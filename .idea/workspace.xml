@@ -1,12 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="d698ee8d-7e2d-4579-bdd7-d7af7a4ba013" name="Default" comment="Determined">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/quickGrab.pyw" />
-      <change type="DELETED" beforePath="C:\Users\Matt\Documents\GitHub\HVB\Pull_Variables.py" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/HVB.iml" afterPath="$PROJECT_DIR$/.idea/HVB.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
+    <list default="true" id="d698ee8d-7e2d-4579-bdd7-d7af7a4ba013" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code.py" afterPath="$PROJECT_DIR$/code.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="HVB.iws" />
@@ -33,10 +29,8 @@
       <file leaf-file-name="quickGrab.pyw" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/quickGrab.pyw">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="13" column="10" selection-start="267" selection-end="267" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="323">
-              <folding>
-                <element signature="e#20#36#0" expanded="true" />
-              </folding>
+            <state line="13" column="10" selection-start="267" selection-end="267" vertical-scroll-proportion="0.0" vertical-offset="221" max-vertical-offset="323">
+              <folding />
             </state>
           </provider>
         </entry>
@@ -44,9 +38,9 @@
       <file leaf-file-name="code.py" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/code.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="16" column="26" selection-start="437" selection-end="437" vertical-scroll-proportion="0.41526717" vertical-offset="0" max-vertical-offset="1632">
+            <state line="2" column="33" selection-start="57" selection-end="57" vertical-scroll-proportion="0.051908396" vertical-offset="0" max-vertical-offset="1802">
               <folding>
-                <element signature="e#20#36#0" expanded="true" />
+                <element signature="e#62#78#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -104,6 +98,7 @@
       <sortByType />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -124,7 +119,6 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -356,11 +350,16 @@
       <created>1395451671416</created>
       <updated>1395451671416</updated>
     </task>
+    <task id="LOCAL-00001" summary="Determined locations of enemies 1-8, mapped all skills, and determined colors to &quot;see&quot; live enemies and dead enemies.">
+      <created>1395633963387</created>
+      <updated>1395633963387</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="ToolWindowManager">
     <frame x="1912" y="-8" width="1936" height="1096" extended-state="6" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2957601" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -376,6 +375,7 @@
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -393,7 +393,8 @@
     <option name="myTodoPanelSettings">
       <TodoPanelSettings />
     </option>
-    <option name="LAST_COMMIT_MESSAGE" value="" />
+    <MESSAGE value="Determined locations of enemies 1-8, mapped all skills, and determined colors to &quot;see&quot; live enemies and dead enemies." />
+    <option name="LAST_COMMIT_MESSAGE" value="Determined locations of enemies 1-8, mapped all skills, and determined colors to &quot;see&quot; live enemies and dead enemies." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -401,18 +402,16 @@
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/quickGrab.pyw">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="13" column="10" selection-start="267" selection-end="267" vertical-scroll-proportion="0.0" vertical-offset="221" max-vertical-offset="323">
-          <folding>
-            <element signature="e#20#36#0" expanded="true" />
-          </folding>
+        <state line="13" column="10" selection-start="267" selection-end="267" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="323">
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/quickGrab.pyw">
+    <entry file="file://$PROJECT_DIR$/code.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="2" column="0" selection-start="37" selection-end="37" vertical-scroll-proportion="0.0" vertical-offset="34" max-vertical-offset="136">
+        <state line="37" column="19" selection-start="967" selection-end="967" vertical-scroll-proportion="0.0" vertical-offset="68" max-vertical-offset="1649">
           <folding>
-            <element signature="e#20#36#0" expanded="true" />
+            <element signature="e#62#78#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -420,17 +419,45 @@
     <entry file="file://$PROJECT_DIR$/quickGrab.pyw">
       <provider selected="true" editor-type-id="text-editor">
         <state line="13" column="10" selection-start="267" selection-end="267" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="323">
-          <folding>
-            <element signature="e#20#36#0" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/code.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="16" column="26" selection-start="437" selection-end="437" vertical-scroll-proportion="0.41526717" vertical-offset="0" max-vertical-offset="1632">
+        <state line="4" column="9" selection-start="68" selection-end="68" vertical-scroll-proportion="0.0" vertical-offset="68" max-vertical-offset="1649">
           <folding>
-            <element signature="e#20#36#0" expanded="true" />
+            <element signature="e#62#78#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/quickGrab.pyw">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="13" column="10" selection-start="267" selection-end="267" vertical-scroll-proportion="0.0" vertical-offset="221" max-vertical-offset="323">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/quickGrab.pyw">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="2" column="0" selection-start="37" selection-end="37" vertical-scroll-proportion="0.0" vertical-offset="34" max-vertical-offset="136">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/quickGrab.pyw">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="13" column="10" selection-start="267" selection-end="267" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="323">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/code.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="2" column="33" selection-start="57" selection-end="57" vertical-scroll-proportion="0.051908396" vertical-offset="0" max-vertical-offset="1802">
+          <folding>
+            <element signature="e#62#78#0" expanded="true" />
           </folding>
         </state>
       </provider>
