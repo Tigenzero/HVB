@@ -339,7 +339,7 @@ def start_grindfest():
         im = screenGrab()
         while getHealth(im) != 100:
             print "Player still recovering"
-            time.sleep(300)
+            time.sleep(60)
             mousePos(Cord.battle_cat_loc)
             leftClick()
             time.sleep(1)
