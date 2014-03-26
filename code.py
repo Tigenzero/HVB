@@ -352,7 +352,7 @@ def start_grindfest():
 
 #Performs all of the needed functions during a round
 def startRound(): #UNFINISHED
-    print "Starting Round. Is player dead? %b" % Cord.p_dead
+    print "Starting Round. Is player dead? %r" % Cord.p_dead
 
     while roundWon() == False and Cord.p_dead == False:
         #time.sleep(1)
