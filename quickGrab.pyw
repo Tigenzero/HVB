@@ -1,4 +1,3 @@
-__author__ = 'Matt'
 import ImageGrab
 import os
 import time
