@@ -19,18 +19,22 @@ class Player_0:
     Frenzied_Blows = 10
     Regen = 4
     Protection = -1
+    #unused
     shield_bash = -1
+    shockblast = -1
 
 
 class Player_1:
     Cure = 0
+    shield_bash = 1
+    #unused
     Iris_Strike = -1
     Regen = -1
     Protection = -1 #3 (costs to much mana)
-    shield_bash = 1
+    shockblast = -1
      # 0 = Health, 1 = Mana, 2 = Spirit, 9 = used
     # Health has 30 round cooldown, Mana and Spirit have 15 round cooldown
-    Items = [0,1,1,1,1,9,9,9,9] #Current Items in your Battle Inventory
+    Items = [0,1,1,1,1,1,9,9,9] #Current Items in your Battle Inventory
 
 class Settings:
     full_screen = 0
@@ -52,6 +56,7 @@ class Cord:
     Items = -1
     Protection = -1
     shield_bash = -1
+    shockblast = -1
      # 0 = Health, 1 = Mana, 2 = Spirit, 9 = used
     # Health has 30 round cooldown, Mana and Spirit have 15 round cooldown
 
@@ -62,7 +67,6 @@ class Cord:
     restore_mana_button = ( 78,  303)
     restore_spirit_button = ( 78,  321)
     restore_all_button = ( 78,  340)
-    e_x =  890
     p_x0 =  22
     p_x10 =  33
     p_x20 =  44
@@ -119,6 +123,7 @@ class Cord:
     #e8_health = (e_x, 531)
     #e9_health = (e_x, 589) #untested
     #e10_health = (e_x, 642) #untested
+    e_x = 890
     e1_health = (e_x,  73)
     e2_health = (e_x,  131)
     e3_health = (e_x,  188)
@@ -131,13 +136,13 @@ class Cord:
     e10_health = (e_x,  595) #untested
 
     enemies = (e1_health, e2_health, e3_health, e4_health, e5_health, e6_health, e7_health, e8_health, e9_health, e10_health)
-    s_y =  96
+    s_y = 96
     #s_y = 290
     s1 = ( 188, s_y)
     s2 = ( 225, s_y)
     s3 = ( 262, s_y)
     s4 = ( 299, s_y)
-    s5 = ( 338, s_y)
+    s5 = ( 338,  s_y)
     s6 = ( 375, s_y)
     s7 = ( 412, s_y)
     s8 = ( 447, s_y)
@@ -189,11 +194,12 @@ class Cooldown:
     regen = 0
     protection = 0
     shield_bash = 0
+    shockblast = 0
     collection = [cure, overcharge, h_potion, m_potion, s_potion, regen, protection]
 
 
 def activate_cure(current_health, current_mana):
-    if current_health <= 60 and Cooldown.cure <= 0 and current_mana >= 10 and Cord.Cure >= 0:
+    if current_health <= 50 and Cooldown.cure <= 0 and current_mana >= 10 and Cord.Cure >= 0:
         use_skill(Cord.Cure)
         Cooldown.cure = 5
         return True
@@ -220,7 +226,7 @@ def activate_iris_strike(current_spirit, current_overcharge):
 
 
 def activate_shield_bash(current_spirit, current_overcharge):
-    if current_overcharge >= 30 and current_spirit < 100 and Cord.shield_bash >= 0 and Cooldown.shield_bash <= 0:
+    if current_overcharge >= 50 and current_spirit < 80 and Cord.shield_bash >= 0 and Cooldown.shield_bash <= 0:
         use_skill(Cord.shield_bash)
         Cooldown.shield_bash = 11
         return True
@@ -235,6 +241,7 @@ def activate_protection():
         return True
     else:
         return False
+
 
 def attack(enemy):
     try:
@@ -269,7 +276,6 @@ def get_cords():
 
 
 #Pulls the current alive Enemies and places them in the current_enemy list
-#EDIT: Pulls first enemy, multiple enemies will be introduced later
 def getEnemies(im):
     current_enemies = []
     #enemy_num = 0
@@ -287,7 +293,7 @@ def getHealth(im):
     for level in Cord.p_health_levels:
         if im.getpixel(level) != Cord.under_color:
             p_health += 10
-        else:
+        else: 
             return p_health
     return 100
 
@@ -341,6 +347,13 @@ def is_player_dead(im):
         return False
 
 
+def is_spirit_active(im):
+    if im.getpixel(Cord.spirit_cat_loc) == Cord.spirit_active_color:
+        return True
+    else:
+        return False
+
+
 def haveItem(item_type):
     for i in range(0, len(Cord.Items)):
     #for item in Cord.Items:
@@ -370,6 +383,7 @@ def leftUp():
 
 def mousePos(cord):
     try:
+        #print Cord.window_padding_x + cord[0], ", ", Cord.window_padding_y + cord[1]
         win32api.SetCursorPos((Cord.window_padding_x + cord[0], Cord.window_padding_y + cord[1]))
     except ValueError:
         print "Mouse Positioning Failed"
@@ -400,14 +414,15 @@ def roundWon():
 def reduceCooldown():
     #for i in range(0, len(Cooldown.collection)):
     #Cooldown.collection[i] = Cooldown.collection[i] -1 Does not update Values
-    Cooldown.cure = Cooldown.cure - 1
-    Cooldown.overcharge = Cooldown.overcharge - 1
-    Cooldown.h_potion = Cooldown.h_potion - 1
-    Cooldown.m_potion = Cooldown.m_potion - 1
-    Cooldown.s_potion = Cooldown.s_potion - 1
-    Cooldown.protection = Cooldown.protection - 1
-    Cooldown.regen = Cooldown.regen - 1
-    Cooldown.shield_bash = Cooldown.shield_bash - 1
+    Cooldown.cure -= 1
+    Cooldown.overcharge -= 1
+    Cooldown.h_potion -= 1
+    Cooldown.m_potion -= 1
+    Cooldown.s_potion -= 1
+    Cooldown.protection -= 1
+    Cooldown.regen -= 1
+    Cooldown.shield_bash -= 1
+    Cooldown.shockblast -= 1
     if Cooldown.shield_bash == 0:
         print "shield bash now active"
 
@@ -423,6 +438,7 @@ def reset_cooldown():
     Cooldown.protection = 0
     Cooldown.regen = 0
     Cooldown.shield_bash = 0
+    Cooldown.shockblast = 0
 
 
 #Grabs the current Screen to be used
@@ -440,7 +456,11 @@ def set_player(player):
     Cord.Items = player.Items
     Cord.Protection = player.Protection
     Cord.shield_bash = player.shield_bash
+    Cord.shockblast = player.shockblast
 
+
+def sleep():
+    time.sleep(random.uniform(0.5, 3))
 
 #Main Function
 def startGame(): #UNFINISHED
@@ -504,13 +524,13 @@ def startRound(): #UNFINISHED
         current_spirit = getSpirit(im)
         current_mana = getMana(im)
         current_overcharge = getOvercharge(im)
-        print "Health: %d Mana: %d Spirit: %d Overcharge: %d" % (current_health, current_mana, current_spirit, current_overcharge)
+        #print "Health: %d Mana: %d Spirit: %d Overcharge: %d" % (current_health, current_mana, current_spirit, current_overcharge)
         if current_health == 0 and not enemies_exist(im):
             Cord.p_dead = True
             print "Player has died"
         elif activate_cure(current_health, current_mana):
             print "Cure Casted"
-        elif current_health <= 30 and Cooldown.h_potion <= 0:
+        elif current_health <= 40 and Cooldown.h_potion <= 0:
             useHealthPot()
         elif current_mana <= 10 and Cooldown.m_potion <= 0:
             useManaPot()
@@ -520,22 +540,28 @@ def startRound(): #UNFINISHED
             print "Regen Casted"
         elif activate_protection():
             print "Protection Casted"
-        elif current_overcharge == 100 and Cooldown.overcharge <= 0 and current_spirit >= 30 and im.getpixel(Cord.spirit_cat_loc) != Cord.spirit_active_color:
-            useSpirit()
-            print "Spirit Activated"
-        elif activate_iris_strike(current_spirit, current_overcharge):
-            if len(current_enemies) > 0:
-                attack(current_enemies[0])
-                print "Iris Strike Used"
-        elif activate_shield_bash(current_spirit, current_overcharge):
-            if len(current_enemies) > 0:
-                attack(current_enemies[0])
-                print "Shield Bash Used"
+        elif not is_spirit_active(im):
+            if use_spirit(current_spirit, current_overcharge, im):
+                print "Spirit Activated"
+            elif activate_iris_strike(current_spirit, current_overcharge):
+                if len(current_enemies) > 0:
+                    attack(current_enemies[0])
+                    print "Iris Strike Used"
+            elif activate_shield_bash(current_spirit, current_overcharge):
+                if len(current_enemies) > 0:
+                    attack(current_enemies[0])
+                    print "Shield Bash Used"
+            else:
+                use_gem()
+                if len(current_enemies) > 0:
+                    attack(current_enemies[0])
         else:
             use_gem()
             if len(current_enemies) > 0:
                 attack(current_enemies[0])
-        time.sleep(0.5)
+        #this sleep function triggers the amount of time between clicks, thus the time between server communication
+        #This function is very important as it randomizes the communication times, emulating the behavior of a player
+        sleep()
 
 
 def useHealthPot():
@@ -594,11 +620,14 @@ def use_skill(skill):
         leftClick()
 
 
-def useSpirit():
-    print "activating Spirit"
-    mousePos(Cord.spirit_cat_loc)
-    leftClick()
-    Cooldown.overcharge = 10
+def use_spirit(current_spirit, current_overcharge, im):
+    if current_overcharge >= 80 and Cooldown.overcharge <= 0 and current_spirit >= 30 and not is_spirit_active(im):
+        mousePos(Cord.spirit_cat_loc)
+        leftClick()
+        Cooldown.overcharge = 10
+        return True
+    else:
+        return False
 
 if __name__ == '__main__':
     startGame()
