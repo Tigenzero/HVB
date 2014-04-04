@@ -488,7 +488,7 @@ def press(*args):
 
 
 def recover():
-    if Settings.recover > 0:
+    if Settings.recover >= 0:
         mousePos(Cord.restoratives_button)
         leftClick()
         if Settings.recover == 0:
@@ -500,6 +500,7 @@ def recover():
         elif Settings.recover == 3:
             mousePos(Cord.restore_spirit_button)
         leftClick()
+        sleep()
         return True
     return False
 
