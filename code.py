@@ -24,6 +24,7 @@ class Player_0:
     #unused
     shield_bash = -1
     shockblast = -1
+    premium = [-1, -1]
 
 
 class Player_1:
@@ -37,11 +38,12 @@ class Player_1:
     shockblast = -1
      # 0 = Health, 1 = Mana, 2 = Spirit, 9 = used
     # Health has 30 round cooldown, Mana and Spirit have 15 round cooldown
-    Items = [0,1,1,1,1,1,9,9,9] #Current Items in your Battle Inventory
+    Items = [0,0,0,0,0,0,9,9,9] #Current Items in your Battle Inventory
+    premium = [3, -1]
 
 class Settings:
     full_screen = 0
-    Player = Player_0
+    Player = Player_1
     box = []
     behavior = 0
     style = 0
@@ -63,6 +65,7 @@ class Cord:
     Protection = -1
     shield_bash = -1
     shockblast = -1
+    premium = []
      # 0 = Health, 1 = Mana, 2 = Spirit, 9 = used
     # Health has 30 round cooldown, Mana and Spirit have 15 round cooldown
 
@@ -216,7 +219,7 @@ class Cooldown:
     shield_bash = 0
     shockblast = 0
     collection = [cure, overcharge, h_potion, m_potion, s_potion, regen, protection]
-
+    premium = [0, 0]
 
 class Status:
     channeling = 10527
@@ -258,6 +261,17 @@ def activate_iris_strike(current_spirit, current_overcharge):
         return True
     else:
         return False
+
+
+def activate_premium():
+    for i in range(0, len(Cord.premium)):
+        if Cooldown.premium[i] <= 0 and Cord.premium[i] >=0:
+            use_skill(Cord.premium[i])
+            Cooldown.premium[i] = 45
+            return True
+        else:
+            print "%d greater than 0 and %d less than 0?" % (Cooldown.premium[i], Cord.premium[i])
+    return False
 
 
 def activate_shield_bash(current_spirit, current_overcharge):
@@ -375,8 +389,11 @@ def getSpirit(im):
 def get_status():
     Cord.Current_Status = []
     for status in Cord.Status:
-        lookup = lookup_status(status)
-        if len(lookup) > 0:
+        pixel_sum = get_pixel_sum(status)
+        if pixel_sum == Status.nothing:
+            return
+        lookup = lookup_status(pixel_sum)
+        if len(lookup) > 1:
             Cord.Current_Status.append(lookup)
 
 
@@ -390,6 +407,13 @@ def go_to_grindfest():
     time.sleep(0.5)
     mousePos(Cord.grindfest_button)
     leftClick()
+
+
+def is_channeling_active():
+    for status in Cord.Current_Status:
+        if status == "channeling":
+            return True
+    return False
 
 
 def is_player_dead(im):
@@ -406,11 +430,12 @@ def is_spirit_active(im):
         return False
 
 
-def lookup_status(status):
+def lookup_status(pixel_sum):
     for known_status in Status.collection:
-        if get_pixel_sum(status) == known_status:
-            return known_status
-    return ""
+        if pixel_sum == known_status:
+            #print "status found: %s" % Status.collection.get(known_status)
+            return Status.collection.get(known_status)
+    return " "
 
 
 def haveItem(item_type):
@@ -484,6 +509,8 @@ def reduceCooldown():
     Cooldown.shockblast -= 1
     #if Cooldown.shield_bash == 0:
         #print "shield bash now active"
+    for i in range(0,len(Cooldown.premium)):
+        Cooldown.premium[i] -= 1
 
 
 def reset_cooldown():
@@ -498,6 +525,8 @@ def reset_cooldown():
     Cooldown.regen = 0
     Cooldown.shield_bash = 0
     Cooldown.shockblast = 0
+    for i in range(0, len(Cooldown.premium)):
+        Cooldown.premium[i] = 0
 
 
 def restore_stats(im):
@@ -519,6 +548,9 @@ def restore_stats(im):
             print "Regen Casted"
         elif activate_protection():
             print "Protection Casted"
+        elif is_channeling_active():
+            if activate_premium():
+                print "premium activated"
         else:
             return False
         return True
@@ -551,6 +583,7 @@ def set_player(player):
     Cord.Protection = player.Protection
     Cord.shield_bash = player.shield_bash
     Cord.shockblast = player.shockblast
+    Cord.premium = player.premium
     Settings.style = player.style
 
 
