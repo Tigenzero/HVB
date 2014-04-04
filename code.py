@@ -10,8 +10,9 @@ import win32api, win32con
 from numpy import *
 from find_window import find_corner, find_browser
 
-
+#Styles: Dual-wield:0, 1-handed:1, 2-handed:2, mage:3, niken:4
 class Player_0:
+    style = 0
     # 0 = Health, 1 = Mana, 2 = Spirit, 9 = used
     Items = [0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1] #main character
     Cure = 0
@@ -26,6 +27,7 @@ class Player_0:
 
 
 class Player_1:
+    style = 1
     Cure = 0
     shield_bash = 1
     #unused
@@ -39,9 +41,10 @@ class Player_1:
 
 class Settings:
     full_screen = 0
-    Player = Player_1
+    Player = Player_0
     box = []
     behavior = 0
+    style = 0
 
 
 class Cord:
@@ -159,8 +162,8 @@ class Cord:
     s16 = ( 743, s_y)
     skills = (s1, s2, s3, s4, s5, s6, s7, s8, s9, s10, s11, s12, s13, s14, s15, s16)
 
-    item_xloc =  261
-    Item_cat_loc = ( 418,  65)
+    item_xloc = 261
+    Item_cat_loc = (418,  65)
     gem_loc = (item_xloc,  210)
     i1 = (item_xloc,  230)
     i2 = (item_xloc,  254)
@@ -176,7 +179,7 @@ class Cord:
     i12 = (item_xloc,  482)
     i13 = (item_xloc,  507)
     i14 = (item_xloc,  530)
-    scroll_xloc =  550
+    scroll_xloc = 550
     scroll1_loc = (scroll_xloc,  234)
     infusion1_loc = [scroll_xloc,  253]
     item_locs = [i1, i2, i3, i4, i5, i6, i7, i8, i9, i10, i11, i12, i13, i14, scroll1_loc, infusion1_loc]
@@ -184,8 +187,22 @@ class Cord:
     # Health has 30 round cooldown, Mana and Spirit have 15 round cooldown
     #Items = [0, 0, 0, 0, 0, 1, 1, 1, 1, 2, 2, 2, 2, 2] #main character
     p_dead = False
-    battle_cat_loc = [ 640,  12]
-    Grindfest_cat_loc = [ 640,  81]
+    battle_cat_loc = [640,  12]
+    Grindfest_cat_loc = [640,  81]
+
+    st_y1 = 13
+    st_y2 = 45
+    st1 = (167, st_y1, 196, st_y2)
+    st2 = (200, st_y1, 229, st_y2)
+    st3 = (233, st_y1, 262, st_y2)
+    st4 = (266, st_y1, 295, st_y2)
+    st5 = (299, st_y1, 328, st_y2)
+    st6 = (332, st_y1, 361, st_y2)
+    st7 = (365, st_y1, 394, st_y2)
+    st8 = (398, st_y1, 427, st_y2)
+    st9 = (431, st_y1, 460, st_y2)
+    Status = (st1, st2, st3, st4, st5, st6, st7, st8, st9)
+    Current_Status = []
 
 
 class Cooldown:
@@ -200,6 +217,21 @@ class Cooldown:
     shockblast = 0
     collection = [cure, overcharge, h_potion, m_potion, s_potion, regen, protection]
 
+
+class Status:
+    channeling = 10527
+    protection = 9619
+    shadow_veil = 7476
+    hastened = 10229
+    nothing = 1162
+    spirit_shield = 7827
+    heartseeker = 6340
+    collection = {channeling: 'channeling',
+                  protection: 'protection',
+                  shadow_veil: 'shadow_veil',
+                  hastened: 'hastened',
+                  spirit_shield: 'spirit_shield',
+                  heartseeker: 'heartseeker'}
 
 def activate_cure(current_health, current_mana):
     if current_health <= 50 and Cooldown.cure <= 0 and current_mana >= 10 and Cord.Cure >= 0:
@@ -273,6 +305,7 @@ def get_boundaries():
       #  corner = (0, y)
        # Settings.box = (corner[0], corner[1], corner[0] + 1235, corner[1] + 701)
 
+
 def get_cords():
     x, y = win32api.GetCursorPos()
     print x, y
@@ -320,11 +353,14 @@ def getOvercharge(im):
             return p_overcharge
     return 100
 
+
 def get_pixel_sum(box):
-    im = ImageOps.grayscale(ImageGrab.grab(box))
+    im = ImageOps.grayscale(ImageGrab.grab((Settings.box[0] + box[0], Settings.box[1] + box[1], Settings.box[0] + box[2], Settings.box[1] + box[3])))
     a = array(im.getcolors())
     a = a.sum()
+    #im.save(os.getcwd() + '\\full_snap__' + str(int(time.time())) + '.png', 'PNG')
     return a
+
 
 def getSpirit(im):
     p_spirit = 0
@@ -334,6 +370,14 @@ def getSpirit(im):
         else:
             return p_spirit
     return 100
+
+
+def get_status():
+    Cord.Current_Status = []
+    for status in Cord.Status:
+        lookup = lookup_status(status)
+        if len(lookup) > 0:
+            Cord.Current_Status.append(lookup)
 
 
 def go_to_grindfest():
@@ -360,6 +404,13 @@ def is_spirit_active(im):
         return True
     else:
         return False
+
+
+def lookup_status(status):
+    for known_status in Status.collection:
+        if get_pixel_sum(status) == known_status:
+            return known_status
+    return ""
 
 
 def haveItem(item_type):
@@ -500,6 +551,7 @@ def set_player(player):
     Cord.Protection = player.Protection
     Cord.shield_bash = player.shield_bash
     Cord.shockblast = player.shockblast
+    Settings.style = player.style
 
 
 def special_attack(im, current_enemies):
@@ -523,6 +575,7 @@ def special_attack(im, current_enemies):
     else:
         return False
     return True
+
 
 def sleep():
     time.sleep(random.uniform(0.5, 3))
@@ -580,11 +633,12 @@ def start_grindfest():
 def startRound(): #UNFINISHED
     print "Starting Round."
 
-    while roundWon() == False and Cord.p_dead == False:
+    while not roundWon() and not Cord.p_dead:
         #time.sleep(1)
         reduceCooldown()
         im = screenGrab()
         current_enemies = getEnemies(im)
+        get_status()
         if restore_stats(im):
             """restoration occurred"""
         elif special_attack(im, current_enemies):

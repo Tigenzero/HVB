@@ -26,11 +26,13 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="quickGrab.pyw" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/quickGrab.pyw">
+      <file leaf-file-name="code.py" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/code.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="4" column="17" selection-start="82" selection-end="82" vertical-scroll-proportion="0.0" vertical-offset="68" max-vertical-offset="340">
-              <folding />
+            <state line="155" column="21" selection-start="4778" selection-end="4778" vertical-scroll-proportion="-1.7212205" vertical-offset="3876" max-vertical-offset="15062">
+              <folding>
+                <element signature="e#42#58#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -38,19 +40,8 @@
       <file leaf-file-name="find_window.py" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/find_window.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="172" column="5" selection-start="5487" selection-end="5487" vertical-scroll-proportion="0.0" vertical-offset="2924" max-vertical-offset="3094">
+            <state line="172" column="5" selection-start="5487" selection-end="5487" vertical-scroll-proportion="0.0" vertical-offset="2016" max-vertical-offset="3060">
               <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="code.py" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/code.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="590" column="41" selection-start="16928" selection-end="16928" vertical-scroll-proportion="1.9483395" vertical-offset="7918" max-vertical-offset="14144">
-              <folding>
-                <element signature="e#42#58#0" expanded="true" />
-              </folding>
             </state>
           </provider>
         </entry>
@@ -79,10 +70,10 @@
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="1912" />
+    <option name="x" value="-8" />
     <option name="y" value="-8" />
-    <option name="width" value="1936" />
-    <option name="height" value="1216" />
+    <option name="width" value="1616" />
+    <option name="height" value="876" />
   </component>
   <component name="ProjectInspectionProfilesVisibleTreeState">
     <entry key="Project Default">
@@ -150,7 +141,7 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="last_opened_file_path" value="C:/Python27/Lib/site-packages/pythonwin" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="options.lastSelected" value="com.jetbrains.python.configuration.PythonSdkConfigurable" />
     <property name="options.splitter.main.proportions" value="0.3" />
     <property name="options.splitter.details.proportions" value="0.2" />
@@ -428,14 +419,14 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="1912" y="-8" width="1936" height="1216" extended-state="6" />
+    <frame x="-8" y="-8" width="1616" height="876" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.83919597" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4149034" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24944974" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.13645834" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.19886003" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.29388297" sideWeight="0.5" order="8" side_tool="true" content_ui="tabs" />
@@ -472,18 +463,42 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/code.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="41" column="21" selection-start="926" selection-end="926" vertical-scroll-proportion="0.0" vertical-offset="765" max-vertical-offset="14161">
+          <folding>
+            <element signature="e#42#58#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/code.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="669" column="0" selection-start="18929" selection-end="18929" vertical-scroll-proportion="0.0" vertical-offset="119" max-vertical-offset="14161">
+          <folding>
+            <element signature="e#42#58#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/quickGrab.pyw">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="4" column="17" selection-start="82" selection-end="82" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="340">
-          <folding />
-        </state>
+        <state line="4" column="17" selection-start="82" selection-end="82" vertical-scroll-proportion="0.0" vertical-offset="68" max-vertical-offset="340" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/find_window.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="172" column="5" selection-start="5487" selection-end="5487" vertical-scroll-proportion="0.0" vertical-offset="2924" max-vertical-offset="3094">
-          <folding />
-        </state>
+        <state line="172" column="5" selection-start="5487" selection-end="5487" vertical-scroll-proportion="0.0" vertical-offset="2924" max-vertical-offset="3094" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/quickGrab.pyw">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="4" column="17" selection-start="82" selection-end="82" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="340" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/find_window.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="172" column="5" selection-start="5487" selection-end="5487" vertical-scroll-proportion="0.0" vertical-offset="2924" max-vertical-offset="3094" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/code.py">
@@ -497,16 +512,12 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/quickGrab.pyw">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="4" column="17" selection-start="82" selection-end="82" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="340">
-          <folding />
-        </state>
+        <state line="4" column="17" selection-start="82" selection-end="82" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="340" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/find_window.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="172" column="5" selection-start="5487" selection-end="5487" vertical-scroll-proportion="0.0" vertical-offset="2924" max-vertical-offset="3094">
-          <folding />
-        </state>
+        <state line="172" column="5" selection-start="5487" selection-end="5487" vertical-scroll-proportion="0.0" vertical-offset="2924" max-vertical-offset="3094" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/code.py">
@@ -520,35 +531,29 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/quickGrab.pyw">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="5" column="12" selection-start="70" selection-end="70" vertical-scroll-proportion="0.0" vertical-offset="85" max-vertical-offset="272">
-          <folding />
-        </state>
+        <state line="5" column="12" selection-start="70" selection-end="70" vertical-scroll-proportion="0.0" vertical-offset="85" max-vertical-offset="272" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/find_window.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1156">
-          <folding />
-        </state>
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1156" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/quickGrab.pyw">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="4" column="17" selection-start="82" selection-end="82" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="289">
-          <folding />
-        </state>
+        <state line="4" column="17" selection-start="82" selection-end="82" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="289" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/find_window.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="172" column="5" selection-start="5487" selection-end="5487" vertical-scroll-proportion="0.0" vertical-offset="2134" max-vertical-offset="3094">
+        <state line="172" column="5" selection-start="5487" selection-end="5487" vertical-scroll-proportion="0.0" vertical-offset="2016" max-vertical-offset="3060">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/code.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="590" column="41" selection-start="16928" selection-end="16928" vertical-scroll-proportion="1.9483395" vertical-offset="7918" max-vertical-offset="14144">
+        <state line="155" column="21" selection-start="4778" selection-end="4778" vertical-scroll-proportion="-1.7212205" vertical-offset="3876" max-vertical-offset="15062">
           <folding>
             <element signature="e#42#58#0" expanded="true" />
           </folding>
