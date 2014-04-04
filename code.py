@@ -468,6 +468,14 @@ def mousePos(cord):
         print "Mouse Positioning Failed"
 
 
+def multiple_enemy_attack(enemies):
+    if len(enemies) >= 5:
+        return 2
+    elif len(enemies) >= 3:
+        return 1
+    else:
+        return 0
+
 def press(*args):
     '''
     one press, one release.
@@ -673,6 +681,8 @@ def start_grindfest():
         print "Starting Grindfest"
         go_to_grindfest()
         startGame()
+        mousePos(Cord.battle_cat_loc)
+        leftClick()
         print "Player Dead, waiting until revival."
 
 
