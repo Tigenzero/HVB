@@ -202,6 +202,23 @@ class Cord:
     Status = (st1, st2, st3, st4, st5, st6, st7, st8, st9)
     Current_Status = []
 
+#Arena Locations
+    a_x = 1140
+    a_next_loc = (771, 60)
+    a1 = 128
+    a2 = 165
+    a3 = 200
+    a4 = 236
+    a5 = 271
+    a6 = 307
+    a7 = 342
+    a8 = 381
+    a9 = 418
+    a10 = 452
+    a11 = 486
+    arenas = [a1, a2, a3, a4, a5, a6, a7, a8 , a9, a10, a11]
+
+
 
 class Cooldown:
     cure = 0
@@ -682,6 +699,7 @@ def start_grindfest():
         print "Starting Grindfest"
         go_to_grindfest()
         startGame()
+        sleep()
         mousePos(Cord.battle_cat_loc)
         leftClick()
         print "Player Dead, waiting until revival."
