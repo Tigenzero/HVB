@@ -47,6 +47,8 @@ class Settings:
     box = []
     behavior = 0
     style = 0
+    #Recover: -1: none, 0:all, 1:health, 2: magic, 3: spirit
+    recover = -1
 
 
 class Cord:
@@ -69,29 +71,30 @@ class Cord:
      # 0 = Health, 1 = Mana, 2 = Spirit, 9 = used
     # Health has 30 round cooldown, Mana and Spirit have 15 round cooldown
 
-
-    grindfest_button = ( 670,  327)
-    restoratives_button = ( 78,  249)
-    restore_health_button = ( 78,  283)
-    restore_mana_button = ( 78,  303)
-    restore_spirit_button = ( 78,  321)
-    restore_all_button = ( 78,  340)
-    p_x0 =  22
-    p_x10 =  33
-    p_x20 =  44
-    p_x30 =  55
-    p_x40 =  66
-    p_x50 =  77
-    p_x60 =  88
-    p_x70 =  99
-    p_x80 =  101
-    p_x90 =  123
-    p_x100 =  134
+#Mapped Menu Buttons
+    grindfest_button = (670,  327)
+    restoratives_button = (78,  249)
+    restore_health_button = (78,  283)
+    restore_mana_button = (78,  303)
+    restore_spirit_button = (78,  321)
+    restore_all_button = (78,  340)
+#Player Stat Locations
+    p_x0 = 22
+    p_x10 = 33
+    p_x20 = 44
+    p_x30 = 55
+    p_x40 = 66
+    p_x50 = 77
+    p_x60 = 88
+    p_x70 = 99
+    p_x80 = 101
+    p_x90 = 123
+    p_x100 = 134
     #p_health = 196
-    p_health =  144
-    p_mana =  186
-    p_spirit =  227
-    p_overcharge =  267
+    p_health = 144
+    p_mana = 186
+    p_spirit = 227
+    p_overcharge = 267
     p_health_levels = ((p_x0, p_health), (p_x10, p_health), (p_x20, p_health), (p_x30, p_health),
                       (p_x40, p_health), (p_x50, p_health), (p_x60, p_health), (p_x70, p_health),
                       (p_x80, p_health), (p_x90, p_health), (p_x100, p_health))
@@ -108,12 +111,12 @@ class Cord:
                       (p_x40, p_overcharge), (p_x50, p_overcharge), (p_x60, p_overcharge), (p_x70, p_overcharge),
                       (p_x80, p_overcharge), (p_x90, p_overcharge), (p_x100, p_overcharge))
 
-    spirit_cat_loc = ( 508,  60)
+    spirit_cat_loc = (508,  60)
     spirit_active_color = (170, 36, 36)
     #round_won = (550, 191)
-    round_won = ( 550,  139) #UNTESTED
+    round_won = (550,  139) #UNTESTED
     #round_won_color = (251, 221, 65) #UNTESTED
-    round_won_color = (165,111,44)
+    round_won_color = (165, 111, 44)
     under_color = (0, 0, 0) #Black
     over_color = (0, 166, 23) #Green
     spirit_over_color = (120, 70, 0)
@@ -122,16 +125,7 @@ class Cord:
     spark_of_life_color = (192, 192, 192) #Color when Spark of Life is Active UNTESTED
     Pony_check_loc = ( 518,  185)
     Pony_check_color = (237, 235, 223)
-    #e1_health = (e_x, 125)
-    #e2_health = (e_x, 183)
-    #e3_health = (e_x, 240)
-    #e4_health = (e_x, 298)
-    #e5_health = (e_x, 357)
-    #e6_health = (e_x, 414)
-    #e7_health = (e_x, 472)
-    #e8_health = (e_x, 531)
-    #e9_health = (e_x, 589) #untested
-    #e10_health = (e_x, 642) #untested
+#Enemies
     e_x = 890
     e1_health = (e_x,  73)
     e2_health = (e_x,  131)
@@ -145,6 +139,7 @@ class Cord:
     e10_health = (e_x,  595) #untested
 
     enemies = (e1_health, e2_health, e3_health, e4_health, e5_health, e6_health, e7_health, e8_health, e9_health, e10_health)
+#Skills
     s_y = 96
     #s_y = 290
     s1 = ( 188, s_y)
@@ -164,7 +159,7 @@ class Cord:
     s15 = ( 707, s_y)
     s16 = ( 743, s_y)
     skills = (s1, s2, s3, s4, s5, s6, s7, s8, s9, s10, s11, s12, s13, s14, s15, s16)
-
+#Items
     item_xloc = 261
     Item_cat_loc = (418,  65)
     gem_loc = (item_xloc,  210)
@@ -192,7 +187,7 @@ class Cord:
     p_dead = False
     battle_cat_loc = [640,  12]
     Grindfest_cat_loc = [640,  81]
-
+#Statuses
     st_y1 = 13
     st_y2 = 45
     st1 = (167, st_y1, 196, st_y2)
@@ -484,6 +479,23 @@ def press(*args):
         win32api.keybd_event(VK_CODE[i], 0, win32con.KEYEVENTF_KEYUP, 0)
 
 
+def recover():
+    if Settings.recover > 0:
+        mousePos(Cord.restoratives_button)
+        leftClick()
+        if Settings.recover == 0:
+            mousePos(Cord.restore_all_button)
+        elif Settings.recover == 1:
+            mousePos(Cord.restore_health_button)
+        elif Settings.recover == 2:
+            mousePos(Cord.restore_mana_button)
+        elif Settings.recover == 3:
+            mousePos(Cord.restore_spirit_button)
+        leftClick()
+        return True
+    return False
+
+
 #Determines if round has been won or not
 def roundWon():
     im = screenGrab()
@@ -648,14 +660,16 @@ def start_grindfest():
     while 1 == 1:
         get_boundaries()
         im = screenGrab()
-        while getHealth(im) != 100 and getMana(im) != 100 and getSpirit(im) != 100:
-            print "Player still recovering"
-            time.sleep(60)
-            mousePos(Cord.battle_cat_loc)
-            leftClick()
-            time.sleep(1)
-            get_boundaries()
-            im = screenGrab()
+        if not recover():
+            while getHealth(im) != 100 and getMana(im) != 100 and getSpirit(im) != 100:
+                print "Player still recovering"
+                time.sleep(60)
+                mousePos(Cord.battle_cat_loc)
+                leftClick()
+                time.sleep(1)
+                get_boundaries()
+                im = screenGrab()
+                print "%d, %d, %d" % (getHealth(im), getMana(im), getSpirit(im))
         print "Starting Grindfest"
         go_to_grindfest()
         startGame()
