@@ -24,7 +24,7 @@ class Player_0:
     #unused
     shield_bash = -1
     shockblast = -1
-    premium = [-1, -1]
+    premium = [12, 13]
 
 
 class Player_1:
@@ -43,7 +43,7 @@ class Player_1:
 
 class Settings:
     full_screen = 0
-    Player = Player_1
+    Player = Player_0
     box = []
     behavior = 0
     style = 0
@@ -652,14 +652,37 @@ def sleep():
     time.sleep(random.uniform(0.5, 3))
 
 
+def start_arena():#UNFINISHED
+    i = 0
+    for i in range(0,1):
+        for arena in Cord.arenas:
+            i += 1
+            get_boundaries()
+            im = screenGrab()
+            if not recover():
+                while getHealth(im) != 100 and getMana(im) != 100 and getSpirit(im) != 100:
+                    print "Player still recovering"
+                    time.sleep(60)
+                    mousePos(Cord.battle_cat_loc)
+                    leftClick()
+                    time.sleep(1)
+                    get_boundaries()
+                    im = screenGrab()
+                    print "%d, %d, %d" % (getHealth(im), getMana(im), getSpirit(im))
+            print "Starting Arena %d" %i
+            go_to_grindfest()
+            startGame()
+            press("spacebar")
+            sleep()
+            print "Player Dead, waiting until revival."
+
 #Main Function
 def startGame(): #UNFINISHED
     set_player(Settings.Player)
     print "Starting Game"
     reset_cooldown()
-    while 1 == 1:
-        get_boundaries()
-        
+    get_boundaries()
+    while not roundWon():
         startRound()
         time.sleep(0.5)
         im = screenGrab()
