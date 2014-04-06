@@ -5,12 +5,14 @@ import ImageGrab
 import os
 import winsound
 import time
+import ImageOps
 import win32api, win32con
 from numpy import *
 from find_window import find_corner, find_browser
 
-
+#Styles: Dual-wield:0, 1-handed:1, 2-handed:2, mage:3, niken:4
 class Player_0:
+    style = 0
     # 0 = Health, 1 = Mana, 2 = Spirit, 9 = used
     Items = [0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1] #main character
     Cure = 0
@@ -22,9 +24,11 @@ class Player_0:
     #unused
     shield_bash = -1
     shockblast = -1
+    premium = [12, 13]
 
 
 class Player_1:
+    style = 1
     Cure = 0
     shield_bash = 1
     #unused
@@ -34,14 +38,18 @@ class Player_1:
     shockblast = -1
      # 0 = Health, 1 = Mana, 2 = Spirit, 9 = used
     # Health has 30 round cooldown, Mana and Spirit have 15 round cooldown
-    Items = [0,1,1,1,1,1,9,9,9] #Current Items in your Battle Inventory
+    Items = [0,0,0,0,0,0,9,9,9] #Current Items in your Battle Inventory
+    premium = [3, -1]
 
 class Settings:
     full_screen = 0
     Player = Player_0
     box = []
-    rounds = 100
-    sleep = 1
+    behavior = 0
+    style = 0
+    #Recover: -1: none, 0:all, 1:health, 2: magic, 3: spirit
+    recover = -1
+
 
 class Cord:
     chrome_popup_padding_y = 52
@@ -59,32 +67,34 @@ class Cord:
     Protection = -1
     shield_bash = -1
     shockblast = -1
+    premium = []
      # 0 = Health, 1 = Mana, 2 = Spirit, 9 = used
     # Health has 30 round cooldown, Mana and Spirit have 15 round cooldown
 
-
-    grindfest_button = ( 670,  327)
-    restoratives_button = ( 78,  249)
-    restore_health_button = ( 78,  283)
-    restore_mana_button = ( 78,  303)
-    restore_spirit_button = ( 78,  321)
-    restore_all_button = ( 78,  340)
-    p_x0 =  22
-    p_x10 =  33
-    p_x20 =  44
-    p_x30 =  55
-    p_x40 =  66
-    p_x50 =  77
-    p_x60 =  88
-    p_x70 =  99
-    p_x80 =  101
-    p_x90 =  123
-    p_x100 =  134
+#Mapped Menu Buttons
+    grindfest_button = (670,  327)
+    restoratives_button = (78,  249)
+    restore_health_button = (78,  283)
+    restore_mana_button = (78,  303)
+    restore_spirit_button = (78,  321)
+    restore_all_button = (78,  340)
+#Player Stat Locations
+    p_x0 = 22
+    p_x10 = 33
+    p_x20 = 44
+    p_x30 = 55
+    p_x40 = 66
+    p_x50 = 77
+    p_x60 = 88
+    p_x70 = 99
+    p_x80 = 101
+    p_x90 = 123
+    p_x100 = 134
     #p_health = 196
-    p_health =  144
-    p_mana =  186
-    p_spirit =  227
-    p_overcharge =  267
+    p_health = 144
+    p_mana = 186
+    p_spirit = 227
+    p_overcharge = 267
     p_health_levels = ((p_x0, p_health), (p_x10, p_health), (p_x20, p_health), (p_x30, p_health),
                       (p_x40, p_health), (p_x50, p_health), (p_x60, p_health), (p_x70, p_health),
                       (p_x80, p_health), (p_x90, p_health), (p_x100, p_health))
@@ -101,12 +111,12 @@ class Cord:
                       (p_x40, p_overcharge), (p_x50, p_overcharge), (p_x60, p_overcharge), (p_x70, p_overcharge),
                       (p_x80, p_overcharge), (p_x90, p_overcharge), (p_x100, p_overcharge))
 
-    spirit_cat_loc = ( 508,  60)
+    spirit_cat_loc = (508,  60)
     spirit_active_color = (170, 36, 36)
     #round_won = (550, 191)
-    round_won = ( 550,  139) #UNTESTED
+    round_won = (550,  139) #UNTESTED
     #round_won_color = (251, 221, 65) #UNTESTED
-    round_won_color = (165,111,44)
+    round_won_color = (165, 111, 44)
     under_color = (0, 0, 0) #Black
     over_color = (0, 166, 23) #Green
     spirit_over_color = (120, 70, 0)
@@ -115,16 +125,7 @@ class Cord:
     spark_of_life_color = (192, 192, 192) #Color when Spark of Life is Active UNTESTED
     Pony_check_loc = ( 518,  185)
     Pony_check_color = (237, 235, 223)
-    #e1_health = (e_x, 125)
-    #e2_health = (e_x, 183)
-    #e3_health = (e_x, 240)
-    #e4_health = (e_x, 298)
-    #e5_health = (e_x, 357)
-    #e6_health = (e_x, 414)
-    #e7_health = (e_x, 472)
-    #e8_health = (e_x, 531)
-    #e9_health = (e_x, 589) #untested
-    #e10_health = (e_x, 642) #untested
+#Enemies
     e_x = 890
     e1_health = (e_x,  73)
     e2_health = (e_x,  131)
@@ -138,6 +139,7 @@ class Cord:
     e10_health = (e_x,  595) #untested
 
     enemies = (e1_health, e2_health, e3_health, e4_health, e5_health, e6_health, e7_health, e8_health, e9_health, e10_health)
+#Skills
     s_y = 96
     #s_y = 290
     s1 = ( 188, s_y)
@@ -157,9 +159,9 @@ class Cord:
     s15 = ( 707, s_y)
     s16 = ( 743, s_y)
     skills = (s1, s2, s3, s4, s5, s6, s7, s8, s9, s10, s11, s12, s13, s14, s15, s16)
-
-    item_xloc =  261
-    Item_cat_loc = ( 418,  65)
+#Items
+    item_xloc = 261
+    Item_cat_loc = (418,  65)
     gem_loc = (item_xloc,  210)
     i1 = (item_xloc,  230)
     i2 = (item_xloc,  254)
@@ -175,17 +177,47 @@ class Cord:
     i12 = (item_xloc,  482)
     i13 = (item_xloc,  507)
     i14 = (item_xloc,  530)
-    i15 = (item_xloc,  550)
-    scroll_xloc =  550
+    scroll_xloc = 550
     scroll1_loc = (scroll_xloc,  234)
     infusion1_loc = [scroll_xloc,  253]
-    item_locs = [i1, i2, i3, i4, i5, i6, i7, i8, i9, i10, i11, i12, i13, i14, i15, scroll1_loc, infusion1_loc]
+    item_locs = [i1, i2, i3, i4, i5, i6, i7, i8, i9, i10, i11, i12, i13, i14, scroll1_loc, infusion1_loc]
     # 0 = Health, 1 = Mana, 2 = Spirit, 9 = used
     # Health has 30 round cooldown, Mana and Spirit have 15 round cooldown
     #Items = [0, 0, 0, 0, 0, 1, 1, 1, 1, 2, 2, 2, 2, 2] #main character
     p_dead = False
-    battle_cat_loc = [ 640,  12]
-    Grindfest_cat_loc = [ 640,  81]
+    battle_cat_loc = [640,  12]
+    Grindfest_cat_loc = [640,  81]
+#Statuses
+    st_y1 = 13
+    st_y2 = 45
+    st1 = (167, st_y1, 196, st_y2)
+    st2 = (200, st_y1, 229, st_y2)
+    st3 = (233, st_y1, 262, st_y2)
+    st4 = (266, st_y1, 295, st_y2)
+    st5 = (299, st_y1, 328, st_y2)
+    st6 = (332, st_y1, 361, st_y2)
+    st7 = (365, st_y1, 394, st_y2)
+    st8 = (398, st_y1, 427, st_y2)
+    st9 = (431, st_y1, 460, st_y2)
+    Status = (st1, st2, st3, st4, st5, st6, st7, st8, st9)
+    Current_Status = []
+
+#Arena Locations
+    a_x = 1140
+    a_next_loc = (771, 60)
+    a1 = 128
+    a2 = 165
+    a3 = 200
+    a4 = 236
+    a5 = 271
+    a6 = 307
+    a7 = 342
+    a8 = 381
+    a9 = 418
+    a10 = 452
+    a11 = 486
+    arenas = [a1, a2, a3, a4, a5, a6, a7, a8 , a9, a10, a11]
+
 
 
 class Cooldown:
@@ -199,7 +231,22 @@ class Cooldown:
     shield_bash = 0
     shockblast = 0
     collection = [cure, overcharge, h_potion, m_potion, s_potion, regen, protection]
+    premium = [0, 0]
 
+class Status:
+    channeling = 10527
+    protection = 9619
+    shadow_veil = 7476
+    hastened = 10229
+    nothing = 1162
+    spirit_shield = 7827
+    heartseeker = 6340
+    collection = {channeling: 'channeling',
+                  protection: 'protection',
+                  shadow_veil: 'shadow_veil',
+                  hastened: 'hastened',
+                  spirit_shield: 'spirit_shield',
+                  heartseeker: 'heartseeker'}
 
 def activate_cure(current_health, current_mana):
     if current_health <= 50 and Cooldown.cure <= 0 and current_mana >= 10 and Cord.Cure >= 0:
@@ -226,6 +273,17 @@ def activate_iris_strike(current_spirit, current_overcharge):
         return True
     else:
         return False
+
+
+def activate_premium():
+    for i in range(0, len(Cord.premium)):
+        if Cooldown.premium[i] <= 0 and Cord.premium[i] >=0:
+            use_skill(Cord.premium[i])
+            Cooldown.premium[i] = 45
+            return True
+        else:
+            print "%d greater than 0 and %d less than 0?" % (Cooldown.premium[i], Cord.premium[i])
+    return False
 
 
 def activate_shield_bash(current_spirit, current_overcharge):
@@ -272,6 +330,7 @@ def get_boundaries():
      #   y = find_browser()
       #  corner = (0, y)
        # Settings.box = (corner[0], corner[1], corner[0] + 1235, corner[1] + 701)
+
 
 def get_cords():
     x, y = win32api.GetCursorPos()
@@ -321,6 +380,14 @@ def getOvercharge(im):
     return 100
 
 
+def get_pixel_sum(box):
+    im = ImageOps.grayscale(ImageGrab.grab((Settings.box[0] + box[0], Settings.box[1] + box[1], Settings.box[0] + box[2], Settings.box[1] + box[3])))
+    a = array(im.getcolors())
+    a = a.sum()
+    #im.save(os.getcwd() + '\\full_snap__' + str(int(time.time())) + '.png', 'PNG')
+    return a
+
+
 def getSpirit(im):
     p_spirit = 0
     for level in Cord.p_spirit_levels:
@@ -329,6 +396,17 @@ def getSpirit(im):
         else:
             return p_spirit
     return 100
+
+
+def get_status():
+    Cord.Current_Status = []
+    for status in Cord.Status:
+        pixel_sum = get_pixel_sum(status)
+        if pixel_sum == Status.nothing:
+            return
+        lookup = lookup_status(pixel_sum)
+        if len(lookup) > 1:
+            Cord.Current_Status.append(lookup)
 
 
 def go_to_grindfest():
@@ -343,6 +421,13 @@ def go_to_grindfest():
     leftClick()
 
 
+def is_channeling_active():
+    for status in Cord.Current_Status:
+        if status == "channeling":
+            return True
+    return False
+
+
 def is_player_dead(im):
     if getHealth(im) == 0:
         return True
@@ -355,6 +440,14 @@ def is_spirit_active(im):
         return True
     else:
         return False
+
+
+def lookup_status(pixel_sum):
+    for known_status in Status.collection:
+        if pixel_sum == known_status:
+            #print "status found: %s" % Status.collection.get(known_status)
+            return Status.collection.get(known_status)
+    return " "
 
 
 def haveItem(item_type):
@@ -392,15 +485,41 @@ def mousePos(cord):
         print "Mouse Positioning Failed"
 
 
+def multiple_enemy_attack(enemies):
+    if len(enemies) >= 5:
+        return 2
+    elif len(enemies) >= 3:
+        return 1
+    else:
+        return 0
+
 def press(*args):
     '''
     one press, one release.
     accepts as many arguments as you want. e.g. press('left_arrow', 'a','b').
     '''
     for i in args:
-        win32api.keybd_event(VK_CODE[i], 0,0,0)
+        win32api.keybd_event(VK_CODE[i], 0, 0, 0)
         time.sleep(.05)
-        win32api.keybd_event(VK_CODE[i],0 ,win32con.KEYEVENTF_KEYUP ,0)
+        win32api.keybd_event(VK_CODE[i], 0, win32con.KEYEVENTF_KEYUP, 0)
+
+
+def recover():
+    if Settings.recover >= 0:
+        mousePos(Cord.restoratives_button)
+        leftClick()
+        if Settings.recover == 0:
+            mousePos(Cord.restore_all_button)
+        elif Settings.recover == 1:
+            mousePos(Cord.restore_health_button)
+        elif Settings.recover == 2:
+            mousePos(Cord.restore_mana_button)
+        elif Settings.recover == 3:
+            mousePos(Cord.restore_spirit_button)
+        leftClick()
+        sleep()
+        return True
+    return False
 
 
 #Determines if round has been won or not
@@ -426,8 +545,10 @@ def reduceCooldown():
     Cooldown.regen -= 1
     Cooldown.shield_bash -= 1
     Cooldown.shockblast -= 1
-    if Cooldown.shield_bash == 0:
-        print "shield bash now active"
+    #if Cooldown.shield_bash == 0:
+        #print "shield bash now active"
+    for i in range(0,len(Cooldown.premium)):
+        Cooldown.premium[i] -= 1
 
 
 def reset_cooldown():
@@ -442,6 +563,35 @@ def reset_cooldown():
     Cooldown.regen = 0
     Cooldown.shield_bash = 0
     Cooldown.shockblast = 0
+    for i in range(0, len(Cooldown.premium)):
+        Cooldown.premium[i] = 0
+
+
+def restore_stats(im):
+        current_health = getHealth(im)
+        current_spirit = getSpirit(im)
+        current_mana = getMana(im)
+        if current_health == 0 and not enemies_exist(im):
+            Cord.p_dead = True
+            print "Player has died"
+        elif activate_cure(current_health, current_mana):
+            print "Cure Casted"
+        elif use_health_pot(current_health):
+            print "Health Potion used"
+        elif use_mana_pot(current_mana):
+            print "Using Mana Potion"
+        elif use_spirit_pot(current_spirit):
+            print "Using Spirit Potion"
+        elif activate_regen(current_health):
+            print "Regen Casted"
+        elif activate_protection():
+            print "Protection Casted"
+        elif is_channeling_active():
+            if activate_premium():
+                print "premium activated"
+        else:
+            return False
+        return True
 
 
 #Grabs the current Screen to be used
@@ -449,6 +599,17 @@ def screenGrab():
     im = ImageGrab.grab(Settings.box)
     #im = ImageGrab.grab()
     #im.save(os.getcwd() + '\\full_snap__' + str(int(time.time())) + '.png', 'PNG')
+    return im
+
+def screenGrab_save():
+    im = ImageGrab.grab(Settings.box)
+    #im = ImageGrab.grab()
+    im.save(os.getcwd() + '\\full_snap__' + str(int(time.time())) + '.png', 'PNG')
+    return im
+
+def screenGrab_all():
+    im = ImageGrab.grab()
+    im.save(os.getcwd() + '\\full_snap__' + str(int(time.time())) + '.png', 'PNG')
     return im
 
 
@@ -460,32 +621,76 @@ def set_player(player):
     Cord.Protection = player.Protection
     Cord.shield_bash = player.shield_bash
     Cord.shockblast = player.shockblast
+    Cord.premium = player.premium
+    Settings.style = player.style
+
+
+def special_attack(im, current_enemies):
+    current_spirit = getSpirit(im)
+    current_overcharge = getOvercharge(im)
+    if not is_spirit_active(im):
+            if use_spirit(current_spirit, current_overcharge, im):
+                print "Spirit Activated"
+            elif activate_iris_strike(current_spirit, current_overcharge):
+                if len(current_enemies) > 0:
+                    attack(current_enemies[0])
+                    print "Iris Strike Used"
+            elif activate_shield_bash(current_spirit, current_overcharge):
+                if len(current_enemies) > 0:
+                    attack(current_enemies[0])
+                    print "Shield Bash Used"
+            else:
+                use_gem()
+                if len(current_enemies) > 0:
+                    attack(current_enemies[0])
+    else:
+        return False
+    return True
 
 
 def sleep():
-    time.sleep(random.uniform(0.5, Settings.sleep))
+    time.sleep(random.uniform(0.5, 3))
 
+
+def start_arena():#UNFINISHED
+    i = 0
+    for i in range(0,1):
+        for arena in Cord.arenas:
+            i += 1
+            get_boundaries()
+            im = screenGrab()
+            if not recover():
+                while getHealth(im) != 100 and getMana(im) != 100 and getSpirit(im) != 100:
+                    print "Player still recovering"
+                    time.sleep(60)
+                    mousePos(Cord.battle_cat_loc)
+                    leftClick()
+                    time.sleep(1)
+                    get_boundaries()
+                    im = screenGrab()
+                    print "%d, %d, %d" % (getHealth(im), getMana(im), getSpirit(im))
+            print "Starting Arena %d" %i
+            go_to_grindfest()
+            startGame()
+            press("spacebar")
+            sleep()
+            print "Player Dead, waiting until revival."
 
 #Main Function
 def startGame(): #UNFINISHED
     set_player(Settings.Player)
     print "Starting Game"
     reset_cooldown()
-    if Settings.rounds == 0:
-        Settings.rounds = 1000
-
-    while 1 < Settings.rounds:
-        get_boundaries()
-        im = screenGrab()
+    get_boundaries()
+    while not roundWon():
         startRound()
-        Settings.rounds -= 1
-        #time.sleep(0.5)
+        time.sleep(0.5)
         im = screenGrab()
         if is_player_dead(im):
             print "Player is dead"
             return
         press('spacebar')
-        time.sleep(1)
+        time.sleep(0.5)
         im = screenGrab()
         #Double Checking to remove any false alarms
         if im.getpixel(Cord.Pony_check_loc) != Cord.Pony_check_color and len(getEnemies(im)) == 0:
@@ -500,24 +705,26 @@ def startGame(): #UNFINISHED
             im = screenGrab()
 
 
-
-
-
 def start_grindfest():
     while 1 == 1:
         get_boundaries()
         im = screenGrab()
-        while getHealth(im) != 100 and getMana(im) != 100 and getSpirit(im) != 100:
-            print "Player still recovering"
-            time.sleep(60)
-            mousePos(Cord.battle_cat_loc)
-            leftClick()
-            time.sleep(1)
-            get_boundaries()
-            im = screenGrab()
+        if not recover():
+            while getHealth(im) != 100 and getMana(im) != 100 and getSpirit(im) != 100:
+                print "Player still recovering"
+                time.sleep(60)
+                mousePos(Cord.battle_cat_loc)
+                leftClick()
+                time.sleep(1)
+                get_boundaries()
+                im = screenGrab()
+                print "%d, %d, %d" % (getHealth(im), getMana(im), getSpirit(im))
         print "Starting Grindfest"
         go_to_grindfest()
         startGame()
+        sleep()
+        mousePos(Cord.battle_cat_loc)
+        leftClick()
         print "Player Dead, waiting until revival."
 
 
@@ -525,46 +732,16 @@ def start_grindfest():
 def startRound(): #UNFINISHED
     print "Starting Round."
 
-    while roundWon() == False and Cord.p_dead == False:
+    while not roundWon() and not Cord.p_dead:
         #time.sleep(1)
         reduceCooldown()
         im = screenGrab()
         current_enemies = getEnemies(im)
-        current_health = getHealth(im)
-        current_spirit = getSpirit(im)
-        current_mana = getMana(im)
-        current_overcharge = getOvercharge(im)
-        #print "Health: %d Mana: %d Spirit: %d Overcharge: %d" % (current_health, current_mana, current_spirit, current_overcharge)
-        if current_health == 0 and not enemies_exist(im):
-            Cord.p_dead = True
-            print "Player has died"
-        elif activate_cure(current_health, current_mana):
-            print "Cure Casted"
-        elif current_health <= 40 and Cooldown.h_potion <= 0:
-            useHealthPot()
-        elif current_mana <= 10 and Cooldown.m_potion <= 0:
-            useManaPot()
-        elif current_spirit <= 10 and Cooldown.s_potion <= 0:
-            useSpiritPot()
-        elif activate_regen(current_health):
-            print "Regen Casted"
-        elif activate_protection():
-            print "Protection Casted"
-        elif not is_spirit_active(im):
-            if use_spirit(current_spirit, current_overcharge, im):
-                print "Spirit Activated"
-            if activate_iris_strike(current_spirit, current_overcharge):
-                if len(current_enemies) > 0:
-                    attack(current_enemies[0])
-                    print "Iris Strike Used"
-            elif activate_shield_bash(current_spirit, current_overcharge):
-                if len(current_enemies) > 0:
-                    attack(current_enemies[0])
-                    print "Shield Bash Used"
-            else:
-                use_gem()
-                if len(current_enemies) > 0:
-                    attack(current_enemies[0])
+        get_status()
+        if restore_stats(im):
+            """restoration occurred"""
+        elif special_attack(im, current_enemies):
+            """special attack occurred"""
         else:
             use_gem()
             if len(current_enemies) > 0:
@@ -574,34 +751,47 @@ def startRound(): #UNFINISHED
         sleep()
 
 
-def useHealthPot():
-    if haveItem(0):
-        print "Using Health Potion"
-        use_item(0)
-        Cooldown.h_potion = 20
+def use_health_pot(current_health):
+    if current_health <= 40 and Cooldown.h_potion <= 0:
+        if haveItem(0):
+            print "Using Health Potion"
+            use_item(0)
+            Cooldown.h_potion = 20
+            return True
+        else:
+            print "No Health Potions Left"
+            Cooldown.h_potion = 999
+            return False
     else:
-        print "No Health Potions Left"
-        Cooldown.h_potion = 999
+        return False
 
 
-def useManaPot():
-    if haveItem(1):
-        print "Using Mana Potion"
-        use_item(1)
-        Cooldown.m_potion = 20
+def use_mana_pot(current_mana):
+    if current_mana <= 10 and Cooldown.m_potion <= 0:
+        if haveItem(1):
+            use_item(1)
+            Cooldown.m_potion = 20
+            return True
+        else:
+            print "No Mana Potions Left"
+            Cooldown.m_potion = 999
+            return False
     else:
-        print "No Mana Potions Left"
-        Cooldown.m_potion = 999
+        return False
 
 
-def useSpiritPot():
-    if haveItem(2):
-        print "Using Spirit Potion"
-        use_item(2)
-        Cooldown.s_potion = 20
+def use_spirit_pot(current_spirit):
+    if current_spirit <= 10 and Cooldown.s_potion <= 0:
+        if haveItem(2):
+            use_item(2)
+            Cooldown.s_potion = 20
+            return True
+        else:
+            print "No Spirit Potions Left"
+            Cooldown.s_potion = 999
+            return False
     else:
-        print "No Spirit Potions Left"
-        Cooldown.s_potion = 999
+        return False
 
 
 def use_gem():
