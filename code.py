@@ -43,7 +43,7 @@ class Player_1:
 
 class Settings:
     full_screen = 0
-    Player = Player_0
+    Player = Player_1
     box = []
     behavior = 0
     style = 0
@@ -111,8 +111,8 @@ class Cord:
                       (p_x40, p_overcharge), (p_x50, p_overcharge), (p_x60, p_overcharge), (p_x70, p_overcharge),
                       (p_x80, p_overcharge), (p_x90, p_overcharge), (p_x100, p_overcharge))
 
-    spirit_cat_loc = (508,  60)
-    spirit_active_color = (170, 36, 36)
+    spirit_cat_loc = (494,  60) #changed, confirm with Chrome. X used to be 508
+    spirit_active_color = (250, 59, 56) #(170, 36, 36)
     #round_won = (550, 191)
     round_won = (550,  139) #UNTESTED
     #round_won_color = (251, 221, 65) #UNTESTED
@@ -123,7 +123,7 @@ class Cord:
     empty_color = (237, 235, 223) #Background Color UNTESTED
     dead_color = (166, 165, 156) #Dead Enemy Color UNTESTED
     spark_of_life_color = (192, 192, 192) #Color when Spark of Life is Active UNTESTED
-    Pony_check_loc = ( 518,  185)
+    Pony_check_loc = (706,170)  #(518,  185) TEST
     Pony_check_color = (237, 235, 223)
 #Enemies
     e_x = 890
@@ -203,6 +203,7 @@ class Cord:
     Current_Status = []
 
 #Arena Locations
+    arena_cat_loc = (626, 40)
     a_x = 1140
     a_next_loc = (771, 60)
     a1 = 128
@@ -409,12 +410,19 @@ def get_status():
             Cord.Current_Status.append(lookup)
 
 
+def go_to_arena(level):
+    mousePos(Cord.battle_cat_loc)
+    time.sleep(0.5)
+    mousePos(Cord.arena_cat_loc)
+    leftClick()
+    time.sleep(0.5)
+    mousePos(Cord.arenas[level])
+    leftClick()
+
 def go_to_grindfest():
     mousePos(Cord.battle_cat_loc)
-    print Cord.battle_cat_loc
     time.sleep(0.5)
     mousePos(Cord.Grindfest_cat_loc)
-    print Cord.Grindfest_cat_loc
     leftClick()
     time.sleep(0.5)
     mousePos(Cord.grindfest_button)
@@ -492,6 +500,20 @@ def multiple_enemy_attack(enemies):
         return 1
     else:
         return 0
+
+def pony_time(im):
+    if im.getpixel(Cord.Pony_check_loc) != Cord.Pony_check_color and len(getEnemies(im)) == 0:
+        time.sleep(0.5)
+        im = screenGrab()
+        while im.getpixel(Cord.Pony_check_loc) != Cord.Pony_check_color and len(getEnemies(im)) == 0:
+            print "Pony Time!"
+            Freq = 2500 # Set Frequency To 2500 Hertz
+            Dur = 1000 # Set Duration To 1000 ms == 1 second
+            winsound.Beep(Freq, Dur)
+            time.sleep(4)
+            im = screenGrab()
+            return True
+    return False
 
 def press(*args):
     '''
@@ -586,9 +608,8 @@ def restore_stats(im):
             print "Regen Casted"
         elif activate_protection():
             print "Protection Casted"
-        elif is_channeling_active():
-            if activate_premium():
-                print "premium activated"
+        elif is_channeling_active() and activate_premium():
+            print "premium activated"
         else:
             return False
         return True
@@ -628,6 +649,7 @@ def set_player(player):
 def special_attack(im, current_enemies):
     current_spirit = getSpirit(im)
     current_overcharge = getOvercharge(im)
+    #print "Is Spirit Active? %r" %is_spirit_active(im)
     if not is_spirit_active(im):
             if use_spirit(current_spirit, current_overcharge, im):
                 print "Spirit Activated"
@@ -649,15 +671,15 @@ def special_attack(im, current_enemies):
 
 
 def sleep():
-    time.sleep(random.uniform(0.5, 3))
+    time.sleep(random.uniform(0.5, 2))
 
 
 def start_arena():#UNFINISHED
-    i = 0
-    for i in range(0,1):
+    Count = 0
+    get_boundaries()
+    for i in range(0, 1):
         for arena in Cord.arenas:
-            i += 1
-            get_boundaries()
+            Count += 1
             im = screenGrab()
             if not recover():
                 while getHealth(im) != 100 and getMana(im) != 100 and getSpirit(im) != 100:
@@ -669,12 +691,13 @@ def start_arena():#UNFINISHED
                     get_boundaries()
                     im = screenGrab()
                     print "%d, %d, %d" % (getHealth(im), getMana(im), getSpirit(im))
-            print "Starting Arena %d" %i
-            go_to_grindfest()
+            print "Starting Arena %d" % Count
+            go_to_arena(arena)
             startGame()
             press("spacebar")
             sleep()
-            print "Player Dead, waiting until revival."
+            print "Heading to next Arena."
+
 
 #Main Function
 def startGame(): #UNFINISHED
@@ -682,27 +705,18 @@ def startGame(): #UNFINISHED
     print "Starting Game"
     reset_cooldown()
     get_boundaries()
-    while not roundWon():
+    im = screenGrab()
+    print "%d enemies" %len(getEnemies(im))
+    while len(getEnemies(im)) > 0 or pony_time(im):
         startRound()
         time.sleep(0.5)
+        press('spacebar')
         im = screenGrab()
         if is_player_dead(im):
             print "Player is dead"
             return
-        press('spacebar')
-        time.sleep(0.5)
+        time.sleep(1)
         im = screenGrab()
-        #Double Checking to remove any false alarms
-        if im.getpixel(Cord.Pony_check_loc) != Cord.Pony_check_color and len(getEnemies(im)) == 0:
-            time.sleep(0.5)
-            im = screenGrab()
-        while im.getpixel(Cord.Pony_check_loc) != Cord.Pony_check_color and len(getEnemies(im)) == 0:
-            print "Pony Time!"
-            Freq = 2500 # Set Frequency To 2500 Hertz
-            Dur = 1000 # Set Duration To 1000 ms == 1 second
-            winsound.Beep(Freq, Dur)
-            time.sleep(4)
-            im = screenGrab()
 
 
 def start_grindfest():
