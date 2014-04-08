@@ -206,18 +206,19 @@ class Cord:
     arena_cat_loc = (626, 40)
     a_x = 1140
     a_next_loc = (771, 60)
-    a1 = 128
-    a2 = 165
-    a3 = 200
-    a4 = 236
-    a5 = 271
-    a6 = 307
-    a7 = 342
-    a8 = 381
-    a9 = 418
-    a10 = 452
-    a11 = 486
-    arenas = [a1, a2, a3, a4, a5, a6, a7, a8 , a9, a10, a11]
+    a_window_ok_loc = (638, 307)
+    a1 = (a_x,128)
+    a2 = (a_x,165)
+    a3 = (a_x,200)
+    a4 = (a_x,236)
+    a5 = (a_x,271)
+    a6 = (a_x,307)
+    a7 = (a_x,342)
+    a8 = (a_x,381)
+    a9 = (a_x,418)
+    a10 = (a_x,452)
+    a11 = (a_x,486)
+    arenas = [a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11]
 
 
 
@@ -415,9 +416,14 @@ def go_to_arena(level):
     time.sleep(0.5)
     mousePos(Cord.arena_cat_loc)
     leftClick()
-    time.sleep(0.5)
-    mousePos(Cord.arenas[level])
+    time.sleep(1)
+    mousePos(level)
     leftClick()
+    time.sleep(1)
+    mousePos(Cord.a_window_ok_loc)
+    time.sleep(0.5)
+    leftClick()
+    time.sleep(1)
 
 def go_to_grindfest():
     mousePos(Cord.battle_cat_loc)
@@ -504,6 +510,7 @@ def multiple_enemy_attack(enemies):
 def pony_time(im):
     if im.getpixel(Cord.Pony_check_loc) != Cord.Pony_check_color and len(getEnemies(im)) == 0:
         time.sleep(0.5)
+        get_boundaries()
         im = screenGrab()
         while im.getpixel(Cord.Pony_check_loc) != Cord.Pony_check_color and len(getEnemies(im)) == 0:
             print "Pony Time!"
@@ -511,7 +518,7 @@ def pony_time(im):
             Dur = 1000 # Set Duration To 1000 ms == 1 second
             winsound.Beep(Freq, Dur)
             time.sleep(4)
-            im = screenGrab()
+            #im = screenGrab()
             return True
     return False
 
@@ -682,7 +689,7 @@ def start_arena():#UNFINISHED
             Count += 1
             im = screenGrab()
             if not recover():
-                while getHealth(im) != 100 and getMana(im) != 100 and getSpirit(im) != 100:
+                while getHealth(im) != 100 or getMana(im) != 100 or getSpirit(im) != 100:
                     print "Player still recovering"
                     time.sleep(60)
                     mousePos(Cord.battle_cat_loc)
@@ -724,7 +731,7 @@ def start_grindfest():
         get_boundaries()
         im = screenGrab()
         if not recover():
-            while getHealth(im) != 100 and getMana(im) != 100 and getSpirit(im) != 100:
+            while getHealth(im) != 100 or getMana(im) != 100 or getSpirit(im) != 100:
                 print "Player still recovering"
                 time.sleep(60)
                 mousePos(Cord.battle_cat_loc)
