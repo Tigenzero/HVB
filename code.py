@@ -17,9 +17,9 @@ class Player_0:
     Items = [0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1] #main character
     Cure = 0
     special_attack = [8, 9, 10]
-    Iris_Strike = 8
-    Backstab = 9
-    Frenzied_Blows = 10
+    Iris_Strike = 8 #deprecated
+    Backstab = 9 #deprecated
+    Frenzied_Blows = 10 #deprecated
     Regen = 4
     Protection = -1
     #unused
@@ -33,7 +33,7 @@ class Player_1:
     Cure = 0
     shield_bash = 1
     #unused
-    Iris_Strike = -1
+    Iris_Strike = -1 #deprecated
     Regen = -1
     Protection = -1 #3 (costs to much mana)
     shockblast = -1
@@ -45,10 +45,9 @@ class Player_1:
 
 class Settings:
     full_screen = 0
-    Player = Player_1
+    Player = Player_0
     box = []
-    behavior = 0
-    style = 0
+    behavior, style = 0, 0
     #Recover: -1: none, 0:all, 1:health, 2: magic, 3: spirit
     recover = -1
     sleep = 2
@@ -775,11 +774,11 @@ def startGame(): #UNFINISHED
     #print "%d enemies" %len(getEnemies(im))
     battle_end = False
     while not battle_end:
-        if len(getEnemies(im)) > 0 or pony_time(im):
+        if len(getEnemies(im)) == 0 or pony_time(im):
             time.sleep(1.5)
             im = screenGrab()
-            if len(getEnemies(im)) > 0 or pony_time(im):
-                print "Battle ended: getEnemies was %d and Pony Time was %r" % (len(getEnemies(im), pony_time(im)))
+            if len(getEnemies(im)) == 0 or pony_time(im):
+                print "Battle ended: getEnemies was %d and Pony Time was %r" % (len(getEnemies(im)), pony_time(im))
                 battle_end = True
         else:
             startRound()
