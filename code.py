@@ -16,6 +16,7 @@ class Player_0:
     # 0 = Health, 1 = Mana, 2 = Spirit, 9 = used
     Items = [0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1] #main character
     Cure = 0
+    special_attack = [8, 9, 10]
     Iris_Strike = 8
     Backstab = 9
     Frenzied_Blows = 10
@@ -36,6 +37,7 @@ class Player_1:
     Regen = -1
     Protection = -1 #3 (costs to much mana)
     shockblast = -1
+    special_attack = [1, -1, -1]
      # 0 = Health, 1 = Mana, 2 = Spirit, 9 = used
     # Health has 30 round cooldown, Mana and Spirit have 15 round cooldown
     Items = [0,0,0,0,0,0,9,9,9] #Current Items in your Battle Inventory
@@ -49,6 +51,7 @@ class Settings:
     style = 0
     #Recover: -1: none, 0:all, 1:health, 2: magic, 3: spirit
     recover = -1
+    sleep = 2
 
 
 class Cord:
@@ -67,7 +70,10 @@ class Cord:
     Protection = -1
     shield_bash = -1
     shockblast = -1
+    special_attack = []
     premium = []
+    special_1 = False #Special Attack 1 activated
+    special_2 = False #Special Attack 2 activated
      # 0 = Health, 1 = Mana, 2 = Spirit, 9 = used
     # Health has 30 round cooldown, Mana and Spirit have 15 round cooldown
 
@@ -206,7 +212,7 @@ class Cord:
     arena_cat_loc = (626, 40)
     a_x = 1140
     a_next_loc = (771, 60)
-    a_window_ok_loc = (638, 307)
+    #a_window_ok_loc = (638, 307)
     a1 = (a_x,128)
     a2 = (a_x,165)
     a3 = (a_x,200)
@@ -234,6 +240,7 @@ class Cooldown:
     shockblast = 0
     collection = [cure, overcharge, h_potion, m_potion, s_potion, regen, protection]
     premium = [0, 0]
+    special_attack = [0, 0, 0]
 
 class Status:
     channeling = 10527
@@ -411,18 +418,23 @@ def get_status():
             Cord.Current_Status.append(lookup)
 
 
-def go_to_arena(level):
+def go_to_arena(level, point):
     mousePos(Cord.battle_cat_loc)
     time.sleep(0.5)
     mousePos(Cord.arena_cat_loc)
     leftClick()
     time.sleep(1)
+    if point == 1:
+        mousePos(Cord.a_next_loc)
+        leftClick()
+        time.sleep(1)
     mousePos(level)
     leftClick()
     time.sleep(1)
-    mousePos(Cord.a_window_ok_loc)
-    time.sleep(0.5)
-    leftClick()
+    #mousePos(Cord.a_window_ok_loc)
+    #time.sleep(0.5)
+    #leftClick()
+    press("enter")
     time.sleep(1)
 
 def go_to_grindfest():
@@ -576,6 +588,9 @@ def reduceCooldown():
     Cooldown.shockblast -= 1
     #if Cooldown.shield_bash == 0:
         #print "shield bash now active"
+    Cooldown.special_attack[0] -= 1
+    Cooldown.special_attack[1] -= 1
+    Cooldown.special_attack[2] -= 1
     for i in range(0,len(Cooldown.premium)):
         Cooldown.premium[i] -= 1
 
@@ -592,6 +607,9 @@ def reset_cooldown():
     Cooldown.regen = 0
     Cooldown.shield_bash = 0
     Cooldown.shockblast = 0
+    Cooldown.special_attack[0] = 0
+    Cooldown.special_attack[1] = 0
+    Cooldown.special_attack[2] = 0
     for i in range(0, len(Cooldown.premium)):
         Cooldown.premium[i] = 0
 
@@ -651,6 +669,7 @@ def set_player(player):
     Cord.shockblast = player.shockblast
     Cord.premium = player.premium
     Settings.style = player.style
+    Cord.special_attack = player.special_attack
 
 
 def special_attack(im, current_enemies):
@@ -660,16 +679,21 @@ def special_attack(im, current_enemies):
     if not is_spirit_active(im):
             if use_spirit(current_spirit, current_overcharge, im):
                 print "Spirit Activated"
-            elif activate_iris_strike(current_spirit, current_overcharge):
-                if len(current_enemies) > 0:
-                    attack(current_enemies[0])
-                    print "Iris Strike Used"
-            elif activate_shield_bash(current_spirit, current_overcharge):
-                if len(current_enemies) > 0:
-                    attack(current_enemies[0])
-                    print "Shield Bash Used"
+            elif current_overcharge >= 30 and current_spirit < 100:
+                if Settings.style == 0:
+                    attack(current_enemies(special_attack_dualwield(current_enemies, current_overcharge)))
+                #elif activate_iris_strike(current_spirit, current_overcharge):
+                #    if len(current_enemies) > 0:
+                #        attack(current_enemies[0])
+                #        print "Iris Strike Used"
+                elif activate_shield_bash(current_spirit, current_overcharge):
+                    if len(current_enemies) > 0:
+                        attack(current_enemies[0])
+                        print "Shield Bash Used"
+                else:
+                    if len(current_enemies) > 0:
+                        attack(current_enemies[0])
             else:
-                use_gem()
                 if len(current_enemies) > 0:
                     attack(current_enemies[0])
     else:
@@ -677,8 +701,43 @@ def special_attack(im, current_enemies):
     return True
 
 
+def special_attack_dualwield(current_enemies, current_overcharge):
+    if current_enemies > 6:
+        if Cord.special_1 and Cord.special_2 and Cord.special_attack[2] >= 0:
+            use_skill(Cord.special_attack[2])
+            Cord.special_1 = False
+            Cord.special_2 = False
+            return multiple_enemy_attack(current_enemies)
+        elif Cord.special_1 and Cord.special_attack[1] >= 0:
+            use_skill(Cord.special_attack[1])
+            Cord.special_2 = True
+            return 0
+        elif current_overcharge >= 50 and Cord.special_attack[2] >= 0 and Cord.special_attack[1] >= 0 and Cord.special_attack[0] >= 0:
+            use_skill(Cord.special_attack[0])
+            Cord.special_1 = True
+            return 0
+        else:
+            if Cord.special_1 and Cord.special_attack[1] >= 0:
+                use_skill(Cord.special_attack[1])
+                Cord.special_2 = True
+                return 0
+            elif Cord.special_attack[0] >= 0:
+                use_skill(Cord.special_attack[0])
+                Cord.special_1 = True
+                return 0
+    else:
+        if Cord.special_1 and Cord.special_attack[1] >= 0:
+            use_skill(Cord.special_attack[1])
+            Cord.special_2 = True
+            return 0
+        elif Cord.special_attack[0] >= 0:
+            use_skill(Cord.special_attack[0])
+            Cord.special_1 = True
+            return 0
+
+
 def sleep():
-    time.sleep(random.uniform(0.5, 2))
+    time.sleep(random.uniform(0.5, Settings.sleep))
 
 
 def start_arena():#UNFINISHED
@@ -699,7 +758,7 @@ def start_arena():#UNFINISHED
                     im = screenGrab()
                     print "%d, %d, %d" % (getHealth(im), getMana(im), getSpirit(im))
             print "Starting Arena %d" % Count
-            go_to_arena(arena)
+            go_to_arena(arena, i)
             startGame()
             press("spacebar")
             sleep()
@@ -713,17 +772,25 @@ def startGame(): #UNFINISHED
     reset_cooldown()
     get_boundaries()
     im = screenGrab()
-    print "%d enemies" %len(getEnemies(im))
-    while len(getEnemies(im)) > 0 or pony_time(im):
-        startRound()
-        time.sleep(0.5)
-        press('spacebar')
-        im = screenGrab()
-        if is_player_dead(im):
-            print "Player is dead"
-            return
-        time.sleep(1)
-        im = screenGrab()
+    #print "%d enemies" %len(getEnemies(im))
+    battle_end = False
+    while not battle_end:
+        if len(getEnemies(im)) > 0 or pony_time(im):
+            time.sleep(1.5)
+            im = screenGrab()
+            if len(getEnemies(im)) > 0 or pony_time(im):
+                print "Battle ended: getEnemies was %d and Pony Time was %r" % (len(getEnemies(im), pony_time(im)))
+                battle_end = True
+        else:
+            startRound()
+            time.sleep(0.5)
+            press('spacebar')
+            im = screenGrab()
+            if is_player_dead(im):
+                print "Player is dead"
+                return
+            time.sleep(1)
+            im = screenGrab()
 
 
 def start_grindfest():
@@ -752,7 +819,7 @@ def start_grindfest():
 #Performs all of the needed functions during a round
 def startRound(): #UNFINISHED
     print "Starting Round."
-
+    enemy_num = 0
     while not roundWon() and not Cord.p_dead:
         #time.sleep(1)
         reduceCooldown()
@@ -764,12 +831,14 @@ def startRound(): #UNFINISHED
         elif special_attack(im, current_enemies):
             """special attack occurred"""
         else:
-            use_gem()
             if len(current_enemies) > 0:
                 attack(current_enemies[0])
         #this sleep function triggers the amount of time between clicks, thus the time between server communication
         #This function is very important as it randomizes the communication times, emulating the behavior of a player
         sleep()
+        if current_enemies < enemy_num:
+            use_gem()
+        enemy_num = current_enemies
 
 
 def use_health_pot(current_health):
