@@ -511,9 +511,9 @@ def mousePos(cord):
 
 
 def multiple_enemy_attack(enemies):
-    if len(enemies) >= 5:
+    if enemies >= 5:
         return 2
-    elif len(enemies) >= 3:
+    elif enemies >= 3:
         return 1
     else:
         return 0
@@ -680,7 +680,7 @@ def special_attack(im, current_enemies):
                 print "Spirit Activated"
             elif current_overcharge >= 30 and current_spirit < 100:
                 if Settings.style == 0:
-                    attack(current_enemies(special_attack_dualwield(current_enemies, current_overcharge)))
+                    attack(current_enemies[special_attack_dualwield(len(current_enemies), current_overcharge)])
                 #elif activate_iris_strike(current_spirit, current_overcharge):
                 #    if len(current_enemies) > 0:
                 #        attack(current_enemies[0])
