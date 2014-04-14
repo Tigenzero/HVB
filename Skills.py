@@ -113,7 +113,7 @@ def special_attack(im, current_enemies, style):
                 print "Spirit Activated"
             elif current_overcharge >= 30 and current_spirit < 100:
                 if style == 0:
-                    attack(current_enemies(special_attack_dualwield(current_enemies, current_overcharge)))
+                    attack(current_enemies[special_attack_dualwield(current_enemies, current_overcharge)])
                 #elif activate_iris_strike(current_spirit, current_overcharge):
                 #    if len(current_enemies) > 0:
                 #        attack(current_enemies[0])
