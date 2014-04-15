@@ -20,13 +20,13 @@ class Player_1:
     style = 1
     Cure = 0
     shield_bash = 1
+    Regen = -1 #2 (premium)
     #unused
     Iris_Strike = -1 #deprecated
-    Regen = -1
-    Protection = -1 #3 (costs to much mana)
+    Protection = -1 #3 (premium)
     shockblast = -1
     special_attack = [1, -1, -1]
      # 0 = Health, 1 = Mana, 2 = Spirit, 9 = used
     # Health has 30 round cooldown, Mana and Spirit have 15 round cooldown
-    Items = [0,0,0,0,0,0,9,9,9] #Current Items in your Battle Inventory
-    premium = [3, -1]
+    Items = [0, 0, 0, 0, 0, 0, 9, 9, 9] #Current Items in your Battle Inventory
+    premium = [3, 2]
