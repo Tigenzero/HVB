@@ -21,7 +21,7 @@ from Cooldown import *
 
 class Settings:
     full_screen = 0
-    Player = Player_1
+    Player = Player_0
     box = []
     behavior, style = 0, 0
     #Recover: -1: none, 0:all, 1:health, 2: magic, 3: spirit
@@ -294,7 +294,7 @@ def sleep():
 def start_arena():#UNFINISHED
     Count = 0
     get_boundaries()
-    for i in range(0, 1):
+    for i in range(0, 2):
         for arena in Cord.arenas:
             Count += 1
             im = screenGrab()
