@@ -364,6 +364,7 @@ def start_grindfest():
         mousePos(Cord.battle_cat_loc)
         leftClick()
         print "Player Dead, waiting until revival."
+        sleep()
 
 
 #Performs all of the needed functions during a round
@@ -379,8 +380,6 @@ def startRound(): #UNFINISHED
         im = screenGrab()
         current_enemies = getEnemies(im)
         get_status()
-        if len(current_enemies) < enemy_num:
-            use_gem()
         if restore_stats(im):
             """restoration occurred"""
         else:
@@ -388,6 +387,8 @@ def startRound(): #UNFINISHED
         #this sleep function triggers the amount of time between clicks, thus the time between server communication
         #This function is very important as it randomizes the communication times, emulating the behavior of a player
         sleep()
+        if len(current_enemies) < enemy_num:
+            use_gem()
         enemy_num = len(current_enemies)
 
 if __name__ == '__main__':
