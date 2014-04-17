@@ -294,7 +294,7 @@ def sleep():
 def start_arena():#UNFINISHED
     Count = 0
     get_boundaries()
-    for i in range(0, 1):
+    for i in range(0, 2):
         for arena in Cord.arenas:
             Count += 1
             im = screenGrab()
