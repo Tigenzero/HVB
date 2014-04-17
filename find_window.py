@@ -1,11 +1,10 @@
 import win32api
 import ImageGrab
-import math
 """
  The initial test will involve 1920X1080
  The width of the box will be at least 1293px
 """
-temp_point = -1
+
 
 def get_width():
     return win32api.GetSystemMetrics(0)
@@ -14,8 +13,7 @@ def get_width():
 def get_height():
     return win32api.GetSystemMetrics(1)
 
-#The plan is to take the resolution of the screen, split it into 4 scanner X coordinates and 10 Y coordinates in hopes that the window can be quickly found
-#Afterwards, the scanner will find the top right corner of the window and determine that the whole window (or at least enough of the window needed to function) is viewable.
+
 def find_window():
     width = get_width()
     height = get_height()
@@ -31,35 +29,6 @@ def find_window():
                 return temp_x, temp_y
     print "Never Found Window"
     return 0, 0
-
-"""
-def find_left(window):
-    x = window[0]
-    y = window[1]
-    if x/100 < 1:
-        x_delimiter = 1
-    else:
-        x_delimiter = x/100
-    im = window_screenGrab()
-    temp_x = -1
-    window_switch = True
-    last_x = 0
-    #while temp_x != 0:
-    try:
-        for i in range(1, 100):
-            temp_x = x-(x_delimiter*i)
-            if (im.getpixel((temp_x, y)) != (237, 235, 223) or im.getpixel((temp_x, y)) != (227, 224, 209)) and window_switch:
-                last_x = temp_x
-                window_switch = False
-            elif im.getpixel((temp_x, y)) == (237, 235, 223) or im.getpixel((temp_x, y)) == (227, 224, 209):
-                last_x = temp_x
-                window_switch = True
-        #print "Outside of Box found at %d" % last_x
-        x = crawl_right(last_x, x, y)
-        return x
-    except ValueError:
-        return 0
-"""
 
 
 def find_left(window):
@@ -100,69 +69,14 @@ def find_top(x, y):
             count += 1
 
     return last_y
-"""
-def find_top(x, y):
-    print x
-    if y/10 < 1:
-        y_delimiter = 1
-    else:
-        y_delimiter = y/1000
-    print y_delimiter
-    im = window_screenGrab()
-    window_switch = True
-    last_y = 0
-    for i in range(1, 1000):
-        temp_y = y-(y_delimiter*i)
-        print temp_y
-        if (im.getpixel((x, temp_y)) != (237, 235, 223) or im.getpixel((x, temp_y)) != (227, 224, 209)) and window_switch:
-            last_y = temp_y
-            window_switch = False
-        elif im.getpixel((x, temp_y)) == (237, 235, 223) or im.getpixel((x, temp_y)) == (227, 224, 209):
-            last_y = temp_y
-            window_switch = True
-    y = crawl_down(last_y, y, x)
-    return y
-"""
 
-def crawl_right(point, orig_point, y):
-    im = window_screenGrab()
-    #while point != orig_point:
-    for i in range(1, orig_point - point):
-        temp_point = point + i
-        if im.getpixel((temp_point, y)) == (237, 235, 223) or im.getpixel((temp_point, y)) == (227, 224, 209):
-            return (point + i)
-    print "no point was found, must have been orig_point"
-    return orig_point
-
-
-def crawl_down(point, orig_point, x):
-    im = window_screenGrab()
-    temp_point = -1
-    #while temp_point != orig_point:
-    for i in range(1, orig_point - point):
-        temp_point = point + i
-        if im.getpixel((x, temp_point)) == (237, 235, 223) or im.getpixel((x, temp_point)) == (227, 224, 209):
-            return temp_point
-    print "no point was found, must have been orig_point"
-    return orig_point
-
-#for fullscreen
-def find_browser():
-    im = window_screenGrab()
-    temp_point = -1
-    #while temp_point != orig_point:
-    for i in range(1, 100):
-        temp_point = 100 - i
-        if im.getpixel((0, temp_point)) != (237, 235, 223) and im.getpixel((0, temp_point)) != (227, 224, 209):
-            return temp_point + 1
-    print "no point was found, must have been 0"
-    return 0
 
 def window_screenGrab():
     #box = ()
     im = ImageGrab.grab()
     #im.save(os.getcwd() + '\\full_snap__' + str(int(time.time())) + '.png', 'PNG')
     return im
+
 
 #for window
 def find_corner():

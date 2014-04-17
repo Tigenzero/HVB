@@ -12,7 +12,8 @@ class Cooldown:
     premium = [0, 0]
     special_attack = [0, 0, 0]
 
-def reduceCooldown():
+
+def reduce_cooldown():
     #for i in range(0, len(Cooldown.collection)):
     #Cooldown.collection[i] = Cooldown.collection[i] -1 Does not update Values
     Cooldown.cure -= 1

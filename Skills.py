@@ -1,4 +1,3 @@
-import code
 from Click_Press import mousePos, leftClick
 from Coordinates import Cord
 from Cooldown import Cooldown
@@ -22,7 +21,7 @@ def activate_cure(current_health, current_mana):
 
 
 def activate_regen(current_health):
-    if current_health <= 60 and Cooldown.regen <= 0 and Cord.Regen >=0:
+    if current_health <= 60 and Cooldown.regen <= 0 <= Cord.Regen:
         print "using Regen"
         use_skill(Cord.Regen)
         Cooldown.regen = 45
@@ -31,17 +30,9 @@ def activate_regen(current_health):
         return False
 
 
-def activate_iris_strike(current_spirit, current_overcharge):
-    if current_overcharge >= 30 and current_spirit < 100 and Cord.Iris_Strike >= 0:
-        use_skill(Cord.Iris_Strike)
-        return True
-    else:
-        return False
-
-
 def activate_premium():
     for i in range(0, len(Cord.premium)):
-        if Cooldown.premium[i] <= 0 and Cord.premium[i] >=0:
+        if Cooldown.premium[i] <= 0 <= Cord.premium[i]:
             use_skill(Cord.premium[i])
             Cooldown.premium[i] = 45
             return True
@@ -51,7 +42,7 @@ def activate_premium():
 
 
 def activate_shield_bash(current_spirit, current_overcharge):
-    if current_overcharge >= 50 and current_spirit < 80 and Cord.shield_bash >= 0 and Cooldown.shield_bash <= 0:
+    if current_overcharge >= 50 and current_spirit < 80 and Cord.shield_bash >= 0 >= Cooldown.shield_bash:
         use_skill(Cord.shield_bash)
         Cooldown.shield_bash = 11
         return True
@@ -60,7 +51,7 @@ def activate_shield_bash(current_spirit, current_overcharge):
 
 
 def activate_protection():
-    if Cord.Protection >= 0 and Cooldown.protection <= 0:
+    if Cord.Protection >= 0 >= Cooldown.protection:
         use_skill(Cord.Protection)
         Cooldown.protection = 19
         return True
@@ -68,7 +59,7 @@ def activate_protection():
         return False
 
 
-def getOvercharge(im):
+def get_overcharge(im):
     p_overcharge = 0
     for level in Cord.p_overcharge_levels:
         if im.getpixel(level) != Cord.under_color:
@@ -78,7 +69,7 @@ def getOvercharge(im):
     return 100
 
 
-def getSpirit(im):
+def get_spirit(im):
     p_spirit = 0
     for level in Cord.p_spirit_levels:
         if im.getpixel(level) != Cord.under_color:
@@ -105,15 +96,15 @@ def multiple_enemy_attack(enemies):
 
 
 def special_attack(im, current_enemies, style):
-    current_spirit = getSpirit(im)
-    current_overcharge = getOvercharge(im)
+    current_spirit = get_spirit(im)
+    current_overcharge = get_overcharge(im)
     #print "Is Spirit Active? %r" %is_spirit_active(im)
     if not is_spirit_active(im):
             if use_spirit(current_spirit, current_overcharge, im):
                 print "Spirit Activated"
             elif current_overcharge >= 30 and current_spirit < 100:
                 if style == 0:
-                    attack(current_enemies[special_attack_dualwield(current_enemies, current_overcharge)])
+                    attack(current_enemies[special_attack_dual(current_enemies, current_overcharge)])
                 #elif activate_iris_strike(current_spirit, current_overcharge):
                 #    if len(current_enemies) > 0:
                 #        attack(current_enemies[0])
@@ -133,8 +124,8 @@ def special_attack(im, current_enemies, style):
             attack(current_enemies[0])
 
 
-def special_attack_dualwield(current_enemies, current_overcharge):
-    if current_enemies > 6:
+def special_attack_dual(current_enemies, current_overcharge):
+    if current_enemies > 6 and Cord.special_attack[2] >= 0:
         if Cord.special_1 and Cord.special_2 and Cord.special_attack[2] >= 0:
             use_skill(Cord.special_attack[2])
             Cord.special_1 = False
@@ -144,18 +135,20 @@ def special_attack_dualwield(current_enemies, current_overcharge):
             use_skill(Cord.special_attack[1])
             Cord.special_2 = True
             return 0
-        elif current_overcharge >= 50 and Cord.special_attack[2] >= 0 and Cord.special_attack[1] >= 0 and Cord.special_attack[0] >= 0:
+        elif current_overcharge >= 70 and Cord.special_attack[2] >= 0 and Cord.special_attack[1] >= 0 and Cord.special_attack[0] >= 0:
             use_skill(Cord.special_attack[0])
             Cord.special_1 = True
+            Cord.special_2 = False
             return 0
         else:
             if Cord.special_1 and Cord.special_attack[1] >= 0:
                 use_skill(Cord.special_attack[1])
                 Cord.special_2 = True
                 return 0
-            elif Cord.special_attack[0] >= 0:
+            elif Cord.special_attack[0] >= 0 and current_overcharge >= 70:
                 use_skill(Cord.special_attack[0])
                 Cord.special_1 = True
+                Cord.special_2 = False
                 return 0
     else:
         if Cord.special_1 and Cord.special_attack[1] >= 0:
@@ -165,6 +158,7 @@ def special_attack_dualwield(current_enemies, current_overcharge):
         elif Cord.special_attack[0] >= 0:
             use_skill(Cord.special_attack[0])
             Cord.special_1 = True
+            Cord.special_2 = False
             return 0
 
 
@@ -174,8 +168,9 @@ def use_skill(skill):
         mousePos(Cord.skills[skill])
         leftClick()
 
+
 def use_spirit(current_spirit, current_overcharge, im):
-    if current_overcharge >= 80 and Cooldown.overcharge <= 0 and current_spirit >= 30 and not is_spirit_active(im):
+    if current_overcharge >= 80 and Cooldown.overcharge <= 0 and current_spirit >= 40 and not is_spirit_active(im):
         mousePos(Cord.spirit_cat_loc)
         leftClick()
         Cooldown.overcharge = 10

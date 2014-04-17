@@ -1,7 +1,8 @@
 from Click_Press import *
 from Cooldown import Cooldown
 
-def haveItem(item_type):
+
+def have_item(item_type):
     for i in range(0, len(Cord.Items)):
     #for item in Cord.Items:
         if Cord.Items[i] == item_type:
@@ -11,7 +12,7 @@ def haveItem(item_type):
 
 def use_health_pot(current_health):
     if current_health <= 40 and Cooldown.h_potion <= 0:
-        if haveItem(0):
+        if have_item(0):
             print "Using Health Potion"
             use_item(0)
             Cooldown.h_potion = 20
@@ -26,7 +27,7 @@ def use_health_pot(current_health):
 
 def use_mana_pot(current_mana):
     if current_mana <= 10 and Cooldown.m_potion <= 0:
-        if haveItem(1):
+        if have_item(1):
             use_item(1)
             Cooldown.m_potion = 20
             return True
@@ -40,7 +41,7 @@ def use_mana_pot(current_mana):
 
 def use_spirit_pot(current_spirit):
     if current_spirit <= 10 and Cooldown.s_potion <= 0:
-        if haveItem(2):
+        if have_item(2):
             use_item(2)
             Cooldown.s_potion = 20
             return True
