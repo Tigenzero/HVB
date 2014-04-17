@@ -16,6 +16,7 @@ from Click_Press import *
 from Cooldown import *
 from Coordinates import Cord
 
+
 class Settings:
     full_screen = 0
     Player = Player_1

@@ -1,7 +1,7 @@
 import win32api
 from win32con import MOUSEEVENTF_LEFTUP, MOUSEEVENTF_LEFTDOWN, KEYEVENTF_KEYUP
 import time
-from code import Cord
+from Coordinates import Cord
 
 
 def leftClick():
