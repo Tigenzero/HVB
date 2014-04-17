@@ -2,8 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d698ee8d-7e2d-4579-bdd7-d7af7a4ba013" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Click_Press.py" afterPath="$PROJECT_DIR$/Click_Press.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code.py" afterPath="$PROJECT_DIR$/code.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="HVB.iws" />
@@ -523,7 +521,11 @@
       <created>1397750318175</created>
       <updated>1397750318175</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="big fix">
+      <created>1397754728812</created>
+      <updated>1397754728812</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -565,7 +567,8 @@
     </option>
     <MESSAGE value="Determined locations of enemies 1-8, mapped all skills, and determined colors to &quot;see&quot; live enemies and dead enemies." />
     <MESSAGE value="Increased Dual Wielding overcharge requirement in hopes that this will fix the issue in which the third level skill wouldn't have enough overcharge to activate. &#10;Other code cleanups and function changes." />
-    <option name="LAST_COMMIT_MESSAGE" value="Increased Dual Wielding overcharge requirement in hopes that this will fix the issue in which the third level skill wouldn't have enough overcharge to activate. &#10;Other code cleanups and function changes." />
+    <MESSAGE value="big fix" />
+    <option name="LAST_COMMIT_MESSAGE" value="big fix" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
