@@ -150,6 +150,8 @@ def special_attack_dual(current_enemies, current_overcharge):
                 Cord.special_1 = True
                 Cord.special_2 = False
                 return 0
+            else:
+                return 0
     else:
         if Cord.special_1 and Cord.special_attack[1] >= 0:
             use_skill(Cord.special_attack[1])
@@ -159,6 +161,8 @@ def special_attack_dual(current_enemies, current_overcharge):
             use_skill(Cord.special_attack[0])
             Cord.special_1 = True
             Cord.special_2 = False
+            return 0
+        else:
             return 0
 
 
