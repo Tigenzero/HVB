@@ -9,7 +9,7 @@ class Cooldown:
     shield_bash = 0
     shockblast = 0
     collection = [cure, overcharge, h_potion, m_potion, s_potion, regen, protection]
-    premium = [0, 0]
+    premium = [0, 0, 0]
     special_attack = [0, 0, 0]
 
 

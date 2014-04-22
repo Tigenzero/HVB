@@ -166,6 +166,39 @@ def special_attack_dual(current_enemies, current_overcharge):
             return 0
 
 
+def special_attack_single(current_overcharge):
+    if Cord.special_attack[2] >= 0:
+        if Cord.special_1 and Cord.special_2 and Cord.special_attack[2] >= 0:
+            use_skill(Cord.special_attack[2])
+            Cord.special_1 = False
+            Cord.special_2 = False
+        elif Cord.special_1 and Cord.special_attack[1] >= 0:
+            use_skill(Cord.special_attack[1])
+            Cord.special_2 = True
+        elif current_overcharge >= 70 and Cord.special_attack[2] >= 0 and Cord.special_attack[1] >= 0 and Cord.special_attack[0] >= 0:
+            use_skill(Cord.special_attack[0])
+            Cord.special_1 = True
+            Cord.special_2 = False
+        else:
+            if Cord.special_1 and Cord.special_attack[1] >= 0:
+                use_skill(Cord.special_attack[1])
+                Cord.special_2 = True
+            elif Cord.special_attack[0] >= 0 and current_overcharge >= 70:
+                use_skill(Cord.special_attack[0])
+                Cord.special_1 = True
+                Cord.special_2 = False
+    else:
+        if Cord.special_1 and Cord.special_attack[1] >= 0:
+            use_skill(Cord.special_attack[1])
+            Cord.special_2 = True
+
+        elif Cord.special_attack[0] >= 0 and current_overcharge >= 50:
+            use_skill(Cord.special_attack[0])
+            Cord.special_1 = True
+            Cord.special_2 = False
+    return 0
+
+
 def use_skill(skill):
     #mousePos(Cord.Cure)
     if skill >= 0:

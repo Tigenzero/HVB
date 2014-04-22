@@ -266,7 +266,7 @@ def set_player(player):
     Cord.Cure = player.Cure
     Cord.Iris_Strike = player.Iris_Strike
     Cord.Regen = player.Regen
-    Cord.Items = player.Items
+    Cord.Items = list(player.Items)
     Cord.Protection = player.Protection
     Cord.shield_bash = player.shield_bash
     Cord.shockblast = player.shockblast

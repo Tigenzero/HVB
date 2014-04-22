@@ -2,31 +2,23 @@
 class Player_0:
     style = 0
     # 0 = Health, 1 = Mana, 2 = Spirit, 9 = used
-    Items = [0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1] #main character
+    Items = (0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1) #main character
     Cure = 0
     special_attack = [8, 9, 10]
-    Iris_Strike = 8 #deprecated
-    Backstab = 9 #deprecated
-    Frenzied_Blows = 10 #deprecated
     Regen = 4
     Protection = -1
     #unused
-    shield_bash = -1
-    shockblast = -1
-    premium = [12, 13]
+    premium = [12, 13, 5]
 
 
 class Player_1:
     style = 1
     Cure = 0
-    shield_bash = 1
     Regen = -1 #2 (premium)
     #unused
-    Iris_Strike = -1 #deprecated
     Protection = -1 #3 (premium)
-    shockblast = -1
-    special_attack = [1, -1, -1]
+    special_attack = [1, 2, -1]
      # 0 = Health, 1 = Mana, 2 = Spirit, 9 = used
     # Health has 30 round cooldown, Mana and Spirit have 15 round cooldown
-    Items = [0, 0, 0, 0, 0, 0, 9, 9, 9] #Current Items in your Battle Inventory
-    premium = [3, 2]
+    Items = (0, 0, 0, 0, 0, 0, 9, 9, 9) #Current Items in your Battle Inventory
+    premium = [3, 4, 5]
