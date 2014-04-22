@@ -61,15 +61,6 @@ def activate_special(special, overcharge, current_overcharge):
     return False
 
 
-def activate_shield_bash(current_spirit, current_overcharge):
-    if current_overcharge >= 50 and current_spirit < 80 and Cord.shield_bash >= 0 >= Cooldown.shield_bash:
-        use_skill(Cord.shield_bash)
-        Cooldown.shield_bash = 11
-        return True
-    else:
-        return False
-
-
 def activate_protection():
     if Cord.Protection >= 0 >= Cooldown.protection:
         use_skill(Cord.Protection)

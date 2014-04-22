@@ -8,16 +8,11 @@ class Cord:
     window_padding_x = 0
     #Cure = (188,  96)
     Cure = -1
-    Iris_Strike = -1
     Regen = -1
     Items = -1
     Protection = -1
-    shield_bash = -1
-    shockblast = -1
     special_attack = []
     premium = []
-    special_1 = False #Special Attack 1 activated
-    special_2 = False #Special Attack 2 activated
      # 0 = Health, 1 = Mana, 2 = Spirit, 9 = used
     # Health has 30 round cooldown, Mana and Spirit have 15 round cooldown
 
