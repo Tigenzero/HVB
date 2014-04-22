@@ -42,21 +42,31 @@ def activate_premium():
     return False
 
 
-def activate_special(special, overcharge, current_overcharge):
-    if special == 2 and Cord.special_attack[2] >= 0:
+def activate_cooldown(special, style):
+    if style == 0 and (special == 0 or special == 1):
+        Cooldown.special_attack[special] = 5
+    else:
+        Cooldown.special_attack[special] = 10
+
+
+def activate_special(special, overcharge, current_overcharge, style):
+    if special == 2 and Cord.special_attack[2] >= 0 >= Cooldown.special_attack[2]:
         if is_status_active("special_1") and is_status_active("special_2") and overcharge < current_overcharge:
             use_skill(Cord.special_attack[2])
             print "special 3 used"
+            activate_cooldown(2, style)
             return True
-    if special == 1 and Cord.special_attack[1] >= 0:
+    if special == 1 and Cord.special_attack[1] >= 0 >= Cooldown.special_attack[1]:
         if is_status_active("special_1") and overcharge < current_overcharge:
             use_skill(Cord.special_attack[1])
             print "special 2 used"
+            activate_cooldown(1, style)
             return True
-    if special == 0 and Cord.special_attack[0] >= 0:
+    if special == 0 and Cord.special_attack[0] >= 0 >= Cooldown.special_attack[0]:
         if overcharge < current_overcharge:
             use_skill(Cord.special_attack[0])
             print "special 1 used"
+            activate_cooldown(0, style)
             return True
     return False
 
@@ -128,46 +138,46 @@ def special_attack(im, current_enemies, style):
 #need to test
 def special_attack_dual(current_enemies, current_overcharge):
     if Cord.special_attack[2] >= 0:
-        if activate_special(2, 0, current_overcharge):
+        if activate_special(2, 10, current_overcharge, 0):
             return multiple_enemy_attack(current_enemies)
-        elif activate_special(1, 0, current_overcharge):
+        elif activate_special(1, 20, current_overcharge, 0):
             return 0
-        elif activate_special(0, 80, current_overcharge):
+        elif activate_special(0, 80, current_overcharge, 0):
             return 0
         else:
-            if activate_special(1, 0, current_overcharge):
+            if activate_special(1, 20, current_overcharge, 0):
                 return 0
-            elif activate_special(0, 80, current_overcharge):
+            elif activate_special(0, 80, current_overcharge, 0):
                 return 0
             else:
                 return 0
     else:
-        if activate_special(1, 0, current_overcharge):
+        if activate_special(1, 20, current_overcharge, 0):
             return 0
-        elif activate_special(0, 60, current_overcharge):
+        elif activate_special(0, 60, current_overcharge, 0):
             return 0
     return 0
 
 
 def special_attack_single(current_overcharge):
     if Cord.special_attack[2] >= 0:
-        if activate_special(2, 0, current_overcharge):
+        if activate_special(2, 10, current_overcharge, 1):
             return 0
-        elif activate_special(1, 0, current_overcharge):
+        elif activate_special(1, 20, current_overcharge, 1):
             return 0
-        elif activate_special(0, 70, current_overcharge):
+        elif activate_special(0, 70, current_overcharge, 1):
             return 0
         else:
-            if activate_special(1, 0, current_overcharge):
+            if activate_special(1, 20, current_overcharge, 1):
                 return 0
-            elif activate_special(0, 70, current_overcharge):
+            elif activate_special(0, 70, current_overcharge, 1):
                 return 0
             else:
                 return 0
     else:
-        if activate_special(1, 0, current_overcharge):
+        if activate_special(1, 20, current_overcharge, 1):
             return 0
-        elif activate_special(0, 50, current_overcharge):
+        elif activate_special(0, 50, current_overcharge, 1):
             return 0
     return 0
 

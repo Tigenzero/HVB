@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d698ee8d-7e2d-4579-bdd7-d7af7a4ba013" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Coordinates.py" afterPath="$PROJECT_DIR$/Coordinates.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Cooldown.py" afterPath="$PROJECT_DIR$/Cooldown.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Skills.py" afterPath="$PROJECT_DIR$/Skills.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code.py" afterPath="$PROJECT_DIR$/code.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
@@ -31,7 +31,7 @@
       <file leaf-file-name="code.py" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/code.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="209" column="39" selection-start="5675" selection-end="5675" vertical-scroll-proportion="0.0" vertical-offset="2963" max-vertical-offset="5542">
+            <state line="323" column="72" selection-start="9487" selection-end="9487" vertical-scroll-proportion="0.0" vertical-offset="4876" max-vertical-offset="5984">
               <folding>
                 <element signature="e#42#58#0" expanded="true" />
               </folding>
@@ -68,10 +68,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Skills.py" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="Skills.py" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Skills.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="60" column="16" selection-start="1904" selection-end="1904" vertical-scroll-proportion="1.1957796" vertical-offset="0" max-vertical-offset="3298">
+            <state line="64" column="80" selection-start="2109" selection-end="2109" vertical-scroll-proportion="0.0" vertical-offset="473" max-vertical-offset="3468">
               <folding>
                 <element signature="e#0#43#0" expanded="true" />
               </folding>
@@ -79,10 +79,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Cooldown.py" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="Cooldown.py" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Cooldown.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="11" column="21" selection-start="277" selection-end="277" vertical-scroll-proportion="0.0" vertical-offset="187" max-vertical-offset="986">
+            <state line="35" column="21" selection-start="1005" selection-end="1005" vertical-scroll-proportion="0.6975381" vertical-offset="0" max-vertical-offset="884">
               <folding />
             </state>
           </provider>
@@ -118,20 +118,19 @@
         <option value="$PROJECT_DIR$/find_window.py" />
         <option value="$PROJECT_DIR$/Click_Press.py" />
         <option value="$PROJECT_DIR$/Items.py" />
-        <option value="$PROJECT_DIR$/Cooldown.py" />
         <option value="$PROJECT_DIR$/Settings.py" />
         <option value="$PROJECT_DIR$/Status.py" />
         <option value="$PROJECT_DIR$/Players.py" />
-        <option value="$PROJECT_DIR$/code.py" />
         <option value="$PROJECT_DIR$/Coordinates.py" />
+        <option value="$PROJECT_DIR$/Cooldown.py" />
+        <option value="$PROJECT_DIR$/code.py" />
         <option value="$PROJECT_DIR$/Skills.py" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="81" />
-    <option name="y" value="19" />
-    <option name="width" value="1672" />
+    <option name="x" value="-17" />
+    <option name="width" value="1519" />
     <option name="height" value="1008" />
   </component>
   <component name="ProjectInspectionProfilesVisibleTreeState">
@@ -529,11 +528,15 @@
       <created>1398199781367</created>
       <updated>1398199781367</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="removing unneeded variables">
+      <created>1398199973576</created>
+      <updated>1398199973576</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="81" y="19" width="1672" height="1008" extended-state="0" />
+    <frame x="-17" y="0" width="1519" height="1008" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
@@ -542,7 +545,7 @@
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24944974" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.13568774" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.14989734" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.16518848" sideWeight="0.5" order="8" side_tool="true" content_ui="tabs" />
@@ -595,7 +598,8 @@
     <MESSAGE value="started function for single handed specials, adjusted players to have replenished item lists, and upped the available premium number to 3" />
     <MESSAGE value="rewrote special attacks:&#10;- now looks for special attack (1-2) status instead of tracking internally&#10;- less code used to perform more logic&#10;- Single Hand style now can use 3rd special&#10;- logic friendlier to users with only two specials&#10;- removed 6 or more enemy limit for dual wield users (3rd special attacks leftover enemies more if less than 5)&#10;- code can now easily be added for other styles (2 handed etc.)" />
     <MESSAGE value="adjusted player 1's item list" />
-    <option name="LAST_COMMIT_MESSAGE" value="adjusted player 1's item list" />
+    <MESSAGE value="removing unneeded variables" />
+    <option name="LAST_COMMIT_MESSAGE" value="removing unneeded variables" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -827,13 +831,6 @@
         <state line="172" column="5" selection-start="5487" selection-end="5487" vertical-scroll-proportion="0.0" vertical-offset="2016" max-vertical-offset="3060" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Cooldown.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="11" column="21" selection-start="277" selection-end="277" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="986">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Status.py">
       <provider selected="true" editor-type-id="text-editor">
         <state line="52" column="0" selection-start="1549" selection-end="1549" vertical-scroll-proportion="0.0" vertical-offset="235" max-vertical-offset="1088">
@@ -850,22 +847,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Players.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="20" column="49" selection-start="529" selection-end="529" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="493">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/code.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="209" column="39" selection-start="5675" selection-end="5675" vertical-scroll-proportion="0.0" vertical-offset="2963" max-vertical-offset="5542">
-          <folding>
-            <element signature="e#42#58#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Coordinates.py">
       <provider selected="true" editor-type-id="text-editor">
         <state line="14" column="16" selection-start="322" selection-end="322" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2907">
@@ -873,12 +854,35 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/code.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="323" column="72" selection-start="9487" selection-end="9487" vertical-scroll-proportion="0.0" vertical-offset="4876" max-vertical-offset="5984">
+          <folding>
+            <element signature="e#42#58#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Players.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="20" column="49" selection-start="529" selection-end="529" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="493">
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/Skills.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="60" column="16" selection-start="1904" selection-end="1904" vertical-scroll-proportion="1.1957796" vertical-offset="0" max-vertical-offset="3298">
+        <state line="64" column="80" selection-start="2109" selection-end="2109" vertical-scroll-proportion="0.0" vertical-offset="473" max-vertical-offset="3468">
           <folding>
             <element signature="e#0#43#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Cooldown.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="35" column="21" selection-start="1005" selection-end="1005" vertical-scroll-proportion="0.6975381" vertical-offset="0" max-vertical-offset="884">
+          <folding />
         </state>
       </provider>
     </entry>

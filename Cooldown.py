@@ -6,8 +6,6 @@ class Cooldown:
     s_potion = 0
     regen = 0
     protection = 0
-    shield_bash = 0
-    shockblast = 0
     collection = [cure, overcharge, h_potion, m_potion, s_potion, regen, protection]
     premium = [0, 0, 0]
     special_attack = [0, 0, 0]
@@ -23,14 +21,12 @@ def reduce_cooldown():
     Cooldown.s_potion -= 1
     Cooldown.protection -= 1
     Cooldown.regen -= 1
-    Cooldown.shield_bash -= 1
-    Cooldown.shockblast -= 1
     #if Cooldown.shield_bash == 0:
         #print "shield bash now active"
     Cooldown.special_attack[0] -= 1
     Cooldown.special_attack[1] -= 1
     Cooldown.special_attack[2] -= 1
-    for i in range(0,len(Cooldown.premium)):
+    for i in range(0, len(Cooldown.premium)):
         Cooldown.premium[i] -= 1
 
 
@@ -44,8 +40,6 @@ def reset_cooldown():
     Cooldown.s_potion = 0
     Cooldown.protection = 0
     Cooldown.regen = 0
-    Cooldown.shield_bash = 0
-    Cooldown.shockblast = 0
     Cooldown.special_attack[0] = 0
     Cooldown.special_attack[1] = 0
     Cooldown.special_attack[2] = 0

@@ -9,7 +9,7 @@ import logging
 import logging.config
 import os
 from Items import use_gem, use_health_pot, use_mana_pot, use_spirit_pot
-from Skills import activate_cure, activate_premium, activate_protection, activate_regen, special_attack, get_spirit
+from Skills import activate_cure, activate_premium, activate_protection, activate_regen, special_attack, get_spirit, get_overcharge
 from Click_Press import *
 from Cooldown import *
 from Coordinates import Cord
@@ -191,11 +191,16 @@ def screenGrab():
     #im.save(os.getcwd() + '\\full_snap__' + str(int(time.time())) + '.png', 'PNG')
     return im
 
-def screenGrab_save():
+
+def screenGrab_save(file_name):
     im = ImageGrab.grab(Settings.box)
     #im = ImageGrab.grab()
-    im.save(os.getcwd() + '\\full_snap__' + str(int(time.time())) + '.png', 'PNG')
+    if len(file_name) > 0:
+        im.save(os.getcwd() + '\\' + file_name + "_" + str(int(time.time())) + '.png', 'PNG')
+    else:
+        im.save(os.getcwd() + '\\full_snap__' + str(int(time.time())) + '.png', 'PNG')
     return im
+
 
 def screenGrab_all():
     im = ImageGrab.grab()
@@ -294,6 +299,27 @@ def start_grindfest():
 
 
 #Performs all of the needed functions during a round
+#current_overcharge = get_overcharge(im)
+    #if current_overcharge == 10:
+    #  screenGrab_save('overcharge_10')
+    #    elif current_overcharge == 20:
+    #        screenGrab_save('overcharge_20')
+    #    elif current_overcharge == 30:
+    #        screenGrab_save('overcharge_30')
+    #    elif current_overcharge == 40:
+    #        screenGrab_save('overcharge_40')
+    #    elif current_overcharge == 50:
+     #       screenGrab_save('overcharge_50')
+     #   elif current_overcharge == 60:
+     #       screenGrab_save('overcharge_60')
+     #   elif current_overcharge == 70:
+     #       screenGrab_save('overcharge_70')
+     #   elif current_overcharge == 80:
+     #       screenGrab_save('overcharge_80')
+     #   elif current_overcharge == 90:
+     #       screenGrab_save('overcharge_90')
+     #   elif current_overcharge == 100:
+     #       screenGrab_save('overcharge_100')
 def startRound(): #UNFINISHED
     #logging.config.fileConfig(os.path.join('settings', "logging.conf"))
     print "Starting Round."
