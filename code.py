@@ -3,44 +3,18 @@ For Screen Resolution 1920 X 1080
 """
 import ImageGrab
 import winsound
-import ImageOps
 from numpy import *
 from find_window import find_corner
 import logging
 import logging.config
-from Players import *
 import os
 from Items import use_gem, use_health_pot, use_mana_pot, use_spirit_pot
 from Skills import activate_cure, activate_premium, activate_protection, activate_regen, special_attack, get_spirit
 from Click_Press import *
 from Cooldown import *
 from Coordinates import Cord
-
-
-class Settings:
-    full_screen = 0
-    Player = Player_1
-    box = []
-    behavior, style = 0, 0
-    #Recover: -1: none, 0:all, 1:health, 2: magic, 3: spirit
-    recover = -1
-    sleep = 2
-
-
-class Status:
-    channeling = 10527
-    protection = 9619
-    shadow_veil = 7476
-    hastened = 10229
-    nothing = 1162
-    spirit_shield = 7827
-    heartseeker = 6340
-    collection = {channeling: 'channeling',
-                  protection: 'protection',
-                  shadow_veil: 'shadow_veil',
-                  hastened: 'hastened',
-                  spirit_shield: 'spirit_shield',
-                  heartseeker: 'heartseeker'}
+from Settings import Settings
+from Status import get_status
 
 
 def enemies_exist(im):
@@ -51,16 +25,10 @@ def enemies_exist(im):
 
 
 def get_boundaries():
-    #if Settings.full_screen == 0:
         corner = find_corner()
-        #for 1920 X 1080
         Settings.box = (corner[0], corner[1], corner[0] + 1235, corner[1] + 701)
         Cord.window_padding_y = corner[1]
         Cord.window_padding_x = corner[0]
-    #else:
-     #   y = find_browser()
-      #  corner = (0, y)
-       # Settings.box = (corner[0], corner[1], corner[0] + 1235, corner[1] + 701)
 
 
 def get_cords():
@@ -99,25 +67,6 @@ def get_mana(im):
         else:
             return p_mana
     return 100
-
-
-def get_pixel_sum(box):
-    im = ImageOps.grayscale(ImageGrab.grab((Settings.box[0] + box[0], Settings.box[1] + box[1], Settings.box[0] + box[2], Settings.box[1] + box[3])))
-    a = array(im.getcolors())
-    a = a.sum()
-    #im.save(os.getcwd() + '\\full_snap__' + str(int(time.time())) + '.png', 'PNG')
-    return a
-
-
-def get_status():
-    Cord.Current_Status = []
-    for status in Cord.Status:
-        pixel_sum = get_pixel_sum(status)
-        if pixel_sum == Status.nothing:
-            return
-        lookup = lookup_status(pixel_sum)
-        if len(lookup) > 1:
-            Cord.Current_Status.append(lookup)
 
 
 def go_to_arena(level, point):
@@ -162,14 +111,6 @@ def is_player_dead(im):
         return True
     else:
         return False
-
-
-def lookup_status(pixel_sum):
-    for known_status in Status.collection:
-        if pixel_sum == known_status:
-            #print "status found: %s" % Status.collection.get(known_status)
-            return Status.collection.get(known_status)
-    return " "
 
 
 def pony_time(im):
