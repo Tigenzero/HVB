@@ -136,6 +136,11 @@ def special_attack(im, current_enemies, style):
 
 
 #need to test
+#special 1 costs 50
+#special 2 costs 50
+#special 3 costs 75
+#together the cost is 175
+#10% of overcharge is roughly 30 overcharge
 def special_attack_dual(current_enemies, current_overcharge):
     if Cord.special_attack[2] >= 0:
         if activate_special(2, 10, current_overcharge, 0):
@@ -159,6 +164,11 @@ def special_attack_dual(current_enemies, current_overcharge):
     return 0
 
 
+#special 1 costs 25
+#special 2 costs 50
+#special 3 costs 75
+#together the cost is 150
+#10% of overcharge is roughly 30 overcharge
 def special_attack_single(current_overcharge):
     if Cord.special_attack[2] >= 0:
         if activate_special(2, 10, current_overcharge, 1):
