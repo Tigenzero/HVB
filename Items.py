@@ -20,14 +20,18 @@ def is_item_active(item):
         item_name = "mana_pot"
     elif item == 2:
         item_name = "spirit_pot"
-    return is_status_active(item_name)
+    if is_status_active(item_name):
+        return True
+    else:
+        time.sleep(2)
+        get_status()
+        return is_status_active(item_name)
 
 
 def use_health_pot(current_health):
-    if not is_item_active(0):
-        if current_health <= 40:
+    if current_health <= 40:
+        if not is_item_active(0):
             if have_item(0):
-                print "Using Health Potion"
                 use_item(0)
                 return True
             else:
@@ -37,10 +41,9 @@ def use_health_pot(current_health):
 
 
 def use_mana_pot(current_mana):
-    if not is_item_active(1):
-        if current_mana <= 20:
+    if current_mana <= 20:
+        if not is_item_active(1):
             if have_item(1):
-                print "Using Mana Potion"
                 use_item(1)
                 return True
             else:
@@ -52,7 +55,6 @@ def use_mana_pot(current_mana):
 def use_spirit_pot(current_spirit):
     if current_spirit <= 10 and Cooldown.s_potion <= 0:
         if have_item(2):
-            print "Using Spirit Potion"
             use_item(2)
             Cooldown.s_potion = 20
             return True

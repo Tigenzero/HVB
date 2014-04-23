@@ -175,9 +175,9 @@ def restore_stats(im):
         elif use_health_pot(current_health):
             print "Health Potion used"
         elif use_mana_pot(current_mana):
-            print "Using Mana Potion"
+            print "Mana Potion used"
         elif use_spirit_pot(current_spirit):
-            print "Using Spirit Potion"
+            print "Spirit Potion used"
         elif activate_regen(current_health):
             print "Regen Casted"
         elif activate_protection():

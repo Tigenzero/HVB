@@ -15,7 +15,7 @@ def attack(enemy):
 def activate_cure(current_health, current_mana):
     if current_health <= 50 and Cooldown.cure <= 0 and current_mana >= 10 and Cord.Cure >= 0:
         use_skill(Cord.Cure)
-        Cooldown.cure = 2
+        Cooldown.cure = 3
         return True
     else:
         return False
