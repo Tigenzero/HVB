@@ -68,7 +68,7 @@ class Cord:
     empty_color = (237, 235, 223) #Background Color UNTESTED
     dead_color = (166, 165, 156) #Dead Enemy Color UNTESTED
     spark_of_life_color = (192, 192, 192) #Color when Spark of Life is Active UNTESTED
-    Pony_check_loc = (706,170)  #(518,  185) TEST
+    Pony_check_loc = ((706,170),(760,122))  #(518,  185) TEST
     Pony_check_color = (237, 235, 223)
 #Enemies
     e_x = 890

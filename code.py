@@ -114,11 +114,16 @@ def is_player_dead(im):
 
 
 def pony_time(im):
-    if im.getpixel(Cord.Pony_check_loc) != Cord.Pony_check_color and len(get_enemies(im)) == 0:
+    if im.getpixel(Cord.Pony_check_loc[0]) != Cord.Pony_check_color and len(get_enemies(im)) == 0:
         time.sleep(0.5)
         get_boundaries()
         im = screenGrab()
-        while im.getpixel(Cord.Pony_check_loc) != Cord.Pony_check_color and len(get_enemies(im)) == 0:
+        for pony in Cord.Pony_check_loc:
+            if im.getpixel(pony) != Cord.Pony_check_color and len(get_enemies(im)) == 0:
+                continue
+            else:
+                return False
+        while im.getpixel(Cord.Pony_check_loc[0]) != Cord.Pony_check_color and len(get_enemies(im)) == 0:
             print "Pony Time!"
             freq = 2500 # Set Frequency To 2500 Hertz
             dur = 1000 # Set Duration To 1000 ms == 1 second
@@ -334,13 +339,13 @@ def startRound(): #UNFINISHED
         get_status()
         if restore_stats(im):
             """restoration occurred"""
+        elif len(current_enemies) < enemy_num:
+            use_gem()
         else:
             special_attack(im, current_enemies, style)
         #this sleep function triggers the amount of time between clicks, thus the time between server communication
         #This function is very important as it randomizes the communication times, emulating the behavior of a player
         sleep()
-        if len(current_enemies) < enemy_num:
-            use_gem()
         enemy_num = len(current_enemies)
 
 if __name__ == '__main__':

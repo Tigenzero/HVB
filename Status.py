@@ -14,6 +14,10 @@ class Status:
     heartseeker = 6340
     special_2 = 2620
     special_1 = 1860
+    health_pot = 8461
+    mana_pot = 6516
+    spirit_pot = 0
+    regen = 7292
     collection = {channeling: 'channeling',
                   protection: 'protection',
                   shadow_veil: 'shadow_veil',
@@ -21,7 +25,11 @@ class Status:
                   spirit_shield: 'spirit_shield',
                   heartseeker: 'heartseeker',
                   special_1: 'special_1',
-                  special_2: 'special_2'}
+                  special_2: 'special_2',
+                  health_pot: 'health_pot',
+                  mana_pot: 'mana_pot',
+                  spirit_pot: 'spirit_pot',
+                  regen: 'regen'}
 
 
 def lookup_status(pixel_sum):

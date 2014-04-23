@@ -16,8 +16,6 @@ def reduce_cooldown():
     #Cooldown.collection[i] = Cooldown.collection[i] -1 Does not update Values
     Cooldown.cure -= 1
     Cooldown.overcharge -= 1
-    Cooldown.h_potion -= 1
-    Cooldown.m_potion -= 1
     Cooldown.s_potion -= 1
     Cooldown.protection -= 1
     Cooldown.regen -= 1
@@ -35,8 +33,6 @@ def reset_cooldown():
      #   Cooldown.collection[i] = 0
     Cooldown.cure = 0
     Cooldown.overcharge = 0
-    Cooldown.h_potion = 0
-    Cooldown.m_potion = 0
     Cooldown.s_potion = 0
     Cooldown.protection = 0
     Cooldown.regen = 0
