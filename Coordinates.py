@@ -36,9 +36,12 @@ class Cord:
     p_x90 = 123
     p_x100 = 134
     #p_health = 196
-    p_health = 144
-    p_mana = 186
-    p_spirit = 227
+    #p_health = 144 health text interfered
+    p_health = 150
+    #p_mana = 186 mana text interfered
+    p_mana = 191
+    #p_spirit = 227 spirit text interfered
+    p_spirit = 232
     p_overcharge = 267
     p_health_levels = ((p_x0, p_health), (p_x10, p_health), (p_x20, p_health), (p_x30, p_health),
                       (p_x40, p_health), (p_x50, p_health), (p_x60, p_health), (p_x70, p_health),

@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="d698ee8d-7e2d-4579-bdd7-d7af7a4ba013" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Items.py" afterPath="$PROJECT_DIR$/Items.py" />
+    <list default="true" id="d698ee8d-7e2d-4579-bdd7-d7af7a4ba013" name="Default" comment="edited coordinates of health, mana, and spirit bars so that stat numbers do not interfere with reading the bar.">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Coordinates.py" afterPath="$PROJECT_DIR$/Coordinates.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Players.py" afterPath="$PROJECT_DIR$/Players.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Skills.py" afterPath="$PROJECT_DIR$/Skills.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code.py" afterPath="$PROJECT_DIR$/code.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="HVB.iws" />
@@ -31,7 +31,7 @@
       <file leaf-file-name="code.py" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/code.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="179" column="37" selection-start="4875" selection-end="4875" vertical-scroll-proportion="0.0" vertical-offset="2550" max-vertical-offset="6069">
+            <state line="179" column="37" selection-start="4875" selection-end="4875" vertical-scroll-proportion="0.0" vertical-offset="459" max-vertical-offset="6069">
               <folding>
                 <element signature="e#42#58#0" expanded="true" />
               </folding>
@@ -62,16 +62,16 @@
       <file leaf-file-name="Coordinates.py" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Coordinates.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="68" column="59" selection-start="2629" selection-end="2629" vertical-scroll-proportion="0.0" vertical-offset="170" max-vertical-offset="2907">
+            <state line="41" column="16" selection-start="1021" selection-end="1021" vertical-scroll-proportion="0.0" vertical-offset="238" max-vertical-offset="2958">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Skills.py" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="Skills.py" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Skills.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="17" column="25" selection-start="467" selection-end="467" vertical-scroll-proportion="0.0" vertical-offset="255" max-vertical-offset="3638">
+            <state line="29" column="9" selection-start="739" selection-end="739" vertical-scroll-proportion="0.28" vertical-offset="255" max-vertical-offset="3638">
               <folding>
                 <element signature="e#0#43#0" expanded="true" />
               </folding>
@@ -91,16 +91,16 @@
       <file leaf-file-name="Players.py" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Players.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="20" column="49" selection-start="529" selection-end="529" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="493">
+            <state line="10" column="25" selection-start="329" selection-end="329" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="493">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Items.py" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="Items.py" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Items.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="44" column="33" selection-start="1054" selection-end="1054" vertical-scroll-proportion="0.66" vertical-offset="187" max-vertical-offset="1564">
+            <state line="44" column="33" selection-start="1054" selection-end="1054" vertical-scroll-proportion="0.0" vertical-offset="187" max-vertical-offset="1564">
               <folding>
                 <element signature="e#0#25#0" expanded="true" />
               </folding>
@@ -138,14 +138,14 @@
         <option value="$PROJECT_DIR$/find_window.py" />
         <option value="$PROJECT_DIR$/Click_Press.py" />
         <option value="$PROJECT_DIR$/Settings.py" />
-        <option value="$PROJECT_DIR$/Players.py" />
-        <option value="$PROJECT_DIR$/Coordinates.py" />
         <option value="$PROJECT_DIR$/exceptions.py" />
         <option value="$PROJECT_DIR$/Status.py" />
         <option value="$PROJECT_DIR$/Cooldown.py" />
-        <option value="$PROJECT_DIR$/Skills.py" />
         <option value="$PROJECT_DIR$/code.py" />
         <option value="$PROJECT_DIR$/Items.py" />
+        <option value="$PROJECT_DIR$/Players.py" />
+        <option value="$PROJECT_DIR$/Coordinates.py" />
+        <option value="$PROJECT_DIR$/Skills.py" />
       </list>
     </option>
   </component>
@@ -564,7 +564,11 @@
       <created>1398287698089</created>
       <updated>1398287698089</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="altered the status check state for health and mana potions. this will slow the rate in which an item is used but will raise integrity that an item is being used only after a previous item's effect has disappeared.">
+      <created>1398290530243</created>
+      <updated>1398290530243</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -634,7 +638,8 @@
     <MESSAGE value="reimplemented cooldown for specials" />
     <MESSAGE value="added comments to specials" />
     <MESSAGE value="added health and mana to status, removed cooldown and added checks to see if potions are currently being used before activating a new one. altered usage of gems where items will be closed out in the event that there isn't a gem present (might be cause of items not getting used)" />
-    <option name="LAST_COMMIT_MESSAGE" value="added health and mana to status, removed cooldown and added checks to see if potions are currently being used before activating a new one. altered usage of gems where items will be closed out in the event that there isn't a gem present (might be cause of items not getting used)" />
+    <MESSAGE value="altered the status check state for health and mana potions. this will slow the rate in which an item is used but will raise integrity that an item is being used only after a previous item's effect has disappeared." />
+    <option name="LAST_COMMIT_MESSAGE" value="altered the status check state for health and mana potions. this will slow the rate in which an item is used but will raise integrity that an item is being used only after a previous item's effect has disappeared." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -866,37 +871,9 @@
         <state line="172" column="5" selection-start="5487" selection-end="5487" vertical-scroll-proportion="0.0" vertical-offset="2016" max-vertical-offset="3060" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Players.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="20" column="49" selection-start="529" selection-end="529" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="493">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Click_Press.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="3" column="25" selection-start="132" selection-end="132" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="3281">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Coordinates.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="68" column="59" selection-start="2629" selection-end="2629" vertical-scroll-proportion="0.0" vertical-offset="697" max-vertical-offset="2907">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Cooldown.py">
       <provider selected="true" editor-type-id="text-editor">
         <state line="34" column="27" selection-start="979" selection-end="979" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="816">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Settings.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="1" column="0" selection-start="22" selection-end="22" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="289">
           <folding />
         </state>
       </provider>
@@ -910,6 +887,29 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/Settings.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="1" column="0" selection-start="22" selection-end="22" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="289">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Items.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="44" column="33" selection-start="1054" selection-end="1054" vertical-scroll-proportion="0.0" vertical-offset="187" max-vertical-offset="1564">
+          <folding>
+            <element signature="e#0#25#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Click_Press.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="3" column="25" selection-start="132" selection-end="132" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="3281">
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/code.py">
       <provider selected="true" editor-type-id="text-editor">
         <state line="179" column="37" selection-start="4875" selection-end="4875" vertical-scroll-proportion="0.0" vertical-offset="2550" max-vertical-offset="6069">
@@ -919,20 +919,25 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Skills.py">
+    <entry file="file://$PROJECT_DIR$/Coordinates.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="17" column="25" selection-start="467" selection-end="467" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="3638">
-          <folding>
-            <element signature="e#0#43#0" expanded="true" />
-          </folding>
+        <state line="41" column="16" selection-start="1021" selection-end="1021" vertical-scroll-proportion="0.0" vertical-offset="238" max-vertical-offset="2958">
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Items.py">
+    <entry file="file://$PROJECT_DIR$/Players.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="44" column="33" selection-start="1054" selection-end="1054" vertical-scroll-proportion="0.66" vertical-offset="187" max-vertical-offset="1564">
+        <state line="10" column="25" selection-start="329" selection-end="329" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="493">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Skills.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="29" column="9" selection-start="739" selection-end="739" vertical-scroll-proportion="0.28" vertical-offset="255" max-vertical-offset="3638">
           <folding>
-            <element signature="e#0#25#0" expanded="true" />
+            <element signature="e#0#43#0" expanded="true" />
           </folding>
         </state>
       </provider>

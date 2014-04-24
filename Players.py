@@ -8,7 +8,7 @@ class Player_0:
     Regen = 4
     Protection = -1
     #unused
-    premium = [12, 13, 5]
+    premium = [12, 13, -1]
 
 
 class Player_1:
@@ -20,5 +20,5 @@ class Player_1:
     special_attack = [1, 2, -1]
      # 0 = Health, 1 = Mana, 2 = Spirit, 9 = used
     # Health has 30 round cooldown, Mana and Spirit have 15 round cooldown
-    Items = (0, 0, 0, 0, 0, 0, 1, 9, 9) #Current Items in your Battle Inventory
+    Items = (0, 0, 0, 1, 1, 1, 1, 9, 9) #Current Items in your Battle Inventory
     premium = [3, 4, 5]

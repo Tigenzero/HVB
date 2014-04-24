@@ -37,8 +37,8 @@ def activate_premium():
             use_skill(Cord.premium[i])
             Cooldown.premium[i] = 45
             return True
-        else:
-            print "%d greater than 0 and %d less than 0?" % (Cooldown.premium[i], Cord.premium[i])
+        #else:
+            #print "%d greater than 0 and %d less than 0?" % (Cooldown.premium[i], Cord.premium[i])
     return False
 
 
