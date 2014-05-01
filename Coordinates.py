@@ -125,10 +125,54 @@ class Cord:
     i12 = (item_xloc,  482)
     i13 = (item_xloc,  507)
     i14 = (item_xloc,  530)
+    i15 = (item_xloc,  556)
     scroll_xloc = 550
     scroll1_loc = (scroll_xloc,  234)
     infusion1_loc = [scroll_xloc,  253]
-    item_locs = [i1, i2, i3, i4, i5, i6, i7, i8, i9, i10, i11, i12, i13, i14, scroll1_loc, infusion1_loc]
+    item_locs = [i1, i2, i3, i4, i5, i6, i7, i8, i9, i10, i11, i12, i13, i14, i15, scroll1_loc, infusion1_loc]
+    itemx_begin = 200
+    itemx_end = 378
+    ibox1 = [itemx_begin, 229, itemx_end, 236]
+    ibox2 = [itemx_begin, 252, itemx_end, 259]
+    ibox3 = [itemx_begin, 275, itemx_end, 282]
+    ibox4 = [itemx_begin, 298, itemx_end, 305]
+    ibox5 = [itemx_begin, 321, itemx_end, 328]
+    ibox6 = [itemx_begin, 344, itemx_end, 351]
+    ibox7 = [itemx_begin, 367, itemx_end, 374]
+    ibox8 = [itemx_begin, 390, itemx_end, 397]
+    ibox9 = [itemx_begin, 413, itemx_end, 420]
+    ibox10 = [itemx_begin, 436, itemx_end, 443]
+    ibox11 = [itemx_begin, 459, itemx_end, 466]
+    ibox12 = [itemx_begin, 482, itemx_end, 489]
+    ibox13 = [itemx_begin, 505, itemx_end, 512]
+    ibox14 = [itemx_begin, 528, itemx_end, 535]
+    ibox15 = [itemx_begin, 551, itemx_end, 558]
+    ibox_list = [ibox1, ibox2, ibox3, ibox4, ibox5, ibox6, ibox7, ibox8, ibox9, ibox10, ibox11, ibox12, ibox13, ibox14, ibox15]
+
+    #Item Color Sums
+    h_1 = 574086 #lesser health potion
+    h_2 = 553816 #average health potion
+    h_3 = 552132 #greater health potion
+    h_4 = 0 #superior health potion
+    h_5 = 575009 #heroic health potion
+    m_1 = 590679 #lesser mana potion
+    m_2 = 570409 #average mana potion
+    m_3 = 568725 #greater mana potion
+    m_4 = 0 #superior mana potion
+    m_5 = 591602 #heroic mana potion
+    s_1 = 0 #lesser spirit potion
+    s_2 = 0 #average spirit potion
+    s_3 = 561838 #greater spirit potion
+    s_4 = 541838 #superior spirit potion
+    s_5 = 584715 #heroic spirit potion
+    h_potions = [h_1, h_2, h_3, h_4, h_5]
+    m_potions = [m_1, m_2, m_3, m_4, m_5]
+    s_potions = [s_1, s_2, s_3, s_4, s_5]
+
+
+
+
+
     # 0 = Health, 1 = Mana, 2 = Spirit, 9 = used
     # Health has 30 round cooldown, Mana and Spirit have 15 round cooldown
     #Items = [0, 0, 0, 0, 0, 1, 1, 1, 1, 2, 2, 2, 2, 2] #main character

@@ -8,7 +8,7 @@ from find_window import find_corner
 import logging
 import logging.config
 import os
-from Items import use_gem, use_health_pot, use_mana_pot, use_spirit_pot
+from Items import use_gem, use_health_pot, use_mana_pot, use_spirit_pot, get_items
 from Skills import activate_cure, activate_premium, activate_protection, activate_regen, special_attack, get_spirit, get_overcharge
 from Click_Press import *
 from Cooldown import *
@@ -216,7 +216,8 @@ def screenGrab_all():
 def set_player(player):
     Cord.Cure = player.Cure
     Cord.Regen = player.Regen
-    Cord.Items = list(player.Items)
+    #Cord.Items = list(player.Items)
+    get_items()
     Cord.Protection = player.Protection
     Cord.premium = player.premium
     Settings.style = player.style
@@ -227,12 +228,21 @@ def sleep():
     time.sleep(random.uniform(0.5, Settings.sleep))
 
 
-def start_arena():#UNFINISHED
+def start_arena(start=1, end=22):#UNFINISHED
     Count = 0
+    Round = start - 1
     get_boundaries()
     for i in range(0, 2):
         for arena in Cord.arenas:
             Count += 1
+            if Cord.arenas[Round] != arena:
+                print "skipping arena %d" % Count
+                continue
+            else:
+                Round += 1
+            if Count >= end:
+                print "Arenas Complete"
+                return
             im = screenGrab()
             if not recover():
                 while get_health(im) != 100 or get_mana(im) != 100 or get_spirit(im) != 100:
@@ -250,15 +260,17 @@ def start_arena():#UNFINISHED
             press("spacebar")
             sleep()
             print "Heading to next Arena."
+        Round -= 11
+
 
 
 #Main Function
 def startGame(): #UNFINISHED
-    set_player(Settings.Player)
     print "Starting Game"
     reset_cooldown()
     get_boundaries()
     im = screenGrab()
+    set_player(Settings.Player)
     #print "%d enemies" %len(getEnemies(im))
     battle_end = False
     while not battle_end:

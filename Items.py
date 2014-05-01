@@ -1,6 +1,42 @@
 from Click_Press import *
 from Cooldown import Cooldown
-from Status import is_status_active, get_status
+from Status import is_status_active, get_status, get_pixel_sum_color
+import logging
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
+
+
+# 0 = Health, 1 = Mana, 2 = Spirit, 9 = used
+def get_items():
+    Cord.Items = [9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9]
+    mousePos(Cord.Item_cat_loc)
+    leftClick()
+    time.sleep(0.3)
+    count = 1
+    for item in Cord.ibox_list:
+        sum = get_pixel_sum_color(item, False)
+        if is_pot(Cord.h_potions, sum):
+            Cord.Items[count - 1] = 0
+        elif is_pot(Cord.m_potions, sum):
+            Cord.Items[count - 1] = 1
+        elif is_pot(Cord.s_potions, sum):
+            Cord.Items[count - 1] = 2
+        else:
+            print "UNKNOWN item %d: %d" % (count, sum)
+            get_pixel_sum_color(item, True)
+            Cord.Items[count - 1] = 9
+
+        count += 1
+    mousePos(Cord.Item_cat_loc)
+    leftClick()
+    #print Cord.Items
+
+
+def is_pot(pots, value):
+    for pot in pots:
+        if pot == value:
+            return True
+    return False
 
 
 def have_item(item_type):
@@ -34,9 +70,6 @@ def use_health_pot(current_health):
             if have_item(0):
                 use_item(0)
                 return True
-            else:
-                print "No Health Potions Left"
-                Cooldown.h_potion = 999
     return False
 
 
@@ -46,9 +79,6 @@ def use_mana_pot(current_mana):
             if have_item(1):
                 use_item(1)
                 return True
-            else:
-                print "No Mana Potions Left"
-                Cooldown.m_potion = 999
     return False
 
 

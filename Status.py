@@ -3,6 +3,8 @@ import ImageGrab
 from numpy import *
 from Coordinates import Cord
 from Settings import *
+import time
+import os
 
 class Status:
     channeling = 10527
@@ -56,6 +58,15 @@ def get_pixel_sum(box):
     a = array(im.getcolors())
     a = a.sum()
     #im.save(os.getcwd() + '\\full_snap__' + str(int(time.time())) + '.png', 'PNG')
+    return a
+
+
+def get_pixel_sum_color(box, save):
+    im = ImageGrab.grab((Settings.box[0] + box[0], Settings.box[1] + box[1], Settings.box[0] + box[2], Settings.box[1] + box[3]))
+    a = array(im)
+    a = a.sum()
+    if save:
+        im.save(os.getcwd() + '\\unknown_item__x-' + str(box[0]) + '_y-' + str(box[1]) + '_' + str(int(time.time())) + '.png', 'PNG')
     return a
 
 
