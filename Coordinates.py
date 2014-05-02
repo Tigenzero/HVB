@@ -155,18 +155,20 @@ class Cord:
     h_3 = 552132 #greater health potion
     h_4 = 0 #superior health potion
     h_5 = 575009 #heroic health potion
+    h_5_c = 574965 #heroic health potion chrome
     m_1 = 590679 #lesser mana potion
     m_2 = 570409 #average mana potion
     m_3 = 568725 #greater mana potion
     m_4 = 0 #superior mana potion
     m_5 = 591602 #heroic mana potion
+    m_5_c = 591551 #heroic mana potion chrome
     s_1 = 0 #lesser spirit potion
     s_2 = 0 #average spirit potion
     s_3 = 561838 #greater spirit potion
     s_4 = 541838 #superior spirit potion
     s_5 = 584715 #heroic spirit potion
-    h_potions = [h_1, h_2, h_3, h_4, h_5]
-    m_potions = [m_1, m_2, m_3, m_4, m_5]
+    h_potions = [h_1, h_2, h_3, h_4, h_5, h_5_c]
+    m_potions = [m_1, m_2, m_3, m_4, m_5, m_5_c]
     s_potions = [s_1, s_2, s_3, s_4, s_5]
 
 
