@@ -32,7 +32,7 @@ class Cord:
     p_x50 = 77
     p_x60 = 88
     p_x70 = 99
-    p_x80 = 101
+    p_x80 = 110
     p_x90 = 123
     p_x100 = 134
     #p_health = 196
@@ -132,6 +132,7 @@ class Cord:
     item_locs = [i1, i2, i3, i4, i5, i6, i7, i8, i9, i10, i11, i12, i13, i14, i15, scroll1_loc, infusion1_loc]
     itemx_begin = 200
     itemx_end = 378
+    ibox_gem = [itemx_begin, 205, itemx_end, 212]
     ibox1 = [itemx_begin, 229, itemx_end, 236]
     ibox2 = [itemx_begin, 252, itemx_end, 259]
     ibox3 = [itemx_begin, 275, itemx_end, 282]

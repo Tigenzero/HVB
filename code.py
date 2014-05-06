@@ -17,6 +17,29 @@ from Settings import Settings
 from Status import get_status
 
 
+def debug_levels(current_level, level):
+    #Performs all of the needed functions during a round
+    if current_level == 10:
+        screenGrab_save(level + '_10', level)
+    elif current_level == 20:
+        screenGrab_save(level + '_20', level)
+    elif current_level == 30:
+        screenGrab_save(level + '_30', level)
+    elif current_level == 40:
+        screenGrab_save(level + '_40', level)
+    elif current_level == 50:
+        screenGrab_save(level + '_50', level)
+    elif current_level == 60:
+        screenGrab_save(level + '_60', level)
+    elif current_level == 70:
+        screenGrab_save(level + '_70', level)
+    elif current_level == 80:
+        screenGrab_save(level + '_80', level)
+    elif current_level == 90:
+        screenGrab_save(level + '_90', level)
+    elif current_level == 100:
+        screenGrab_save(level + '_100', level)
+
 def enemies_exist(im):
     for enemy in Cord.enemies:
         if im.getpixel(enemy) == Cord.over_color or im.getpixel(enemy) == Cord.under_color:
@@ -197,11 +220,22 @@ def screenGrab():
     return im
 
 
-def screenGrab_save(file_name):
+def screenGrab_save(file_name='', level=''):
     im = ImageGrab.grab(Settings.box)
     #im = ImageGrab.grab()
     if len(file_name) > 0:
-        im.save(os.getcwd() + '\\' + file_name + "_" + str(int(time.time())) + '.png', 'PNG')
+        if len(level) > 0:
+            if level == "health":
+                im.save(os.getcwd() + '\\images\\debug\\health\\' + file_name + "_" + str(int(time.time())) + '.png', 'PNG')
+            elif level == "mana":
+                im.save(os.getcwd() + '\\images\\debug\\mana\\' + file_name + "_" + str(int(time.time())) + '.png', 'PNG')
+            elif level == "spirit":
+                im.save(os.getcwd() + '\\images\\debug\\spirit\\' + file_name + "_" + str(int(time.time())) + '.png', 'PNG')
+            else:
+                logging.warning("screenGrab_save level unknown, saving at root")
+                im.save(os.getcwd() + '\\full_snap__' + str(int(time.time())) + '.png', 'PNG')
+        else:
+            im.save(os.getcwd() + '\\' + file_name + "_" + str(int(time.time())) + '.png', 'PNG')
     else:
         im.save(os.getcwd() + '\\full_snap__' + str(int(time.time())) + '.png', 'PNG')
     return im
@@ -315,28 +349,7 @@ def start_grindfest():
         sleep()
 
 
-#Performs all of the needed functions during a round
-#current_overcharge = get_overcharge(im)
-    #if current_overcharge == 10:
-    #  screenGrab_save('overcharge_10')
-    #    elif current_overcharge == 20:
-    #        screenGrab_save('overcharge_20')
-    #    elif current_overcharge == 30:
-    #        screenGrab_save('overcharge_30')
-    #    elif current_overcharge == 40:
-    #        screenGrab_save('overcharge_40')
-    #    elif current_overcharge == 50:
-     #       screenGrab_save('overcharge_50')
-     #   elif current_overcharge == 60:
-     #       screenGrab_save('overcharge_60')
-     #   elif current_overcharge == 70:
-     #       screenGrab_save('overcharge_70')
-     #   elif current_overcharge == 80:
-     #       screenGrab_save('overcharge_80')
-     #   elif current_overcharge == 90:
-     #       screenGrab_save('overcharge_90')
-     #   elif current_overcharge == 100:
-     #       screenGrab_save('overcharge_100')
+
 def startRound(): #UNFINISHED
     #logging.config.fileConfig(os.path.join('settings', "logging.conf"))
     print "Starting Round."
@@ -348,6 +361,10 @@ def startRound(): #UNFINISHED
         reduce_cooldown()
         im = screenGrab()
         current_enemies = get_enemies(im)
+        #print str(current_enemies) + " enemies"
+        debug_levels(get_health(im), "health")
+        debug_levels(get_mana(im), "mana")
+        debug_levels(get_spirit(im), "spirit")
         get_status()
         if restore_stats(im):
             """restoration occurred"""

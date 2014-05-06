@@ -9,6 +9,9 @@ class Cooldown:
     collection = [cure, overcharge, h_potion, m_potion, s_potion, regen, protection]
     premium = [0, 0, 0]
     special_attack = [0, 0, 0]
+    h_gem = False
+    m_gem = False
+    s_gem = False
 
 
 def reduce_cooldown():
@@ -39,5 +42,8 @@ def reset_cooldown():
     Cooldown.special_attack[0] = 0
     Cooldown.special_attack[1] = 0
     Cooldown.special_attack[2] = 0
+    Cooldown.h_gem = False
+    Cooldown.m_gem = False
+    Cooldown.s_gem = False
     for i in range(0, len(Cooldown.premium)):
         Cooldown.premium[i] = 0

@@ -1,5 +1,5 @@
 from Players import *
-
+import logging
 
 class Settings:
     full_screen = 0
@@ -9,3 +9,5 @@ class Settings:
     #Recover: -1: none, 0:all, 1:health, 2: magic, 3: spirit
     recover = -1
     sleep = 2
+    log_loc = "Battle.log"
+    log_level = logging.DEBUG

@@ -2,8 +2,18 @@ from Click_Press import *
 from Cooldown import Cooldown
 from Status import is_status_active, get_status, get_pixel_sum_color
 import logging
-logging.basicConfig(level=logging.INFO)
+from Settings import Settings
+logging.basicConfig(filename=Settings.log_loc, level=Settings.log_level)
 logger = logging.getLogger(__name__)
+
+
+def activate_gem():
+    mousePos(Cord.Item_cat_loc)
+    leftClick()
+    mousePos(Cord.gem_loc)
+    leftClick()
+    mousePos(Cord.Item_cat_loc)
+    leftClick()
 
 
 # 0 = Health, 1 = Mana, 2 = Spirit, 9 = used
@@ -21,8 +31,10 @@ def get_items():
             Cord.Items[count - 1] = 1
         elif is_pot(Cord.s_potions, sum):
             Cord.Items[count - 1] = 2
+        elif sum == 865970:  # empty
+            Cord.Items[count - 1] = 9
         else:
-            print "UNKNOWN item %d: %d" % (count, sum)
+            logger.warning("UNKNOWN item %d: %d" % (count, sum))
             get_pixel_sum_color(item, True)
             Cord.Items[count - 1] = 9
 
@@ -64,6 +76,27 @@ def is_item_active(item):
         return is_status_active(item_name)
 
 
+def leftover_inventory():
+    count = 0
+    h_count = 0
+    m_count = 0
+    s_count = 0
+    for item in Cord.Items:
+        if item != 9:
+            count += 1
+            if item == 0:
+                h_count += 1
+            elif item == 1:
+                m_count += 1
+            elif item == 2:
+                s_count += 1
+    logger.info("Inventory Leftover: " + str(count))
+    logger.info("Health Potions: " + str(h_count))
+    logger.info("Mana Potions: " + str(m_count))
+    logger.info("Spirit Potions: " + str(s_count))
+
+
+
 def use_health_pot(current_health):
     if current_health <= 40:
         if not is_item_active(0):
@@ -89,7 +122,7 @@ def use_spirit_pot(current_spirit):
             Cooldown.s_potion = 20
             return True
         else:
-            print "No Spirit Potions Left"
+            logger.info("No Spirit Potions Left")
             Cooldown.s_potion = 999
             return False
     else:
@@ -99,8 +132,27 @@ def use_spirit_pot(current_spirit):
 def use_gem():
     mousePos(Cord.Item_cat_loc)
     leftClick()
-    mousePos(Cord.gem_loc)
-    leftClick()
+    time.sleep(0.3)
+    item = Cord.ibox_gem
+    sum = get_pixel_sum_color(item, False)
+    if sum == 0:
+        logging.debug("health gem found")
+        Cooldown.h_gem = True
+    elif sum == 729967:
+        logging.debug("mana gem found")
+        Cooldown.m_gem = True
+    elif sum == 723194:
+        logging.debug("spirit gem found")
+        Cooldown.h_gem = True
+    elif sum == 722692:  # empty
+        logging.debug("mystic gem found")
+        mousePos(Cord.gem_loc)
+        leftClick()
+    elif sum == 865970:  # empty
+        logging.debug("no gem found")
+    else:
+        logger.warning("UNKNOWN gem: %d" % sum)
+        get_pixel_sum_color(item, True)
     mousePos(Cord.Item_cat_loc)
     leftClick()
 

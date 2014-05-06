@@ -66,7 +66,7 @@ def get_pixel_sum_color(box, save):
     a = array(im)
     a = a.sum()
     if save:
-        im.save(os.getcwd() + '\\unknown_item__x-' + str(box[0]) + '_y-' + str(box[1]) + '_' + str(int(time.time())) + '.png', 'PNG')
+        im.save(os.getcwd() + '\\images\\unknown_item__x-' + str(box[0]) + '_y-' + str(box[1]) + '_' + str(a) + '_' + str(int(time.time())) + '.png', 'PNG')
     return a
 
 
