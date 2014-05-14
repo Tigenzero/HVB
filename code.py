@@ -8,7 +8,7 @@ from find_window import find_corner
 import logging
 import logging.config
 import os
-from Items import use_gem, use_health_pot, use_mana_pot, use_spirit_pot, get_items
+from Items import get_gem, use_health_pot, use_mana_pot, use_spirit_pot, get_items, use_gem
 from Skills import activate_cure, activate_premium, activate_protection, activate_regen, special_attack, get_spirit, get_overcharge
 from Click_Press import *
 from Cooldown import *
@@ -191,12 +191,20 @@ def restore_stats(im):
         current_spirit = get_spirit(im)
         current_mana = get_mana(im)
         if current_health == 0 and not enemies_exist(im):
-            Cord.p_dead = True
-            print "Player has died"
+            time.sleep(1)
+            if current_health == 0 and not enemies_exist(screenGrab()):
+                Cord.p_dead = True
+                print "Player has died"
+            else:
+                return False
+        elif use_gem(0, current_health):
+            print "Health Gem Used"
         elif activate_cure(current_health, current_mana):
             print "Cure Casted"
         elif use_health_pot(current_health):
             print "Health Potion used"
+        elif use_gem(0, current_mana):
+            print "Mana Gem Used"
         elif use_mana_pot(current_mana):
             print "Mana Potion used"
         elif use_spirit_pot(current_spirit):
@@ -354,7 +362,7 @@ def startRound(): #UNFINISHED
     #logging.config.fileConfig(os.path.join('settings', "logging.conf"))
     print "Starting Round."
     enemy_num = 0
-    use_gem()
+    get_gem()
     style = Settings.style
     while not round_won() and not Cord.p_dead:
         #time.sleep(1)
@@ -362,14 +370,14 @@ def startRound(): #UNFINISHED
         im = screenGrab()
         current_enemies = get_enemies(im)
         #print str(current_enemies) + " enemies"
-        debug_levels(get_health(im), "health")
-        debug_levels(get_mana(im), "mana")
-        debug_levels(get_spirit(im), "spirit")
+        #debug_levels(get_health(im), "health")
+        #debug_levels(get_mana(im), "mana")
+        #debug_levels(get_spirit(im), "spirit")
         get_status()
         if restore_stats(im):
             """restoration occurred"""
         elif len(current_enemies) < enemy_num:
-            use_gem()
+            get_gem()
         else:
             special_attack(im, current_enemies, style)
         #this sleep function triggers the amount of time between clicks, thus the time between server communication

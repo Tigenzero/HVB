@@ -16,6 +16,34 @@ def activate_gem():
     leftClick()
 
 
+def get_gem():
+    mousePos(Cord.Item_cat_loc)
+    leftClick()
+    time.sleep(0.3)
+    item = Cord.ibox_gem
+    sum = get_pixel_sum_color(item, False)
+    if sum == 0:
+        logging.debug("health gem found")
+        Cooldown.h_gem = True
+    elif sum == 729967:
+        logging.debug("mana gem found")
+        Cooldown.m_gem = True
+    elif sum == 723194:
+        logging.debug("spirit gem found")
+        Cooldown.h_gem = True
+    elif sum == 722692:  # empty
+        logging.debug("mystic gem found")
+        mousePos(Cord.gem_loc)
+        leftClick()
+    elif sum == 865970:  # empty
+        logging.debug("no gem found")
+    else:
+        logger.warning("UNKNOWN gem: %d" % sum)
+        get_pixel_sum_color(item, True)
+    mousePos(Cord.Item_cat_loc)
+    leftClick()
+
+
 # 0 = Health, 1 = Mana, 2 = Spirit, 9 = used
 def get_items():
     Cord.Items = [9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9]
@@ -128,33 +156,17 @@ def use_spirit_pot(current_spirit):
     else:
         return False
 
-
-def use_gem():
-    mousePos(Cord.Item_cat_loc)
-    leftClick()
-    time.sleep(0.3)
-    item = Cord.ibox_gem
-    sum = get_pixel_sum_color(item, False)
-    if sum == 0:
-        logging.debug("health gem found")
-        Cooldown.h_gem = True
-    elif sum == 729967:
-        logging.debug("mana gem found")
-        Cooldown.m_gem = True
-    elif sum == 723194:
-        logging.debug("spirit gem found")
-        Cooldown.h_gem = True
-    elif sum == 722692:  # empty
-        logging.debug("mystic gem found")
-        mousePos(Cord.gem_loc)
-        leftClick()
-    elif sum == 865970:  # empty
-        logging.debug("no gem found")
-    else:
-        logger.warning("UNKNOWN gem: %d" % sum)
-        get_pixel_sum_color(item, True)
-    mousePos(Cord.Item_cat_loc)
-    leftClick()
+#0 = health, 1 = mana
+def use_gem(gem_type, current):
+    if gem_type == 0:
+        if current == 50:
+            activate_gem()
+            return True
+    elif gem_type == 1:
+        if current == 40:
+            activate_gem()
+            return True
+    return False
 
 
 def use_item(item_type):
