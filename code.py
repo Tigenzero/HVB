@@ -8,7 +8,7 @@ from find_window import find_corner
 import logging
 import logging.config
 import os
-from Items import get_gem, use_health_pot, use_mana_pot, use_spirit_pot, get_items, use_gem
+from Items import get_gem, use_health_pot, use_mana_pot, use_spirit_pot, get_items, use_gem, leftover_inventory
 from Skills import activate_cure, activate_premium, activate_protection, activate_regen, special_attack, get_spirit, get_overcharge
 from Click_Press import *
 from Cooldown import *
@@ -147,7 +147,7 @@ def pony_time(im):
             else:
                 return False
         while im.getpixel(Cord.Pony_check_loc[0]) != Cord.Pony_check_color and len(get_enemies(im)) == 0:
-            print "Pony Time!"
+            logging.info("Pony Time!")
             freq = 2500 # Set Frequency To 2500 Hertz
             dur = 1000 # Set Duration To 1000 ms == 1 second
             winsound.Beep(freq, dur)
@@ -194,27 +194,29 @@ def restore_stats(im):
             time.sleep(1)
             if current_health == 0 and not enemies_exist(screenGrab()):
                 Cord.p_dead = True
-                print "Player has died"
+                logging.info("Player has died")
             else:
                 return False
         elif use_gem(0, current_health):
-            print "Health Gem Used"
+            logging.info("Health Gem Used")
         elif activate_cure(current_health, current_mana):
-            print "Cure Casted"
+            logging.info("Cure Casted")
         elif use_health_pot(current_health):
-            print "Health Potion used"
-        elif use_gem(0, current_mana):
-            print "Mana Gem Used"
+            logging.info("Health Potion used")
+        elif use_gem(1, current_mana):
+            logging.info("Mana Gem Used")
         elif use_mana_pot(current_mana):
-            print "Mana Potion used"
+            logging.info("Mana Potion used")
+        elif use_gem(1, current_spirit):
+            logging.info("Spirit Gem Used")
         elif use_spirit_pot(current_spirit):
-            print "Spirit Potion used"
+            logging.info("Spirit Potion used")
         elif activate_regen(current_health):
-            print "Regen Casted"
+            logging.info("Regen Casted")
         elif activate_protection():
-            print "Protection Casted"
+            logging.info("Protection Casted")
         elif is_channeling_active() and activate_premium():
-            print "premium activated"
+            logging.info("premium activated")
         else:
             return False
         return True
@@ -278,37 +280,38 @@ def start_arena(start=1, end=22):#UNFINISHED
         for arena in Cord.arenas:
             Count += 1
             if Cord.arenas[Round] != arena:
-                print "skipping arena %d" % Count
+                logging.debug("skipping arena %d" % Count)
                 continue
             else:
                 Round += 1
             if Count >= end:
-                print "Arenas Complete"
+                logging.info("Arenas Complete")
                 return
             im = screenGrab()
             if not recover():
                 while get_health(im) != 100 or get_mana(im) != 100 or get_spirit(im) != 100:
-                    print "Player still recovering"
+                    logging.debug("Player still recovering")
                     time.sleep(60)
                     mousePos(Cord.battle_cat_loc)
                     leftClick()
                     time.sleep(1)
                     get_boundaries()
                     im = screenGrab()
-                    print "%d, %d, %d" % (get_health(im), get_mana(im), get_spirit(im))
-            print "Starting Arena %d" % Count
+                    logging.debug("%d, %d, %d" % (get_health(im), get_mana(im), get_spirit(im)))
+            logging.info("Starting Arena %d" % Count)
             go_to_arena(arena, i)
             startGame()
             press("spacebar")
             sleep()
-            print "Heading to next Arena."
+            logging.info("Heading to next Arena.")
         Round -= 11
 
 
 
 #Main Function
 def startGame(): #UNFINISHED
-    print "Starting Game"
+    logging.basicConfig(filename=Settings.log_loc, level=Settings.log_level, format='%(asctime)s %(levelname)s: %(message)s')
+    logging.info("Starting Game")
     reset_cooldown()
     get_boundaries()
     im = screenGrab()
@@ -320,7 +323,7 @@ def startGame(): #UNFINISHED
             time.sleep(1.5)
             im = screenGrab()
             if len(get_enemies(im)) == 0 and not pony_time(im):
-                print "Battle ended: getEnemies was %d and Pony Time was %r" % (len(get_enemies(im)), pony_time(im))
+                logging.info("Battle ended: getEnemies was %d and Pony Time was %r" % (len(get_enemies(im)), pony_time(im)))
                 battle_end = True
         else:
             startRound()
@@ -328,7 +331,8 @@ def startGame(): #UNFINISHED
             press('spacebar')
             im = screenGrab()
             if is_player_dead(im):
-                print "Player is dead"
+                logging.info("Player is dead")
+                leftover_inventory()
                 return
             time.sleep(1)
             im = screenGrab()
@@ -340,27 +344,27 @@ def start_grindfest():
         im = screenGrab()
         if not recover():
             while get_health(im) != 100 or get_mana(im) != 100 or get_spirit(im) != 100:
-                print "Player still recovering"
+                logging.debug( "Player still recovering")
                 time.sleep(60)
                 mousePos(Cord.battle_cat_loc)
                 leftClick()
                 time.sleep(1)
                 get_boundaries()
                 im = screenGrab()
-        print "Starting Grindfest"
+        logging.info("Starting Grindfest")
         go_to_grindfest()
         startGame()
         sleep()
         mousePos(Cord.battle_cat_loc)
         leftClick()
-        print "Player Dead, waiting until revival."
+        logging.info("Player Dead, waiting until revival.")
         sleep()
 
 
 
 def startRound(): #UNFINISHED
     #logging.config.fileConfig(os.path.join('settings', "logging.conf"))
-    print "Starting Round."
+    logging.info("Starting Round.")
     enemy_num = 0
     get_gem()
     style = Settings.style
@@ -376,7 +380,7 @@ def startRound(): #UNFINISHED
         get_status()
         if restore_stats(im):
             """restoration occurred"""
-        elif len(current_enemies) < enemy_num:
+        elif 0 < len(current_enemies) < enemy_num:
             get_gem()
         else:
             special_attack(im, current_enemies, style)

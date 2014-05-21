@@ -3,7 +3,6 @@ from Cooldown import Cooldown
 from Status import is_status_active, get_status, get_pixel_sum_color
 import logging
 from Settings import Settings
-logging.basicConfig(filename=Settings.log_loc, level=Settings.log_level)
 logger = logging.getLogger(__name__)
 
 
@@ -22,13 +21,13 @@ def get_gem():
     time.sleep(0.3)
     item = Cord.ibox_gem
     sum = get_pixel_sum_color(item, False)
-    if sum == 0:
+    if sum == 713603:
         logging.debug("health gem found")
         Cooldown.h_gem = True
     elif sum == 729967:
         logging.debug("mana gem found")
         Cooldown.m_gem = True
-    elif sum == 723194:
+    elif sum == 723194 or sum == 722448:
         logging.debug("spirit gem found")
         Cooldown.h_gem = True
     elif sum == 722692:  # empty
@@ -36,10 +35,14 @@ def get_gem():
         mousePos(Cord.gem_loc)
         leftClick()
     elif sum == 865970:  # empty
-        logging.debug("no gem found")
+        ""
+        #logging.debug("no gem found")
     else:
         logger.warning("UNKNOWN gem: %d" % sum)
         get_pixel_sum_color(item, True)
+        if Settings.shutdown:
+            logging.critical("unknown gem, shutting down")
+            quit()
     mousePos(Cord.Item_cat_loc)
     leftClick()
 
@@ -65,7 +68,9 @@ def get_items():
             logger.warning("UNKNOWN item %d: %d" % (count, sum))
             get_pixel_sum_color(item, True)
             Cord.Items[count - 1] = 9
-
+            #if Settings.shutdown:
+            #    logging.critical("unknown element, shutting down")
+            #    quit()
         count += 1
     mousePos(Cord.Item_cat_loc)
     leftClick()
@@ -123,8 +128,6 @@ def leftover_inventory():
     logger.info("Mana Potions: " + str(m_count))
     logger.info("Spirit Potions: " + str(s_count))
 
-
-
 def use_health_pot(current_health):
     if current_health <= 40:
         if not is_item_active(0):
@@ -156,15 +159,23 @@ def use_spirit_pot(current_spirit):
     else:
         return False
 
-#0 = health, 1 = mana
+
+#0 = health, 1 = mana, 2 = spirit
 def use_gem(gem_type, current):
     if gem_type == 0:
-        if current == 50:
+        if current <= 60 and Cooldown.h_gem:
             activate_gem()
+            Cooldown.h_gem = False
             return True
     elif gem_type == 1:
-        if current == 40:
+        if current <= 40 and Cooldown.m_gem:
             activate_gem()
+            Cooldown.m_gem = False
+            return True
+    elif gem_type == 2:
+        if current <= 80 and Cooldown.m_gem:
+            activate_gem()
+            Cooldown.s_gem = False
             return True
     return False
 
@@ -178,4 +189,4 @@ def use_item(item_type):
             mousePos(Cord.item_locs[i])
             leftClick()
             return
-    print "Item Not Found..."
+    logging.warning("Item Not Found...")

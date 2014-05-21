@@ -18,8 +18,9 @@ class Status:
     special_1 = 1860
     health_pot = 8461
     mana_pot = 6516
-    spirit_pot = 0
+    spirit_pot = 0 #NEED
     regen = 7292
+    overwhelming_strikes = 12726
     collection = {channeling: 'channeling',
                   protection: 'protection',
                   shadow_veil: 'shadow_veil',
@@ -31,7 +32,8 @@ class Status:
                   health_pot: 'health_pot',
                   mana_pot: 'mana_pot',
                   spirit_pot: 'spirit_pot',
-                  regen: 'regen'}
+                  regen: 'regen',
+                  overwhelming_strikes: 'overwhelming_strikes'}
 
 
 def lookup_status(pixel_sum):
@@ -39,6 +41,7 @@ def lookup_status(pixel_sum):
         if pixel_sum == known_status:
             #print "status found: %s" % Status.collection.get(known_status)
             return Status.collection.get(known_status)
+    logging.warning("status not found: {0}".format(pixel_sum))
     return " "
 
 
@@ -51,6 +54,9 @@ def get_status():
         lookup = lookup_status(pixel_sum)
         if len(lookup) > 1:
             Cord.Current_Status.append(lookup)
+        #else:
+         #   logging.warning("status location: {0}".format(status))
+          #  get_pixel_sum_color(status, True)
 
 
 def get_pixel_sum(box):

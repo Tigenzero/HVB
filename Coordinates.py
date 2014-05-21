@@ -214,3 +214,27 @@ class Cord:
     a10 = (a_x,452)
     a11 = (a_x,486)
     arenas = [a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11]
+
+#Skill Hotkey Locations
+    #37x
+    sk_x1 = 169
+    sk_x2 = 198
+    sk_y1 = 80
+    sk_y2 = 110
+    sk_0 = (0*37 + sk_x1, sk_y1, 0*37 + sk_x2, sk_y2)
+    sk_1 = (1*37 + sk_x1, sk_y1, 1*37 + sk_x2, sk_y2)
+    sk_2 = (2*37 + sk_x1, sk_y1, 2*37 + sk_x2, sk_y2)
+    sk_3 = (3*37 + sk_x1, sk_y1, 3*37 + sk_x2, sk_y2)
+    sk_4 = (4*37 + sk_x1, sk_y1, 4*37 + sk_x2, sk_y2)
+    sk_5 = (5*37 + sk_x1, sk_y1, 5*37 + sk_x2, sk_y2)
+    sk_6 = (6*37 + sk_x1, sk_y1, 6*37 + sk_x2, sk_y2)
+    sk_7 = (7*37 + sk_x1, sk_y1, 7*37 + sk_x2, sk_y2)
+    sk_8 = (8*37 + sk_x1, sk_y1, 8*37 + sk_x2, sk_y2)
+    sk_9 = (9*37 + sk_x1, sk_y1, 9*37 + sk_x2, sk_y2)
+    sk_10 = (10*37 + sk_x1, sk_y1, 10*37 + sk_x2, sk_y2)
+    sk_11 = (11*37 + sk_x1, sk_y1, 11*37 + sk_x2, sk_y2)
+    sk_12 = (12*37 + sk_x1, sk_y1, 12*37 + sk_x2, sk_y2)
+    sk_13 = (13*37 + sk_x1, sk_y1, 13*37 + sk_x2, sk_y2)
+    sk_14 = (14*37 + sk_x1, sk_y1, 14*37 + sk_x2, sk_y2)
+    sk_15 = (15*37 + sk_x1, sk_y1, 15*37 + sk_x2, sk_y2)
+    skill_status = [sk_0, sk_1, sk_2, sk_3, sk_4, sk_5, sk_6, sk_7, sk_8, sk_9, sk_10, sk_11, sk_12, sk_13, sk_14, sk_15]

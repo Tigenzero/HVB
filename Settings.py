@@ -8,6 +8,7 @@ class Settings:
     behavior, style = 0, 0
     #Recover: -1: none, 0:all, 1:health, 2: magic, 3: spirit
     recover = -1
-    sleep = 2
+    sleep = 2.5
     log_loc = "Battle.log"
     log_level = logging.DEBUG
+    shutdown = False

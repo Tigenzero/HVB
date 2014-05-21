@@ -1,15 +1,16 @@
 from Click_Press import mousePos, leftClick
 from Coordinates import Cord
 from Cooldown import Cooldown
-from Status import is_status_active
-
+from Status import is_status_active, get_pixel_sum
+import Settings
+import logging
 
 def attack(enemy):
     try:
         mousePos(enemy)
         leftClick()
     except ValueError:
-        print "no more enemies"
+        logging.warning("no more enemies")
 
 
 def activate_cure(current_health, current_mana):
@@ -23,7 +24,7 @@ def activate_cure(current_health, current_mana):
 
 def activate_regen(current_health):
     if current_health <= 60 and Cooldown.regen <= 0 <= Cord.Regen:
-        print "using Regen"
+        logging.info("using Regen")
         use_skill(Cord.Regen)
         Cooldown.regen = 45
         return True
@@ -53,20 +54,39 @@ def activate_special(special, overcharge, current_overcharge, style):
     if special == 2 and Cord.special_attack[2] >= 0 >= Cooldown.special_attack[2]:
         if is_status_active("special_1") and is_status_active("special_2") and overcharge < current_overcharge:
             use_skill(Cord.special_attack[2])
-            print "special 3 used"
+            logging.debug("special 3 used")
             activate_cooldown(2, style)
             return True
     if special == 1 and Cord.special_attack[1] >= 0 >= Cooldown.special_attack[1]:
         if is_status_active("special_1") and overcharge < current_overcharge:
             use_skill(Cord.special_attack[1])
-            print "special 2 used"
+            logging.debug("special 2 used")
             activate_cooldown(1, style)
             return True
     if special == 0 and Cord.special_attack[0] >= 0 >= Cooldown.special_attack[0]:
         if overcharge < current_overcharge:
             use_skill(Cord.special_attack[0])
-            print "special 1 used"
+            logging.debug("special 1 used")
             activate_cooldown(0, style)
+            return True
+    return False
+
+
+def activate_special2(special, overcharge=0, current_overcharge=0):
+    if special == 2 and Cord.special_attack[2] >= 0:
+        if is_skill_active(2):
+            use_skill(Cord.special_attack[2])
+            logging.debug("special 3 used")
+            return True
+    if special == 1 and Cord.special_attack[1] >= 0:
+        if is_skill_active(1):
+            use_skill(Cord.special_attack[1])
+            logging.debug("special 2 used")
+            return True
+    if special == 0 and Cord.special_attack[0] >= 0:
+        if is_skill_active(0) and overcharge < current_overcharge:
+            use_skill(Cord.special_attack[0])
+            logging.debug("special 1 used")
             return True
     return False
 
@@ -100,6 +120,18 @@ def get_spirit(im):
     return 100
 
 
+def is_skill_active(skill):
+    #skill: 20065
+    skill_status = get_pixel_sum(Cord.skill_status[Settings.Settings.Player.special_attack[skill]])
+    if skill_status == 20065:
+        return True
+    elif skill_status == 21045:
+        return False
+    else:
+        logging.info("skill sum unidentified: {0}".format(skill_status))
+        return False
+
+
 def is_spirit_active(im):
     if im.getpixel(Cord.spirit_cat_loc) == Cord.spirit_active_color:
         return True
@@ -122,7 +154,7 @@ def special_attack(im, current_enemies, style):
     #print "Is Spirit Active? %r" %is_spirit_active(im)
     if not is_spirit_active(im):
             if use_spirit(current_spirit, current_overcharge, im):
-                print "Spirit Activated"
+                logging.debug("Spirit Activated")
                 return
             elif current_overcharge >= 30 and current_spirit < 100:
                 if style == 0:
@@ -170,6 +202,29 @@ def special_attack_dual(current_enemies, current_overcharge):
 #together the cost is 150
 #10% of overcharge is roughly 30 overcharge
 def special_attack_single(current_overcharge):
+    if Cord.special_attack[2] >= 0:
+        if activate_special2(2):
+            return 0
+        elif activate_special2(1):
+            return 0
+        elif activate_special2(0, 70, current_overcharge):
+            return 0
+        else:
+            if activate_special2(1):
+                return 0
+            elif activate_special2(0, 70, current_overcharge):
+                return 0
+            else:
+                return 0
+    else:
+        if activate_special2(1):
+            return 0
+        elif activate_special2(0, 50, current_overcharge):
+            return 0
+    return 0
+
+
+def special_attack_single_original(current_overcharge):
     if Cord.special_attack[2] >= 0:
         if activate_special(2, 10, current_overcharge, 1):
             return 0

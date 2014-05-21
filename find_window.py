@@ -28,7 +28,7 @@ def find_window():
                 #print "window found at %d, %d" % (temp_x, temp_y)
                 return temp_x, temp_y
     print "Never Found Window"
-    return 0, 0
+    quit()
 
 
 def find_left(window):
