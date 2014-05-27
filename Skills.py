@@ -123,11 +123,12 @@ def get_spirit(im):
 def is_skill_active(skill):
     #skill: 20065
     skill_status = get_pixel_sum(Cord.skill_status[Settings.Settings.Player.special_attack[skill]])
-    if skill_status == 20065:
+    if skill_status == 20065 or skill_status == 21073:
         return True
-    elif skill_status == 21045:
+    elif skill_status == 21045 or skill_status == 20979 or skill_status == 20572:
         return False
     else:
+        print skill_status
         logging.info("skill sum unidentified: {0}".format(skill_status))
         return False
 
@@ -174,6 +175,22 @@ def special_attack(im, current_enemies, style):
 #together the cost is 175
 #10% of overcharge is roughly 30 overcharge
 def special_attack_dual(current_enemies, current_overcharge):
+    if Cord.special_attack[2] >= 0:
+        if activate_special2(2):
+            return multiple_enemy_attack(current_enemies)
+        elif activate_special2(1):
+            return 0
+        elif activate_special2(0, 80, current_overcharge):
+            return 0
+    else:
+        if activate_special2(1):
+            return 0
+        elif activate_special2(0, 60, current_overcharge):
+            return 0
+    return 0
+
+
+def special_attack_dual_original(current_enemies, current_overcharge):
     if Cord.special_attack[2] >= 0:
         if activate_special(2, 10, current_overcharge, 0):
             return multiple_enemy_attack(current_enemies)
