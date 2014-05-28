@@ -173,7 +173,7 @@ def use_gem(gem_type, current):
             Cooldown.m_gem = False
             return True
     elif gem_type == 2:
-        if current <= 80 and Cooldown.m_gem:
+        if current <= 80 and Cooldown.s_gem:
             activate_gem()
             Cooldown.s_gem = False
             return True
