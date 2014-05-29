@@ -321,6 +321,7 @@ def startGame(): #UNFINISHED
     while not battle_end:
         if len(get_enemies(im)) == 0 or pony_time(im):
             time.sleep(1.5)
+            press('spacebar')
             im = screenGrab()
             if len(get_enemies(im)) == 0 and not pony_time(im):
                 logging.info("Battle ended: getEnemies was %d and Pony Time was %r" % (len(get_enemies(im)), pony_time(im)))

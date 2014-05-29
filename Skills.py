@@ -150,22 +150,27 @@ def multiple_enemy_attack(enemies):
 
 
 def special_attack(im, current_enemies, style):
-    current_spirit = get_spirit(im)
-    current_overcharge = get_overcharge(im)
-    #print "Is Spirit Active? %r" %is_spirit_active(im)
-    if not is_spirit_active(im):
-            if use_spirit(current_spirit, current_overcharge, im):
-                logging.debug("Spirit Activated")
-                return
-            elif current_overcharge >= 30 and current_spirit < 100:
-                if style == 0:
-                    attack(current_enemies[special_attack_dual(current_enemies, current_overcharge)])
+    try:
+        current_spirit = get_spirit(im)
+        current_overcharge = get_overcharge(im)
+        #print "Is Spirit Active? %r" %is_spirit_active(im)
+        if not is_spirit_active(im):
+                if use_spirit(current_spirit, current_overcharge, im):
+                    logging.debug("Spirit Activated")
                     return
-                elif style == 1:
-                    attack(current_enemies[special_attack_single(current_overcharge)])
-                    return
-    if len(current_enemies) > 0:
-        attack(current_enemies[0])
+                elif current_overcharge >= 30 and current_spirit < 100:
+                    if style == 0:
+                        attack(current_enemies[special_attack_dual(current_enemies, current_overcharge)])
+                        return
+                    elif style == 1:
+                        attack(current_enemies[special_attack_single(current_overcharge)])
+                        return
+        if len(current_enemies) > 0:
+            attack(current_enemies[0])
+    except:
+        logging.warning("Issue with Special Attack function. returning")
+        return
+
 
 
 #need to test
