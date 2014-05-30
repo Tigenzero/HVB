@@ -207,7 +207,7 @@ def restore_stats(im):
             logging.info("Mana Gem Used")
         elif use_mana_pot(current_mana):
             logging.info("Mana Potion used")
-        elif use_gem(1, current_spirit):
+        elif use_gem(2, current_spirit):
             logging.info("Spirit Gem Used")
         elif use_spirit_pot(current_spirit):
             logging.info("Spirit Potion used")
