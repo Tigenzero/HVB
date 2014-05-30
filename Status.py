@@ -21,6 +21,7 @@ class Status:
     spirit_pot = 0 #NEED
     regen = 7292
     overwhelming_strikes = 12726
+    riddle_master = 8331
     collection = {channeling: 'channeling',
                   protection: 'protection',
                   shadow_veil: 'shadow_veil',
@@ -33,7 +34,8 @@ class Status:
                   mana_pot: 'mana_pot',
                   spirit_pot: 'spirit_pot',
                   regen: 'regen',
-                  overwhelming_strikes: 'overwhelming_strikes'}
+                  overwhelming_strikes: 'overwhelming_strikes',
+                  riddle_master: 'riddle_master'}
 
 
 def lookup_status(pixel_sum):
@@ -41,7 +43,7 @@ def lookup_status(pixel_sum):
         if pixel_sum == known_status:
             #print "status found: %s" % Status.collection.get(known_status)
             return Status.collection.get(known_status)
-    logging.warning("status not found: {0}".format(pixel_sum))
+    logging.debug("status not found: {0}".format(pixel_sum))
     return " "
 
 
