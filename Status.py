@@ -10,7 +10,7 @@ class Status:
     channeling = 10527
     protection = 9619
     shadow_veil = 7476
-    hastened = 10229
+    haste = 10229
     nothing = 1162
     spirit_shield = 7827
     heartseeker = 6340
@@ -25,7 +25,7 @@ class Status:
     collection = {channeling: 'channeling',
                   protection: 'protection',
                   shadow_veil: 'shadow_veil',
-                  hastened: 'hastened',
+                  haste: 'haste',
                   spirit_shield: 'spirit_shield',
                   heartseeker: 'heartseeker',
                   special_1: 'special_1',
