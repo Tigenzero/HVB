@@ -1,6 +1,6 @@
 from Click_Press import *
 from Cooldown import Cooldown
-from Status import is_status_active, get_status, get_pixel_sum_color
+from Status import is_status_active, get_status, get_pixel_sum, get_pixel_sum_color
 import logging
 from Settings import Settings
 logger = logging.getLogger(__name__)
@@ -20,17 +20,17 @@ def get_gem():
     leftClick()
     time.sleep(0.3)
     item = Cord.ibox_gem
-    sum = get_pixel_sum_color(item, False)
+    sum = get_pixel_sum(item)
     if sum == 713603:
         logging.debug("health gem found")
         Cooldown.h_gem = True
-    elif sum == 729967:
+    elif sum == 729967 or sum == 729940:
         logging.debug("mana gem found")
         Cooldown.m_gem = True
-    elif sum == 723194 or sum == 722448:
+    elif sum == 723194 or sum == 722448 or sum == 723149:
         logging.debug("spirit gem found")
         Cooldown.h_gem = True
-    elif sum == 722692:  # empty
+    elif sum == 722692 or sum == 722641:
         logging.debug("mystic gem found")
         mousePos(Cord.gem_loc)
         leftClick()
@@ -39,7 +39,7 @@ def get_gem():
         #logging.debug("no gem found")
     else:
         logger.warning("UNKNOWN gem: %d" % sum)
-        get_pixel_sum_color(item, True)
+        get_pixel_sum(item, True)
         if Settings.shutdown:
             logging.critical("unknown gem, shutting down")
             quit()

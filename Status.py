@@ -61,11 +61,12 @@ def get_status():
           #  get_pixel_sum_color(status, True)
 
 
-def get_pixel_sum(box):
+def get_pixel_sum(box, save = False):
     im = ImageOps.grayscale(ImageGrab.grab((Settings.box[0] + box[0], Settings.box[1] + box[1], Settings.box[0] + box[2], Settings.box[1] + box[3])))
     a = array(im.getcolors())
     a = a.sum()
-    #im.save(os.getcwd() + '\\full_snap__' + str(int(time.time())) + '.png', 'PNG')
+    if save:
+        im.save(os.getcwd() + '\\images\\unknown_item__x-' + str(box[0]) + '_y-' + str(box[1]) + '_' + str(a) + '_' + str(int(time.time())) + '.png', 'PNG')
     return a
 
 
