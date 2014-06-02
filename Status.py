@@ -38,15 +38,6 @@ class Status:
                   riddle_master: 'riddle_master'}
 
 
-def lookup_status(pixel_sum):
-    for known_status in Status.collection:
-        if pixel_sum == known_status:
-            #print "status found: %s" % Status.collection.get(known_status)
-            return Status.collection.get(known_status)
-    logging.debug("status not found: {0}".format(pixel_sum))
-    return " "
-
-
 def get_status():
     Cord.Current_Status = []
     for status in Cord.Status:
@@ -84,3 +75,12 @@ def is_status_active(status_name):
         if status == status_name:
             return True
     return False
+
+
+def lookup_status(pixel_sum):
+    for known_status in Status.collection:
+        if pixel_sum == known_status:
+            #print "status found: %s" % Status.collection.get(known_status)
+            return Status.collection.get(known_status)
+    logging.debug("status not found: {0}".format(pixel_sum))
+    return " "

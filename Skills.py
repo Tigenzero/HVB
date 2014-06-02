@@ -5,6 +5,37 @@ from Status import is_status_active, get_pixel_sum
 import Settings
 import logging
 
+class Skills:
+    Cure_a = 12676
+    Cure_i = 16439
+    Special_a = 20065
+    Special_i = 21045
+    Protection_a = 13194
+    Protection_i = 16270
+    Haste_a = 21690
+    Haste_i = 22154
+    Regen_a = 13459
+    Regen_i = 17261
+    Shadow_Veil_a = 0
+    Shadow_Veil_i = 0
+    Empty = 4431
+    
+    Active_Collection = {Cure_a: "Cure",
+                         Special_a: "Special",
+                         Protection_a: "Protection",
+                         Haste_a: "Haste",
+                         Regen_a: "Regen",
+                         Shadow_Veil_a: "Shadow_Veil",
+                         Empty: ""}
+    Inactive_Collection = {Cure_i: "Cure",
+                           Special_i: "Special",
+                           Protection_i: "Protection",
+                           Haste_i: "Haste",
+                           Regen_i: "Regen",
+                           Shadow_Veil_i: "Shadow_Veil"}
+    Current = ["", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""]
+
+
 def attack(enemy):
     try:
         mousePos(enemy)
@@ -74,17 +105,17 @@ def activate_special(special, overcharge, current_overcharge, style):
 
 def activate_special2(special, overcharge=0, current_overcharge=0):
     if special == 2 and Cord.special_attack[2] >= 0:
-        if is_skill_active(2):
+        if is_special_active(2):
             use_skill(Cord.special_attack[2])
             logging.debug("special 3 used")
             return True
     if special == 1 and Cord.special_attack[1] >= 0:
-        if is_skill_active(1):
+        if is_special_active(1):
             use_skill(Cord.special_attack[1])
             logging.debug("special 2 used")
             return True
     if special == 0 and Cord.special_attack[0] >= 0:
-        if is_skill_active(0) and overcharge < current_overcharge:
+        if is_special_active(0) and overcharge < current_overcharge:
             use_skill(Cord.special_attack[0])
             logging.debug("special 1 used")
             return True
@@ -98,6 +129,24 @@ def activate_protection():
         return True
     else:
         return False
+
+
+def get_skills():
+    skill_count = 0
+    for skill in Cord.skill_status:
+        sum = get_pixel_sum(skill)
+        result = Skills.Active_Collection.get(sum)
+        if result is not None:
+            Skills.Current[skill_count] = result
+        else:
+            result = Skills.Inactive_Collection.get(sum)
+            if result is not None:
+                Skills.Current[skill_count] = result
+            else:
+                logging.warning("UNKNOWN skill: %d" % sum)
+                get_pixel_sum(skill, True)
+        skill_count += 1
+
 
 
 def get_overcharge(im):
@@ -120,7 +169,7 @@ def get_spirit(im):
     return 100
 
 
-def is_skill_active(skill):
+def is_special_active(skill):
     #skill: 20065
     skill_status = get_pixel_sum(Cord.skill_status[Settings.Settings.Player.special_attack[skill]])
     if skill_status == 20065 or skill_status == 21073:

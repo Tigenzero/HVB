@@ -9,7 +9,7 @@ import logging
 import logging.config
 import os
 from Items import get_gem, use_health_pot, use_mana_pot, use_spirit_pot, get_items, use_gem, leftover_inventory
-from Skills import activate_cure, activate_premium, activate_protection, activate_regen, special_attack, get_spirit, get_overcharge
+from Skills import activate_cure, activate_premium, activate_protection, activate_regen, special_attack, get_spirit, get_skills
 from Click_Press import *
 from Cooldown import *
 from Coordinates import Cord
