@@ -1,38 +1,39 @@
 from Click_Press import mousePos, leftClick
 from Coordinates import Cord
 from Cooldown import Cooldown
-from Status import is_status_active, get_pixel_sum
+from Status import is_status_active, get_pixel_sum, get_pixel_sum_color
 import Settings
 import logging
 
 class Skills:
-    Cure_a = 12676
-    Cure_i = 16439
-    Special_a = 20065
-    Special_i = 21045
-    Protection_a = 13194
-    Protection_i = 16270
-    Haste_a = 21690
-    Haste_i = 22154
-    Regen_a = 13459
-    Regen_i = 17261
-    Shadow_Veil_a = 0
-    Shadow_Veil_i = 0
-    Empty = 4431
-    
-    Active_Collection = {Cure_a: "Cure",
-                         Special_a: "Special",
-                         Protection_a: "Protection",
-                         Haste_a: "Haste",
-                         Regen_a: "Regen",
-                         Shadow_Veil_a: "Shadow_Veil",
-                         Empty: ""}
-    Inactive_Collection = {Cure_i: "Cure",
-                           Special_i: "Special",
-                           Protection_i: "Protection",
-                           Haste_i: "Haste",
-                           Regen_i: "Regen",
-                           Shadow_Veil_i: "Shadow_Veil"}
+    #Cure_a = 12676
+    #Cure_i = 16439
+    #Special_a = 20065
+    #Special_i = 21045
+    #Protection_a = 13194
+    #Protection_i = 16270
+    #Haste_a = 21690
+    #Haste_i = 22154
+    #Regen_a = 13459
+    #Regen_i = 17261
+    #Shadow_Veil_a = 0
+    #Shadow_Veil_i = 0
+    #Empty = 4431
+    Active_Collection = {}
+    Inactive_Collection = {}
+    #Active_Collection = {Cure_a: "Cure",
+    #                     Special_a: "Special",
+    #                     Protection_a: "Protection",
+    #                     Haste_a: "Haste",
+    #                     Regen_a: "Regen",
+    #                     Shadow_Veil_a: "Shadow_Veil",
+    #                     Empty: ""}
+    #Inactive_Collection = {Cure_i: "Cure",
+    #                       Special_i: "Special",
+    #                       Protection_i: "Protection",
+    #                       Haste_i: "Haste",
+    #                       Regen_i: "Regen",
+    #                       Shadow_Veil_i: "Shadow_Veil"}
     Current = ["", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""]
 
 
@@ -45,8 +46,8 @@ def attack(enemy):
 
 
 def activate_cure(current_health, current_mana):
-    if current_health <= 50 and Cooldown.cure <= 0 and current_mana >= 10 and Cord.Cure >= 0:
-        use_skill(Cord.Cure)
+    if current_health <= 50 and lookup_skill("Cure") > 15 and :
+        use_skill(lookup_skill("Cure"))
         Cooldown.cure = 3
         return True
     else:
@@ -134,7 +135,7 @@ def activate_protection():
 def get_skills():
     skill_count = 0
     for skill in Cord.skill_status:
-        sum = get_pixel_sum(skill)
+        sum = get_pixel_sum_color(skill)
         result = Skills.Active_Collection.get(sum)
         if result is not None:
             Skills.Current[skill_count] = result
@@ -144,7 +145,7 @@ def get_skills():
                 Skills.Current[skill_count] = result
             else:
                 logging.warning("UNKNOWN skill: %d" % sum)
-                get_pixel_sum(skill, True)
+                get_pixel_sum_color(skill, True)
         skill_count += 1
 
 
@@ -169,6 +170,19 @@ def get_spirit(im):
     return 100
 
 
+def is_skill_active(skill):
+    #skill: 20065
+    skill_status = get_pixel_sum(Cord.skill_status[lookup_skill(skill)])
+    if Skills.Active_Collection.get(skill_status) is not None:
+        return True
+    elif Skills.Inactive_Collection.get(skill_status) is not None:
+        return False
+    else:
+        print skill_status
+        logging.info("skill {0} sum unidentified: {1}".format(skill, skill_status))
+        return False
+
+
 def is_special_active(skill):
     #skill: 20065
     skill_status = get_pixel_sum(Cord.skill_status[Settings.Settings.Player.special_attack[skill]])
@@ -178,7 +192,7 @@ def is_special_active(skill):
         return False
     else:
         print skill_status
-        logging.info("skill sum unidentified: {0}".format(skill_status))
+        logging.info("special sum unidentified: {0}".format(skill_status))
         return False
 
 
@@ -188,6 +202,11 @@ def is_spirit_active(im):
     else:
         return False
 
+def lookup_skill(c_skill):
+    for i in range(0, len(Skills.Current)-1):
+        if Skills.Current[i] == c_skill:
+            return i
+    return 16
 
 def multiple_enemy_attack(enemies):
     if len(enemies) >= 5:

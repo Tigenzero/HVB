@@ -61,7 +61,7 @@ def get_pixel_sum(box, save = False):
     return a
 
 
-def get_pixel_sum_color(box, save):
+def get_pixel_sum_color(box, save = False):
     im = ImageGrab.grab((Settings.box[0] + box[0], Settings.box[1] + box[1], Settings.box[0] + box[2], Settings.box[1] + box[3]))
     a = array(im)
     a = a.sum()

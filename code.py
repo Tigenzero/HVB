@@ -15,7 +15,7 @@ from Cooldown import *
 from Coordinates import Cord
 from Settings import Settings
 from Status import get_status
-
+from Image_Initialize import get_images
 
 def debug_levels(current_level, level):
     #Performs all of the needed functions during a round
@@ -315,6 +315,8 @@ def startGame(): #UNFINISHED
     reset_cooldown()
     get_boundaries()
     im = screenGrab()
+    get_images()
+    get_skills()
     set_player(Settings.Player)
     #print "%d enemies" %len(getEnemies(im))
     battle_end = False
