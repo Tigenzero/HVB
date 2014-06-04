@@ -45,20 +45,19 @@ def attack(enemy):
         logging.warning("no more enemies")
 
 
-def activate_cure(current_health, current_mana):
-    if current_health <= 50 and lookup_skill("Cure") > 15 and :
+#Done, base Activate functions on this
+def activate_cure(current_health):
+    if current_health <= 50 and is_skill_active("Cure"):
         use_skill(lookup_skill("Cure"))
-        Cooldown.cure = 3
         return True
     else:
         return False
 
 
 def activate_regen(current_health):
-    if current_health <= 60 and Cooldown.regen <= 0 <= Cord.Regen:
+    if current_health <= 60 and is_skill_active("Regen") and not is_premium_skill("Regen"):
         logging.info("using Regen")
         use_skill(Cord.Regen)
-        Cooldown.regen = 45
         return True
     else:
         return False
@@ -66,12 +65,9 @@ def activate_regen(current_health):
 
 def activate_premium():
     for i in range(0, len(Cord.premium)):
-        if Cooldown.premium[i] <= 0 <= Cord.premium[i]:
-            use_skill(Cord.premium[i])
-            Cooldown.premium[i] = 45
+        if is_skill_active(Cord.premium[i]) and not is_status_active(Cord.premium[i]):
+            use_skill(lookup_skill(Cord.premium[i]))
             return True
-        #else:
-            #print "%d greater than 0 and %d less than 0?" % (Cooldown.premium[i], Cord.premium[i])
     return False
 
 
@@ -170,17 +166,26 @@ def get_spirit(im):
     return 100
 
 
+def is_premium_skill(skill):
+    for p_skill in Cord.premium:
+        if p_skill == skill:
+            return True
+    return False
+
+
 def is_skill_active(skill):
     #skill: 20065
-    skill_status = get_pixel_sum(Cord.skill_status[lookup_skill(skill)])
-    if Skills.Active_Collection.get(skill_status) is not None:
-        return True
-    elif Skills.Inactive_Collection.get(skill_status) is not None:
-        return False
-    else:
-        print skill_status
-        logging.info("skill {0} sum unidentified: {1}".format(skill, skill_status))
-        return False
+    if lookup_skill(skill) <= 15:
+        skill_status = get_pixel_sum(Cord.skill_status[lookup_skill(skill)])
+        if Skills.Active_Collection.get(skill_status) is not None:
+            return True
+        elif Skills.Inactive_Collection.get(skill_status) is not None:
+            return False
+        else:
+            print skill_status
+            logging.info("skill {0} sum unidentified: {1}".format(skill, skill_status))
+            return False
+    return False
 
 
 def is_special_active(skill):
