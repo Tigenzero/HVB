@@ -5,6 +5,7 @@ from Status import is_status_active, get_pixel_sum, get_pixel_sum_color
 import Settings
 import logging
 
+
 class Skills:
     #Cure_a = 12676
     #Cure_i = 16439
@@ -45,19 +46,17 @@ def attack(enemy):
         logging.warning("no more enemies")
 
 
+def activate_cooldown(special, style):
+    if style == 0 and (special == 0 or special == 1):
+        Cooldown.special_attack[special] = 5
+    else:
+        Cooldown.special_attack[special] = 10
+
+
 #Done, base Activate functions on this
 def activate_cure(current_health):
     if current_health <= 50 and is_skill_active("Cure"):
         use_skill(lookup_skill("Cure"))
-        return True
-    else:
-        return False
-
-
-def activate_regen(current_health):
-    if current_health <= 60 and is_skill_active("Regen") and not is_premium_skill("Regen"):
-        logging.info("using Regen")
-        use_skill(Cord.Regen)
         return True
     else:
         return False
@@ -71,11 +70,21 @@ def activate_premium():
     return False
 
 
-def activate_cooldown(special, style):
-    if style == 0 and (special == 0 or special == 1):
-        Cooldown.special_attack[special] = 5
+def activate_regen(current_health):
+    if current_health <= 60 and is_skill_active("Regen") and not is_premium_skill("Regen") and not is_status_active("Regen"):
+        logging.info("using Regen")
+        use_skill(lookup_skill("Regen"))
+        return True
     else:
-        Cooldown.special_attack[special] = 10
+        return False
+
+
+def activate_protection():
+    if is_skill_active("Protection") and not is_premium_skill("Protection") and not is_status_active("Protection"):
+        use_skill(lookup_skill("Protection"))
+        return True
+    else:
+        return False
 
 
 def activate_special(special, overcharge, current_overcharge, style):
@@ -119,31 +128,37 @@ def activate_special2(special, overcharge=0, current_overcharge=0):
     return False
 
 
-def activate_protection():
-    if Cord.Protection >= 0 >= Cooldown.protection:
-        use_skill(Cord.Protection)
-        Cooldown.protection = 19
-        return True
-    else:
-        return False
+def buffer_Skill_Find(pixel_sum, collection):
+    logging.warning("Skill Buffer Being Used")
+    for key, value in collection.items():
+        if key - Settings.Settings.skill_buffer <=  pixel_sum  <= key + Settings.Settings.skill_buffer:
+            return value
+    return None
 
 
 def get_skills():
     skill_count = 0
     for skill in Cord.skill_status:
-        sum = get_pixel_sum_color(skill)
+        #sum = get_pixel_sum_color(skill)
+        sum = get_pixel_sum(skill)
         result = Skills.Active_Collection.get(sum)
+        result2 = Skills.Inactive_Collection.get(sum)
         if result is not None:
             Skills.Current[skill_count] = result
+        elif result2 is not None:
+            Skills.Current[skill_count] = result2
         else:
-            result = Skills.Inactive_Collection.get(sum)
+            result = buffer_Skill_Find(sum, Skills.Active_Collection)
             if result is not None:
-                Skills.Current[skill_count] = result
+              Skills.Current[skill_count] = result
             else:
-                logging.warning("UNKNOWN skill: %d" % sum)
-                get_pixel_sum_color(skill, True)
+                result2 = buffer_Skill_Find(sum, Skills.Inactive_Collection)
+                if result2 is not None:
+                    Skills.Current[skill_count] = result2
+                else:
+                    logging.warning("UNKNOWN skill: %d" % sum)
+                    get_pixel_sum_color(skill, True)
         skill_count += 1
-
 
 
 def get_overcharge(im):
@@ -190,15 +205,28 @@ def is_skill_active(skill):
 
 def is_special_active(skill):
     #skill: 20065
-    skill_status = get_pixel_sum(Cord.skill_status[Settings.Settings.Player.special_attack[skill]])
-    if skill_status == 20065 or skill_status == 21073:
+    skill_status = get_pixel_sum_color(Cord.skill_status[Settings.Settings.Player.special_attack[skill]])
+    if Skills.Active_Collection.get(skill_status) is not None:
         return True
-    elif skill_status == 21045 or skill_status == 20979 or skill_status == 20572:
+    elif Skills.Inactive_Collection.get(skill_status) is not None:
         return False
     else:
         print skill_status
         logging.info("special sum unidentified: {0}".format(skill_status))
         return False
+
+
+#def is_special_active(skill):
+#    #skill: 20065
+#    skill_status = get_pixel_sum(Cord.skill_status[Settings.Settings.Player.special_attack[skill]])
+#    if skill_status == 20065 or skill_status == 21073:
+#        return True
+#    elif skill_status == 21045 or skill_status == 20979 or skill_status == 20572:
+#        return False
+#    else:
+#        print skill_status
+#        logging.info("special sum unidentified: {0}".format(skill_status))
+#        return False
 
 
 def is_spirit_active(im):
@@ -207,11 +235,13 @@ def is_spirit_active(im):
     else:
         return False
 
+
 def lookup_skill(c_skill):
     for i in range(0, len(Skills.Current)-1):
         if Skills.Current[i] == c_skill:
             return i
     return 16
+
 
 def multiple_enemy_attack(enemies):
     if len(enemies) >= 5:

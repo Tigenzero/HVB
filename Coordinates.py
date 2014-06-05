@@ -7,10 +7,7 @@ class Cord:
     window_padding_y = 0
     window_padding_x = 0
     #Cure = (188,  96)
-    Cure = -1
-    Regen = -1
     Items = -1
-    Protection = -1
     special_attack = []
     premium = []
      # 0 = Health, 1 = Mana, 2 = Spirit, 9 = used
@@ -185,15 +182,15 @@ class Cord:
 #Statuses
     st_y1 = 13
     st_y2 = 45
-    st1 = (167, st_y1, 196, st_y2)
-    st2 = (200, st_y1, 229, st_y2)
-    st3 = (233, st_y1, 262, st_y2)
-    st4 = (266, st_y1, 295, st_y2)
-    st5 = (299, st_y1, 328, st_y2)
-    st6 = (332, st_y1, 361, st_y2)
-    st7 = (365, st_y1, 394, st_y2)
-    st8 = (398, st_y1, 427, st_y2)
-    st9 = (431, st_y1, 460, st_y2)
+    st1 = (167, st_y1, 197, st_y2)
+    st2 = (200, st_y1, 230, st_y2)
+    st3 = (233, st_y1, 263, st_y2)
+    st4 = (266, st_y1, 296, st_y2)
+    st5 = (299, st_y1, 329, st_y2)
+    st6 = (332, st_y1, 362, st_y2)
+    st7 = (365, st_y1, 395, st_y2)
+    st8 = (398, st_y1, 428, st_y2)
+    st9 = (431, st_y1, 461, st_y2)
     Status = (st1, st2, st3, st4, st5, st6, st7, st8, st9)
     Current_Status = []
 
@@ -218,9 +215,9 @@ class Cord:
 #Skill Hotkey Locations
     #37x
     sk_x1 = 169
-    sk_x2 = 198
+    sk_x2 = 199
     sk_y1 = 80
-    sk_y2 = 110
+    sk_y2 = 112
     sk_0 = (0*37 + sk_x1, sk_y1, 0*37 + sk_x2, sk_y2)
     sk_1 = (1*37 + sk_x1, sk_y1, 1*37 + sk_x2, sk_y2)
     sk_2 = (2*37 + sk_x1, sk_y1, 2*37 + sk_x2, sk_y2)

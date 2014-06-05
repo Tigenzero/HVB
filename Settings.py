@@ -12,3 +12,4 @@ class Settings:
     log_loc = "Battle.log"
     log_level = logging.INFO
     shutdown = False
+    skill_buffer = 20

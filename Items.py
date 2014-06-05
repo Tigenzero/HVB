@@ -24,14 +24,18 @@ def get_gem():
     if sum == 713603:
         logging.debug("health gem found")
         Cooldown.h_gem = True
+        get_pixel_sum_color(item, True)
     elif sum == 729967 or sum == 729940:
         logging.debug("mana gem found")
         Cooldown.m_gem = True
+        get_pixel_sum_color(item, True)
     elif sum == 723194 or sum == 722448 or sum == 723149:
         logging.debug("spirit gem found")
         Cooldown.h_gem = True
-    elif sum == 722692 or sum == 722641:
+        get_pixel_sum_color(item, True)
+    elif (sum == 722692 or sum == 722641) and not is_status_active("Channeling"):
         logging.debug("mystic gem found")
+        get_pixel_sum_color(item, True)
         mousePos(Cord.gem_loc)
         leftClick()
     elif sum == 865970:  # empty
@@ -39,7 +43,7 @@ def get_gem():
         #logging.debug("no gem found")
     else:
         logger.warning("UNKNOWN gem: %d" % sum)
-        get_pixel_sum(item, True)
+        get_pixel_sum_color(item, True)
         if Settings.shutdown:
             logging.critical("unknown gem, shutting down")
             quit()

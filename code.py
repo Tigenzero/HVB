@@ -124,7 +124,7 @@ def go_to_grindfest():
 
 def is_channeling_active():
     for status in Cord.Current_Status:
-        if status == "channeling":
+        if status == "Channeling":
             return True
     return False
 
@@ -199,7 +199,7 @@ def restore_stats(im):
                 return False
         elif use_gem(0, current_health):
             logging.info("Health Gem Used")
-        elif activate_cure(current_health, current_mana):
+        elif activate_cure(current_health):
             logging.info("Cure Casted")
         elif use_health_pot(current_health):
             logging.info("Health Potion used")
@@ -258,11 +258,7 @@ def screenGrab_all():
 
 
 def set_player(player):
-    Cord.Cure = player.Cure
-    Cord.Regen = player.Regen
-    #Cord.Items = list(player.Items)
     get_items()
-    Cord.Protection = player.Protection
     Cord.premium = player.premium
     Settings.style = player.style
     Cord.special_attack = player.special_attack

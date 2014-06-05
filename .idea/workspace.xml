@@ -1,10 +1,63 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="d698ee8d-7e2d-4579-bdd7-d7af7a4ba013" name="Default" comment="edited coordinates of health, mana, and spirit bars so that stat numbers do not interfere with reading the bar.">
+    <list default="true" id="d698ee8d-7e2d-4579-bdd7-d7af7a4ba013" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/images/initialize/Status/Absorb.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/images/initialize/Status/Arcane_Focus.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/images/initialize/unuse/active/Drain.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/images/initialize/active/Empty.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/images/initialize/inactive/Empty.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/images/initialize/item/Empty.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/images/initialize/item/H_pot.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/images/initialize/Status/Heartseeker.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/images/initialize/unuse/active/Heartseeker.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/images/initialize/item/M_pot.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/images/initialize/unuse/active/Protection.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/images/initialize/Status/Regen.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/images/initialize/Status/Shadow_Veil.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/images/initialize/unuse/active/Sleep.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/images/initialize/Status/Spark_Life.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/images/initialize/unuse/inactive/Special.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/images/initialize/Status/Spirit_Shield.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/images/initialize/item/used.1.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/images/initialize/item/used.png" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/images/initialize/active/Drain.png" afterPath="$PROJECT_DIR$/images/initialize/active/Drain.1.png" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/images/initialize/active/Heartseeker.png" afterPath="$PROJECT_DIR$/images/initialize/active/Heartseeker.1.png" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/images/initialize/active/Protection.png" afterPath="$PROJECT_DIR$/images/initialize/active/Protection.1.png" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/images/initialize/active/Sleep.png" afterPath="$PROJECT_DIR$/images/initialize/active/Sleep.1.png" />
+      <change type="MOVED" beforePath="C:\Users\Matt\Documents\GitHub\HVB\images\channeling.png" afterPath="$PROJECT_DIR$/images/initialize/Status/Fire_Infusion.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/images/initialize/active/Cure.png" afterPath="$PROJECT_DIR$/images/initialize/active/Cure.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/images/initialize/inactive/Cure.png" afterPath="$PROJECT_DIR$/images/initialize/inactive/Cure.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/images/initialize/active/Drain.png" afterPath="$PROJECT_DIR$/images/initialize/active/Drain.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/images/initialize/inactive/Drain.png" afterPath="$PROJECT_DIR$/images/initialize/inactive/Drain.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/images/initialize/active/Haste.png" afterPath="$PROJECT_DIR$/images/initialize/active/Haste.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/images/initialize/inactive/Haste.png" afterPath="$PROJECT_DIR$/images/initialize/inactive/Haste.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/images/initialize/active/Heartseeker.png" afterPath="$PROJECT_DIR$/images/initialize/active/Heartseeker.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/images/initialize/inactive/Heartseeker.png" afterPath="$PROJECT_DIR$/images/initialize/inactive/Heartseeker.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/images/initialize/active/Protection.png" afterPath="$PROJECT_DIR$/images/initialize/active/Protection.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/images/initialize/inactive/Protection.png" afterPath="$PROJECT_DIR$/images/initialize/inactive/Protection.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/images/initialize/active/Regen.png" afterPath="$PROJECT_DIR$/images/initialize/active/Regen.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/images/initialize/inactive/Regen.png" afterPath="$PROJECT_DIR$/images/initialize/inactive/Regen.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/images/initialize/active/Shadow_Veil.png" afterPath="$PROJECT_DIR$/images/initialize/active/Shadow_Veil.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/images/initialize/inactive/Shadow_Veil.png" afterPath="$PROJECT_DIR$/images/initialize/inactive/Shadow_Veil.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/images/initialize/active/Sleep.png" afterPath="$PROJECT_DIR$/images/initialize/active/Sleep.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/images/initialize/inactive/Sleep.png" afterPath="$PROJECT_DIR$/images/initialize/inactive/Sleep.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/images/initialize/active/Spark_Life.png" afterPath="$PROJECT_DIR$/images/initialize/active/Spark_Life.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/images/initialize/inactive/Spark_Life.png" afterPath="$PROJECT_DIR$/images/initialize/inactive/Spark_Life.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/images/initialize/active/Special.png" afterPath="$PROJECT_DIR$/images/initialize/active/Special.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/images/initialize/inactive/Special.png" afterPath="$PROJECT_DIR$/images/initialize/inactive/Special.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/images/initialize/active/Spirit_Shield.png" afterPath="$PROJECT_DIR$/images/initialize/active/Spirit_Shield.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/images/initialize/inactive/Spirit_Shield.png" afterPath="$PROJECT_DIR$/images/initialize/inactive/Spirit_Shield.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/images/initialize/active/Weaken.png" afterPath="$PROJECT_DIR$/images/initialize/active/Weaken.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/images/initialize/inactive/Weaken.png" afterPath="$PROJECT_DIR$/images/initialize/inactive/Weaken.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Coordinates.py" afterPath="$PROJECT_DIR$/Coordinates.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Image_Initialize.py" afterPath="$PROJECT_DIR$/Image_Initialize.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Items.py" afterPath="$PROJECT_DIR$/Items.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Players.py" afterPath="$PROJECT_DIR$/Players.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Settings.py" afterPath="$PROJECT_DIR$/Settings.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Skills.py" afterPath="$PROJECT_DIR$/Skills.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Status.py" afterPath="$PROJECT_DIR$/Status.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code.py" afterPath="$PROJECT_DIR$/code.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="HVB.iws" />
@@ -28,63 +81,23 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="Status.py" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Status.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="68" column="156" selection-start="2265" selection-end="2265" vertical-scroll-proportion="0.0" vertical-offset="595" max-vertical-offset="1462">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Battle.log" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Battle.log">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="2271" column="0" selection-start="121764" selection-end="121764" vertical-scroll-proportion="0.0" vertical-offset="55346" max-vertical-offset="55896">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Skills.py" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Skills.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="108" column="31" selection-start="3545" selection-end="3545" vertical-scroll-proportion="0.0" vertical-offset="1292" max-vertical-offset="4862">
-              <folding>
-                <marker date="1401498017952" expanded="true" signature="850:1180" placeholder="..." />
-                <marker date="1401498017952" expanded="true" signature="2480:3127" placeholder="..." />
-                <marker date="1401498017952" expanded="true" signature="3582:3773" placeholder="..." />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Settings.py" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Settings.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="9" column="15" selection-start="212" selection-end="212" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="323">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="code.py" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/code.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="310" column="14" selection-start="9594" selection-end="9594" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="6783">
-              <folding>
-                <element signature="e#42#58#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Items.py" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="Items.py" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Items.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="41" column="32" selection-start="1165" selection-end="1165" vertical-scroll-proportion="0.53061223" vertical-offset="255" max-vertical-offset="3349">
+            <state line="17" column="14" selection-start="399" selection-end="399" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="3417">
               <folding>
                 <element signature="e#0#25#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Skills.py" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/Skills.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="147" column="32" selection-start="5020" selection-end="5020" vertical-scroll-proportion="0.4067524" vertical-offset="2246" max-vertical-offset="6698">
+              <folding>
+                <element signature="e#0#43#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -112,22 +125,23 @@
         <option value="$PROJECT_DIR$/Click_Press.py" />
         <option value="$PROJECT_DIR$/exceptions.py" />
         <option value="$PROJECT_DIR$/Cooldown.py" />
+        <option value="$PROJECT_DIR$/Battle.log" />
+        <option value="$PROJECT_DIR$/Status.py" />
+        <option value="$PROJECT_DIR$/Settings.py" />
+        <option value="$PROJECT_DIR$/Image_Initialize.py" />
         <option value="$PROJECT_DIR$/Players.py" />
         <option value="$PROJECT_DIR$/code.py" />
         <option value="$PROJECT_DIR$/Coordinates.py" />
-        <option value="$PROJECT_DIR$/Skills.py" />
-        <option value="$PROJECT_DIR$/Settings.py" />
-        <option value="$PROJECT_DIR$/Battle.log" />
-        <option value="$PROJECT_DIR$/Status.py" />
         <option value="$PROJECT_DIR$/Items.py" />
+        <option value="$PROJECT_DIR$/Skills.py" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="158" />
-    <option name="y" value="40" />
-    <option name="width" value="1558" />
-    <option name="height" value="988" />
+    <option name="x" value="1912" />
+    <option name="y" value="-8" />
+    <option name="width" value="1936" />
+    <option name="height" value="1096" />
   </component>
   <component name="ProjectInspectionProfilesVisibleTreeState">
     <entry key="Project Default">
@@ -203,6 +217,10 @@
               <option name="myItemId" value="images" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="initialize" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
           </PATH>
         </subPane>
       </pane>
@@ -232,6 +250,13 @@
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\Matt\Documents\GitHub\HVB" />
     </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Matt\Documents\GitHub\HVB\images\initialize\active" />
+      <recent name="C:\Users\Matt\Documents\GitHub\HVB\images\initialize\inactive" />
+      <recent name="C:\Users\Matt\Documents\GitHub\HVB\images\initialize\Status" />
+      <recent name="C:\Users\Matt\Documents\GitHub\HVB\images\initialize\item" />
+      <recent name="C:\Users\Matt\Documents\GitHub\HVB\images\initialize\unuse\active" />
+    </key>
   </component>
   <component name="RestoreUpdateTree">
     <UpdateInfo date="Moments ago" ActionInfo="_Update">
@@ -249,14 +274,8 @@
             <option name="myCanBeAbsent" value="false" />
             <option name="myId" value="UPDATED" />
             <PATH vcs="Git" revision="">$PROJECT_DIR$/.gitignore</PATH>
-            <PATH vcs="Git" revision="">$PROJECT_DIR$/Cooldown.py</PATH>
-            <PATH vcs="Git" revision="">$PROJECT_DIR$/Coordinates.py</PATH>
-            <PATH vcs="Git" revision="">$PROJECT_DIR$/Items.py</PATH>
             <PATH vcs="Git" revision="">$PROJECT_DIR$/Settings.py</PATH>
             <PATH vcs="Git" revision="">$PROJECT_DIR$/Skills.py</PATH>
-            <PATH vcs="Git" revision="">$PROJECT_DIR$/Status.py</PATH>
-            <PATH vcs="Git" revision="">$PROJECT_DIR$/code.py</PATH>
-            <PATH vcs="Git" revision="">$PROJECT_DIR$/find_window.py</PATH>
           </FILE-GROUP>
           <FILE-GROUP>
             <option name="myUpdateName" value="Created" />
@@ -264,7 +283,20 @@
             <option name="mySupportsDeletion" value="false" />
             <option name="myCanBeAbsent" value="false" />
             <option name="myId" value="CREATED" />
-            <PATH vcs="Git" revision="">$PROJECT_DIR$/UI.py</PATH>
+            <PATH vcs="Git" revision="">$PROJECT_DIR$/images/initialize/active/Drain.png</PATH>
+            <PATH vcs="Git" revision="">$PROJECT_DIR$/images/initialize/active/Heartseeker.png</PATH>
+            <PATH vcs="Git" revision="">$PROJECT_DIR$/images/initialize/active/Shadow_Veil.png</PATH>
+            <PATH vcs="Git" revision="">$PROJECT_DIR$/images/initialize/active/Sleep.png</PATH>
+            <PATH vcs="Git" revision="">$PROJECT_DIR$/images/initialize/active/Spark_Life.png</PATH>
+            <PATH vcs="Git" revision="">$PROJECT_DIR$/images/initialize/active/Spirit_Shield.png</PATH>
+            <PATH vcs="Git" revision="">$PROJECT_DIR$/images/initialize/active/Weaken.png</PATH>
+            <PATH vcs="Git" revision="">$PROJECT_DIR$/images/initialize/inactive/Drain.png</PATH>
+            <PATH vcs="Git" revision="">$PROJECT_DIR$/images/initialize/inactive/Heartseeker.png</PATH>
+            <PATH vcs="Git" revision="">$PROJECT_DIR$/images/initialize/inactive/Shadow_Veil.png</PATH>
+            <PATH vcs="Git" revision="">$PROJECT_DIR$/images/initialize/inactive/Sleep.png</PATH>
+            <PATH vcs="Git" revision="">$PROJECT_DIR$/images/initialize/inactive/Spark_Life.png</PATH>
+            <PATH vcs="Git" revision="">$PROJECT_DIR$/images/initialize/inactive/Spirit_Shield.png</PATH>
+            <PATH vcs="Git" revision="">$PROJECT_DIR$/images/initialize/inactive/Weaken.png</PATH>
           </FILE-GROUP>
           <FILE-GROUP>
             <option name="myUpdateName" value="Deleted" />
@@ -660,54 +692,37 @@
       <created>1399005214115</created>
       <updated>1399005214115</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="Added item sums, changed adding sums function to include option to save image of status, and had gems be scanned in greyscale.">
+      <created>1401679232554</created>
+      <updated>1401679232555</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="158" y="40" width="1558" height="988" extended-state="0" />
-    <editor active="false" />
+    <frame x="1912" y="-8" width="1936" height="1096" extended-state="6" />
+    <editor active="true" />
     <layout>
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32988626" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.1734575" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24944974" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2886259" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2311743" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.16518848" sideWeight="0.5" order="8" side_tool="true" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2018018" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32945284" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2926577" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
     </layout>
-    <layout-to-restore>
-      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.1734575" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
-      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.16518848" sideWeight="0.5" order="8" side_tool="true" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32945284" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24944974" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2886259" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2018018" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-    </layout-to-restore>
   </component>
   <component name="Vcs.Log.UiProperties">
     <option name="RECENTLY_FILTERED_USER_GROUPS">
@@ -732,7 +747,9 @@
     <MESSAGE value="added health and mana to status, removed cooldown and added checks to see if potions are currently being used before activating a new one. altered usage of gems where items will be closed out in the event that there isn't a gem present (might be cause of items not getting used)" />
     <MESSAGE value="altered the status check state for health and mana potions. this will slow the rate in which an item is used but will raise integrity that an item is being used only after a previous item's effect has disappeared." />
     <MESSAGE value="added heroic mana and health potion color value for chrome" />
-    <option name="LAST_COMMIT_MESSAGE" value="added heroic mana and health potion color value for chrome" />
+    <MESSAGE value="Added item sums, changed adding sums function to include option to save image of status, and had gems be scanned in greyscale." />
+    <MESSAGE value="MAJOR UPDATE&#10;Status and Skill &quot;Seeing&quot; based on original images is now a reality. Before numbered hash codes were used to determine skills and statuses, this created an issue when going from one machine to another as the codes did not always match the same skills and statuses on a new machine. &#10;Status and Skill &quot;Seeing&quot; allows for the machine to make the hashcodes itself based on an image library. &#10;This means you will no longer have to specify what skills you have in your hotkeys, it will read them (with a few exceptions). &#10;For my next trick, Items will have their own image library." />
+    <option name="LAST_COMMIT_MESSAGE" value="MAJOR UPDATE&#10;Status and Skill &quot;Seeing&quot; based on original images is now a reality. Before numbered hash codes were used to determine skills and statuses, this created an issue when going from one machine to another as the codes did not always match the same skills and statuses on a new machine. &#10;Status and Skill &quot;Seeing&quot; allows for the machine to make the hashcodes itself based on an image library. &#10;This means you will no longer have to specify what skills you have in your hotkeys, it will read them (with a few exceptions). &#10;For my next trick, Items will have their own image library." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -740,205 +757,265 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/Status.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="42" column="0" selection-start="1193" selection-end="1193" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1411">
-          <folding />
-        </state>
+    <entry file="file://$PROJECT_DIR$/images/initialize/active/Regen.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Skills.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="58" column="4" selection-start="1729" selection-end="1729" vertical-scroll-proportion="0.0" vertical-offset="986" max-vertical-offset="3587">
-          <folding>
-            <marker date="1401498017952" expanded="true" signature="850:1180" placeholder="..." />
-            <marker date="1401498017952" expanded="true" signature="2480:3127" placeholder="..." />
-            <marker date="1401498017952" expanded="true" signature="3582:3773" placeholder="..." />
-          </folding>
-        </state>
+    <entry file="file://$PROJECT_DIR$/images/initialize/active/Empty.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/find_window.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="172" column="5" selection-start="5487" selection-end="5487" vertical-scroll-proportion="0.0" vertical-offset="2924" max-vertical-offset="3094" />
+    <entry file="file://$PROJECT_DIR$/images/initialize/active/Heartseeker.1.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/code.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="15" column="0" selection-start="371" selection-end="371" vertical-scroll-proportion="0.0" vertical-offset="255" max-vertical-offset="12886" />
+    <entry file="file://$PROJECT_DIR$/images/initialize/active/Drain.1.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/find_window.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="172" column="5" selection-start="5487" selection-end="5487" vertical-scroll-proportion="0.0" vertical-offset="2924" max-vertical-offset="3094" />
+    <entry file="file://$PROJECT_DIR$/images/initialize/active/Cure.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/code.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="683" column="21" selection-start="19681" selection-end="19681" vertical-scroll-proportion="0.0" vertical-offset="11611" max-vertical-offset="18258" />
+    <entry file="file://$PROJECT_DIR$/images/initialize/Status/Spirit_Shield.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/find_window.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="172" column="5" selection-start="5487" selection-end="5487" vertical-scroll-proportion="0.0" vertical-offset="2924" max-vertical-offset="3094" />
+    <entry file="file://$PROJECT_DIR$/images/initialize/Status/Heartseeker.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/code.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="421" column="9" selection-start="11985" selection-end="11985" vertical-scroll-proportion="0.0" vertical-offset="119" max-vertical-offset="15623" />
+    <entry file="file://$PROJECT_DIR$/images/initialize/inactive/Drain.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/find_window.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="172" column="5" selection-start="5487" selection-end="5487" vertical-scroll-proportion="0.0" vertical-offset="2924" max-vertical-offset="3094" />
+    <entry file="file://$PROJECT_DIR$/images/initialize/inactive/Sleep.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/code.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="155" column="21" selection-start="4778" selection-end="4778" vertical-scroll-proportion="0.0" vertical-offset="3876" max-vertical-offset="15062" />
+    <entry file="file://$PROJECT_DIR$/images/initialize/inactive/Weaken.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/find_window.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="172" column="5" selection-start="5487" selection-end="5487" vertical-scroll-proportion="0.0" vertical-offset="2924" max-vertical-offset="3094" />
+    <entry file="file://$PROJECT_DIR$/images/initialize/Status/Arcane_Focus.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/code.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="41" column="21" selection-start="926" selection-end="926" vertical-scroll-proportion="0.0" vertical-offset="765" max-vertical-offset="14161" />
+    <entry file="file://$PROJECT_DIR$/images/initialize/Status/Absorb.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/code.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="669" column="0" selection-start="18929" selection-end="18929" vertical-scroll-proportion="0.0" vertical-offset="119" max-vertical-offset="14161" />
+    <entry file="file://$PROJECT_DIR$/images/initialize/Status/Shadow_Veil.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/quickGrab.pyw">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="4" column="17" selection-start="82" selection-end="82" vertical-scroll-proportion="0.0" vertical-offset="68" max-vertical-offset="340" />
+    <entry file="file://$PROJECT_DIR$/images/initialize/inactive/Spirit_Shield.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/find_window.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="172" column="5" selection-start="5487" selection-end="5487" vertical-scroll-proportion="0.0" vertical-offset="2924" max-vertical-offset="3094" />
+    <entry file="file://$PROJECT_DIR$/images/initialize/inactive/Heartseeker.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/quickGrab.pyw">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="4" column="17" selection-start="82" selection-end="82" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="340" />
+    <entry file="file://$PROJECT_DIR$/images/initialize/inactive/Cure.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/find_window.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="172" column="5" selection-start="5487" selection-end="5487" vertical-scroll-proportion="0.0" vertical-offset="2924" max-vertical-offset="3094" />
+    <entry file="file://$PROJECT_DIR$/images/initialize/inactive/Protection.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/code.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="295" column="14" selection-start="8739" selection-end="8739" vertical-scroll-proportion="0.0" vertical-offset="5015" max-vertical-offset="13243" />
+    <entry file="file://$PROJECT_DIR$/images/initialize/inactive/Spark_Life.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/quickGrab.pyw">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="4" column="17" selection-start="82" selection-end="82" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="340" />
+    <entry file="file://$PROJECT_DIR$/images/initialize/inactive/Shadow_Veil.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/find_window.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="172" column="5" selection-start="5487" selection-end="5487" vertical-scroll-proportion="0.0" vertical-offset="2924" max-vertical-offset="3094" />
+    <entry file="file://$PROJECT_DIR$/images/initialize/inactive/Empty.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/code.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="295" column="14" selection-start="8739" selection-end="8739" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="13243" />
+    <entry file="file://$PROJECT_DIR$/images/initialize/inactive/Special.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/quickGrab.pyw">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="5" column="12" selection-start="70" selection-end="70" vertical-scroll-proportion="0.0" vertical-offset="85" max-vertical-offset="272" />
+    <entry file="file://$PROJECT_DIR$/images/initialize/item/H_pot.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/find_window.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1156" />
+    <entry file="file://$PROJECT_DIR$/images/initialize/item/M_pot.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/quickGrab.pyw">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="4" column="17" selection-start="82" selection-end="82" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="289" />
+    <entry file="file://$PROJECT_DIR$/images/initialize/item/used.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/find_window.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="172" column="5" selection-start="5487" selection-end="5487" vertical-scroll-proportion="0.0" vertical-offset="2016" max-vertical-offset="3060" />
+    <entry file="file://$PROJECT_DIR$/images/initialize/item/used.1.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Players.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="10" column="25" selection-start="329" selection-end="329" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="493" />
+    <entry file="file://$PROJECT_DIR$/images/initialize/item/Empty.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Click_Press.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="3" column="25" selection-start="132" selection-end="132" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="3281" />
+    <entry file="file://$PROJECT_DIR$/images/initialize/inactive/Haste.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Coordinates.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="167" column="40" selection-start="6093" selection-end="6093" vertical-scroll-proportion="0.0" vertical-offset="3222" max-vertical-offset="3740" />
+    <entry file="file://$PROJECT_DIR$/images/initialize/inactive/Regen.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Cooldown.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="34" column="27" selection-start="979" selection-end="979" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="816" />
+    <entry file="file://$PROJECT_DIR$/images/initialize/inactive/Corruption.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Skills.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="108" column="31" selection-start="3545" selection-end="3545" vertical-scroll-proportion="0.0" vertical-offset="1292" max-vertical-offset="4862">
-          <folding>
-            <marker date="1401498017952" expanded="true" signature="850:1180" placeholder="..." />
-            <marker date="1401498017952" expanded="true" signature="2480:3127" placeholder="..." />
-            <marker date="1401498017952" expanded="true" signature="3582:3773" placeholder="..." />
-          </folding>
-        </state>
+    <entry file="file://$PROJECT_DIR$/images/initialize/inactive/Arcane_Focus.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/code.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="310" column="14" selection-start="9594" selection-end="9594" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="6783">
-          <folding>
-            <element signature="e#42#58#0" expanded="true" />
-          </folding>
-        </state>
+    <entry file="file://$PROJECT_DIR$/images/initialize/inactive/Gale.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Settings.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="9" column="15" selection-start="212" selection-end="212" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="323">
-          <folding />
-        </state>
+    <entry file="file://$PROJECT_DIR$/images/initialize/inactive/Blind.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Battle.log">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="2271" column="0" selection-start="121764" selection-end="121764" vertical-scroll-proportion="0.0" vertical-offset="38607" max-vertical-offset="55896">
-          <folding />
-        </state>
+    <entry file="file://$PROJECT_DIR$/images/initialize/inactive/Fiery_Blast.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Status.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="68" column="156" selection-start="2265" selection-end="2265" vertical-scroll-proportion="0.0" vertical-offset="595" max-vertical-offset="1462">
-          <folding />
-        </state>
+    <entry file="file://$PROJECT_DIR$/images/initialize/inactive/Imperil.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/images/initialize/inactive/Freeze.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/images/initialize/inactive/Absorb.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/images/initialize/inactive/Smite.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/images/initialize/inactive/Shockblast.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/images/initialize/active/Corruption.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/images/initialize/active/Arcane_Focus.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/images/initialize/active/Gale.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/images/initialize/active/Blind.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/images/initialize/active/Fiery_Blast.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/images/initialize/active/Imperil.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/images/initialize/active/Freeze.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/images/initialize/active/Special.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/images/initialize/active/Absorb.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/images/initialize/active/Shockblast.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/images/initialize/active/Smite.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Items.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="41" column="32" selection-start="1165" selection-end="1165" vertical-scroll-proportion="0.53061223" vertical-offset="255" max-vertical-offset="3349">
+        <state line="17" column="14" selection-start="399" selection-end="399" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="3417">
           <folding>
             <element signature="e#0#25#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Skills.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="147" column="32" selection-start="5020" selection-end="5020" vertical-scroll-proportion="0.4067524" vertical-offset="2246" max-vertical-offset="6698">
+          <folding>
+            <element signature="e#0#43#0" expanded="true" />
           </folding>
         </state>
       </provider>
