@@ -129,7 +129,7 @@ def activate_special2(special, overcharge=0, current_overcharge=0):
 
 
 def buffer_Skill_Find(pixel_sum, collection):
-    logging.warning("Skill Buffer Being Used")
+    logging.info("Skill Buffer Being Used")
     for key, value in collection.items():
         if key - Settings.Settings.skill_buffer <=  pixel_sum  <= key + Settings.Settings.skill_buffer:
             return value

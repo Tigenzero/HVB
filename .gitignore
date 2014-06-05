@@ -3,3 +3,4 @@
 *.log
 workspace.xml
 *.ini
+.idea/workspace.xml
