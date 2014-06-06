@@ -3,8 +3,8 @@ class Player_0:
     style = 0
     # 0 = Health, 1 = Mana, 2 = Spirit, 9 = used
     #Items = (0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1) #main character
-    special_attack = [8, 9, 10]
-    premium = ["Drain", "Heartseeker", "Spirit_Shield"]
+    special_attack = [5, 6, 7]
+    premium = ["Heartseeker", "Spirit_Shield", "Absorb"]
 
 
 class Player_1:

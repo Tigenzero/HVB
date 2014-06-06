@@ -5,43 +5,49 @@ import ntpath
 from Skills import Skills
 import ImageOps
 from Status import Status
-
+import Items
 
 def get_images():
     for image in list_files("active"):
         im = Image.open(image, 'r')
         im = ImageOps.grayscale(im)
-        #pix_val = list(im.getdata())
-        #pix_val_flat = [x for sets in pix_val for x in sets]
-        #a = sum(pix_val_flat)
         a = array(im.getcolors())
         a = a.sum()
         filename = return_filename(image).split(".")[0]
         Skills.Active_Collection[a] = filename
-        #print "{0}: {1}".format(return_filename(image).split(".")[0], a)
-
     for image in list_files("inactive"):
         im = Image.open(image, 'r')
         im = ImageOps.grayscale(im)
-        #pix_val = list(im.getdata())
-        #pix_val_flat = [x for sets in pix_val for x in sets]
-        #a = sum(pix_val_flat)
         a = array(im.getcolors())
         a = a.sum()
         filename = return_filename(image).split(".")[0]
         Skills.Inactive_Collection[a] = filename
-        #print "{0}: {1}".format(return_filename(image).split(".")[0], a)
     for image in list_files("status"):
         im = Image.open(image, 'r')
         im = ImageOps.grayscale(im)
-        #pix_val = list(im.getdata())
-        #pix_val_flat = [x for sets in pix_val for x in sets]
-        #a = sum(pix_val_flat)
         a = array(im.getcolors())
         a = a.sum()
         filename = return_filename(image).split(".")[0]
         Status.collection[a] = filename
-        #print "{0}: {1}".format(return_filename(image).split(".")[0], a)
+    for image in list_files("gem"):
+        im = Image.open(image, 'r')
+        im = ImageOps.grayscale(im)
+        a = array(im.getcolors())
+        a = a.sum()
+        filename = return_filename(image).split(".")[0]
+        Items.Gem_Collection[a] = filename
+    for image in list_files("item"):
+        im = Image.open(image, 'r')
+        pix_val = list(im.getdata())
+        pix_val_flat = [x for sets in pix_val for x in sets]
+        a = sum(pix_val_flat)
+        filename = return_filename(image).split(".")[0]
+        Items.Item_Collection[a] = filename
+        #USE ONLY WHEN COLOR IS NEEDED
+        #pix_val = list(im.getdata())
+        #pix_val_flat = [x for sets in pix_val for x in sets]
+        #a = sum(pix_val_flat)
+
 
 
 def list_files(type):

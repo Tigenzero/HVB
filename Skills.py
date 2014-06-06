@@ -198,7 +198,7 @@ def is_skill_active(skill):
             return False
         else:
             print skill_status
-            logging.info("skill {0} sum unidentified: {1}".format(skill, skill_status))
+            logging.debug("skill {0} sum unidentified: {1}".format(skill, skill_status))
             return False
     return False
 
@@ -211,7 +211,7 @@ def is_special_active(skill):
     elif Skills.Inactive_Collection.get(skill_status) is not None:
         return False
     else:
-        print skill_status
+        #print skill_status
         logging.info("special sum unidentified: {0}".format(skill_status))
         return False
 

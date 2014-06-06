@@ -10,6 +10,6 @@ class Settings:
     recover = 0
     sleep = 2.5
     log_loc = "Battle.log"
-    log_level = logging.INFO
+    log_level = logging.DEBUG
     shutdown = False
     skill_buffer = 20
