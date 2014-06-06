@@ -31,9 +31,9 @@ def get_images():
         Status.collection[a] = filename
     for image in list_files("gem"):
         im = Image.open(image, 'r')
-        im = ImageOps.grayscale(im)
-        a = array(im.getcolors())
-        a = a.sum()
+        pix_val = list(im.getdata())
+        pix_val_flat = [x for sets in pix_val for x in sets]
+        a = sum(pix_val_flat)
         filename = return_filename(image).split(".")[0]
         Items.Gem_Collection[a] = filename
     for image in list_files("item"):

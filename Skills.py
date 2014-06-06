@@ -205,7 +205,7 @@ def is_skill_active(skill):
 
 def is_special_active(skill):
     #skill: 20065
-    skill_status = get_pixel_sum_color(Cord.skill_status[Settings.Settings.Player.special_attack[skill]])
+    skill_status = get_pixel_sum(Cord.skill_status[Settings.Settings.Player.special_attack[skill]])
     if Skills.Active_Collection.get(skill_status) is not None:
         return True
     elif Skills.Inactive_Collection.get(skill_status) is not None:

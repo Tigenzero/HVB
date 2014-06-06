@@ -22,7 +22,7 @@ def get_gem():
     leftClick()
     time.sleep(0.3)
     item = Cord.ibox_gem
-    sum = get_pixel_sum(item)
+    sum = get_pixel_sum_color(item)
     result = Gem_Collection.get(sum)
     if result is not None:
         if result == "Health_Gem":
@@ -36,6 +36,12 @@ def get_gem():
             Cooldown.s_gem = True
         elif result == "Mystic_Gem" and not is_status_active("Channeling"):
             logging.debug("mystic gem found")
+            mousePos(Cord.gem_loc)
+            leftClick()
+        else:
+            logger.warning("UNKNOWN gem: %d" % sum)
+            get_pixel_sum_color(item, True)
+        #REMOVE ONCE ALL GEMS ARE FOUND
             mousePos(Cord.gem_loc)
             leftClick()
     else:
