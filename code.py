@@ -372,6 +372,7 @@ def startRound(): #UNFINISHED
         reduce_cooldown()
         im = screenGrab()
         current_enemies = get_enemies(im)
+        logging.debug("Enemies: {} Health: {} Mana: {} Spirit: {}".format(len(current_enemies), get_health(im), get_mana(im), get_spirit(im)))
         #print str(current_enemies) + " enemies"
         #debug_levels(get_health(im), "health")
         #debug_levels(get_mana(im), "mana")
@@ -380,8 +381,10 @@ def startRound(): #UNFINISHED
         if restore_stats(im):
             """restoration occurred"""
         elif 0 < len(current_enemies) < enemy_num:
+            logging.debug("Enemy Died, Checking Gem")
             get_gem()
         else:
+            logging.debug("Attacking Enemy")
             special_attack(im, current_enemies, style)
         #this sleep function triggers the amount of time between clicks, thus the time between server communication
         #This function is very important as it randomizes the communication times, emulating the behavior of a player

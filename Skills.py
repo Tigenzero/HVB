@@ -138,6 +138,7 @@ def buffer_Skill_Find(pixel_sum, collection):
 
 def get_skills():
     skill_count = 0
+    Skill_kill = False
     for skill in Cord.skill_status:
         #sum = get_pixel_sum_color(skill)
         sum = get_pixel_sum(skill)
@@ -158,7 +159,11 @@ def get_skills():
                 else:
                     logging.warning("UNKNOWN skill: %d" % sum)
                     get_pixel_sum_color(skill, True)
+                    Skill_kill = True
         skill_count += 1
+    if Skill_kill:
+        logging.critical("Not all skills were identified. Shutting down now.")
+        quit()
 
 
 def get_overcharge(im):

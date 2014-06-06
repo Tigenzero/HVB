@@ -38,12 +38,6 @@ def get_gem():
             logging.debug("mystic gem found")
             mousePos(Cord.gem_loc)
             leftClick()
-        else:
-            logger.warning("UNKNOWN gem: %d" % sum)
-            get_pixel_sum_color(item, True)
-        #REMOVE ONCE ALL GEMS ARE FOUND
-            mousePos(Cord.gem_loc)
-            leftClick()
     else:
         logger.warning("UNKNOWN gem: %d" % sum)
         get_pixel_sum_color(item, True)
