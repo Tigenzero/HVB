@@ -139,7 +139,7 @@ def buffer_Skill_Find(pixel_sum, collection):
 
 def get_skills():
     skill_count = 0
-    Skill_kill = False
+    skill_kill = False
     for skill in Cord.skill_status:
         #sum = get_pixel_sum_color(skill)
         sum = get_pixel_sum_color(skill)
@@ -153,17 +153,19 @@ def get_skills():
         else:
             result = buffer_Skill_Find(sum, Skills.Active_Collection)
             if result is not None:
-              Skills.Current[skill_count] = result
+                Skills.Current[skill_count] = result
+                Skills.Active_Collection[sum] = result
             else:
                 result2 = buffer_Skill_Find(sum, Skills.Inactive_Collection)
                 if result2 is not None:
                     Skills.Current[skill_count] = result2
+                    Skills.Inactive_Collection[sum] = result2
                 else:
                     logging.warning("UNKNOWN skill: %d" % sum)
                     get_pixel_sum_color(skill, True)
-                    Skill_kill = True
+                    skill_kill = True
         skill_count += 1
-    if Skill_kill:
+    if skill_kill:
         logging.critical("Not all skills were identified. Shutting down now.")
         quit()
 
@@ -198,7 +200,7 @@ def is_premium_skill(skill):
 def is_skill_active(skill):
     #skill: 20065
     if lookup_skill(skill) <= 15:
-        skill_status = get_pixel_sum(Cord.skill_status[lookup_skill(skill)])
+        skill_status = get_pixel_sum_color(Cord.skill_status[lookup_skill(skill)])
         if Skills.Active_Collection.get(skill_status) is not None:
             return True
         elif Skills.Inactive_Collection.get(skill_status) is not None:
@@ -206,13 +208,22 @@ def is_skill_active(skill):
         else:
             #print skill_status
             logging.debug("skill {0} sum unidentified: {1}. Skill Position: {2}".format(skill, skill_status, lookup_skill(skill)))
+            result = buffer_Skill_Find(skill_status, Skills.Active_Collection)
+            if result is not None:
+                Skills.Active_Collection[skill_status] = result
+                return True
+            else:
+                result2 = buffer_Skill_Find(skill_status, Skills.Inactive_Collection)
+                if result2 is not None:
+                    Skills.Inactive_Collection[skill_status] = result2
+                    return False
             return False
     return False
 
 
 def is_special_active(skill):
     #skill: 20065
-    skill_status = get_pixel_sum(Cord.skill_status[Settings.Settings.Player.special_attack[skill]])
+    skill_status = get_pixel_sum_color(Cord.skill_status[Settings.Settings.Player.special_attack[skill]])
     if Skills.Active_Collection.get(skill_status) is not None:
         return True
     elif Skills.Inactive_Collection.get(skill_status) is not None:

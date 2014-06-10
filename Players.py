@@ -13,4 +13,4 @@ class Player_1:
      # 0 = Health, 1 = Mana, 2 = Spirit, 9 = used
     # Health has 30 round cooldown, Mana and Spirit have 15 round cooldown
     #Items = (0, 0, 0, 1, 1, 1, 1, 9, 9) #Current Items in your Battle Inventory
-    premium = ["Protection", "Haste", "Regen "]
+    premium = ["Protection", "Haste", "Regen", "Shadow_Veil"]
