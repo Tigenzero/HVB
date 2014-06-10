@@ -6,20 +6,22 @@ from Skills import Skills
 import ImageOps
 from Status import Status
 import Items
+import logging
+
 
 def get_images():
     for image in list_files("active"):
         im = Image.open(image, 'r')
-        im = ImageOps.grayscale(im)
-        a = array(im.getcolors())
-        a = a.sum()
+        pix_val = list(im.getdata())
+        pix_val_flat = [x for sets in pix_val for x in sets]
+        a = sum(pix_val_flat)
         filename = return_filename(image).split(".")[0]
         Skills.Active_Collection[a] = filename
     for image in list_files("inactive"):
         im = Image.open(image, 'r')
-        im = ImageOps.grayscale(im)
-        a = array(im.getcolors())
-        a = a.sum()
+        pix_val = list(im.getdata())
+        pix_val_flat = [x for sets in pix_val for x in sets]
+        a = sum(pix_val_flat)
         filename = return_filename(image).split(".")[0]
         Skills.Inactive_Collection[a] = filename
     for image in list_files("status"):
@@ -47,6 +49,14 @@ def get_images():
         #pix_val = list(im.getdata())
         #pix_val_flat = [x for sets in pix_val for x in sets]
         #a = sum(pix_val_flat)
+        #USE WHEN GRAYSCALE CAN BE USED
+        #im = ImageOps.grayscale(im)
+        #a = array(im.getcolors())
+        #a = a.sum()
+    logging.debug("Active Collection:")
+    print_collection(Skills.Active_Collection)
+    logging.debug("Inactive Collection:")
+    print_collection(Skills.Inactive_Collection)
 
 
 
@@ -65,3 +75,8 @@ def list_files(type):
 def return_filename(path):
     head, tail = ntpath.split(path)
     return tail or ntpath.basename(head)
+
+
+def print_collection(collection):
+    for key,value in sort(collection.items()):
+        logging.debug("{}: {}".format(value, key))

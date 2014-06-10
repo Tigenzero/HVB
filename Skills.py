@@ -132,6 +132,7 @@ def buffer_Skill_Find(pixel_sum, collection):
     logging.info("Skill Buffer Being Used")
     for key, value in collection.items():
         if key - Settings.Settings.skill_buffer <=  pixel_sum  <= key + Settings.Settings.skill_buffer:
+            logging.debug("Skill sum {} is {} away from {} which is {}".format(pixel_sum, Settings.Settings.skill_buffer, key, value))
             return value
     return None
 
@@ -141,7 +142,8 @@ def get_skills():
     Skill_kill = False
     for skill in Cord.skill_status:
         #sum = get_pixel_sum_color(skill)
-        sum = get_pixel_sum(skill)
+        sum = get_pixel_sum_color(skill)
+        logging.debug("Skill {}: {}".format(skill_count, sum))
         result = Skills.Active_Collection.get(sum)
         result2 = Skills.Inactive_Collection.get(sum)
         if result is not None:
@@ -202,8 +204,8 @@ def is_skill_active(skill):
         elif Skills.Inactive_Collection.get(skill_status) is not None:
             return False
         else:
-            print skill_status
-            logging.debug("skill {0} sum unidentified: {1}".format(skill, skill_status))
+            #print skill_status
+            logging.debug("skill {0} sum unidentified: {1}. Skill Position: {2}".format(skill, skill_status, lookup_skill(skill)))
             return False
     return False
 
