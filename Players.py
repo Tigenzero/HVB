@@ -5,7 +5,7 @@ class Player_0:
     #Items = (0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1) #main character
     special_attack = [5, 6, 7]
     premium = ["Heartseeker", "Spirit_Shield", "Absorb"]
-
+    skills = ["Cure", "Regen", "Heartseeker", "Spirit_Shield", "Absorb", "Special", "Special", "Special", "Blind", "Drain", "Weaken", "Sleep", "Empty", "Empty", "Empty", "Empty"]
 
 class Player_1:
     style = 1
@@ -14,3 +14,4 @@ class Player_1:
     # Health has 30 round cooldown, Mana and Spirit have 15 round cooldown
     #Items = (0, 0, 0, 1, 1, 1, 1, 9, 9) #Current Items in your Battle Inventory
     premium = ["Protection", "Haste", "Regen", "Shadow_Veil"]
+    skills = ["", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""]

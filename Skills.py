@@ -35,6 +35,7 @@ class Skills:
     #                       Haste_i: "Haste",
     #                       Regen_i: "Regen",
     #                       Shadow_Veil_i: "Shadow_Veil"}
+
     Current = ["", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""]
 
 
@@ -131,8 +132,8 @@ def activate_special2(special, overcharge=0, current_overcharge=0):
 def buffer_Skill_Find(pixel_sum, collection):
     logging.info("Skill Buffer Being Used")
     for key, value in collection.items():
-        if key - Settings.Settings.skill_buffer <=  pixel_sum  <= key + Settings.Settings.skill_buffer:
-            logging.debug("Skill sum {} is {} away from {} which is {}".format(pixel_sum, Settings.Settings.skill_buffer, key, value))
+        if key - Settings.skill_buffer <=  pixel_sum  <= key + Settings.skill_buffer:
+            logging.debug("Skill sum {} is {} away from {} which is {}".format(pixel_sum, Settings.skill_buffer, key, value))
             return value
     return None
 
@@ -147,18 +148,18 @@ def get_skills():
         result = Skills.Active_Collection.get(sum)
         result2 = Skills.Inactive_Collection.get(sum)
         if result is not None:
-            Skills.Current[skill_count] = result
+            Settings.Player.skills[skill_count] = result
         elif result2 is not None:
-            Skills.Current[skill_count] = result2
+            Settings.Player.skills[skill_count] = result2
         else:
             result = buffer_Skill_Find(sum, Skills.Active_Collection)
             if result is not None:
-                Skills.Current[skill_count] = result
+                Settings.Player.skills[skill_count] = result
                 Skills.Active_Collection[sum] = result
             else:
                 result2 = buffer_Skill_Find(sum, Skills.Inactive_Collection)
                 if result2 is not None:
-                    Skills.Current[skill_count] = result2
+                    Settings.Player.skills[skill_count] = result2
                     Skills.Inactive_Collection[sum] = result2
                 else:
                     logging.warning("UNKNOWN skill: %d" % sum)
@@ -223,7 +224,7 @@ def is_skill_active(skill):
 
 def is_special_active(skill):
     #skill: 20065
-    skill_status = get_pixel_sum_color(Cord.skill_status[Settings.Settings.Player.special_attack[skill]])
+    skill_status = get_pixel_sum_color(Cord.skill_status[Settings.Player.special_attack[skill]])
     if Skills.Active_Collection.get(skill_status) is not None:
         return True
     elif Skills.Inactive_Collection.get(skill_status) is not None:
@@ -236,7 +237,7 @@ def is_special_active(skill):
 
 #def is_special_active(skill):
 #    #skill: 20065
-#    skill_status = get_pixel_sum(Cord.skill_status[Settings.Settings.Player.special_attack[skill]])
+#    skill_status = get_pixel_sum(Cord.skill_status[Settings.Player.special_attack[skill]])
 #    if skill_status == 20065 or skill_status == 21073:
 #        return True
 #    elif skill_status == 21045 or skill_status == 20979 or skill_status == 20572:
@@ -255,8 +256,8 @@ def is_spirit_active(im):
 
 
 def lookup_skill(c_skill):
-    for i in range(0, len(Skills.Current)-1):
-        if Skills.Current[i] == c_skill:
+    for i in range(0, len(Settings.Player.skills)-1):
+        if Settings.Player.skills[i] == c_skill:
             return i
     return 16
 

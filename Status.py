@@ -2,8 +2,7 @@ import ImageOps
 import ImageGrab
 from numpy import *
 from Coordinates import Cord
-from Settings import *
-import time
+import Settings
 import os
 
 class Status:

@@ -13,7 +13,7 @@ from Skills import activate_cure, activate_premium, activate_protection, activat
 from Click_Press import *
 from Cooldown import *
 from Coordinates import Cord
-from Settings import Settings
+import Settings
 from Status import get_status
 from Image_Initialize import get_images
 
@@ -312,7 +312,6 @@ def startGame(): #UNFINISHED
     get_boundaries()
     im = screenGrab()
     get_images()
-    get_skills()
     set_player(Settings.Player)
     #print "%d enemies" %len(getEnemies(im))
     battle_end = False

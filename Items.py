@@ -2,7 +2,7 @@ from Click_Press import *
 from Cooldown import Cooldown
 from Status import is_status_active, get_status, get_pixel_sum, get_pixel_sum_color
 import logging
-from Settings import Settings
+import Settings
 logger = logging.getLogger(__name__)
 Gem_Collection = {}
 Item_Collection = {}
