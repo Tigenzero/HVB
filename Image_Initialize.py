@@ -53,10 +53,10 @@ def get_images():
         #im = ImageOps.grayscale(im)
         #a = array(im.getcolors())
         #a = a.sum()
-    logging.debug("Active Collection:")
-    print_collection(Skills.Active_Collection)
-    logging.debug("Inactive Collection:")
-    print_collection(Skills.Inactive_Collection)
+    #logging.debug("Active Collection:")
+    #print_collection(Skills.Active_Collection)
+    #logging.debug("Inactive Collection:")
+    #print_collection(Skills.Inactive_Collection)
 
 
 

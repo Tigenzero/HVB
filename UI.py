@@ -28,7 +28,7 @@ class UI(wx.Frame):
         #st1 = wx.StaticText(panel, label='Player Name')
         #st1.SetFont(font)
         #hbox1.Add(st1, flag=wx.RIGHT, border=8)
-        cb = wx.ComboBox(panel)
+        cb = wx.ComboBox(panel, size=(200,0), name="player_config")
         hbox1.Add(cb, flag=wx.EXPAND | wx.RIGHT)
         browse_button = wx.Button(panel, label="Configure")
         hbox1.Add(browse_button, flag=wx.LEFT, border = 10)

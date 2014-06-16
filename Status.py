@@ -4,6 +4,7 @@ from numpy import *
 from Coordinates import Cord
 import Settings
 import os
+import logging
 
 class Status:
     channeling = 10527

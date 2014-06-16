@@ -313,6 +313,9 @@ def startGame(): #UNFINISHED
     im = screenGrab()
     get_images()
     set_player(Settings.Player)
+    if len(Settings.Player.skills[0]) <= 1:
+        logging.critical("skills not set, shutting down")
+        SystemExit
     #print "%d enemies" %len(getEnemies(im))
     battle_end = False
     while not battle_end:

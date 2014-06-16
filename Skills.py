@@ -37,6 +37,7 @@ class Skills:
     #                       Shadow_Veil_i: "Shadow_Veil"}
 
     Current = ["", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""]
+    Exceptions = ["Shadow_Veil", "Corruption", "Shockblast", "Smite"]
 
 
 def attack(enemy):
@@ -191,6 +192,20 @@ def get_spirit(im):
     return 100
 
 
+def is_exception_skill_active(skill):
+    skill_status = get_pixel_sum_color(Cord.skill_status[lookup_skill(skill)])
+    if skill == "Shadow_Veil" or skill == "Corruption":
+        if skill_status <= 200000:
+            return True
+    elif skill == "Shockblast":
+        if skill_status <= 450000:
+            return True
+    elif skill == "Smite":
+        if skill_status <= 500000:
+            return True
+    return False
+
+
 def is_premium_skill(skill):
     for p_skill in Cord.premium:
         if p_skill == skill:
@@ -199,6 +214,19 @@ def is_premium_skill(skill):
 
 
 def is_skill_active(skill):
+    if lookup_skill(skill) <= 15:
+        for e_skill in Skills.Exceptions:
+            if e_skill == skill:
+                return is_exception_skill_active(skill)
+        skill_status = get_pixel_sum_color(Cord.skill_status[lookup_skill(skill)])
+        if skill_status <= 400000:
+            return True
+        else:
+            return False
+    return False
+
+
+def is_skill_active_dynamic(skill):
     #skill: 20065
     if lookup_skill(skill) <= 15:
         skill_status = get_pixel_sum_color(Cord.skill_status[lookup_skill(skill)])
