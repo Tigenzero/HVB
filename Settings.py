@@ -11,3 +11,4 @@ log_loc = "Battle.log"
 log_level = logging.DEBUG
 shutdown = False
 skill_buffer = 20
+Player_List = []
