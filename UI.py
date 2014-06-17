@@ -28,11 +28,12 @@ class UI(wx.Frame):
         #st1 = wx.StaticText(panel, label='Player Name')
         #st1.SetFont(font)
         #hbox1.Add(st1, flag=wx.RIGHT, border=8)
-        cb = wx.ComboBox(panel, size=(200,0), name="player_config")
+        cb = wx.ComboBox(panel, size=(200, 0), name="player_config")
+        cb.SetEditable(False)
         hbox1.Add(cb, flag=wx.EXPAND | wx.RIGHT)
         browse_button = wx.Button(panel, label="Configure")
-        hbox1.Add(browse_button, flag=wx.LEFT, border = 10)
-        vbox.Add(hbox1, flag=wx.LEFT|wx.TOP, border=10)
+        hbox1.Add(browse_button, flag=wx.LEFT, border=10)
+        vbox.Add(hbox1, flag=wx.LEFT | wx.TOP, border=10)
 
 
         #hbox2 = wx.BoxSizer(wx.HORIZONTAL)
@@ -52,18 +53,34 @@ class UI(wx.Frame):
         #vbox.Add((-1, 25))
 
         hbox4 = wx.BoxSizer(wx.HORIZONTAL)
-        cb1 = wx.CheckBox(panel, label='Case Sensitive')
+        cb1 = wx.CheckBox(panel, label='Auto Recover')
         cb1.SetFont(font)
         hbox4.Add(cb1)
-        cb2 = wx.CheckBox(panel, label='Nested Classes')
-        cb2.SetFont(font)
-        hbox4.Add(cb2, flag=wx.LEFT, border=10)
-        cb3 = wx.CheckBox(panel, label='Non-Project classes')
-        cb3.SetFont(font)
-        hbox4.Add(cb3, flag=wx.LEFT, border=10)
+        #cb2 = wx.CheckBox(panel, label='Nested Classes')
+        #cb2.SetFont(font)
+        #hbox4.Add(cb2, flag=wx.LEFT, border=10)
+        #cb3 = wx.CheckBox(panel, label='Non-Project classes')
+        #cb3.SetFont(font)
+        #hbox4.Add(cb3, flag=wx.LEFT, border=10)
+        sleep_min = wx.TextCtrl(panel, size=(20, 20))
+        hbox4.Add(sleep_min, proportion=1, flag=wx.LEFT, border=30)
+
+        font2 = font
+        st2 = wx.StaticText(panel, label='-')
+        font2.SetPointSize(20)
+        st2.SetFont(font2)
+        hbox4.Add(st2, border=10)
+
+        sleep_max = wx.TextCtrl(panel, size=(20, 20))
+        hbox4.Add(sleep_max, proportion=1, flag=wx.LEFT, border=30)
+
+        st2 = wx.StaticText(panel, label='Sleep')
+        st2.SetFont(font)
+        hbox4.Add(st2, flag=wx.LEFT, border=10)
+
         vbox.Add(hbox4, flag=wx.LEFT, border=10)
 
-        vbox.Add((-1, 25))
+        #vbox.Add((-1, 25))
 
         hbox5 = wx.BoxSizer(wx.HORIZONTAL)
         btn1 = wx.Button(panel, label='Ok', size=(70, 30))
