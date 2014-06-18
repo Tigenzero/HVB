@@ -23,12 +23,12 @@ class UI(wx.Frame):
         vbox = wx.BoxSizer(wx.VERTICAL)
         wx_grinder = self.get_grinder_image("grinder.jpg")
         vbox.Add(wx.StaticBitmap(panel, -1, wx_grinder, (10, 10), (wx_grinder.GetWidth(), wx_grinder.GetHeight())), 0, wx.ALL, 5)
-
         hbox1 = wx.BoxSizer(wx.HORIZONTAL)
         player_names = []
         if len(Settings.Player_List) > 0:
             for player in Settings.Player_List:
                 player_names.append(player.name)
+        player_names.append("new")
         self.cb = wx.ComboBox(panel, size=(200, 0), name="player_config", choices=player_names)
         self.cb.SetEditable(False)
         self.cb.SetSelection(0)
@@ -112,6 +112,7 @@ class UI(wx.Frame):
         logging.debug(self.cb.GetValue())
 
     def set_player(self, event):
+        Settings.Player = None
         current_player = self.cb.GetValue()
         for player in Settings.Player_List:
             if player.name == current_player:
