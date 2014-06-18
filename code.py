@@ -158,17 +158,21 @@ def pony_time(im):
 
 
 def recover():
-    if Settings.recover >= 0:
+    if Settings.recover:
         mousePos(Cord.restoratives_button)
         leftClick()
-        if Settings.recover == 0:
-            mousePos(Cord.restore_all_button)
-        elif Settings.recover == 1:
-            mousePos(Cord.restore_health_button)
-        elif Settings.recover == 2:
-            mousePos(Cord.restore_mana_button)
-        elif Settings.recover == 3:
-            mousePos(Cord.restore_spirit_button)
+        mousePos(Cord.restore_all_button)
+    #if Settings.recover >= 0:
+    #    mousePos(Cord.restoratives_button)
+    #    leftClick()
+    #    if Settings.recover == 0:
+    #        mousePos(Cord.restore_all_button)
+    #    elif Settings.recover == 1:
+    #        mousePos(Cord.restore_health_button)
+    #    elif Settings.recover == 2:
+    #        mousePos(Cord.restore_mana_button)
+    #    elif Settings.recover == 3:
+    #        mousePos(Cord.restore_spirit_button)
         leftClick()
         sleep()
         return True
@@ -265,10 +269,10 @@ def set_player(player):
 
 
 def sleep():
-    time.sleep(random.uniform(0.5, Settings.sleep))
+    time.sleep(random.uniform(Settings.min_sleep, Settings.max_sleep))
 
 
-def start_arena(start=1, end=22):#UNFINISHED
+def start_arena(start=1, end=21):#UNFINISHED
     Count = 0
     Round = start - 1
     get_boundaries()
