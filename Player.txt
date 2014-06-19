@@ -6,7 +6,7 @@ premium:Heartseeker,Spirit_Shield,Absorb
 skills:Cure,Regen,Heartseeker,Spirit_Shield,Absorb,Special,Special,Special,Blind,Drain,Weaken,Sleep,Empty,Empty,Empty,Empty
 name:Player_1
 style:1
-special_attack:1,2,-1
+special:1,2,8
 items:0,0,0,1,1,1,1,9,9
-premium:Protection,Haste,Regen,Shadow_Veil
+premium:Protection,Haste,Shadow_Veil
 skills:Cure,Special,Special,Protection,Haste,Regen,Shadow_Veil,Spark_Life,Special,Empty,Empty,Empty,Empty,Empty,Empty,Empty

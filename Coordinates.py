@@ -8,8 +8,6 @@ class Cord:
     window_padding_x = 0
     #Cure = (188,  96)
     Items = -1
-    special_attack = []
-    premium = []
      # 0 = Health, 1 = Mana, 2 = Spirit, 9 = used
     # Health has 30 round cooldown, Mana and Spirit have 15 round cooldown
 

@@ -20,11 +20,11 @@ def get_player_config():
                 else:
                     player_stats.name = line_split[1].rstrip("\n")
             elif line_split[0] == "style":
-                player_stats.style = line_split[1].rstrip("\n").split(",")
+                player_stats.style = int(line_split[1].rstrip("\n"))
             elif line_split[0] == "items":
-                player_stats.items = tuple(line_split[1].rstrip("\n").split(","))
+                player_stats.items = tuple(map(int, line_split[1].rstrip("\n").split(",")))
             elif line_split[0] == "special":
-                player_stats.special_attack = line_split[1].rstrip("\n").split(",")
+                player_stats.special_attack = map(int, line_split[1].rstrip("\n").split(","))
             elif line_split[0] == "premium":
                 player_stats.premium = line_split[1].rstrip("\n").split(",")
             elif line_split[0] == "skills":

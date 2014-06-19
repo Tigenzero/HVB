@@ -167,16 +167,22 @@ class UI(wx.Frame):
         if 0 < float(self.sleep_min.GetValue()) < float(self.sleep_max.GetValue()):
             Settings.min_sleep = float(self.sleep_min.GetValue())
             Settings.max_sleep = float(self.sleep_max.GetValue())
-            display_message("min_sleep is now {}. max_sleep is now {}".format(Settings.min_sleep, Settings.max_sleep))
-        else:
-            display_message("Minimum Sleep needs to be greater than 0 and less than Maxiumum Sleep")
+            #display_message("min_sleep is now {}. max_sleep is now {}".format(Settings.min_sleep, Settings.max_sleep))
+        #else:
+            #display_message("Minimum Sleep needs to be greater than 0 and less than Maxiumum Sleep")
 
     def end_of_game(self):
         display_message("Bot has Ended")
 
     def configure_character(self, event):
-        Window2(wx.GetApp().TopWindow, title="Player Config").Show()
-
+        #Save for Later
+        #Window2(wx.GetApp().TopWindow, title="Player Config").Show()
+        stats = "Name: " + Settings.Player.name + "\n"
+        stats = stats + "Style: " + str(Settings.Player.style) + "\n"
+        stats = stats + "Premium: " + str(Settings.Player.premium) + "\n"
+        stats = stats + "Skills: " + str(Settings.Player.skills) + "\n"
+        stats = stats + "Special Attack: " + str(Settings.Player.special_attack) + "\n"
+        display_message(stats)
 
 if __name__ == '__main__':
 

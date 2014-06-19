@@ -261,13 +261,6 @@ def screenGrab_all():
     return im
 
 
-def set_player(player):
-    get_items()
-    Cord.premium = player.premium
-    Settings.style = player.style
-    Cord.special_attack = player.special_attack
-
-
 def sleep():
     time.sleep(random.uniform(Settings.min_sleep, Settings.max_sleep))
 
@@ -316,7 +309,7 @@ def startGame(): #UNFINISHED
     get_boundaries()
     im = screenGrab()
     get_images()
-    set_player(Settings.Player)
+    get_items()
     if len(Settings.Player.skills[0]) <= 1:
         logging.critical("skills not set, shutting down")
         SystemExit
@@ -372,7 +365,7 @@ def startRound(): #UNFINISHED
     logging.info("Starting Round.")
     enemy_num = 0
     get_gem()
-    style = Settings.style
+    style = Settings.Player.style
     while not round_won() and not Cord.p_dead:
         #time.sleep(1)
         reduce_cooldown()

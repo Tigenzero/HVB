@@ -20,7 +20,7 @@ class Player_1:
 
 class Player:
     name = ""
-    style = None
+    style = ""
     # 0 = Health, 1 = Mana, 2 = Spirit, 9 = used
     items = () #main character
     special_attack = []

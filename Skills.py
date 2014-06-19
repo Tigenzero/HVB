@@ -65,9 +65,9 @@ def activate_cure(current_health):
 
 
 def activate_premium():
-    for i in range(0, len(Cord.premium)):
-        if is_skill_active(Cord.premium[i]) and not is_status_active(Cord.premium[i]):
-            use_skill(lookup_skill(Cord.premium[i]))
+    for i in range(0, len(Settings.Player.premium)):
+        if is_skill_active(Settings.Player.premium[i]) and not is_status_active(Settings.Player.premium[i]):
+            use_skill(lookup_skill(Settings.Player.premium[i]))
             return True
     return False
 
@@ -89,21 +89,21 @@ def activate_protection():
 
 
 def activate_special(special, overcharge, current_overcharge, style):
-    if special == 2 and Cord.special_attack[2] >= 0 >= Cooldown.special_attack[2]:
+    if special == 2 and Settings.Player.special_attack[2] >= 0 >= Cooldown.special_attack[2]:
         if is_status_active("special_1") and is_status_active("special_2") and overcharge < current_overcharge:
-            use_skill(Cord.special_attack[2])
+            use_skill(Settings.Player.special_attack[2])
             logging.debug("special 3 used")
             activate_cooldown(2, style)
             return True
-    if special == 1 and Cord.special_attack[1] >= 0 >= Cooldown.special_attack[1]:
+    if special == 1 and Settings.Player.special_attack[1] >= 0 >= Cooldown.special_attack[1]:
         if is_status_active("special_1") and overcharge < current_overcharge:
-            use_skill(Cord.special_attack[1])
+            use_skill(Settings.Player.special_attack[1])
             logging.debug("special 2 used")
             activate_cooldown(1, style)
             return True
-    if special == 0 and Cord.special_attack[0] >= 0 >= Cooldown.special_attack[0]:
+    if special == 0 and Settings.Player.special_attack[0] >= 0 >= Cooldown.special_attack[0]:
         if overcharge < current_overcharge:
-            use_skill(Cord.special_attack[0])
+            use_skill(Settings.Player.special_attack[0])
             logging.debug("special 1 used")
             activate_cooldown(0, style)
             return True
@@ -111,19 +111,20 @@ def activate_special(special, overcharge, current_overcharge, style):
 
 
 def activate_special2(special, overcharge=0, current_overcharge=0):
-    if special == 2 and Cord.special_attack[2] >= 0:
+    logging.debug("checking if special can be activated")
+    if special == 2 and Settings.Player.special_attack[2] >= 0:
         if is_special_active(2):
-            use_skill(Cord.special_attack[2])
+            use_skill(Settings.Player.special_attack[2])
             logging.debug("special 3 used")
             return True
-    if special == 1 and Cord.special_attack[1] >= 0:
+    elif special == 1 and Settings.Player.special_attack[1] >= 0:
         if is_special_active(1):
-            use_skill(Cord.special_attack[1])
+            use_skill(Settings.Player.special_attack[1])
             logging.debug("special 2 used")
             return True
-    if special == 0 and Cord.special_attack[0] >= 0:
-        if is_special_active(0) and overcharge < current_overcharge:
-            use_skill(Cord.special_attack[0])
+    elif special == 0 and Settings.Player.special_attack[0] >= 0:
+        if is_special_active(0) and overcharge <= current_overcharge:
+            use_skill(Settings.Player.special_attack[0])
             logging.debug("special 1 used")
             return True
     return False
@@ -206,7 +207,7 @@ def is_exception_skill_active(skill):
 
 
 def is_premium_skill(skill):
-    for p_skill in Cord.premium:
+    for p_skill in Settings.Player.premium:
         if p_skill == skill:
             return True
     return False
@@ -249,7 +250,15 @@ def is_skill_active_dynamic(skill):
     return False
 
 
-def is_special_active(skill):
+def is_special_active(special):
+    skill_status = get_pixel_sum_color(Cord.skill_status[Settings.Player.special_attack[special]])
+    if skill_status <= 400000:
+        return True
+    else:
+        return False
+
+
+def is_special_active_original(skill):
     #skill: 20065
     skill_status = get_pixel_sum_color(Cord.skill_status[Settings.Player.special_attack[skill]])
     if Skills.Active_Collection.get(skill_status) is not None:
@@ -314,6 +323,9 @@ def special_attack(im, current_enemies, style):
                     elif style == 1:
                         attack(current_enemies[special_attack_single(current_overcharge)])
                         return
+                    else:
+                        logging.critical("STYLE NOT FOUND: {}".format(style))
+                        SystemExit
         if len(current_enemies) > 0:
             attack(current_enemies[0])
     except:
@@ -329,7 +341,7 @@ def special_attack(im, current_enemies, style):
 #together the cost is 175
 #10% of overcharge is roughly 30 overcharge
 def special_attack_dual(current_enemies, current_overcharge):
-    if Cord.special_attack[2] >= 0:
+    if Settings.Player.special_attack[2] >= 0:
         if activate_special2(2):
             return multiple_enemy_attack(current_enemies)
         elif activate_special2(1):
@@ -345,7 +357,7 @@ def special_attack_dual(current_enemies, current_overcharge):
 
 
 def special_attack_dual_original(current_enemies, current_overcharge):
-    if Cord.special_attack[2] >= 0:
+    if Settings.Player.special_attack[2] >= 0:
         if activate_special(2, 10, current_overcharge, 0):
             return multiple_enemy_attack(current_enemies)
         elif activate_special(1, 20, current_overcharge, 0):
@@ -373,20 +385,13 @@ def special_attack_dual_original(current_enemies, current_overcharge):
 #together the cost is 150
 #10% of overcharge is roughly 30 overcharge
 def special_attack_single(current_overcharge):
-    if Cord.special_attack[2] >= 0:
+    if Settings.Player.special_attack[2] >= 0:
         if activate_special2(2):
             return 0
         elif activate_special2(1):
             return 0
         elif activate_special2(0, 70, current_overcharge):
             return 0
-        else:
-            if activate_special2(1):
-                return 0
-            elif activate_special2(0, 70, current_overcharge):
-                return 0
-            else:
-                return 0
     else:
         if activate_special2(1):
             return 0
@@ -396,7 +401,7 @@ def special_attack_single(current_overcharge):
 
 
 def special_attack_single_original(current_overcharge):
-    if Cord.special_attack[2] >= 0:
+    if Settings.Player.special_attack[2] >= 0:
         if activate_special(2, 10, current_overcharge, 1):
             return 0
         elif activate_special(1, 20, current_overcharge, 1):
