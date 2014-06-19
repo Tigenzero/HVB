@@ -29,6 +29,11 @@ def get_player_config():
                 player_stats.premium = line_split[1].rstrip("\n").split(",")
             elif line_split[0] == "skills":
                 player_stats.skills = line_split[1].rstrip("\n").split(",")
+            elif line_split[0] == "spirit":
+                if line_split[1].rstrip("\n") == "True":
+                    player_stats.spirit = True
+                else:
+                    player_stats.spirit = False
         if len(player_stats.name) > 0:
             Settings.Player_List.append(player_stats)
 

@@ -316,16 +316,13 @@ def special_attack(im, current_enemies, style):
                 if use_spirit(current_spirit, current_overcharge, im):
                     logging.debug("Spirit Activated")
                     return
-                elif current_overcharge >= 30 and current_spirit < 100:
+                elif current_overcharge >= 30:
                     if style == 0:
                         attack(current_enemies[special_attack_dual(current_enemies, current_overcharge)])
                         return
                     elif style == 1:
                         attack(current_enemies[special_attack_single(current_overcharge)])
                         return
-                    else:
-                        logging.critical("STYLE NOT FOUND: {}".format(style))
-                        SystemExit
         if len(current_enemies) > 0:
             attack(current_enemies[0])
     except:
@@ -431,7 +428,7 @@ def use_skill(skill):
 
 
 def use_spirit(current_spirit, current_overcharge, im):
-    if current_overcharge >= 80 and Cooldown.overcharge <= 0 and current_spirit >= 40 and not is_spirit_active(im):
+    if current_overcharge >= 80 and Cooldown.overcharge <= 0 and current_spirit >= 40 and not is_spirit_active(im) and Settings.Player.spirit:
         mousePos(Cord.spirit_cat_loc)
         leftClick()
         Cooldown.overcharge = 10
