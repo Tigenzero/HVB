@@ -53,24 +53,6 @@ class UI(wx.Frame):
         self.recover_checkbox.SetValue(Settings.recover)
         self.recover_checkbox.Bind(wx.EVT_CHECKBOX, self.autorecover, self.recover_checkbox)
         hbox2.Add(self.recover_checkbox)
-        """#Sleep Settings
-        st2 = wx.StaticText(panel, label='Sleep Range')
-        st2.SetFont(font)
-        hbox2.Add(st2, flag=wx.LEFT, border=20)
-        st2 = wx.StaticText(panel, label='Min:')
-        st2.SetFont(font)
-        hbox2.Add(st2, flag=wx.LEFT, border=15)
-        self.sleep_min = wx.TextCtrl(panel, size=(30, 20))
-        self.sleep_min.SetValue(Settings.min_sleep.__str__())
-        self.sleep_min.Bind(wx.EVT_TEXT, self.edit_sleep, self.sleep_min)
-        hbox2.Add(self.sleep_min, proportion=1, flag=wx.LEFT, border=5)
-        st2 = wx.StaticText(panel, label='Max: ')
-        st2.SetFont(font)
-        hbox2.Add(st2, flag=wx.LEFT, border=20)
-        self.sleep_max = wx.TextCtrl(panel, size=(30, 20))
-        self.sleep_max.SetValue(Settings.max_sleep.__str__())
-        self.sleep_max.Bind(wx.EVT_TEXT, self.edit_sleep, self.sleep_max)
-        hbox2.Add(self.sleep_max, proportion=1, flag=wx.LEFT, border=5)"""
         #Insertion of Second Row Box
         vbox.Add(hbox2, flag=wx.LEFT | wx.TOP, border=10)
         #Third Row Box
@@ -195,12 +177,6 @@ class UI(wx.Frame):
     def configure_character(self, event):
         #Save for Later
         Window2(wx.GetApp().TopWindow, title="Player Config").Show()
-        """stats = "Name: " + Settings.Player.name + "\n"
-        stats = stats + "Style: " + str(Settings.Player.style) + "\n"
-        stats = stats + "Premium: " + str(Settings.Player.premium) + "\n"
-        stats = stats + "Skills: " + str(Settings.Player.skills) + "\n"
-        stats = stats + "Special Attack: " + str(Settings.Player.special_attack) + "\n"
-        display_message(stats)"""
 
 if __name__ == '__main__':
 
@@ -212,6 +188,15 @@ if __name__ == '__main__':
 def display_message(value):
     dial = wx.MessageDialog(None, value, "Info", wx.OK)
     dial.ShowModal()
+
+
+def get_character_stats():
+        stats = "Name: " + Settings.Player.name + "\n"
+        stats = stats + "Style: " + str(Settings.Player.style) + "\n"
+        stats = stats + "Premium: " + str(Settings.Player.premium) + "\n"
+        stats = stats + "Skills: " + str(Settings.Player.skills) + "\n"
+        stats = stats + "Special Attack: " + str(Settings.Player.special_attack) + "\n"
+        display_message(stats)
 
 #app = wx.App(False) #Create a new app, dont redirect stdout/stderr to a window
 #frame = wx.Frame(None, wx.ID_ANY, "Grind Buster") #a frame is a top-level window
