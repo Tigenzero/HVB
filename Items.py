@@ -1,11 +1,16 @@
 from Click_Press import *
-from Cooldown import Cooldown
 from Status import is_status_active, get_status, get_pixel_sum, get_pixel_sum_color
 import logging
 import Settings
 logger = logging.getLogger(__name__)
 Gem_Collection = {}
 Item_Collection = {}
+
+
+class Items:
+    h_gem = False
+    s_gem = False
+    m_gem = False
 
 
 def activate_gem():
@@ -27,13 +32,13 @@ def get_gem():
     if result is not None:
         if result == "Health_Gem":
             logging.debug("health gem found")
-            Cooldown.h_gem = True
+            Items.h_gem = True
         elif result == "Mana_Gem":
             logging.debug("mana gem found")
-            Cooldown.m_gem = True
+            Items.m_gem = True
         elif result == "Spirit_Gem":
             logging.debug("spirit gem found")
-            Cooldown.s_gem = True
+            Items.s_gem = True
         elif result == "Mystic_Gem" and not is_status_active("Channeling"):
             logging.debug("mystic gem found")
             mousePos(Cord.gem_loc)
@@ -59,15 +64,15 @@ def get_gem_original():
     sum = get_pixel_sum(item)
     if sum == 713603:
         logging.debug("health gem found")
-        Cooldown.h_gem = True
+        Items.h_gem = True
         get_pixel_sum_color(item, True)
     elif sum == 729967 or sum == 729940:
         logging.debug("mana gem found")
-        Cooldown.m_gem = True
+        Items.m_gem = True
         get_pixel_sum_color(item, True)
     elif sum == 723194 or sum == 722448 or sum == 723149:
         logging.debug("spirit gem found")
-        Cooldown.h_gem = True
+        Items.h_gem = True
         get_pixel_sum_color(item, True)
     elif (sum == 722692 or sum == 722641) and not is_status_active("Channeling"):
         logging.debug("mystic gem found")
@@ -122,7 +127,7 @@ def get_items_original():
 # 0 = Health, 1 = Mana, 2 = Spirit, 9 = used
 def get_items():
     Cord.Items = [9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9]
-    mousePos(Cord.Item_cat_loc)
+    mousePos(Cord.Item_cat_loc, True)
     leftClick()
     time.sleep(1.0)
     count = 1
@@ -145,7 +150,7 @@ def get_items():
             #    logging.critical("unknown element, shutting down")
             #    quit()
         count += 1
-    mousePos(Cord.Item_cat_loc)
+    mousePos(Cord.Item_cat_loc, True)
     leftClick()
     #print Cord.Items
 
@@ -220,35 +225,30 @@ def use_mana_pot(current_mana):
 
 
 def use_spirit_pot(current_spirit):
-    if current_spirit <= 10 and Cooldown.s_potion <= 0:
-        if have_item(2):
-            use_item(2)
-            Cooldown.s_potion = 20
-            return True
-        else:
-            logger.info("No Spirit Potions Left")
-            Cooldown.s_potion = 999
-            return False
-    else:
-        return False
+    if current_spirit <= 20:
+        if not is_item_active(2):
+            if have_item(2):
+                use_item(2)
+                return True
+    return False
 
 
 #0 = health, 1 = mana, 2 = spirit
 def use_gem(gem_type, current):
     if gem_type == 0:
-        if current <= 60 and Cooldown.h_gem:
+        if current <= 60 and Items.h_gem:
             activate_gem()
-            Cooldown.h_gem = False
+            Items.h_gem = False
             return True
     elif gem_type == 1:
-        if current <= 50 and Cooldown.m_gem:
+        if current <= 50 and Items.m_gem:
             activate_gem()
-            Cooldown.m_gem = False
+            Items.m_gem = False
             return True
     elif gem_type == 2:
-        if current <= 80 and Cooldown.s_gem:
+        if current <= 80 and Items.s_gem:
             activate_gem()
-            Cooldown.s_gem = False
+            Items.s_gem = False
             return True
     return False
 

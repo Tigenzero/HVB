@@ -5,13 +5,10 @@ import ImageGrab
 import winsound
 from numpy import *
 from find_window import find_corner
-import logging
-import logging.config
 import os
 from Items import get_gem, use_health_pot, use_mana_pot, use_spirit_pot, get_items, use_gem, leftover_inventory
-from Skills import activate_cure, activate_premium, activate_protection, activate_regen, special_attack, get_spirit, get_skills
+from Skills import activate_cure, activate_premium, activate_protection, activate_regen, special_attack, get_spirit, activate_absorb
 from Click_Press import *
-from Cooldown import *
 from Coordinates import Cord
 import Settings
 from Status import get_status
@@ -152,7 +149,19 @@ def pony_time(im):
             dur = 1000 # Set Duration To 1000 ms == 1 second
             winsound.Beep(freq, dur)
             time.sleep(4)
+            Settings.pony_timer += 1
             im = screenGrab()
+            if Settings.pony_timer >= 9:
+                press('backspace')
+                time.sleep(0.2)
+                option = random.uniform(0, 2)
+                if option == 0:
+                    press('a')
+                if option == 1:
+                    press('b')
+                if option == 2:
+                    press('c')
+            press('enter')
         return True
     return False
 
@@ -221,6 +230,8 @@ def restore_stats(im):
             logging.info("Protection Casted")
         elif is_channeling_active() and activate_premium():
             logging.info("premium activated")
+        elif activate_absorb():
+            logging.info("absorb activated")
         else:
             return False
         return True
@@ -267,9 +278,13 @@ def sleep():
 
 def start_arena(start=1, end=21):#UNFINISHED
     Count = 0
+    Starting_Point = 0
     Round = start - 1
+    if Round > 10:
+        Round -= 11
+        Starting_Point = 1
     get_boundaries()
-    for i in range(0, 2):
+    for i in range(Starting_Point, 2):
         for arena in Cord.arenas:
             Count += 1
             if Cord.arenas[Round] != arena:
@@ -293,7 +308,8 @@ def start_arena(start=1, end=21):#UNFINISHED
                     logging.debug("%d, %d, %d" % (get_health(im), get_mana(im), get_spirit(im)))
             logging.info("Starting Arena %d" % Count)
             go_to_arena(arena, i)
-            startGame()
+            if not startGame():
+                return
             press("spacebar")
             sleep()
             logging.info("Heading to next Arena.")
@@ -305,7 +321,7 @@ def start_arena(start=1, end=21):#UNFINISHED
 def startGame(): #UNFINISHED
     logging.basicConfig(filename=Settings.log_loc, level=Settings.log_level, format='%(asctime)s %(levelname)s: %(message)s')
     logging.info("Starting Game")
-    reset_cooldown()
+    #reset_cooldown()
     get_boundaries()
     im = screenGrab()
     get_images()
@@ -324,16 +340,19 @@ def startGame(): #UNFINISHED
                 logging.info("Battle ended: getEnemies was %d and Pony Time was %r" % (len(get_enemies(im)), pony_time(im)))
                 battle_end = True
         else:
-            startRound()
+            Settings.pony_timer = 0
+            if not startRound():
+                return False
             time.sleep(0.5)
             press('spacebar')
             im = screenGrab()
             if is_player_dead(im):
                 logging.info("Player is dead")
                 leftover_inventory()
-                return
+                return False
             time.sleep(1)
             im = screenGrab()
+    return True
 
 
 def start_grindfest():
@@ -351,7 +370,8 @@ def start_grindfest():
                 im = screenGrab()
         logging.info("Starting Grindfest")
         go_to_grindfest()
-        startGame()
+        if not startGame():
+            return
         sleep()
         mousePos(Cord.battle_cat_loc)
         leftClick()
@@ -360,22 +380,19 @@ def start_grindfest():
 
 
 
-def startRound(): #UNFINISHED
-    #logging.config.fileConfig(os.path.join('settings', "logging.conf"))
+def startRound():
     logging.info("Starting Round.")
     enemy_num = 0
     get_gem()
     style = Settings.Player.style
+    Settings.pause = False
     while not round_won() and not Cord.p_dead:
-        #time.sleep(1)
-        reduce_cooldown()
+        if Settings.pause:
+            return False
+        #reduce_cooldown()
         im = screenGrab()
         current_enemies = get_enemies(im)
         logging.debug("Enemies: {} Health: {} Mana: {} Spirit: {}".format(len(current_enemies), get_health(im), get_mana(im), get_spirit(im)))
-        #print str(current_enemies) + " enemies"
-        #debug_levels(get_health(im), "health")
-        #debug_levels(get_mana(im), "mana")
-        #debug_levels(get_spirit(im), "spirit")
         get_status()
         if restore_stats(im):
             """restoration occurred"""
@@ -389,6 +406,7 @@ def startRound(): #UNFINISHED
         #This function is very important as it randomizes the communication times, emulating the behavior of a player
         sleep()
         enemy_num = len(current_enemies)
+    return True
 
 if __name__ == '__main__':
     startGame()

@@ -2,6 +2,16 @@ import win32api
 from win32con import MOUSEEVENTF_LEFTUP, MOUSEEVENTF_LEFTDOWN, KEYEVENTF_KEYUP
 import time
 from Coordinates import Cord
+import Settings
+import logging
+
+def cursor_check(init_check):
+    x, y = win32api.GetCursorPos()
+    if (Settings.box[0] <= x <= Settings.box[2] and Settings.box[1] <= y <= Settings.box[3]) or init_check:
+        return False
+    else:
+        logging.debug("outside of range")
+        return True
 
 
 def leftClick():
@@ -12,23 +22,29 @@ def leftClick():
 
 
 def leftDown():
-    win32api.mouse_event(MOUSEEVENTF_LEFTDOWN,0,0)
+    win32api.mouse_event(MOUSEEVENTF_LEFTDOWN, 0, 0)
     time.sleep(.1)
     print 'left Down'
 
 
 def leftUp():
-    win32api.mouse_event(MOUSEEVENTF_LEFTUP,0,0)
+    win32api.mouse_event(MOUSEEVENTF_LEFTUP, 0, 0)
     time.sleep(.1)
     print 'left release'
 
 
-def mousePos(cord):
+def mousePos(cord, init=False):
+    if cursor_check(init):
+        Settings.pause = True
+        return False
     try:
         #print Cord.window_padding_x + cord[0], ", ", Cord.window_padding_y + cord[1]
         win32api.SetCursorPos((Cord.window_padding_x + cord[0], Cord.window_padding_y + cord[1]))
+        return True
     except ValueError:
         print "Mouse Positioning Failed"
+        return False
+
 
 def press(*args):
     '''

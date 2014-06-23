@@ -1,4 +1,3 @@
-from Players import *
 import logging
 full_screen = 0
 Player = None
@@ -14,3 +13,5 @@ shutdown = False
 skill_buffer = 20
 Player_List = []
 Arenas = []
+pause = False
+pony_timer = 0

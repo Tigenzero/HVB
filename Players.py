@@ -27,3 +27,5 @@ class Player:
     special_attack = []
     premium = []
     skills = []
+    min_sleep = 0.5
+    max_sleep = 2.5

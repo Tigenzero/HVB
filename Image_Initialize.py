@@ -1,9 +1,9 @@
 from PIL import Image
-from numpy import *
-import os
-import ntpath
+from numpy import array, sort
+import os.path
+from ntpath import split, basename
 from Skills import Skills
-import ImageOps
+from ImageOps import grayscale
 from Status import Status
 import Items
 import logging
@@ -26,7 +26,7 @@ def get_images():
         Skills.Inactive_Collection[a] = filename
     for image in list_files("status"):
         im = Image.open(image, 'r')
-        im = ImageOps.grayscale(im)
+        im = grayscale(im)
         a = array(im.getcolors())
         a = a.sum()
         filename = return_filename(image).split(".")[0]
@@ -73,8 +73,8 @@ def list_files(type):
 
 
 def return_filename(path):
-    head, tail = ntpath.split(path)
-    return tail or ntpath.basename(head)
+    head, tail = split(path)
+    return tail or basename(head)
 
 
 def print_collection(collection):

@@ -34,6 +34,10 @@ def get_player_config():
                     player_stats.spirit = True
                 else:
                     player_stats.spirit = False
+            elif line_split[0] == "min_sleep":
+                player_stats.min_sleep = float(line_split[1].rstrip("\n"))
+            elif line_split[0] == "max_sleep":
+                player_stats.max_sleep = float(line_split[1].rstrip("\n"))
         if len(player_stats.name) > 0:
             Settings.Player_List.append(player_stats)
 

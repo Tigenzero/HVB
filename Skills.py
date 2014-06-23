@@ -1,6 +1,5 @@
 from Click_Press import mousePos, leftClick
 from Coordinates import Cord
-from Cooldown import Cooldown
 from Status import is_status_active, get_pixel_sum, get_pixel_sum_color
 import Settings
 import logging
@@ -20,6 +19,7 @@ class Skills:
     #Shadow_Veil_a = 0
     #Shadow_Veil_i = 0
     #Empty = 4431
+    overcharge_cooldown = 0
     Active_Collection = {}
     Inactive_Collection = {}
     #Active_Collection = {Cure_a: "Cure",
@@ -47,13 +47,13 @@ def attack(enemy):
     except ValueError:
         logging.warning("no more enemies")
 
-
+"""
 def activate_cooldown(special, style):
     if style == 0 and (special == 0 or special == 1):
         Cooldown.special_attack[special] = 5
     else:
         Cooldown.special_attack[special] = 10
-
+"""
 
 #Done, base Activate functions on this
 def activate_cure(current_health):
@@ -80,6 +80,14 @@ def activate_regen(current_health):
         return False
 
 
+def activate_absorb():
+    if is_skill_active("Absorb") and not is_premium_skill("Absorb") and not is_status_active("Absorb"):
+        use_skill(lookup_skill("Absorb"))
+        return True
+    else:
+        return False
+
+
 def activate_protection():
     if is_skill_active("Protection") and not is_premium_skill("Protection") and not is_status_active("Protection"):
         use_skill(lookup_skill("Protection"))
@@ -87,7 +95,7 @@ def activate_protection():
     else:
         return False
 
-
+"""
 def activate_special(special, overcharge, current_overcharge, style):
     if special == 2 and Settings.Player.special_attack[2] >= 0 >= Cooldown.special_attack[2]:
         if is_status_active("special_1") and is_status_active("special_2") and overcharge < current_overcharge:
@@ -107,7 +115,7 @@ def activate_special(special, overcharge, current_overcharge, style):
             logging.debug("special 1 used")
             activate_cooldown(0, style)
             return True
-    return False
+    return False"""
 
 
 def activate_special2(special, overcharge=0, current_overcharge=0):
@@ -352,7 +360,7 @@ def special_attack_dual(current_enemies, current_overcharge):
             return 0
     return 0
 
-
+"""
 def special_attack_dual_original(current_enemies, current_overcharge):
     if Settings.Player.special_attack[2] >= 0:
         if activate_special(2, 10, current_overcharge, 0):
@@ -373,7 +381,7 @@ def special_attack_dual_original(current_enemies, current_overcharge):
             return 0
         elif activate_special(0, 60, current_overcharge, 0):
             return 0
-    return 0
+    return 0"""
 
 
 #special 1 costs 25
@@ -396,7 +404,7 @@ def special_attack_single(current_overcharge):
             return 0
     return 0
 
-
+"""
 def special_attack_single_original(current_overcharge):
     if Settings.Player.special_attack[2] >= 0:
         if activate_special(2, 10, current_overcharge, 1):
@@ -417,7 +425,7 @@ def special_attack_single_original(current_overcharge):
             return 0
         elif activate_special(0, 50, current_overcharge, 1):
             return 0
-    return 0
+    return 0"""
 
 
 def use_skill(skill):
@@ -428,10 +436,11 @@ def use_skill(skill):
 
 
 def use_spirit(current_spirit, current_overcharge, im):
-    if current_overcharge >= 80 and Cooldown.overcharge <= 0 and current_spirit >= 40 and not is_spirit_active(im) and Settings.Player.spirit:
+    if current_overcharge >= 80 and Skills.overcharge_cooldown <= 0 and current_spirit >= 40 and not is_spirit_active(im) and Settings.Player.spirit:
         mousePos(Cord.spirit_cat_loc)
         leftClick()
-        Cooldown.overcharge = 10
+        Skills.overcharge_cooldown = 10
         return True
     else:
+        Skills.overcharge_cooldown -= 1
         return False

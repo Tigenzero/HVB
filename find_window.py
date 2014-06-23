@@ -1,9 +1,5 @@
 import win32api
 import ImageGrab
-"""
- The initial test will involve 1920X1080
- The width of the box will be at least 1293px
-"""
 
 
 def get_width():
