@@ -123,7 +123,7 @@ class UI(wx.Frame):
 
     def player_validate(self):
         try:
-            if len(Settings.Player.name) > 0:
+            if len(Settings.Player.name) > 0 and Settings.Player.name == UI.cb.GetValue():
                 return True
         except:
             display_message("PLAYER NOT VALID")
@@ -177,7 +177,8 @@ class UI(wx.Frame):
 
     def configure_character(self, event):
         #Save for Later
-        Window2(wx.GetApp().TopWindow, title="Player Config").Show()
+        #Window2(wx.GetApp().TopWindow, title="Player Config").Show()
+        get_character_stats()
 
 if __name__ == '__main__':
 

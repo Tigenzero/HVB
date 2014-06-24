@@ -26,20 +26,16 @@ def get_player_config():
                 elif line_split[0] == "items":
                     player_stats.items = tuple(map(int, line_split[1].rstrip("\n").split(",")))
                 elif line_split[0] == "special":
-                    player_stats.special_attack = map(int, line_split[1].rstrip("\n").split(","))
+                    player_stats.special_attack = map(int, clean(line_split[1]).split(","))
                 elif line_split[0] == "premium":
-                    for skills in line_split[1].rstrip("\n").split(","):
-                        skills = skills.strip("[")
-                        skills = skills.strip("]")
-                        skills = skills.replace(" ", "")
-                        player_stats.premium.append(skills.replace("'", ""))
+                    for skills in line_split[1].split(","):
+                        skills = clean(skills)
+                        player_stats.premium.append(skills)
                 elif line_split[0] == "skills":
                     #player_stats.skills = line_split[1].rstrip("\n").split(",")
-                    for skills in line_split[1].rstrip("\n").split(","):
-                        skills = skills.strip("[")
-                        skills = skills.strip("]")
-                        skills = skills.replace(" ", "")
-                        player_stats.skills.append(skills.replace("'", ""))
+                    for skills in line_split[1].split(","):
+                        skills = clean(skills)
+                        player_stats.skills.append(skills)
                 elif line_split[0] == "spirit":
                     if line_split[1].rstrip("\n") == "True":
                         player_stats.spirit = True
@@ -58,6 +54,14 @@ def get_player_config():
 def factory(aClass, *args):
     return aClass(*args)
 
+
+def clean(line):
+    line = line.rstrip("\n")
+    line = line.strip("[")
+    line = line.strip("]")
+    line = line.replace(" ", "")
+    line = line.replace("'", "")
+    return line
 
 def get_arena_values():
     if os.path.isfile("Arenas.txt"):

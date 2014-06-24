@@ -333,8 +333,9 @@ def special_attack(im, current_enemies, style):
                         return
         if len(current_enemies) > 0:
             attack(current_enemies[0])
-    except:
-        logging.warning("Issue with Special Attack function. returning")
+    except Exception, e:
+        logging.warning("Issue with Special Attack function. returning. Specials: {}".format(Settings.Player.special_attack))
+        logging.exception(e)
         return
 
 
