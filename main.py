@@ -6,38 +6,51 @@ import wx
 import Players
 
 def get_player_config():
+    Settings.Player_List = []
     if os.path.isfile("Player.txt"):
         #player_stats = ["", "", "", "", "", ""]
         player_stats = factory(Players.Player)
         player_config = open(os.getcwd() + "\\" + "Player.txt")
         for line in player_config:
-            line_split = line.split(":")
-            if line_split[0] == "name":
-                if len(player_stats.name) > 0:
-                    Settings.Player_List.append(player_stats)
-                    player_stats = Players.Player
-                    player_stats.name = line_split[1].rstrip("\n")
-                else:
-                    player_stats.name = line_split[1].rstrip("\n")
-            elif line_split[0] == "style":
-                player_stats.style = int(line_split[1].rstrip("\n"))
-            elif line_split[0] == "items":
-                player_stats.items = tuple(map(int, line_split[1].rstrip("\n").split(",")))
-            elif line_split[0] == "special":
-                player_stats.special_attack = map(int, line_split[1].rstrip("\n").split(","))
-            elif line_split[0] == "premium":
-                player_stats.premium = line_split[1].rstrip("\n").split(",")
-            elif line_split[0] == "skills":
-                player_stats.skills = line_split[1].rstrip("\n").split(",")
-            elif line_split[0] == "spirit":
-                if line_split[1].rstrip("\n") == "True":
-                    player_stats.spirit = True
-                else:
-                    player_stats.spirit = False
-            elif line_split[0] == "min_sleep":
-                player_stats.min_sleep = float(line_split[1].rstrip("\n"))
-            elif line_split[0] == "max_sleep":
-                player_stats.max_sleep = float(line_split[1].rstrip("\n"))
+            try:
+                line_split = line.split(":")
+                if line_split[0] == "name":
+                    if len(player_stats.name) > 0:
+                        Settings.Player_List.append(player_stats)
+                        player_stats = Players.Player
+                        player_stats.name = line_split[1].rstrip("\n")
+                    else:
+                        player_stats.name = line_split[1].rstrip("\n")
+                elif line_split[0] == "style":
+                    player_stats.style = int(line_split[1].rstrip("\n"))
+                elif line_split[0] == "items":
+                    player_stats.items = tuple(map(int, line_split[1].rstrip("\n").split(",")))
+                elif line_split[0] == "special":
+                    player_stats.special_attack = map(int, line_split[1].rstrip("\n").split(","))
+                elif line_split[0] == "premium":
+                    for skills in line_split[1].rstrip("\n").split(","):
+                        skills = skills.strip("[")
+                        skills = skills.strip("]")
+                        skills = skills.replace(" ", "")
+                        player_stats.premium.append(skills.replace("'", ""))
+                elif line_split[0] == "skills":
+                    #player_stats.skills = line_split[1].rstrip("\n").split(",")
+                    for skills in line_split[1].rstrip("\n").split(","):
+                        skills = skills.strip("[")
+                        skills = skills.strip("]")
+                        skills = skills.replace(" ", "")
+                        player_stats.skills.append(skills.replace("'", ""))
+                elif line_split[0] == "spirit":
+                    if line_split[1].rstrip("\n") == "True":
+                        player_stats.spirit = True
+                    else:
+                        player_stats.spirit = False
+                elif line_split[0] == "min_sleep":
+                    player_stats.min_sleep = float(line_split[1].rstrip("\n"))
+                elif line_split[0] == "max_sleep":
+                    player_stats.max_sleep = float(line_split[1].rstrip("\n"))
+            except:
+                continue
         if len(player_stats.name) > 0:
             Settings.Player_List.append(player_stats)
 
