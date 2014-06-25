@@ -5,7 +5,7 @@ import logging
 import code
 import Settings
 import Players
-from main import get_player_config
+import main
 
 class UI(wx.Frame):
 
@@ -177,8 +177,8 @@ class UI(wx.Frame):
 
     def configure_character(self, event):
         #Save for Later
-        #Window2(wx.GetApp().TopWindow, title="Player Config").Show()
-        get_character_stats()
+        Window2(wx.GetApp().TopWindow, title="Player Config").Show()
+        #get_character_stats()
 
 if __name__ == '__main__':
 
@@ -229,6 +229,9 @@ class Window2(wx.Frame):
         self.current_player = UI.cb.GetValue()
         if self.current_player == "new":
             config_player = factory(Players.Player)
+            config_player.skills = []
+            config_player.premium = []
+            config_player.special_attack = []
         else:
             for player in Settings.Player_List:
                 if player.name == self.current_player:
@@ -568,7 +571,7 @@ class Window2(wx.Frame):
                 f.write("%s\n" % line)
                 line = "max_sleep:{}".format(self.sleep_max.GetValue())
                 f.write("%s\n" % line)
-        get_player_config()
+        main.get_player_config()
         UI.cb.Clear()
         if len(Settings.Player_List) > 0:
             print len(Settings.Player_List)

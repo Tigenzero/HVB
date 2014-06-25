@@ -50,9 +50,9 @@ def get_status():
         lookup = lookup_status(pixel_sum)
         if len(lookup) > 1:
             Cord.Current_Status.append(lookup)
-        #else:
-         #   logging.warning("status location: {0}".format(status))
-            #get_pixel_sum_color(status, True)
+        else:
+            logging.warning("status location: {0}".format(status))
+            get_pixel_sum_color(status, True)
 
 
 def get_pixel_sum(box, save_box=False):

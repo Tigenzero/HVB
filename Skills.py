@@ -368,12 +368,12 @@ def special_attack_dual_original(current_enemies, current_overcharge):
             return multiple_enemy_attack(current_enemies)
         elif activate_special(1, 20, current_overcharge, 0):
             return 0
-        elif activate_special(0, 80, current_overcharge, 0):
+        elif activate_special(0, 70, current_overcharge, 0):
             return 0
         else:
             if activate_special(1, 20, current_overcharge, 0):
                 return 0
-            elif activate_special(0, 80, current_overcharge, 0):
+            elif activate_special(0, 70, current_overcharge, 0):
                 return 0
             else:
                 return 0

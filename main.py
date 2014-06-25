@@ -10,6 +10,8 @@ def get_player_config():
     if os.path.isfile("Player.txt"):
         #player_stats = ["", "", "", "", "", ""]
         player_stats = factory(Players.Player)
+        player_stats.skills = []
+        player_stats.premium = []
         player_config = open(os.getcwd() + "\\" + "Player.txt")
         for line in player_config:
             try:

@@ -7,3 +7,11 @@ skills:['Cure', 'Regen', 'Heartseeker', 'Spirit_Shield', 'Absorb', 'Special', 'S
 spirit:True
 min_sleep:0.5
 max_sleep:0.9
+name:Player_1
+style:1
+special:[1, 2, 8]
+premium:['Protection', 'Haste', 'Shadow_Veil', 'Spark_Life']
+skills:['Cure', 'Special', 'Special', 'Protection', 'Haste', 'Regen', 'Shadow_Veil', 'Spark_Life', 'Special', 'Absorb', 'Empty', 'Empty', 'Empty', 'Empty', 'Empty', 'Empty']
+spirit:True
+min_sleep:0.3
+max_sleep:0.5
