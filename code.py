@@ -13,6 +13,7 @@ from Coordinates import Cord
 import Settings
 from Status import get_status
 from Image_Initialize import get_images
+import random
 
 def debug_levels(current_level, level):
     #Performs all of the needed functions during a round
@@ -151,17 +152,17 @@ def pony_time(im):
             time.sleep(4)
             Settings.pony_timer += 1
             im = screenGrab()
-            if Settings.pony_timer >= 9:
+            if Settings.pony_timer >= 6:
                 press('backspace')
                 time.sleep(0.2)
-                option = random.uniform(0, 2)
+                option = random.randint(0, 2)
                 if option == 0:
                     press('a')
                 if option == 1:
                     press('b')
                 if option == 2:
                     press('c')
-            press('enter')
+                press('enter')
         return True
     return False
 
@@ -284,8 +285,13 @@ def start_arena(start=1, end=21):#UNFINISHED
         Round -= 11
         Starting_Point = 1
     get_boundaries()
+    stop_arena = False
     for i in range(Starting_Point, 2):
+        if stop_arena:
+            return
         for arena in Cord.arenas:
+            if stop_arena:
+                return
             Count += 1
             if Cord.arenas[Round] != arena:
                 logging.debug("skipping arena %d" % Count)
@@ -309,6 +315,7 @@ def start_arena(start=1, end=21):#UNFINISHED
             logging.info("Starting Arena %d" % Count)
             go_to_arena(arena, i)
             if not startGame():
+                stop_arena = True
                 return
             press("spacebar")
             sleep()

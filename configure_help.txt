@@ -1,0 +1,9 @@
+Guidelines: Always place your hotkey specials from the least to the greatest. Absorb is used automatically so if it is set in the skills it will be used. 
+
+Name: Name of the character configuration that will be available in the main menu
+
+Sleep Range: Sets the range in which the grind buster will wait in between actions. Sleep range increases the variation of action times thus decreasing the chance of being seen as a bot. Sleep range also acts as a wait timer for users with a slow internet connection to allow for the next round to load in the browser.
+
+Skills: Set all hotkey skills in the skills section for the grind buster to use. 
+
+Premium: Premium skills are skills that will be activated when channelling is active. This will allow for supporting skills to be activated for free and have double the duration. 

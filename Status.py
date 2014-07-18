@@ -23,21 +23,6 @@ class Status:
     overwhelming_strikes = 12726
     riddle_master = 8331
     Spark_Life = 15675
-    #collection = {channeling: 'channeling',
-    #              protection: 'protection',
-    #              shadow_veil: 'shadow_veil',
-    #              haste: 'haste',
-    #              spirit_shield: 'spirit_shield',
-    #              heartseeker: 'heartseeker',
-    #              special_1: 'special_1',
-    #              special_2: 'special_2',
-    #              health_pot: 'health_pot',
-    #              mana_pot: 'mana_pot',
-    #              spirit_pot: 'spirit_pot',
-    #              regen: 'regen',
-    #              overwhelming_strikes: 'overwhelming_strikes',
-    #              riddle_master: 'riddle_master',
-    #              Spark_Life: 'Spark_Life'}
     collection = {}
 
 
@@ -50,9 +35,9 @@ def get_status():
         lookup = lookup_status(pixel_sum)
         if len(lookup) > 1:
             Cord.Current_Status.append(lookup)
-        else:
-            logging.warning("status location: {0}".format(status))
-            get_pixel_sum_color(status, True)
+        #else:
+         #   logging.warning("status location: {0}".format(status))
+          #  get_pixel_sum_color(status, True)
 
 
 def get_pixel_sum(box, save_box=False):

@@ -331,6 +331,12 @@ def special_attack(im, current_enemies, style):
                     elif style == 1:
                         attack(current_enemies[special_attack_single(current_overcharge)])
                         return
+                    elif style == 2:
+                        attack(current_enemies[special_attack_2hand(current_overcharge)])
+                        return
+                    elif style == 4:
+                        attack(current_enemies[special_attack_niken(current_overcharge)])
+                        return
         if len(current_enemies) > 0:
             attack(current_enemies[0])
     except Exception, e:
@@ -404,6 +410,30 @@ def special_attack_single(current_overcharge):
         elif activate_special2(0, 50, current_overcharge):
             return 0
     return 0
+
+
+def special_attack_2hand(current_overcharge):
+    if Settings.Player.special_attack[2] >= 0:
+        if activate_special2(2):
+            return 0
+        elif activate_special2(1):
+            return 0
+        elif activate_special2(0, 70, current_overcharge):
+            return 0
+    else:
+        if activate_special2(1):
+            return 0
+        elif activate_special2(0, 50, current_overcharge):
+            return 0
+    return 0
+
+
+def special_attack_niken(current_overcharge):
+    if activate_special2(0, 50, current_overcharge):
+        return 0
+    return 0
+
+
 
 """
 def special_attack_single_original(current_overcharge):

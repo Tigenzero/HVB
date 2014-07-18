@@ -22,7 +22,7 @@ def activate_gem():
     leftClick()
 
 
-def get_gem():
+def dynamic_get_gem():
     mousePos(Cord.Item_cat_loc)
     leftClick()
     time.sleep(0.3)
@@ -32,15 +32,19 @@ def get_gem():
     if result is not None:
         if result == "Health_Gem":
             logging.debug("health gem found")
+            get_pixel_sum_color(item, True)
             Items.h_gem = True
         elif result == "Mana_Gem":
             logging.debug("mana gem found")
+            get_pixel_sum_color(item, True)
             Items.m_gem = True
         elif result == "Spirit_Gem":
             logging.debug("spirit gem found")
+            get_pixel_sum_color(item, True)
             Items.s_gem = True
         elif result == "Mystic_Gem" and not is_status_active("Channeling"):
             logging.debug("mystic gem found")
+            get_pixel_sum_color(item, True)
             mousePos(Cord.gem_loc)
             leftClick()
     else:
@@ -52,6 +56,28 @@ def get_gem():
         if Settings.shutdown:
             logging.critical("unknown gem, shutting down")
             quit()
+    mousePos(Cord.Item_cat_loc)
+    leftClick()
+
+
+def get_gem():
+    mousePos(Cord.Item_cat_loc)
+    leftClick()
+    time.sleep(0.3)
+    item = Cord.ibox_gem
+    sum = get_pixel_sum_color(item)
+    if 710000 <= sum <= 719999:
+        logging.debug("health gem found")
+        Items.h_gem = True
+    elif 729000 <= sum <= 729999:
+        logging.debug("mana gem found")
+        Items.m_gem = True
+    elif 723000 <= sum <= 723999:
+        logging.debug("spirit gem found")
+        Items.s_gem = True
+    elif 722000 <= sum <= 722999 and not is_status_active("Channeling"):
+        mousePos(Cord.gem_loc)
+        leftClick()
     mousePos(Cord.Item_cat_loc)
     leftClick()
 
@@ -95,37 +121,7 @@ def get_gem_original():
 
 
 # 0 = Health, 1 = Mana, 2 = Spirit, 9 = used
-def get_items_original():
-    Cord.Items = [9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9]
-    mousePos(Cord.Item_cat_loc)
-    leftClick()
-    time.sleep(1.0)
-    count = 1
-    for item in Cord.ibox_list:
-        sum = get_pixel_sum_color(item, False)
-        if is_pot(Cord.h_potions, sum):
-            Cord.Items[count - 1] = 0
-        elif is_pot(Cord.m_potions, sum):
-            Cord.Items[count - 1] = 1
-        elif is_pot(Cord.s_potions, sum):
-            Cord.Items[count - 1] = 2
-        elif sum == 865970:  # empty
-            Cord.Items[count - 1] = 9
-        else:
-            logger.warning("UNKNOWN item %d: %d" % (count, sum))
-            get_pixel_sum_color(item, True)
-            Cord.Items[count - 1] = 9
-            #if Settings.shutdown:
-            #    logging.critical("unknown element, shutting down")
-            #    quit()
-        count += 1
-    mousePos(Cord.Item_cat_loc)
-    leftClick()
-    #print Cord.Items
-
-
-# 0 = Health, 1 = Mana, 2 = Spirit, 9 = used
-def get_items():
+def dynamic_get_items():
     Cord.Items = [9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9]
     mousePos(Cord.Item_cat_loc, True)
     leftClick()
@@ -149,6 +145,23 @@ def get_items():
             #if Settings.shutdown:
             #    logging.critical("unknown element, shutting down")
             #    quit()
+        count += 1
+    mousePos(Cord.Item_cat_loc, True)
+    leftClick()
+    #print Cord.Items
+
+
+def get_items():
+    #Cord.Items = [9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9]
+    Cord.Items = list(Settings.Player.items)
+    mousePos(Cord.Item_cat_loc, True)
+    leftClick()
+    time.sleep(1.0)
+    count = 1
+    for item in Cord.ibox_list:
+        sum = get_pixel_sum_color(item, False)
+        if sum >= 700000:  # empty
+            Cord.Items[count - 1] = 9
         count += 1
     mousePos(Cord.Item_cat_loc, True)
     leftClick()

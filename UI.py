@@ -42,8 +42,11 @@ class UI(wx.Frame):
         #Player Configuration Button
         browse_button = wx.Button(panel, label="Configure", size=(75, 20))
         browse_button.Bind(wx.EVT_BUTTON, self.configure_character)
-
         hbox1.Add(browse_button, flag=wx.LEFT, border=10)
+        #Player Delete Button
+        delete_button = wx.Button(panel, label="Delete", size=(75, 20))
+        delete_button.Bind(wx.EVT_BUTTON, self.delete_character)
+        hbox1.Add(delete_button, flag=wx.LEFT, border=10)
         #Insertion of First Row Box
         vbox.Add(hbox1, flag=wx.LEFT | wx.TOP, border=10)
         #Second Row Box
@@ -106,6 +109,8 @@ class UI(wx.Frame):
 
     def display_help(self, event):
         logging.debug("Help Activated")
+        help_doc = get_help_file("help.txt")
+        display_message(help_doc)
 
     def get_value(self, event):
         dial = wx.MessageDialog(None, self.cb.GetValue(), "Info", wx.OK)
@@ -180,6 +185,23 @@ class UI(wx.Frame):
         Window2(wx.GetApp().TopWindow, title="Player Config").Show()
         #get_character_stats()
 
+    def delete_character(self, event):
+        name = UI.cb.GetValue()
+        message = "WARNING: Are you sure you want to delete {}?".format(name)
+        dial = wx.MessageDialog(None, message, "Character Delete", wx.YES_NO)
+        if dial.ShowModal() == wx.ID_YES:
+            rewrite_player_file(name)
+            main.get_player_config()
+            UI.cb.Clear()
+            if len(Settings.Player_List) > 0:
+                print len(Settings.Player_List)
+                for player in Settings.Player_List:
+                    if not name == player.name:
+                        UI.cb.Append(player.name)
+            UI.cb.Append("new")
+            UI.cb.SetSelection(0)
+
+
 if __name__ == '__main__':
 
     app = wx.App()
@@ -190,6 +212,40 @@ if __name__ == '__main__':
 def display_message(value):
     dial = wx.MessageDialog(None, value, "Info", wx.OK)
     dial.ShowModal()
+
+
+def get_help_file(file_loc):
+    with open(file_loc, 'r') as f:
+        list = f.readlines()
+        content = ""
+        for line in list:
+            content = content + line
+        return content
+
+
+def rewrite_player_file(name):
+    if name == "new":
+        return
+    fpath = os.getcwd() + "\\" + "Player.txt"
+    if os.path.isfile("Player.txt"):
+        with open(fpath, 'r+') as f:
+            lines = f.readlines()
+            f.seek(0)
+            f.truncate()
+            name_found = False
+            for line in lines:
+                line_split = line.split(':')
+                if line_split[0] == "name":
+                    if line_split[1].rstrip("\n") == name:
+                        name_found = True
+                    else:
+                        name_found = False
+                        f.write(line)
+                elif name_found:
+                    continue
+                else:
+                    f.write(line)
+        f.close()
 
 
 def get_character_stats():
@@ -225,17 +281,18 @@ class Window2(wx.Frame):
         font.SetPointSize(9)
         panel.SetBackgroundColour('#4f5049')
         #get currently selected player
-        config_player = None
+        Window2.config_player = None
         self.current_player = UI.cb.GetValue()
         if self.current_player == "new":
-            config_player = factory(Players.Player)
-            config_player.skills = []
-            config_player.premium = []
-            config_player.special_attack = []
+            Window2.config_player = factory(Players.Player)
+            Window2.config_player.skills = []
+            Window2.config_player.premium = []
+            Window2.config_player.special_attack = []
+            Window2.config_player.items = []
         else:
             for player in Settings.Player_List:
                 if player.name == self.current_player:
-                    config_player = player
+                    Window2.config_player = player
         #Main Box
         vbox = wx.BoxSizer(wx.VERTICAL)
         #First Row Box
@@ -245,16 +302,16 @@ class Window2(wx.Frame):
         st2.SetFont(font)
         hbox1.Add(st2)
         self.name = wx.TextCtrl(panel, size=(100, 20))
-        self.name.SetValue(config_player.name.__str__())
+        self.name.SetValue(Window2.config_player.name.__str__())
         hbox1.Add(self.name, flag=wx.LEFT, border=15)
         #Style Box
         st3 = wx.StaticText(panel, label='Style: ')
         st3.SetFont(font)
         hbox1.Add(st3, flag=wx.LEFT, border=15)
-        style_names = ["Dual Wield", "1 Handed", "2 Handed", "Niken", "Mage"]
+        style_names = ["Dual Wield", "1 Handed", "2 Handed", "Mage", "Niken"]
         self.style_cb = wx.ComboBox(panel, size=(90, 20), name="Style", choices=style_names)
         self.style_cb.SetEditable(False)
-        self.style_cb.SetSelection(config_player.style)
+        self.style_cb.SetSelection(Window2.config_player.style)
         hbox1.Add(self.style_cb, flag=wx.LEFT, border=10)
         vbox.Add(hbox1, flag=wx.LEFT | wx.TOP, border=10)
         #Second Row Box
@@ -267,18 +324,18 @@ class Window2(wx.Frame):
         st2.SetFont(font)
         hbox2.Add(st2, flag=wx.LEFT, border=15)
         self.sleep_min = wx.TextCtrl(panel, size=(30, 20))
-        self.sleep_min.SetValue(config_player.min_sleep.__str__())
+        self.sleep_min.SetValue(Window2.config_player.min_sleep.__str__())
         hbox2.Add(self.sleep_min, proportion=1, flag=wx.LEFT, border=5)
         st2 = wx.StaticText(panel, label='Max: ')
         st2.SetFont(font)
         hbox2.Add(st2, flag=wx.LEFT, border=20)
         self.sleep_max = wx.TextCtrl(panel, size=(30, 20))
-        self.sleep_max.SetValue(config_player.max_sleep.__str__())
+        self.sleep_max.SetValue(Window2.config_player.max_sleep.__str__())
         hbox2.Add(self.sleep_max, proportion=1, flag=wx.LEFT, border=5)
         #Spirit Check Box
         self.spirit_checkbox = wx.CheckBox(panel, label='Spirit')
         self.spirit_checkbox.SetFont(font)
-        self.spirit_checkbox.SetValue(config_player.spirit)
+        self.spirit_checkbox.SetValue(Window2.config_player.spirit)
         hbox2.Add(self.spirit_checkbox, flag=wx.LEFT, border=30)
         #Insertion of Second Row Box
         vbox.Add(hbox2, flag=wx.LEFT | wx.TOP, border=10)
@@ -299,8 +356,8 @@ class Window2(wx.Frame):
         hbox4.Add(st)
         self.skill_cb1 = wx.ComboBox(panel, size=(100, 20), choices=self.skills)
         self.skill_cb1.SetEditable(False)
-        self.skill_cb1.SetSelection(self.get_skill(config_player, 0))
-        #print "skill received for first skill is {} and player name is {}".format(self.get_skill(config_player, 0), config_player.name)
+        self.skill_cb1.SetSelection(self.get_skill(Window2.config_player, 0))
+        #print "skill received for first skill is {} and player name is {}".format(self.get_skill(Window2.config_player, 0), Window2.config_player.name)
         hbox4.Add(self.skill_cb1, flag=wx.LEFT, border=10)
 
         st = wx.StaticText(panel, label='9: ')
@@ -308,12 +365,12 @@ class Window2(wx.Frame):
         hbox4.Add(st, flag=wx.LEFT, border=20)
         self.skill_cb9 = wx.ComboBox(panel, size=(100, 20), choices=self.skills)
         self.skill_cb9.SetEditable(False)
-        self.skill_cb9.SetSelection(self.get_skill(config_player, 8))
+        self.skill_cb9.SetSelection(self.get_skill(Window2.config_player, 8))
         hbox4.Add(self.skill_cb9, flag=wx.LEFT, border=10)
 
         self.premium_cb1 = wx.ComboBox(panel, size=(100, 20), choices=self.skills)
         self.premium_cb1.SetEditable(False)
-        self.premium_cb1.SetSelection(self.get_premium(config_player, 0))
+        self.premium_cb1.SetSelection(self.get_premium(Window2.config_player, 0))
         hbox4.Add(self.premium_cb1, flag=wx.LEFT, border=30)
 
         #Inserstion of Row Box
@@ -325,7 +382,7 @@ class Window2(wx.Frame):
         hbox5.Add(st)
         self.skill_cb2 = wx.ComboBox(panel, size=(100, 20), choices=self.skills)
         self.skill_cb2.SetEditable(False)
-        self.skill_cb2.SetSelection(self.get_skill(config_player, 1))
+        self.skill_cb2.SetSelection(self.get_skill(Window2.config_player, 1))
         hbox5.Add(self.skill_cb2, flag=wx.LEFT, border=10)
 
         st = wx.StaticText(panel, label='10: ')
@@ -333,12 +390,12 @@ class Window2(wx.Frame):
         hbox5.Add(st, flag=wx.LEFT, border=20)
         self.skill_cb10 = wx.ComboBox(panel, size=(100, 20), choices=self.skills)
         self.skill_cb10.SetEditable(False)
-        self.skill_cb10.SetSelection(self.get_skill(config_player, 9))
+        self.skill_cb10.SetSelection(self.get_skill(Window2.config_player, 9))
         hbox5.Add(self.skill_cb10, flag=wx.LEFT, border=2)
 
         self.premium_cb2 = wx.ComboBox(panel, size=(100, 20), choices=self.skills)
         self.premium_cb2.SetEditable(False)
-        self.premium_cb2.SetSelection(self.get_premium(config_player, 1))
+        self.premium_cb2.SetSelection(self.get_premium(Window2.config_player, 1))
         hbox5.Add(self.premium_cb2, flag=wx.LEFT, border=30)
 
         #Inserstion of Row Box
@@ -350,7 +407,7 @@ class Window2(wx.Frame):
         hbox6.Add(st)
         self.skill_cb3 = wx.ComboBox(panel, size=(100, 20), choices=self.skills)
         self.skill_cb3.SetEditable(False)
-        self.skill_cb3.SetSelection(self.get_skill(config_player, 2))
+        self.skill_cb3.SetSelection(self.get_skill(Window2.config_player, 2))
         hbox6.Add(self.skill_cb3, flag=wx.LEFT, border=10)
 
         st = wx.StaticText(panel, label='11: ')
@@ -358,12 +415,12 @@ class Window2(wx.Frame):
         hbox6.Add(st, flag=wx.LEFT, border=20)
         self.skill_cb11 = wx.ComboBox(panel, size=(100, 20), choices=self.skills)
         self.skill_cb11.SetEditable(False)
-        self.skill_cb11.SetSelection(self.get_skill(config_player, 10))
+        self.skill_cb11.SetSelection(self.get_skill(Window2.config_player, 10))
         hbox6.Add(self.skill_cb11, flag=wx.LEFT, border=2)
 
         self.premium_cb3 = wx.ComboBox(panel, size=(100, 20), choices=self.skills)
         self.premium_cb3.SetEditable(False)
-        self.premium_cb3.SetSelection(self.get_premium(config_player, 2))
+        self.premium_cb3.SetSelection(self.get_premium(Window2.config_player, 2))
         hbox6.Add(self.premium_cb3, flag=wx.LEFT, border=30)
 
         #Inserstion of Row Box
@@ -375,7 +432,7 @@ class Window2(wx.Frame):
         hbox7.Add(st)
         self.skill_cb4 = wx.ComboBox(panel, size=(100, 20), choices=self.skills)
         self.skill_cb4.SetEditable(False)
-        self.skill_cb4.SetSelection(self.get_skill(config_player, 3))
+        self.skill_cb4.SetSelection(self.get_skill(Window2.config_player, 3))
         hbox7.Add(self.skill_cb4, flag=wx.LEFT, border=10)
 
         st = wx.StaticText(panel, label='12: ')
@@ -383,12 +440,12 @@ class Window2(wx.Frame):
         hbox7.Add(st, flag=wx.LEFT, border=20)
         self.skill_cb12 = wx.ComboBox(panel, size=(100, 20), choices=self.skills)
         self.skill_cb12.SetEditable(False)
-        self.skill_cb12.SetSelection(self.get_skill(config_player, 11))
+        self.skill_cb12.SetSelection(self.get_skill(Window2.config_player, 11))
         hbox7.Add(self.skill_cb12, flag=wx.LEFT, border=2)
 
         self.premium_cb4 = wx.ComboBox(panel, size=(100, 20), choices=self.skills)
         self.premium_cb4.SetEditable(False)
-        self.premium_cb4.SetSelection(self.get_premium(config_player, 3))
+        self.premium_cb4.SetSelection(self.get_premium(Window2.config_player, 3))
         hbox7.Add(self.premium_cb4, flag=wx.LEFT, border=30)
 
         #Inserstion of Row Box
@@ -400,7 +457,7 @@ class Window2(wx.Frame):
         hbox8.Add(st)
         self.skill_cb5 = wx.ComboBox(panel, size=(100, 20), choices=self.skills)
         self.skill_cb5.SetEditable(False)
-        self.skill_cb5.SetSelection(self.get_skill(config_player, 4))
+        self.skill_cb5.SetSelection(self.get_skill(Window2.config_player, 4))
         hbox8.Add(self.skill_cb5, flag=wx.LEFT, border=10)
 
         st = wx.StaticText(panel, label='13: ')
@@ -408,8 +465,12 @@ class Window2(wx.Frame):
         hbox8.Add(st, flag=wx.LEFT, border=20)
         self.skill_cb13 = wx.ComboBox(panel, size=(100, 20), choices=self.skills)
         self.skill_cb13.SetEditable(False)
-        self.skill_cb13.SetSelection(self.get_skill(config_player, 12))
+        self.skill_cb13.SetSelection(self.get_skill(Window2.config_player, 12))
         hbox8.Add(self.skill_cb13, flag=wx.LEFT, border=2)
+
+        item_btn = wx.Button(panel, label='Items', size=(100, 20))
+        item_btn.Bind(wx.EVT_BUTTON, self.set_items)
+        hbox8.Add(item_btn, flag=wx.LEFT, border=30)
         
         #Inserstion of Row Box
         vbox.Add(hbox8, flag=wx.LEFT | wx.TOP, border=10)
@@ -420,7 +481,7 @@ class Window2(wx.Frame):
         hbox11.Add(st)
         self.skill_cb6 = wx.ComboBox(panel, size=(100, 20), choices=self.skills)
         self.skill_cb6.SetEditable(False)
-        self.skill_cb6.SetSelection(self.get_skill(config_player, 5))
+        self.skill_cb6.SetSelection(self.get_skill(Window2.config_player, 5))
         hbox11.Add(self.skill_cb6, flag=wx.LEFT, border=10)
 
         st = wx.StaticText(panel, label='14: ')
@@ -428,7 +489,7 @@ class Window2(wx.Frame):
         hbox11.Add(st, flag=wx.LEFT, border=20)
         self.skill_cb14 = wx.ComboBox(panel, size=(100, 20), choices=self.skills)
         self.skill_cb14.SetEditable(False)
-        self.skill_cb14.SetSelection(self.get_skill(config_player, 13))
+        self.skill_cb14.SetSelection(self.get_skill(Window2.config_player, 13))
         hbox11.Add(self.skill_cb14, flag=wx.LEFT, border=2)
         
         #Inserstion of Row Box
@@ -440,7 +501,7 @@ class Window2(wx.Frame):
         hbox12.Add(st)
         self.skill_cb7 = wx.ComboBox(panel, size=(100, 20), choices=self.skills)
         self.skill_cb7.SetEditable(False)
-        self.skill_cb7.SetSelection(self.get_skill(config_player, 6))
+        self.skill_cb7.SetSelection(self.get_skill(Window2.config_player, 6))
         hbox12.Add(self.skill_cb7, flag=wx.LEFT, border=10)
 
         st = wx.StaticText(panel, label='15: ')
@@ -448,7 +509,7 @@ class Window2(wx.Frame):
         hbox12.Add(st, flag=wx.LEFT, border=20)
         self.skill_cb15 = wx.ComboBox(panel, size=(100, 20), choices=self.skills)
         self.skill_cb15.SetEditable(False)
-        self.skill_cb15.SetSelection(self.get_skill(config_player, 14))
+        self.skill_cb15.SetSelection(self.get_skill(Window2.config_player, 14))
         hbox12.Add(self.skill_cb15, flag=wx.LEFT, border=2)
         
         #Inserstion of Row Box
@@ -461,7 +522,7 @@ class Window2(wx.Frame):
         hbox13.Add(st)
         self.skill_cb8 = wx.ComboBox(panel, size=(100, 20), choices=self.skills)
         self.skill_cb8.SetEditable(False)
-        self.skill_cb8.SetSelection(self.get_skill(config_player, 7))
+        self.skill_cb8.SetSelection(self.get_skill(Window2.config_player, 7))
         hbox13.Add(self.skill_cb8, flag=wx.LEFT, border=10)
 
         st = wx.StaticText(panel, label='16: ')
@@ -469,7 +530,7 @@ class Window2(wx.Frame):
         hbox13.Add(st, flag=wx.LEFT, border=20)
         self.skill_cb16 = wx.ComboBox(panel, size=(100, 20), choices=self.skills)
         self.skill_cb16.SetEditable(False)
-        self.skill_cb16.SetSelection(self.get_skill(config_player, 15))
+        self.skill_cb16.SetSelection(self.get_skill(Window2.config_player, 15))
         hbox13.Add(self.skill_cb16, flag=wx.LEFT, border=2)
         
         #Inserstion of Row Box
@@ -495,7 +556,11 @@ class Window2(wx.Frame):
         panel.SetSizer(vbox)
         panel.Refresh()
 
+    def set_items(self, event):
+        item_window(wx.GetApp().TopWindow, title="Item Config").Show()
+
     def save(self, event):
+
         print "saving"
         print "looking for {}".format(self.current_player)
         fpath = os.getcwd() + "\\" + "Player.txt"
@@ -513,8 +578,8 @@ class Window2(wx.Frame):
                             line = "name:{}{}".format(self.name.GetValue(), "\n")
                         elif line_split[0] == "style":
                             line = "style:{}{}".format(self.get_player_style(), "\n")
-                        #elif line_split[0] == "items":
-                        #    line = "items:{}".format(config_player.items)
+                        elif line_split[0] == "items":
+                            line = "items:{}{}".format(self.get_converted_items(), "\n")
                         elif line_split[0] == "special":
                             line = "special:{}{}".format(self.get_player_special(), "\n")
                         elif line_split[0] == "premium":
@@ -535,8 +600,8 @@ class Window2(wx.Frame):
                     f.write(line + "\n")
                     line = "style:{}".format(self.get_player_style())
                     f.write(line + "\n")
-                    #line = "items:{}".format(config_player.items)
-                    #f.write(line + "\n")
+                    line = "items:{}".format(Window2.config_player.items)
+                    f.write(line + "\n")
                     line = "special:{}".format(self.get_player_special())
                     f.write(line + "\n")
                     line = "premium:{}".format(self.get_player_premium())
@@ -557,8 +622,8 @@ class Window2(wx.Frame):
                 f.write("%s\n" % line)
                 line = "style:{}".format(self.get_player_style())
                 f.write("%s\n" % line)
-                #line = "items:{}".format(config_player.items)
-                #f.write(line + "\n")
+                line = "items:{}".format(Window2.config_player.items)
+                f.write("%s\n" % line)
                 line = "special:{}".format(self.get_player_special())
                 f.write("%s\n" % line)
                 line = "premium:{}".format(self.get_player_premium())
@@ -574,7 +639,6 @@ class Window2(wx.Frame):
         main.get_player_config()
         UI.cb.Clear()
         if len(Settings.Player_List) > 0:
-            print len(Settings.Player_List)
             for player in Settings.Player_List:
                 UI.cb.Append(player.name)
         UI.cb.Append("new")
@@ -583,14 +647,14 @@ class Window2(wx.Frame):
         self.Destroy()
 
     def cancel(self, event):
-        print "closing window"
         self.Destroy()
 
     def close_window(self):
         self.Destroy()
 
-    def display_help(self):
-        print "displaying help"
+    def display_help(self, event):
+        help_doc = get_help_file("configure_help.txt")
+        display_message(help_doc)
 
     def get_skill(self, player, skill):
         try:
@@ -598,10 +662,17 @@ class Window2(wx.Frame):
         except:
             return 0
 
+    def get_converted_items(self):
+        tuple_list = Window2.config_player.items
+        item_list = []
+        for item in tuple_list:
+            item_list.append(item)
+        return item_list
+
     def get_player_style(self):
         style_names = ["Dual Wield", "1 Handed", "2 Handed", "Mage", "Niken"]
         style = self.style_cb.GetValue()
-        for i in range(0, len(style_names)-1):
+        for i in range(0, len(style_names)):
             if style == style_names[i]:
                 return i
 
@@ -633,3 +704,238 @@ class Window2(wx.Frame):
             if self.skills[i] == skill:
                 return i
         return 0
+
+
+class item_window(wx.Frame):
+    items = ["Health Potion", "Magic Potion", "Spirit Potion", "Empty"]
+    def __init__(self, parent, title):
+            super(item_window, self).__init__(parent, title=title, size=(325, 350))
+            self.init_item_window()
+            self.Centre()
+            self.Show(True)
+
+
+    def init_item_window(self):
+        item_window.item_list = []
+        panel = wx.Panel(self)
+        font = wx.SystemSettings_GetFont(wx.SYS_SYSTEM_FONT)
+        font.SetPointSize(9)
+        panel.SetBackgroundColour('#4f5049')
+        config_player = Window2.config_player
+        print config_player.name
+        vbox = wx.BoxSizer(wx.VERTICAL)
+        #First Row Box
+        hbox3 = wx.BoxSizer(wx.HORIZONTAL)
+        #Skill text
+        st3 = wx.StaticText(panel, label='Items: ')
+        st3.SetFont(font)
+        hbox3.Add(st3)
+        vbox.Add(hbox3, flag=wx.LEFT | wx.TOP, border=10)
+        #Skill Boxes
+        hbox4 = wx.BoxSizer(wx.HORIZONTAL)
+        st = wx.StaticText(panel, label='1: ')
+        st.SetFont(font)
+        hbox4.Add(st)
+        self.skill_cb1 = wx.ComboBox(panel, size=(100, 20), choices=self.items)
+        self.skill_cb1.SetEditable(False)
+        self.skill_cb1.SetSelection(self.get_item(config_player, 0))
+        #print "skill received for first skill is {} and player name is {}".format(self.get_item(config_player, 0), config_player.name)
+        hbox4.Add(self.skill_cb1, flag=wx.LEFT, border=10)
+
+        st = wx.StaticText(panel, label='9: ')
+        st.SetFont(font)
+        hbox4.Add(st, flag=wx.LEFT, border=20)
+        self.skill_cb9 = wx.ComboBox(panel, size=(100, 20), choices=self.items)
+        self.skill_cb9.SetEditable(False)
+        self.skill_cb9.SetSelection(self.get_item(config_player, 8))
+        hbox4.Add(self.skill_cb9, flag=wx.LEFT, border=10)
+
+        #Inserstion of Row Box
+        vbox.Add(hbox4, flag=wx.LEFT | wx.TOP, border=10)
+
+        hbox5 = wx.BoxSizer(wx.HORIZONTAL)
+        st = wx.StaticText(panel, label='2: ')
+        st.SetFont(font)
+        hbox5.Add(st)
+        self.skill_cb2 = wx.ComboBox(panel, size=(100, 20), choices=self.items)
+        self.skill_cb2.SetEditable(False)
+        self.skill_cb2.SetSelection(self.get_item(config_player, 1))
+        hbox5.Add(self.skill_cb2, flag=wx.LEFT, border=10)
+
+        st = wx.StaticText(panel, label='10: ')
+        st.SetFont(font)
+        hbox5.Add(st, flag=wx.LEFT, border=20)
+        self.skill_cb10 = wx.ComboBox(panel, size=(100, 20), choices=self.items)
+        self.skill_cb10.SetEditable(False)
+        self.skill_cb10.SetSelection(self.get_item(config_player, 9))
+        hbox5.Add(self.skill_cb10, flag=wx.LEFT, border=2)
+
+
+        #Inserstion of Row Box
+        vbox.Add(hbox5, flag=wx.LEFT | wx.TOP, border=10)
+
+        hbox6 = wx.BoxSizer(wx.HORIZONTAL)
+        st = wx.StaticText(panel, label='3: ')
+        st.SetFont(font)
+        hbox6.Add(st)
+        self.skill_cb3 = wx.ComboBox(panel, size=(100, 20), choices=self.items)
+        self.skill_cb3.SetEditable(False)
+        self.skill_cb3.SetSelection(self.get_item(config_player, 2))
+        hbox6.Add(self.skill_cb3, flag=wx.LEFT, border=10)
+
+        st = wx.StaticText(panel, label='11: ')
+        st.SetFont(font)
+        hbox6.Add(st, flag=wx.LEFT, border=20)
+        self.skill_cb11 = wx.ComboBox(panel, size=(100, 20), choices=self.items)
+        self.skill_cb11.SetEditable(False)
+        self.skill_cb11.SetSelection(self.get_item(config_player, 10))
+        hbox6.Add(self.skill_cb11, flag=wx.LEFT, border=2)
+
+
+        #Inserstion of Row Box
+        vbox.Add(hbox6, flag=wx.LEFT | wx.TOP, border=10)
+
+        hbox7 = wx.BoxSizer(wx.HORIZONTAL)
+        st = wx.StaticText(panel, label='4: ')
+        st.SetFont(font)
+        hbox7.Add(st)
+        self.skill_cb4 = wx.ComboBox(panel, size=(100, 20), choices=self.items)
+        self.skill_cb4.SetEditable(False)
+        self.skill_cb4.SetSelection(self.get_item(config_player, 3))
+        hbox7.Add(self.skill_cb4, flag=wx.LEFT, border=10)
+
+        st = wx.StaticText(panel, label='12: ')
+        st.SetFont(font)
+        hbox7.Add(st, flag=wx.LEFT, border=20)
+        self.skill_cb12 = wx.ComboBox(panel, size=(100, 20), choices=self.items)
+        self.skill_cb12.SetEditable(False)
+        self.skill_cb12.SetSelection(self.get_item(config_player, 11))
+        hbox7.Add(self.skill_cb12, flag=wx.LEFT, border=2)
+
+
+        #Inserstion of Row Box
+        vbox.Add(hbox7, flag=wx.LEFT | wx.TOP, border=10)
+
+        hbox8 = wx.BoxSizer(wx.HORIZONTAL)
+        st = wx.StaticText(panel, label='5: ')
+        st.SetFont(font)
+        hbox8.Add(st)
+        self.skill_cb5 = wx.ComboBox(panel, size=(100, 20), choices=self.items)
+        self.skill_cb5.SetEditable(False)
+        self.skill_cb5.SetSelection(self.get_item(config_player, 4))
+        hbox8.Add(self.skill_cb5, flag=wx.LEFT, border=10)
+
+        st = wx.StaticText(panel, label='13: ')
+        st.SetFont(font)
+        hbox8.Add(st, flag=wx.LEFT, border=20)
+        self.skill_cb13 = wx.ComboBox(panel, size=(100, 20), choices=self.items)
+        self.skill_cb13.SetEditable(False)
+        self.skill_cb13.SetSelection(self.get_item(config_player, 12))
+        hbox8.Add(self.skill_cb13, flag=wx.LEFT, border=2)
+
+        #Inserstion of Row Box
+        vbox.Add(hbox8, flag=wx.LEFT | wx.TOP, border=10)
+
+        hbox11 = wx.BoxSizer(wx.HORIZONTAL)
+        st = wx.StaticText(panel, label='6: ')
+        st.SetFont(font)
+        hbox11.Add(st)
+        self.skill_cb6 = wx.ComboBox(panel, size=(100, 20), choices=self.items)
+        self.skill_cb6.SetEditable(False)
+        self.skill_cb6.SetSelection(self.get_item(config_player, 5))
+        hbox11.Add(self.skill_cb6, flag=wx.LEFT, border=10)
+
+        st = wx.StaticText(panel, label='14: ')
+        st.SetFont(font)
+        hbox11.Add(st, flag=wx.LEFT, border=20)
+        self.skill_cb14 = wx.ComboBox(panel, size=(100, 20), choices=self.items)
+        self.skill_cb14.SetEditable(False)
+        self.skill_cb14.SetSelection(self.get_item(config_player, 13))
+        hbox11.Add(self.skill_cb14, flag=wx.LEFT, border=2)
+
+        #Inserstion of Row Box
+        vbox.Add(hbox11, flag=wx.LEFT | wx.TOP, border=10)
+
+        hbox12 = wx.BoxSizer(wx.HORIZONTAL)
+        st = wx.StaticText(panel, label='7: ')
+        st.SetFont(font)
+        hbox12.Add(st)
+        self.skill_cb7 = wx.ComboBox(panel, size=(100, 20), choices=self.items)
+        self.skill_cb7.SetEditable(False)
+        self.skill_cb7.SetSelection(self.get_item(config_player, 6))
+        hbox12.Add(self.skill_cb7, flag=wx.LEFT, border=10)
+
+        st = wx.StaticText(panel, label='15: ')
+        st.SetFont(font)
+        hbox12.Add(st, flag=wx.LEFT, border=20)
+        self.skill_cb15 = wx.ComboBox(panel, size=(100, 20), choices=self.items)
+        self.skill_cb15.SetEditable(False)
+        self.skill_cb15.SetSelection(self.get_item(config_player, 14))
+        hbox12.Add(self.skill_cb15, flag=wx.LEFT, border=2)
+
+        #Inserstion of Row Box
+        vbox.Add(hbox12, flag=wx.LEFT | wx.TOP, border=10)
+
+
+        hbox13 = wx.BoxSizer(wx.HORIZONTAL)
+        st = wx.StaticText(panel, label='8: ')
+        st.SetFont(font)
+        hbox13.Add(st)
+        self.skill_cb8 = wx.ComboBox(panel, size=(100, 20), choices=self.items)
+        self.skill_cb8.SetEditable(False)
+        self.skill_cb8.SetSelection(self.get_item(config_player, 7))
+        hbox13.Add(self.skill_cb8, flag=wx.LEFT, border=10)
+
+        st = wx.StaticText(panel, label='16: ')
+        st.SetFont(font)
+        hbox13.Add(st, flag=wx.LEFT, border=20)
+        self.skill_cb16 = wx.ComboBox(panel, size=(100, 20), choices=self.items)
+        self.skill_cb16.SetEditable(False)
+        self.skill_cb16.SetSelection(self.get_item(config_player, 15))
+        hbox13.Add(self.skill_cb16, flag=wx.LEFT, border=2)
+        #Inserstion of Row Box
+        vbox.Add(hbox13, flag=wx.LEFT | wx.TOP, border=10)
+        hbox9 = wx.BoxSizer(wx.HORIZONTAL)
+        quick_btn1 = wx.Button(panel, label='Save', size=(132, 30))
+        quick_btn1.Bind(wx.EVT_BUTTON, self.save)
+        hbox9.Add(quick_btn1, flag=wx.LEFT, border=5)
+        btn2 = wx.Button(panel, label='Cancel', size=(132, 30))
+        btn2.Bind(wx.EVT_BUTTON, self.cancel)
+        hbox9.Add(btn2, flag=wx.LEFT, border=10)
+        vbox.Add(hbox9, flag=wx.LEFT | wx.TOP, border=10)
+        panel.SetSizer(vbox)
+        panel.Refresh()
+
+    def get_item(self, player, pos):
+        try:
+            item = player.items[pos]
+            if item < 9:
+                return item
+            else:
+                return 3
+        except:
+            return 3
+
+    def save(self, event):
+        items = self.get_player_items()
+        item_list = []
+        for item in items:
+            if item == "Health Potion":
+                item_list.append(0)
+            elif item == "Magic Potion":
+                item_list.append(1)
+            elif item == "Spirit Potion":
+                item_list.append(2)
+            else:
+                item_list.append(9)
+        Window2.config_player.items = item_list
+        self.Destroy()
+
+    def cancel(self, event):
+        self.Destroy()
+
+    def get_player_items(self):
+        return [self.skill_cb1.GetValue().encode('utf-8'), self.skill_cb2.GetValue().encode('utf-8'), self.skill_cb3.GetValue().encode('utf-8'), self.skill_cb4.GetValue().encode('utf-8'),
+                self.skill_cb5.GetValue().encode('utf-8'), self.skill_cb6.GetValue().encode('utf-8'), self.skill_cb7.GetValue().encode('utf-8'), self.skill_cb8.GetValue().encode('utf-8'),
+                self.skill_cb9.GetValue().encode('utf-8'), self.skill_cb10.GetValue().encode('utf-8'), self.skill_cb11.GetValue().encode('utf-8'), self.skill_cb12.GetValue().encode('utf-8'),
+                self.skill_cb13.GetValue().encode('utf-8'), self.skill_cb14.GetValue().encode('utf-8'), self.skill_cb15.GetValue().encode('utf-8'), self.skill_cb16.GetValue().encode('utf-8')]

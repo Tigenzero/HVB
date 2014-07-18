@@ -9,6 +9,7 @@ def get_player_config():
     Settings.Player_List = []
     if os.path.isfile("Player.txt"):
         #player_stats = ["", "", "", "", "", ""]
+        Players.Player.name = ""
         player_stats = factory(Players.Player)
         player_stats.skills = []
         player_stats.premium = []
@@ -26,7 +27,7 @@ def get_player_config():
                 elif line_split[0] == "style":
                     player_stats.style = int(line_split[1].rstrip("\n"))
                 elif line_split[0] == "items":
-                    player_stats.items = tuple(map(int, line_split[1].rstrip("\n").split(",")))
+                    player_stats.items = tuple(map(int, clean(line_split[1]).split(",")))
                 elif line_split[0] == "special":
                     player_stats.special_attack = map(int, clean(line_split[1]).split(","))
                 elif line_split[0] == "premium":

@@ -80,3 +80,7 @@ def return_filename(path):
 def print_collection(collection):
     for key,value in sort(collection.items()):
         logging.debug("{}: {}".format(value, key))
+
+
+if __name__ == "__main__":
+    get_images()
