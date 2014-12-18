@@ -27,5 +27,6 @@ class Player:
     special_attack = []
     premium = []
     skills = []
+    auto_cast = ["Spark_Life", "Absorb"]
     min_sleep = 0.5
     max_sleep = 2.5
