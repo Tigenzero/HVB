@@ -1,0 +1,4 @@
+from code import *
+get_boundaries()
+im = screenGrab()
+get_health(im)

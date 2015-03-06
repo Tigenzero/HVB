@@ -73,6 +73,7 @@ def get_enemies(im):
 def get_health(im):
     p_health = 0
     for level in Cord.p_health_levels:
+        print im.getpixel(level)
         if im.getpixel(level) != Cord.under_color:
             p_health += 10
         else:
