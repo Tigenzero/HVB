@@ -154,6 +154,7 @@ def dynamic_get_items():
 def get_items():
     #Cord.Items = [9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9]
     Cord.Items = list(Settings.Player.items)
+    logging.debug(Cord.Items)
     mousePos(Cord.Item_cat_loc, True)
     leftClick()
     time.sleep(1.0)

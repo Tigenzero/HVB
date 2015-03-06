@@ -293,6 +293,7 @@ class Window2(wx.Frame):
             for player in Settings.Player_List:
                 if player.name == self.current_player:
                     Window2.config_player = player
+        print self.get_skill(Window2.config_player, 3)
         #Main Box
         vbox = wx.BoxSizer(wx.VERTICAL)
         #First Row Box

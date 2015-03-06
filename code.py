@@ -7,7 +7,7 @@ from numpy import *
 from find_window import find_corner
 import os
 from Items import get_gem, use_health_pot, use_mana_pot, use_spirit_pot, get_items, use_gem, leftover_inventory
-from Skills import activate_cure, activate_premium, activate_protection, activate_regen, special_attack, get_spirit, activate_absorb
+from Skills import activate_cure, activate_premium, activate_protection, activate_regen, special_attack, get_spirit, activate_absorb, activate_auto_cast
 from Click_Press import *
 from Coordinates import Cord
 import Settings
@@ -232,8 +232,10 @@ def restore_stats(im):
             logging.info("Protection Casted")
         elif is_channeling_active() and activate_premium():
             logging.info("premium activated")
-        elif activate_absorb():
-            logging.info("absorb activated")
+        #elif activate_absorb():
+        #    logging.info("absorb activated")
+        elif activate_auto_cast():
+            logging.info("auto skill activated")
         else:
             return False
         return True
@@ -341,11 +343,12 @@ def startGame(): #UNFINISHED
     battle_end = False
     while not battle_end:
         if len(get_enemies(im)) == 0 or pony_time(im):
-            time.sleep(1.5)
             press('spacebar')
+            time.sleep(1.5)
             im = screenGrab()
             if len(get_enemies(im)) == 0 and not pony_time(im):
                 logging.info("Battle ended: getEnemies was %d and Pony Time was %r" % (len(get_enemies(im)), pony_time(im)))
+                screenGrab_save()
                 battle_end = True
         else:
             Settings.pony_timer = 0

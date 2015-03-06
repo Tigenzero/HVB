@@ -88,6 +88,15 @@ def activate_absorb():
         return False
 
 
+def activate_auto_cast():
+    casted = False
+    for skill in Settings.Player.auto_cast:
+        if is_skill_active(skill) and not is_premium_skill(skill) and not is_status_active(skill):
+            use_skill(lookup_skill(skill))
+            casted = True
+    return casted
+
+
 def activate_protection():
     if is_skill_active("Protection") and not is_premium_skill("Protection") and not is_status_active("Protection"):
         use_skill(lookup_skill("Protection"))
