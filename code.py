@@ -7,7 +7,7 @@ from numpy import *
 from find_window import find_corner
 import os
 from Items import get_gem, use_health_pot, use_mana_pot, use_spirit_pot, get_items, use_gem, leftover_inventory
-from Skills import activate_cure, activate_premium, activate_protection, activate_regen, special_attack, get_spirit, activate_absorb, activate_auto_cast
+from Skills import activate_cure, activate_premium, activate_protection, activate_regen, special_attack, get_spirit, activate_absorb, activate_auto_cast, activate_spark_life
 from Click_Press import *
 from Coordinates import Cord
 import Settings
@@ -47,7 +47,7 @@ def enemies_exist(im):
 
 def get_boundaries():
         corner = find_corner()
-        Settings.box = (corner[0], corner[1], corner[0] + 1235, corner[1] + 701)
+        Settings.box = (corner[0], corner[1], corner[0] + 1235, corner[1] + 720)
         Cord.window_padding_y = corner[1]
         Cord.window_padding_x = corner[0]
 
@@ -73,7 +73,6 @@ def get_enemies(im):
 def get_health(im):
     p_health = 0
     for level in Cord.p_health_levels:
-        print im.getpixel(level)
         if im.getpixel(level) != Cord.under_color:
             p_health += 10
         else:
@@ -216,6 +215,8 @@ def restore_stats(im):
             logging.info("Health Gem Used")
         elif activate_cure(current_health):
             logging.info("Cure Casted")
+        elif activate_spark_life(current_health):
+            logging.info("Spark Life Casted")
         elif use_health_pot(current_health):
             logging.info("Health Potion used")
         elif use_gem(1, current_mana):
@@ -402,11 +403,13 @@ def startRound():
             return False
         #reduce_cooldown()
         im = screenGrab()
+        if im.getpixel((42, 710)) != (227, 224, 209):
+            continue
         current_enemies = get_enemies(im)
         logging.debug("Enemies: {} Health: {} Mana: {} Spirit: {}".format(len(current_enemies), get_health(im), get_mana(im), get_spirit(im)))
         get_status()
         if restore_stats(im):
-            """restoration occurred"""
+            time.sleep(0.2)
         elif 0 < len(current_enemies) < enemy_num:
             logging.debug("Enemy Died, Checking Gem")
             get_gem()
@@ -415,7 +418,7 @@ def startRound():
             special_attack(im, current_enemies, style)
         #this sleep function triggers the amount of time between clicks, thus the time between server communication
         #This function is very important as it randomizes the communication times, emulating the behavior of a player
-        sleep()
+        #sleep()
         enemy_num = len(current_enemies)
     return True
 

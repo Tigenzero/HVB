@@ -31,24 +31,25 @@ class Cord:
     p_x90 = 123
     p_x100 = 134
     #p_health = 196
-    #p_health = 144 health text interfered
-    p_health = 150
-    #p_mana = 186 mana text interfered
-    p_mana = 191
-    #p_spirit = 227 spirit text interfered
-    p_spirit = 232
-    p_overcharge = 267
+    p_health = 149
+    #p_health = 150 laptop
+    p_mana = 187
+    #p_mana = 191
+    p_spirit = 227
+    #p_spirit = 232
+    #p_overcharge = 267
+    p_overcharge = 265
     p_health_levels = ((p_x0, p_health), (p_x10, p_health), (p_x20, p_health), (p_x30, p_health),
-                      (p_x40, p_health), (p_x50, p_health), (p_x60, p_health), (p_x70, p_health),
-                      (p_x80, p_health), (p_x90, p_health), (p_x100, p_health))
+                       (p_x40, p_health), (p_x50, p_health), (p_x60, p_health), (p_x70, p_health),
+                       (p_x80, p_health), (p_x90, p_health), (p_x100, p_health))
 
     p_mana_levels = ((p_x0, p_mana), (p_x10, p_mana), (p_x20, p_mana), (p_x30, p_mana),
-                      (p_x40, p_mana), (p_x50, p_mana), (p_x60, p_mana), (p_x70, p_mana),
-                      (p_x80, p_mana), (p_x90, p_mana), (p_x100, p_mana))
+                     (p_x40, p_mana), (p_x50, p_mana), (p_x60, p_mana), (p_x70, p_mana),
+                     (p_x80, p_mana), (p_x90, p_mana), (p_x100, p_mana))
 
     p_spirit_levels = ((p_x0, p_spirit), (p_x10, p_spirit), (p_x20, p_spirit), (p_x30, p_spirit),
-                      (p_x40, p_spirit), (p_x50, p_spirit), (p_x60, p_spirit), (p_x70, p_spirit),
-                      (p_x80, p_spirit), (p_x90, p_spirit), (p_x100, p_spirit))
+                       (p_x40, p_spirit), (p_x50, p_spirit), (p_x60, p_spirit), (p_x70, p_spirit),
+                       (p_x80, p_spirit), (p_x90, p_spirit), (p_x100, p_spirit))
 
     p_overcharge_levels = ((p_x0, p_overcharge), (p_x10, p_overcharge), (p_x20, p_overcharge), (p_x30, p_overcharge),
                       (p_x40, p_overcharge), (p_x50, p_overcharge), (p_x60, p_overcharge), (p_x70, p_overcharge),

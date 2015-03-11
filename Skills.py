@@ -1,4 +1,4 @@
-from Click_Press import mousePos, leftClick
+from Click_Press import mousePos, leftClick, press
 from Coordinates import Cord
 from Status import is_status_active, get_pixel_sum, get_pixel_sum_color
 import Settings
@@ -38,12 +38,24 @@ class Skills:
 
     Current = ["", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""]
     Exceptions = ["Shadow_Veil", "Corruption", "Shockblast", "Smite"]
-
+Enemies = {
+    Cord.e1_health: "1",
+    Cord.e2_health: "2",
+    Cord.e3_health: "3",
+    Cord.e4_health: "4",
+    Cord.e5_health: "5",
+    Cord.e6_health: "6",
+    Cord.e7_health: "7",
+    Cord.e8_health: "8",
+    Cord.e9_health: "9",
+    Cord.e10_health: "0",
+}
 
 def attack(enemy):
     try:
-        mousePos(enemy)
-        leftClick()
+        #mousePos(enemy)
+        #leftClick()
+        press(Enemies[enemy])
     except ValueError:
         logging.warning("no more enemies")
 
@@ -75,6 +87,14 @@ def activate_premium():
 def activate_regen(current_health):
     if current_health <= 60 and is_skill_active("Regen") and not is_premium_skill("Regen") and not is_status_active("Regen"):
         use_skill(lookup_skill("Regen"))
+        return True
+    else:
+        return False
+
+
+def activate_spark_life(current_health):
+    if current_health <= 30 and is_skill_active("Spark_Life") and not is_premium_skill("Spark_Life") and not is_status_active("Spark_Life"):
+        use_skill(lookup_skill("Spark_Life"))
         return True
     else:
         return False
