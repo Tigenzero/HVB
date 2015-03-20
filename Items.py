@@ -66,20 +66,26 @@ def get_gem():
     time.sleep(0.3)
     item = Cord.ibox_gem
     sum = get_pixel_sum_color(item)
+    message = "no gem found"
     if 710000 <= sum <= 719999:
-        logging.debug("health gem found")
+        #logging.debug("health gem found")
+        message = "health gem found"
         Items.h_gem = True
     elif 729000 <= sum <= 729999:
-        logging.debug("mana gem found")
+        #logging.debug("mana gem found")
+        message = "mana gem found"
         Items.m_gem = True
     elif 723000 <= sum <= 723999:
-        logging.debug("spirit gem found")
+        #logging.debug("spirit gem found")
+        message = "spirit gem found"
         Items.s_gem = True
     elif 722000 <= sum <= 722999 and not is_status_active("Channeling"):
+        message = "Channeling gem found"
         mousePos(Cord.gem_loc)
         leftClick()
     mousePos(Cord.Item_cat_loc)
     leftClick()
+    return message
 
 
 def get_gem_original():

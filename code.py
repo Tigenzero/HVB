@@ -204,42 +204,41 @@ def restore_stats(im):
         current_health = get_health(im)
         current_spirit = get_spirit(im)
         current_mana = get_mana(im)
+        message = ""
         if current_health == 0 and not enemies_exist(im):
             time.sleep(1)
             if current_health == 0 and not enemies_exist(screenGrab()):
                 Cord.p_dead = True
-                logging.info("Player has died")
+                message = "Player has died"
             else:
                 return False
         elif use_gem(0, current_health):
-            logging.info("Health Gem Used")
+            message = "Health Gem Used"
         elif activate_cure(current_health):
-            logging.info("Cure Casted")
+            message = "Cure Casted"
         elif activate_spark_life(current_health):
-            logging.info("Spark Life Casted")
+            message = "Spark Life Casted"
         elif use_health_pot(current_health):
-            logging.info("Health Potion used")
+            message = "Health Potion used"
         elif use_gem(1, current_mana):
-            logging.info("Mana Gem Used")
+            message = "Mana Gem Used"
         elif use_mana_pot(current_mana):
-            logging.info("Mana Potion used")
+            message = "Mana Potion used"
         elif use_gem(2, current_spirit):
-            logging.info("Spirit Gem Used")
+            message = "Spirit Gem Used"
         elif use_spirit_pot(current_spirit):
-            logging.info("Spirit Potion used")
+            message = "Spirit Potion used"
         elif activate_regen(current_health):
-            logging.info("Regen Casted")
+            message = "Regen Casted"
         elif activate_protection():
-            logging.info("Protection Casted")
+            message = "Protection Casted"
         elif is_channeling_active() and activate_premium():
-            logging.info("premium activated")
+            message = "premium activated"
         #elif activate_absorb():
-        #    logging.info("absorb activated")
+        #    message = "absorb activated")
         elif activate_auto_cast():
-            logging.info("auto skill activated")
-        else:
-            return False
-        return True
+            message = "auto skill activated"
+        return message
 
 
 #Grabs the current Screen to be used
@@ -406,19 +405,23 @@ def startRound():
         if im.getpixel((42, 710)) != (227, 224, 209):
             continue
         current_enemies = get_enemies(im)
-        logging.debug("Enemies: {} Health: {} Mana: {} Spirit: {}".format(len(current_enemies), get_health(im), get_mana(im), get_spirit(im)))
+        #logging.debug("Enemies: {} Health: {} Mana: {} Spirit: {}".format(len(current_enemies), get_health(im), get_mana(im), get_spirit(im)))
+        log_message = "{},{},{},{},".format(len(current_enemies), get_health(im), get_mana(im), get_spirit(im))
         get_status()
-        if restore_stats(im):
+        restore_message = restore_stats(im)
+        if len(restore_message) > 0:
+            log_message = log_message + restore_message
             time.sleep(0.2)
         elif 0 < len(current_enemies) < enemy_num:
-            logging.debug("Enemy Died, Checking Gem")
-            get_gem()
+            #logging.debug("Enemy Died, Checking Gem")
+            log_message = log_message + get_gem()
         else:
-            logging.debug("Attacking Enemy")
-            special_attack(im, current_enemies, style)
+            #logging.debug("Attacking Enemy")
+            log_message = log_message + special_attack(im, current_enemies, style)
         #this sleep function triggers the amount of time between clicks, thus the time between server communication
         #This function is very important as it randomizes the communication times, emulating the behavior of a player
         #sleep()
+        logging.debug(log_message)
         enemy_num = len(current_enemies)
     return True
 

@@ -148,7 +148,7 @@ def activate_special(special, overcharge, current_overcharge, style):
 
 
 def activate_special2(special, overcharge=0, current_overcharge=0):
-    logging.debug("checking if special can be activated")
+    #logging.debug("checking if special can be activated")
     if special == 2 and Settings.Player.special_attack[2] >= 0:
         if is_special_active(2):
             use_skill(Settings.Player.special_attack[2])
@@ -349,25 +349,23 @@ def special_attack(im, current_enemies, style):
         current_spirit = get_spirit(im)
         current_overcharge = get_overcharge(im)
         #print "Is Spirit Active? %r" %is_spirit_active(im)
+        message = "Attacked Enemy"
         if not is_spirit_active(im):
                 if use_spirit(current_spirit, current_overcharge, im):
-                    logging.debug("Spirit Activated")
-                    return
+                    message = "Spirit Activated"
                 elif current_overcharge >= 30:
                     if style == 0:
                         attack(current_enemies[special_attack_dual(current_enemies, current_overcharge)])
-                        return
                     elif style == 1:
                         attack(current_enemies[special_attack_single(current_overcharge)])
-                        return
                     elif style == 2:
                         attack(current_enemies[special_attack_2hand(current_overcharge)])
-                        return
                     elif style == 4:
                         attack(current_enemies[special_attack_niken(current_overcharge)])
-                        return
+                return message
         if len(current_enemies) > 0:
             attack(current_enemies[0])
+            return message
     except Exception, e:
         logging.warning("Issue with Special Attack function. returning. Specials: {}".format(Settings.Player.special_attack))
         logging.exception(e)

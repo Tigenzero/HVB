@@ -4,6 +4,8 @@ import os.path
 import UI
 import wx
 import Players
+import datetime
+
 
 def get_player_config():
     Settings.Player_List = []
@@ -77,7 +79,8 @@ def get_arena_values():
         dial.ShowModal()
 
 if __name__ == '__main__':
-    logging.basicConfig(filename=Settings.log_loc, level=Settings.log_level, format='%(asctime)s %(levelname)s: %(message)s')
+    log_path = "{}{}".format( datetime.datetime.today().strftime("%Y%m%d"), Settings.log_loc)
+    logging.basicConfig(filename=log_path, level=Settings.log_level, format='%(asctime)s,%(levelname)s,%(message)s')
     logging.debug("Starting main")
     get_player_config()
     get_arena_values()
