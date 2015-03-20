@@ -362,6 +362,8 @@ def special_attack(im, current_enemies, style):
                         attack(current_enemies[special_attack_2hand(current_overcharge)])
                     elif style == 4:
                         attack(current_enemies[special_attack_niken(current_overcharge)])
+                else:
+                    attack(current_enemies[0])
                 return message
         if len(current_enemies) > 0:
             attack(current_enemies[0])
@@ -369,7 +371,7 @@ def special_attack(im, current_enemies, style):
     except Exception, e:
         logging.warning("Issue with Special Attack function. returning. Specials: {}".format(Settings.Player.special_attack))
         logging.exception(e)
-        return
+        return "Issue with Special Attack. returning"
 
 
 

@@ -417,7 +417,8 @@ def startRound():
             log_message = log_message + get_gem()
         else:
             #logging.debug("Attacking Enemy")
-            log_message = log_message + special_attack(im, current_enemies, style)
+            message = special_attack(im, current_enemies, style)
+            log_message = log_message + message
         #this sleep function triggers the amount of time between clicks, thus the time between server communication
         #This function is very important as it randomizes the communication times, emulating the behavior of a player
         #sleep()
