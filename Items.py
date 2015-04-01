@@ -245,7 +245,7 @@ def use_mana_pot(current_mana):
 
 
 def use_spirit_pot(current_spirit):
-    if current_spirit <= 20:
+    if current_spirit <= 30:
         if not is_item_active(2):
             if have_item(2):
                 use_item(2)
