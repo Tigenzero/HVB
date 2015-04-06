@@ -70,5 +70,5 @@ def lookup_status(pixel_sum):
         if pixel_sum == known_status:
             #print "status found: %s" % Status.collection.get(known_status)
             return Status.collection.get(known_status)
-    logging.debug("status not found: {0}".format(pixel_sum))
+    #logging.debug("status not found: {0}".format(pixel_sum))
     return " "
