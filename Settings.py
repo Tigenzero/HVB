@@ -15,3 +15,4 @@ Player_List = []
 Arenas = []
 pause = False
 pony_timer = 0
+cool_down = 42

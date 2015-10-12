@@ -22,6 +22,12 @@ def activate_gem():
     #leftClick()
 
 
+def cool_down():
+    for item in Items.cool_down:
+        if item > 0:
+            item -= 1
+
+
 def dynamic_get_gem():
     open_items()
     item = Cord.ibox_gem
@@ -203,7 +209,7 @@ def is_pot(pots, value):
 
 def have_item(item_type):
     for i in range(0, len(Cord.Items)):
-        if Cord.Items[i] == item_type and is_item_available(Cord.ibox_list[i]):
+        if Cord.Items[i] == item_type and is_item_available(Cord.ibox_list[i]) and Items.cool_down == 0:
             return True
     return False
 
@@ -299,7 +305,7 @@ def use_item(item_type):
             leftClick()
             mousePos(Cord.item_locs[i])
             leftClick()
-            Items.cool_down[i] = 40
+            Items.cool_down[i] = Settings.cool_down
             return True
     logging.warning("No Items Could be Used.")
     return False

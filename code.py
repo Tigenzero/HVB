@@ -6,7 +6,7 @@ import winsound
 from numpy import *
 from find_window import find_corner
 import os
-from Items import get_gem, use_health_pot, use_mana_pot, use_spirit_pot, get_items, use_gem, leftover_inventory
+from Items import get_gem, use_health_pot, use_mana_pot, use_spirit_pot, get_items, use_gem, leftover_inventory, cool_down
 from Skills import activate_cure, activate_premium, activate_protection, activate_regen, special_attack, get_spirit, activate_absorb, activate_auto_cast, activate_spark_life
 from Click_Press import *
 from Coordinates import Cord
@@ -406,6 +406,7 @@ def startRound():
         if im.getpixel((42, 710)) != (227, 224, 209):
             continue
         current_enemies = get_enemies(im)
+        cool_down()
         #logging.debug("Enemies: {} Health: {} Mana: {} Spirit: {}".format(len(current_enemies), get_health(im), get_mana(im), get_spirit(im)))
         log_message = "{},{},{},{},".format(len(current_enemies), get_health(im), get_mana(im), get_spirit(im))
         get_status()
