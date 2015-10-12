@@ -11,6 +11,7 @@ class Items:
     h_gem = False
     s_gem = False
     m_gem = False
+    cool_down = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 
 
 def activate_gem():
@@ -156,14 +157,15 @@ def get_items():
     #Cord.Items = [9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9]
     Cord.Items = list(Settings.Player.items)
     logging.debug(Cord.Items)
-    open_items()
+    #Settings Items as static until further notice.
+    """open_items()
     count = 1
     for item in Cord.ibox_list:
         if is_slot_empty_or_used(item):
             Cord.Items[count - 1] = 9
         count += 1
     close_items()
-    print Cord.Items
+    print Cord.Items"""
 
 
 def open_items():
@@ -246,8 +248,8 @@ def use_health_pot(current_health):
     if current_health <= 70:
         if not is_item_active(0):
             if have_item(0):
-                use_item(0)
-                return True
+                if use_item(0):
+                    return True
     return False
 
 
@@ -255,8 +257,8 @@ def use_mana_pot(current_mana):
     if current_mana <= 70:
         if not is_item_active(1):
             if have_item(1):
-                use_item(1)
-                return True
+                if use_item(1):
+                    return True
     return False
 
 
@@ -264,8 +266,8 @@ def use_spirit_pot(current_spirit):
     if current_spirit <= 70:
         if not is_item_active(2):
             if have_item(2):
-                use_item(2)
-                return True
+                if use_item(2):
+                    return True
     return False
 
 
@@ -291,11 +293,13 @@ def use_gem(gem_type, current):
 
 def use_item(item_type):
     for i in range(0, len(Cord.Items)):
-        if Cord.Items[i] == item_type:
+        if Cord.Items[i] == item_type and Items.cool_down[i] == 0:
             #Cord.Items[i] = 9 ##New Rule
             mousePos(Cord.Item_cat_loc)
             leftClick()
             mousePos(Cord.item_locs[i])
             leftClick()
-            return
-    logging.warning("Item Not Found...")
+            Items.cool_down[i] = 40
+            return True
+    logging.warning("No Items Could be Used.")
+    return False

@@ -1,5 +1,6 @@
 import Settings
 import logging
+import logging.config
 import os.path
 import UI
 import wx
@@ -79,8 +80,13 @@ def get_arena_values():
         dial.ShowModal()
 
 if __name__ == '__main__':
-    log_path = "{}{}".format( datetime.datetime.today().strftime("%Y%m%d"), Settings.log_loc)
-    logging.basicConfig(filename=log_path, level=Settings.log_level, format='%(asctime)s,%(levelname)s,%(message)s')
+    logfile = os.path.join('logs', 'logging_file.log')
+    print logfile
+    if not os.path.isdir('logs'):
+        os.makedirs('logs')
+    logging.config.fileConfig('logging.conf', defaults={'logfile': logfile})
+    #log_path = "{}{}".format( datetime.datetime.today().strftime("%Y%m%d"), Settings.log_loc)
+    #logging.basicConfig(filename=log_path, level=Settings.log_level, format='%(asctime)s,%(levelname)s,%(message)s')
     logging.debug("Starting main")
     get_player_config()
     get_arena_values()
