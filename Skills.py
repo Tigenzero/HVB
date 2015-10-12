@@ -85,7 +85,7 @@ def activate_premium():
 
 
 def activate_regen(current_health):
-    if current_health <= 60 and is_skill_active("Regen") and not is_premium_skill("Regen") and not is_status_active("Regen"):
+    if current_health <= 70 and is_skill_active("Regen") and not is_premium_skill("Regen") and not is_status_active("Regen"):
         use_skill(lookup_skill("Regen"))
         return True
     else:

@@ -14,18 +14,15 @@ class Items:
 
 
 def activate_gem():
-    mousePos(Cord.Item_cat_loc)
-    leftClick()
+    open_items()
     mousePos(Cord.gem_loc)
     leftClick()
-    mousePos(Cord.Item_cat_loc)
-    leftClick()
+    #mousePos(Cord.Item_cat_loc)
+    #leftClick()
 
 
 def dynamic_get_gem():
-    mousePos(Cord.Item_cat_loc)
-    leftClick()
-    time.sleep(0.3)
+    open_items()
     item = Cord.ibox_gem
     sum = get_pixel_sum_color(item)
     result = Gem_Collection.get(sum)
@@ -61,9 +58,7 @@ def dynamic_get_gem():
 
 
 def get_gem():
-    mousePos(Cord.Item_cat_loc)
-    leftClick()
-    time.sleep(0.3)
+    open_items()
     item = Cord.ibox_gem
     sum = get_pixel_sum_color(item)
     message = "no gem found"
@@ -131,7 +126,7 @@ def dynamic_get_items():
     Cord.Items = [9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9]
     mousePos(Cord.Item_cat_loc, True)
     leftClick()
-    time.sleep(1.0)
+    time.sleep(0.7)
     count = 1
     for item in Cord.ibox_list:
         sum = get_pixel_sum_color(item, False)
@@ -161,18 +156,40 @@ def get_items():
     #Cord.Items = [9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9]
     Cord.Items = list(Settings.Player.items)
     logging.debug(Cord.Items)
+    open_items()
+    count = 1
+    for item in Cord.ibox_list:
+        if is_slot_empty_or_used(item):
+            Cord.Items[count - 1] = 9
+        count += 1
+    close_items()
+    print Cord.Items
+
+
+def open_items():
     mousePos(Cord.Item_cat_loc, True)
     leftClick()
     time.sleep(1.0)
-    count = 1
-    for item in Cord.ibox_list:
-        sum = get_pixel_sum_color(item, False)
-        if sum >= 700000:  # empty
-            Cord.Items[count - 1] = 9
-        count += 1
+
+
+def close_items():
     mousePos(Cord.Item_cat_loc, True)
     leftClick()
-    #print Cord.Items
+
+
+def is_slot_empty_or_used(item):
+    item_sum = get_pixel_sum_color(item, False)
+    if item_sum >= 700000:  # empty
+        return True
+    else:
+        return False
+
+
+def is_item_available(item):
+    open_items()
+    result = is_slot_empty_or_used(item)
+    close_items()
+    return not result
 
 
 def is_pot(pots, value):
@@ -184,8 +201,7 @@ def is_pot(pots, value):
 
 def have_item(item_type):
     for i in range(0, len(Cord.Items)):
-    #for item in Cord.Items:
-        if Cord.Items[i] == item_type:
+        if Cord.Items[i] == item_type and is_item_available(Cord.ibox_list[i]):
             return True
     return False
 
@@ -227,7 +243,7 @@ def leftover_inventory():
     logger.info("Spirit Potions: " + str(s_count))
 
 def use_health_pot(current_health):
-    if current_health <= 40:
+    if current_health <= 70:
         if not is_item_active(0):
             if have_item(0):
                 use_item(0)
@@ -236,7 +252,7 @@ def use_health_pot(current_health):
 
 
 def use_mana_pot(current_mana):
-    if current_mana <= 20:
+    if current_mana <= 70:
         if not is_item_active(1):
             if have_item(1):
                 use_item(1)
@@ -245,7 +261,7 @@ def use_mana_pot(current_mana):
 
 
 def use_spirit_pot(current_spirit):
-    if current_spirit <= 30:
+    if current_spirit <= 70:
         if not is_item_active(2):
             if have_item(2):
                 use_item(2)
@@ -256,12 +272,12 @@ def use_spirit_pot(current_spirit):
 #0 = health, 1 = mana, 2 = spirit
 def use_gem(gem_type, current):
     if gem_type == 0:
-        if current <= 60 and Items.h_gem:
+        if current <= 70 and Items.h_gem:
             activate_gem()
             Items.h_gem = False
             return True
     elif gem_type == 1:
-        if current <= 50 and Items.m_gem:
+        if current <= 70 and Items.m_gem:
             activate_gem()
             Items.m_gem = False
             return True
@@ -276,7 +292,7 @@ def use_gem(gem_type, current):
 def use_item(item_type):
     for i in range(0, len(Cord.Items)):
         if Cord.Items[i] == item_type:
-            Cord.Items[i] = 9
+            #Cord.Items[i] = 9 ##New Rule
             mousePos(Cord.Item_cat_loc)
             leftClick()
             mousePos(Cord.item_locs[i])
