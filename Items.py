@@ -251,7 +251,7 @@ def leftover_inventory():
     logger.info("Spirit Potions: " + str(s_count))
 
 def use_health_pot(current_health):
-    if current_health <= 70:
+    if current_health <= 50:
         if not is_item_active(0):
             if have_item(0):
                 if use_item(0):
