@@ -1,4 +1,14 @@
+<<<<<<< HEAD
 *.xml
 *.xml
 *.xml
 *.xml
+=======
+.idea
+*.xml
+*.log
+workspace.xml
+*.ini
+.idea/workspace.xml
+*.pyc
+>>>>>>> refs/remotes/origin/UI&Altered-Skill-Methods

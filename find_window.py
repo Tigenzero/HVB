@@ -1,11 +1,15 @@
 import win32api
 import ImageGrab
+<<<<<<< HEAD
 import math
 """
  The initial test will involve 1920X1080
  The width of the box will be at least 1293px
 """
 temp_point = -1
+=======
+
+>>>>>>> refs/remotes/origin/UI&Altered-Skill-Methods
 
 def get_width():
     return win32api.GetSystemMetrics(0)
@@ -14,8 +18,12 @@ def get_width():
 def get_height():
     return win32api.GetSystemMetrics(1)
 
+<<<<<<< HEAD
 #The plan is to take the resolution of the screen, split it into 4 scanner X coordinates and 10 Y coordinates in hopes that the window can be quickly found
 #Afterwards, the scanner will find the top right corner of the window and determine that the whole window (or at least enough of the window needed to function) is viewable.
+=======
+
+>>>>>>> refs/remotes/origin/UI&Altered-Skill-Methods
 def find_window():
     width = get_width()
     height = get_height()
@@ -30,6 +38,7 @@ def find_window():
                 #print "window found at %d, %d" % (temp_x, temp_y)
                 return temp_x, temp_y
     print "Never Found Window"
+<<<<<<< HEAD
     return 0, 0
 
 """
@@ -60,6 +69,9 @@ def find_left(window):
     except ValueError:
         return 0
 """
+=======
+    quit()
+>>>>>>> refs/remotes/origin/UI&Altered-Skill-Methods
 
 
 def find_left(window):
@@ -100,6 +112,7 @@ def find_top(x, y):
             count += 1
 
     return last_y
+<<<<<<< HEAD
 """
 def find_top(x, y):
     print x
@@ -158,12 +171,20 @@ def find_browser():
     print "no point was found, must have been 0"
     return 0
 
+=======
+
+
+>>>>>>> refs/remotes/origin/UI&Altered-Skill-Methods
 def window_screenGrab():
     #box = ()
     im = ImageGrab.grab()
     #im.save(os.getcwd() + '\\full_snap__' + str(int(time.time())) + '.png', 'PNG')
     return im
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> refs/remotes/origin/UI&Altered-Skill-Methods
 #for window
 def find_corner():
     window = find_window()
