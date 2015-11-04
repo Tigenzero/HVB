@@ -1,0 +1,7 @@
+Naked
+PIL
+PyYAML
+cElementTree
+citelementtree
+numpy
+pyasn1
