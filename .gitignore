@@ -5,3 +5,4 @@ workspace.xml
 *.ini
 .idea/workspace.xml
 *.pyc
+*.pyc
