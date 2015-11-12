@@ -20,6 +20,8 @@ class ScreenGrabber(object):
         self.screen_height = win32api.GetSystemMetrics(1)
         self.scan_size = 12
         self.image = None
+        self._find_window_dimensions()
+
 
     def _find_window_dimensions(self):
         window = self._find_window()
