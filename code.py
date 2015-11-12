@@ -4,7 +4,7 @@ For Screen Resolution 1920 X 1080
 import ImageGrab
 import winsound
 from numpy import *
-from find_window import find_corner
+from find_window import ScreenGrabber
 import os
 from Items import get_gem, use_health_pot, use_mana_pot, use_spirit_pot, get_items, use_gem, leftover_inventory, cool_down
 from Skills import activate_cure, activate_premium, activate_protection, activate_regen, special_attack, get_spirit, activate_absorb, activate_auto_cast, activate_spark_life
@@ -45,11 +45,11 @@ def enemies_exist(im):
     return False
 
 
-def get_boundaries():
+"""def get_boundaries():
         corner = find_corner()
         Settings.box = (corner[0], corner[1], corner[0] + 1235, corner[1] + 720)
         Cord.window_padding_y = corner[1]
-        Cord.window_padding_x = corner[0]
+        Cord.window_padding_x = corner[0]"""
 
 
 def get_cords():
