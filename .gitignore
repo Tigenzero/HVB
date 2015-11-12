@@ -12,3 +12,4 @@ workspace.xml
 .idea/workspace.xml
 *.pyc
 >>>>>>> refs/remotes/origin/UI&Altered-Skill-Methods
+*.xml

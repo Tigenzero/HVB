@@ -136,12 +136,12 @@ class UI(wx.Frame):
 
     def launch_game(self, event):
         if self.player_validate():
-            code_old.startGame()
+            code.startGame()
             self.end_of_game()
 
     def launch_grindfest(self, event):
         if self.player_validate():
-            code_old.start_grindfest()
+            code.start_grindfest()
             self.end_of_game()
 
     #UNFINISHED
@@ -159,7 +159,7 @@ class UI(wx.Frame):
                 #display_message("end arena found")
 
         if self.player_validate():
-            code_old.start_arena(start_num + 1, end_num + 1)
+            code.start_arena(start_num + 1, end_num + 1)
             self.end_of_game()
 
     def autorecover(self, event):

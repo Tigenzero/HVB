@@ -1,10 +1,43 @@
 import win32api
 import ImageGrab
+import scanner
 """
  The initial test will involve 1920X1080
  The width of the box will be at least 1293px
 """
 temp_point = -1
+WINDOW_COLORS = [
+    (237, 235, 223),
+    (227, 224, 209),
+    (177, 185, 194)
+]
+
+class ScreenGrabber(object):
+    def __init__(self):
+        self.window_dimensions = [0, 0, 0, 0]
+        self.screen_width = win32api.GetSystemMetrics(0)
+        self.screen_height = win32api.GetSystemMetrics(1)
+        self.scan_size = 12
+        self.image = None
+
+    def _find_window_dimensions(self):
+        window = self._find_window()
+        left = find_left(window)
+        top = find_top(left, window[1])
+        self.window_dimensions = (left, top, left + 1235, top + 720)
+
+    def _find_window(self):
+        self.refresh_image()
+        window_scanner = scanner.Scanner.run(self.screen_width,
+                                         self.screen_height,
+                                         self.scan_size,
+                                         self.image,
+                                         WINDOW_COLORS)
+
+
+
+    def refresh_image(self):
+        self.image = ImageGrab.grab()
 
 def get_width():
     return win32api.GetSystemMetrics(0)
