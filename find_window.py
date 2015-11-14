@@ -4,6 +4,7 @@ import win32api
 import scanner
 import PIL
 from PIL import Image, ImageGrab
+import logging
 """
  The initial test will involve 1920X1080
  The width of the box will be at least 1293px
@@ -33,7 +34,6 @@ class ScreenGrabber(object):
 
     def _find_window(self):
         self.refresh_image()
-        self.save()
         return scanner.Scanner.run(self.screen_width,
                                    self.screen_height,
                                    self.scan_size,
@@ -77,8 +77,7 @@ class ScreenGrabber(object):
         self.image = ImageGrab.grab(self.window_dimensions)
 
     def save(self):
-        self.image.save("soemthing.png", 'PNG')
-        #self.image.save(os.getcwd() + '\\image_snap__' + str(int(time.time())) + '.png', 'PNG')
+        self.image.save(os.getcwd() + '\\image_snap__' + str(int(time.time())) + '.png', 'PNG')
 
 """#for fullscreen
 def find_browser():

@@ -1,3 +1,7 @@
+from PIL import ImageGrab, Image
+import PIL
+
+
 class Scanner(object):
     def __init__(self, x_scan, y_scan, scan_size, image, scan_targets):
         self.x_scan = x_scan
@@ -22,7 +26,7 @@ class Scanner(object):
 
     def _check_coordinates_for_targets(self, x_coord, y_coord):
         for target in self.scan_targets:
-            if self.image.getpixels(x_coord, y_coord) == target:
+            if self.image.getpixel((x_coord, y_coord)) == target:
                 self.found_x_coord = x_coord
                 self.found_y_coord = y_coord
                 return True
