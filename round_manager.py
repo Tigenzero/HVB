@@ -9,6 +9,7 @@ import time
 import logging
 import image_initialize  # legacy
 import Settings  # legacy
+import Status  # legacy
 
 
 class MasterControl(object):
@@ -77,7 +78,7 @@ class MasterControl(object):
             #logging.debug("Enemies: {} Health: {} Mana: {} Spirit: {}".format(len(current_enemies), get_health(im), get_mana(im), get_spirit(im)))
             log_message = "{},{},{},{},".format(len(current_enemies), self.player_monitor.health,
                                                 self.player_monitor.mana, self.player_monitor.spirit)
-            get_status()
+            Status.get_status()
             restore_message = restore_stats(im)
             if len(restore_message) > 0:
                 log_message = log_message + restore_message
