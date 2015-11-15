@@ -4,39 +4,18 @@ For Screen Resolution 1920 X 1080
 import ImageGrab
 import winsound
 from numpy import *
-from find_window import ScreenGrabber
+import find_window
 import os
-from Items import get_gem, use_health_pot, use_mana_pot, use_spirit_pot, get_items, use_gem, leftover_inventory, cool_down
+from items import get_gem, use_health_pot, use_mana_pot, use_spirit_pot, get_items, use_gem, leftover_inventory, cool_down
 from Skills import activate_cure, activate_premium, activate_protection, activate_regen, special_attack, get_spirit, activate_absorb, activate_auto_cast, activate_spark_life
 from Click_Press import *
 from Coordinates import Cord
 import Settings
 from Status import get_status
-from Image_Initialize import get_images
+from image_initialize import get_images
 import random
+import scanner
 
-def debug_levels(current_level, level):
-    #Performs all of the needed functions during a round
-    if current_level == 10:
-        screenGrab_save(level + '_10', level)
-    elif current_level == 20:
-        screenGrab_save(level + '_20', level)
-    elif current_level == 30:
-        screenGrab_save(level + '_30', level)
-    elif current_level == 40:
-        screenGrab_save(level + '_40', level)
-    elif current_level == 50:
-        screenGrab_save(level + '_50', level)
-    elif current_level == 60:
-        screenGrab_save(level + '_60', level)
-    elif current_level == 70:
-        screenGrab_save(level + '_70', level)
-    elif current_level == 80:
-        screenGrab_save(level + '_80', level)
-    elif current_level == 90:
-        screenGrab_save(level + '_90', level)
-    elif current_level == 100:
-        screenGrab_save(level + '_100', level)
 
 def enemies_exist(im):
     for enemy in Cord.enemies:
@@ -70,24 +49,25 @@ def get_enemies(im):
     return current_enemies
 
 
-def get_health(im):
-    p_health = 0
-    for level in Cord.p_health_levels:
-        if im.getpixel(level) != Cord.under_color:
-            p_health += 10
-        else:
-            return p_health
-    return 100
+def find_window_dimensions(window_grabber=find_window.ScreenGrabber()):
+    window_grabber.refresh_image()
+    window = scanner.Scanner.run(window_grabber.screen_width,
+                                 window_grabber.screen_height,
+                                 window_grabber.scan_size,
+                                 window_grabber.image,
+                                 find_window.WINDOW_COLORS)
+    left = window_grabber.find_left(window)
+    top = window_grabber.find_top(left, window[1])
+    window_grabber.window_dimensions = (left, top, left + 1235, top + 720)
 
 
-def get_mana(im):
-    p_mana = 0
-    for level in Cord.p_mana_levels:
-        if im.getpixel(level) != Cord.under_color:
-            p_mana += 10
-        else:
-            return p_mana
-    return 100
+def find_window(self):
+    self.refresh_image()
+    return scanner.Scanner.run(self.screen_width,
+                               self.screen_height,
+                               self.scan_size,
+                               self.image,
+                               find_window.WINDOW_COLORS)
 
 
 def go_to_arena(level, point):
@@ -125,13 +105,6 @@ def is_channeling_active():
         if status == "Channeling":
             return True
     return False
-
-
-def is_player_dead(im):
-    if get_health(im) == 0:
-        return True
-    else:
-        return False
 
 
 def pony_time(im):
@@ -241,41 +214,6 @@ def restore_stats(im):
         return message
 
 
-#Grabs the current Screen to be used
-def screenGrab():
-    im = ImageGrab.grab(Settings.box)
-    #im = ImageGrab.grab()
-    #im.save(os.getcwd() + '\\full_snap__' + str(int(time.time())) + '.png', 'PNG')
-    return im
-
-
-def screenGrab_save(file_name='', level=''):
-    im = ImageGrab.grab(Settings.box)
-    #im = ImageGrab.grab()
-    if len(file_name) > 0:
-        if len(level) > 0:
-            if level == "health":
-                im.save(os.getcwd() + '\\images\\debug\\health\\' + file_name + "_" + str(int(time.time())) + '.png', 'PNG')
-            elif level == "mana":
-                im.save(os.getcwd() + '\\images\\debug\\mana\\' + file_name + "_" + str(int(time.time())) + '.png', 'PNG')
-            elif level == "spirit":
-                im.save(os.getcwd() + '\\images\\debug\\spirit\\' + file_name + "_" + str(int(time.time())) + '.png', 'PNG')
-            else:
-                logging.warning("screenGrab_save level unknown, saving at root")
-                im.save(os.getcwd() + '\\full_snap__' + str(int(time.time())) + '.png', 'PNG')
-        else:
-            im.save(os.getcwd() + '\\' + file_name + "_" + str(int(time.time())) + '.png', 'PNG')
-    else:
-        im.save(os.getcwd() + '\\full_snap__' + str(int(time.time())) + '.png', 'PNG')
-    return im
-
-
-def screenGrab_all():
-    im = ImageGrab.grab()
-    im.save(os.getcwd() + '\\full_snap__' + str(int(time.time())) + '.png', 'PNG')
-    return im
-
-
 def sleep():
     time.sleep(random.uniform(Settings.min_sleep, Settings.max_sleep))
 
@@ -353,7 +291,7 @@ def startGame(): #UNFINISHED
                 battle_end = True
         else:
             Settings.pony_timer = 0
-            if not startRound():
+            if not start_round():
                 return False
             time.sleep(0.5)
             press('spacebar')
@@ -392,7 +330,7 @@ def start_grindfest():
 
 
 
-def startRound():
+def start_round():
     logging.info("Starting Round.")
     enemy_num = 0
     get_gem()

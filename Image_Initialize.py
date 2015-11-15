@@ -5,7 +5,7 @@ from ntpath import split, basename
 from Skills import Skills
 from ImageOps import grayscale
 from Status import Status
-import Items
+import items
 import logging
 
 
@@ -37,14 +37,14 @@ def get_images():
         pix_val_flat = [x for sets in pix_val for x in sets]
         a = sum(pix_val_flat)
         filename = return_filename(image).split(".")[0]
-        Items.Gem_Collection[a] = filename
+        items.Gem_Collection[a] = filename
     for image in list_files("item"):
         im = Image.open(image, 'r')
         pix_val = list(im.getdata())
         pix_val_flat = [x for sets in pix_val for x in sets]
         a = sum(pix_val_flat)
         filename = return_filename(image).split(".")[0]
-        Items.Item_Collection[a] = filename
+        items.Item_Collection[a] = filename
         #USE ONLY WHEN COLOR IS NEEDED
         #pix_val = list(im.getdata())
         #pix_val_flat = [x for sets in pix_val for x in sets]

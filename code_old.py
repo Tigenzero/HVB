@@ -316,13 +316,13 @@ import winsound
 from numpy import *
 from find_window import find_corner
 import os
-from Items import get_gem, use_health_pot, use_mana_pot, use_spirit_pot, get_items, use_gem, leftover_inventory, cool_down
+from items import get_gem, use_health_pot, use_mana_pot, use_spirit_pot, get_items, use_gem, leftover_inventory, cool_down
 from Skills import activate_cure, activate_premium, activate_protection, activate_regen, special_attack, get_spirit, activate_absorb, activate_auto_cast, activate_spark_life
 from Click_Press import *
 from Coordinates import Cord
 import Settings
 from Status import get_status
-from Image_Initialize import get_images
+from image_initialize import get_images
 import random
 
 def debug_levels(current_level, level):

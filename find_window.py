@@ -9,7 +9,6 @@ import logging
  The initial test will involve 1920X1080
  The width of the box will be at least 1293px
 """
-temp_point = -1
 WINDOW_COLORS = [
     (237, 235, 223),
     (227, 224, 209),
@@ -24,23 +23,8 @@ class ScreenGrabber(object):
         self.window_dimensions = [0, 0, self.screen_width, self.screen_height]
         self.scan_size = 12
         self.image = None
-        self._find_window_dimensions()
 
-    def _find_window_dimensions(self):
-        window = self._find_window()
-        left = self._find_left(window)
-        top = self._find_top(left, window[1])
-        self.window_dimensions = (left, top, left + 1235, top + 720)
-
-    def _find_window(self):
-        self.refresh_image()
-        return scanner.Scanner.run(self.screen_width,
-                                   self.screen_height,
-                                   self.scan_size,
-                                   self.image,
-                                   WINDOW_COLORS)
-
-    def _find_left(self, window):
+    def find_left(self, window):
         x = window[0]
         y = window[1]
         count = 0
@@ -57,7 +41,7 @@ class ScreenGrabber(object):
                     count += 1
         return last_x
 
-    def _find_top(self, x, y):
+    def find_top(self, x, y):
         count = 0
         last_y = 0
         for i in range(1, y):
@@ -78,6 +62,10 @@ class ScreenGrabber(object):
 
     def save(self):
         self.image.save(os.getcwd() + '\\image_snap__' + str(int(time.time())) + '.png', 'PNG')
+
+    def save_all(self):
+        full_image = ImageGrab.grab()
+        full_image.save(os.getcwd() + '\\full_snap__' + str(int(time.time())) + '.png', 'PNG')
 
 """#for fullscreen
 def find_browser():

@@ -1,3 +1,141 @@
+class PlayerCords(object):
+    def __init__(self):
+        p_levels = [22, 33, 44, 55, 66, 77, 88, 99, 110, 123, 134]
+        p_health_y = 149
+        #p_health_y = 196
+        #p_health_y = 150 laptop
+        p_mana_y = 187
+        #p_mana_y = 191
+        p_spirit_y = 227
+        #p_spirit_y = 232
+        #p_overcharge_y = 267
+        p_overcharge_y = 265
+        self.under_color = (0, 0, 0) #Black
+        self.over_color = (0, 166, 23) #Green
+        spirit_over_color = (120, 70, 0)
+        self.p_health_levels = ((p_levels[0], p_health_y),
+                                (p_levels[1], p_health_y),
+                                (p_levels[2], p_health_y),
+                                (p_levels[3], p_health_y),
+                                (p_levels[4], p_health_y),
+                                (p_levels[5], p_health_y),
+                                (p_levels[6], p_health_y),
+                                (p_levels[7], p_health_y),
+                                (p_levels[8], p_health_y),
+                                (p_levels[9], p_health_y),
+                                (p_levels[10], p_health_y))
+
+        self.p_mana_levels = ((p_levels[0], p_mana_y),
+                              (p_levels[1], p_mana_y),
+                              (p_levels[2], p_mana_y),
+                              (p_levels[3], p_mana_y),
+                              (p_levels[4], p_mana_y),
+                              (p_levels[5], p_mana_y),
+                              (p_levels[6], p_mana_y),
+                              (p_levels[7], p_mana_y),
+                              (p_levels[8], p_mana_y),
+                              (p_levels[9], p_mana_y),
+                              (p_levels[10], p_mana_y))
+
+        self.p_spirit_levels = ((p_levels[0], p_spirit_y),
+                                (p_levels[1], p_spirit_y),
+                                (p_levels[2], p_spirit_y),
+                                (p_levels[3], p_spirit_y),
+                                (p_levels[4], p_spirit_y),
+                                (p_levels[5], p_spirit_y),
+                                (p_levels[6], p_spirit_y),
+                                (p_levels[7], p_spirit_y),
+                                (p_levels[8], p_spirit_y),
+                                (p_levels[9], p_spirit_y),
+                                (p_levels[10], p_spirit_y))
+
+        self.p_overcharge_levels = ((p_levels[0], p_overcharge_y),
+                                    (p_levels[1], p_overcharge_y),
+                                    (p_levels[2], p_overcharge_y),
+                                    (p_levels[3], p_overcharge_y),
+                                    (p_levels[4], p_overcharge_y),
+                                    (p_levels[5], p_overcharge_y),
+                                    (p_levels[6], p_overcharge_y),
+                                    (p_levels[7], p_overcharge_y),
+                                    (p_levels[8], p_overcharge_y),
+                                    (p_levels[9], p_overcharge_y),
+                                    (p_levels[10], p_overcharge_y))
+
+
+class EnemyCords(object):
+    def __init__(self):
+        e_x = 890
+        e1_health = (e_x,  73)
+        e2_health = (e_x,  131)
+        e3_health = (e_x,  188)
+        e4_health = (e_x,  246)
+        e5_health = (e_x,  305)
+        e6_health = (e_x,  362)
+        e7_health = (e_x,  420)
+        e8_health = (e_x,  479)
+        e9_health = (e_x,  537) #untested
+        e10_health = (e_x,  595) #untested
+        self.under_color = (0, 0, 0) #Black
+        self.over_color = (0, 166, 23) #Green
+
+        self.enemies = (e1_health,
+                        e2_health,
+                        e3_health,
+                        e4_health,
+                        e5_health,
+                        e6_health,
+                        e7_health,
+                        e8_health,
+                        e9_health,
+                        e10_health)
+
+
+class ItemCords(object):
+    def __init__(self):
+        item_xloc = 261
+        self.item_cat_loc = (418,  65)
+        self.gem_loc = (item_xloc,  210)
+        i1 = (item_xloc,  235)
+        i2 = (item_xloc,  258)
+        i3 = (item_xloc,  281)
+        i4 = (item_xloc,  304)
+        i5 = (item_xloc,  327)
+        i6 = (item_xloc,  350)
+        i7 = (item_xloc,  373)
+        i8 = (item_xloc,  391) #here and below are not updated to latest settings
+        i9 = (item_xloc,  414)
+        i10 = (item_xloc,  438)
+        i11 = (item_xloc,  460)
+        i12 = (item_xloc,  482)
+        i13 = (item_xloc,  507)
+        i14 = (item_xloc,  530)
+        i15 = (item_xloc,  556)
+        scroll_xloc = 550
+        scroll1_loc = (scroll_xloc,  234)
+        infusion1_loc = [scroll_xloc,  253]
+        self.item_locs = [i1, i2, i3, i4, i5, i6, i7, i8, i9, i10, i11, i12, i13, i14, i15, scroll1_loc, infusion1_loc]
+        itemx_begin = 200
+        itemx_end = 378
+        self.ibox_gem = [itemx_begin, 205, itemx_end, 212]
+        ibox1 = [itemx_begin, 229, itemx_end, 236]
+        ibox2 = [itemx_begin, 252, itemx_end, 259]
+        ibox3 = [itemx_begin, 275, itemx_end, 282]
+        ibox4 = [itemx_begin, 298, itemx_end, 305]
+        ibox5 = [itemx_begin, 321, itemx_end, 328]
+        ibox6 = [itemx_begin, 344, itemx_end, 351]
+        ibox7 = [itemx_begin, 367, itemx_end, 374]
+        ibox8 = [itemx_begin, 390, itemx_end, 397]
+        ibox9 = [itemx_begin, 413, itemx_end, 420]
+        ibox10 = [itemx_begin, 436, itemx_end, 443]
+        ibox11 = [itemx_begin, 459, itemx_end, 466]
+        ibox12 = [itemx_begin, 482, itemx_end, 489]
+        ibox13 = [itemx_begin, 505, itemx_end, 512]
+        ibox14 = [itemx_begin, 528, itemx_end, 535]
+        ibox15 = [itemx_begin, 551, itemx_end, 558]
+        self.ibox_list = [ibox1, ibox2, ibox3, ibox4, ibox5, ibox6, ibox7, ibox8, ibox9, ibox10, ibox11, ibox12, ibox13, ibox14, ibox15]
+
+
+
 class Cord:
     chrome_popup_padding_y = 52
     firefox_padding_y = 85
@@ -18,42 +156,7 @@ class Cord:
     restore_mana_button = (78,  303)
     restore_spirit_button = (78,  321)
     restore_all_button = (78,  340)
-#Player Stat Locations
-    p_x0 = 22
-    p_x10 = 33
-    p_x20 = 44
-    p_x30 = 55
-    p_x40 = 66
-    p_x50 = 77
-    p_x60 = 88
-    p_x70 = 99
-    p_x80 = 110
-    p_x90 = 123
-    p_x100 = 134
-    #p_health = 196
-    p_health = 149
-    #p_health = 150 laptop
-    p_mana = 187
-    #p_mana = 191
-    p_spirit = 227
-    #p_spirit = 232
-    #p_overcharge = 267
-    p_overcharge = 265
-    p_health_levels = ((p_x0, p_health), (p_x10, p_health), (p_x20, p_health), (p_x30, p_health),
-                       (p_x40, p_health), (p_x50, p_health), (p_x60, p_health), (p_x70, p_health),
-                       (p_x80, p_health), (p_x90, p_health), (p_x100, p_health))
 
-    p_mana_levels = ((p_x0, p_mana), (p_x10, p_mana), (p_x20, p_mana), (p_x30, p_mana),
-                     (p_x40, p_mana), (p_x50, p_mana), (p_x60, p_mana), (p_x70, p_mana),
-                     (p_x80, p_mana), (p_x90, p_mana), (p_x100, p_mana))
-
-    p_spirit_levels = ((p_x0, p_spirit), (p_x10, p_spirit), (p_x20, p_spirit), (p_x30, p_spirit),
-                       (p_x40, p_spirit), (p_x50, p_spirit), (p_x60, p_spirit), (p_x70, p_spirit),
-                       (p_x80, p_spirit), (p_x90, p_spirit), (p_x100, p_spirit))
-
-    p_overcharge_levels = ((p_x0, p_overcharge), (p_x10, p_overcharge), (p_x20, p_overcharge), (p_x30, p_overcharge),
-                      (p_x40, p_overcharge), (p_x50, p_overcharge), (p_x60, p_overcharge), (p_x70, p_overcharge),
-                      (p_x80, p_overcharge), (p_x90, p_overcharge), (p_x100, p_overcharge))
 
     spirit_cat_loc = (494,  60) #changed, confirm with Chrome. X used to be 508
     spirit_active_color = (250, 59, 56) #(170, 36, 36)
@@ -67,22 +170,8 @@ class Cord:
     empty_color = (237, 235, 223) #Background Color UNTESTED
     dead_color = (166, 165, 156) #Dead Enemy Color UNTESTED
     spark_of_life_color = (192, 192, 192) #Color when Spark of Life is Active UNTESTED
-    Pony_check_loc = ((706,170),(760,122))  #(518,  185) TEST
+    Pony_check_loc = ((706, 170), (760, 122))  #(518,  185) TEST
     Pony_check_color = (237, 235, 223)
-#Enemies
-    e_x = 890
-    e1_health = (e_x,  73)
-    e2_health = (e_x,  131)
-    e3_health = (e_x,  188)
-    e4_health = (e_x,  246)
-    e5_health = (e_x,  305)
-    e6_health = (e_x,  362)
-    e7_health = (e_x,  420)
-    e8_health = (e_x,  479)
-    e9_health = (e_x,  537) #untested
-    e10_health = (e_x,  595) #untested
-
-    enemies = (e1_health, e2_health, e3_health, e4_health, e5_health, e6_health, e7_health, e8_health, e9_health, e10_health)
 #Skills
     s_y = 96
     #s_y = 290
