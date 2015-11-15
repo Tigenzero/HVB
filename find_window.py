@@ -1,7 +1,6 @@
 import os
 import time
 import win32api
-import scanner
 import PIL
 from PIL import Image, ImageGrab
 import logging

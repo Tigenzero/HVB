@@ -6,6 +6,7 @@ class PlayerMonitor(object):
         self.health = 100
         self.mana = 100
         self.spirit = 100
+        self.overcharge = 0
         self.player_coordinates = PlayerCords()
         self.is_dead = False
 

@@ -4,7 +4,7 @@ from PIL import Image
 import scanner
 import logging
 
-TEST_IMAGE = os.path.join(os.path.dirname(os.path.abspath(__file__)), "test_window.png")
+TEST_IMAGE = os.path.join(os.path.dirname(os.path.abspath(__file__)), "test_full_window.png")
 
 
 def test_screen_grabber_init():

@@ -30,10 +30,17 @@ class ItemManager(object):
         self.current_gem = None
         self.item_cords = ItemCords()
         self.items = []
+        self.h_available = True
+        self.m_available = True
+        self.s_available = True
+        self.next_h = None
+        self.next_m = None
+        self.next_s = None
 
     def get_items(self):
         for index, item in enumerate(list(Settings.Player.items)):
             self.items[index] = Item(item, self.item_cords.item_locs[index])
+            self.check_inventory()
 
     def use_item(self, item):
         if not item.available:
@@ -43,6 +50,9 @@ class ItemManager(object):
         Click_Press.mousePos(item.coordinates)
         Click_Press.leftClick()
         item.cool_down = 20  # Fix Later as a cool down dictionary that checks levels
+        item.available = False
+        self.check_inventory()
+        # BE SURE TO SET ITEM'S SOURCE SELF.NEXT_# TO NONE
 
     def cool_down_items(self):
         for item in self.items:
@@ -86,3 +96,23 @@ class ItemManager(object):
         Click_Press.mousePos(self.item_cords.item_cat_loc)
         Click_Press.leftClick()
         return message
+
+    def check_inventory(self):
+        self.h_available = False
+        self.m_available = False
+        self.s_available = False
+        for item in self.items:
+            if item.available is not True:
+                continue
+            if item.type == 0:
+                self.h_available = True
+            elif item.type == 1:
+                self.m_available = True
+            elif item.type == 1:
+                self.s_available = True
+            if self.next_h is None and item.type == 0:
+                self.next_h = item
+            elif self.next_m is None and item.type == 1:
+                self.next_m = item
+            elif self.next_s is None and item.type == 2:
+                self.next_s = item

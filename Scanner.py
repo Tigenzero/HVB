@@ -1,8 +1,12 @@
 from PIL import ImageGrab, Image
 import PIL
+import logging
 
 
 class Scanner(object):
+    """
+    Scans an image for a certain pixel color. Once found, it returns the x and y.
+    """
     def __init__(self, x_scan, y_scan, scan_size, image, scan_targets):
         self.x_scan = x_scan
         self.y_scan = y_scan
@@ -26,7 +30,11 @@ class Scanner(object):
 
     def _check_coordinates_for_targets(self, x_coord, y_coord):
         for target in self.scan_targets:
-            if self.image.getpixel((x_coord, y_coord)) == target:
+            color = self.image.getpixel((x_coord, y_coord))
+            if len(color) > 3:
+                color = (color[0], color[1], color[2])
+            #logging.info(color)
+            if color == target:
                 self.found_x_coord = x_coord
                 self.found_y_coord = y_coord
                 return True

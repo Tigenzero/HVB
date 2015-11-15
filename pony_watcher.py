@@ -9,13 +9,13 @@ import random
 class PonyWatcher(object):
     def __init__(self):
         # (518,  185) TEST
-        self.Pony_check_loc = ((706, 170), (760, 122))
-        self.Pony_check_color = (237, 235, 223)
+        self.pony_check_loc = ((706, 170), (760, 122))
+        self.pony_check_color = (237, 235, 223)
 
     def is_pony_time(self, image, pony_loc=(0, 0)):
         if pony_loc == (0, 0):
-            pony_loc = self.Pony_check_loc[0]
-        if image.getpixel(pony_loc) != self.Pony_check_color:
+            pony_loc = self.pony_check_loc[0]
+        if image.getpixel(pony_loc) != self.pony_check_color:
             return True
         else:
             return False
@@ -27,7 +27,7 @@ class PonyWatcher(object):
             return
         time.sleep(0.5)
         screen_grabber.refresh_image()
-        for pony_loc in self.Pony_check_loc:
+        for pony_loc in self.pony_check_loc:
             if self.is_pony_time(screen_grabber.image, pony_loc):
                 continue
             else:
@@ -65,10 +65,10 @@ class PonyWatcher(object):
         if option == 2:
             press('c')
         press('enter')
-        return
+        pass
 
     def _play_pony_sound(self):
-        freq = 2500 # Set Frequency To 2500 Hertz
-        dur = 1000 # Set Duration To 1000 ms == 1 second
+        freq = 2500  # Set Frequency To 2500 Hertz
+        dur = 1000  # Set Duration To 1000 ms == 1 second
         winsound.Beep(freq, dur)
         return
