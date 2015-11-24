@@ -306,8 +306,8 @@ def activate_protection():
 
 def attack(enemy):
     try:
-        mousePos(enemy)
-        leftClick()
+        mouse_position(enemy)
+        left_click()
     except ValueError:
         print "no more enemies"
 
@@ -318,8 +318,8 @@ from find_window import find_corner
 import os
 from items import get_gem, use_health_pot, use_mana_pot, use_spirit_pot, get_items, use_gem, leftover_inventory, cool_down
 from Skills import activate_cure, activate_premium, activate_protection, activate_regen, special_attack, get_spirit, activate_absorb, activate_auto_cast, activate_spark_life
-from Click_Press import *
-from Coordinates import Cord
+from click_press import *
+from coordinates import Cord
 import Settings
 from Status import get_status
 from image_initialize import get_images
@@ -453,41 +453,41 @@ def get_status():
             Cord.Current_Status.append(lookup)
 =======
 def go_to_arena(level, point):
-    mousePos(Cord.battle_cat_loc)
+    mouse_position(Cord.battle_cat_loc)
     time.sleep(0.5)
-    mousePos(Cord.arena_cat_loc)
-    leftClick()
+    mouse_position(Cord.arena_cat_loc)
+    left_click()
     time.sleep(1)
     if point == 1:
-        mousePos(Cord.a_next_loc)
-        leftClick()
+        mouse_position(Cord.a_next_loc)
+        left_click()
         time.sleep(1)
-    mousePos(level)
-    leftClick()
+    mouse_position(level)
+    left_click()
     time.sleep(1)
-    #mousePos(Cord.a_window_ok_loc)
+    #mouse_position(Cord.a_window_ok_loc)
     #time.sleep(0.5)
-    #leftClick()
+    #left_click()
     press("enter")
     time.sleep(1)
 >>>>>>> refs/remotes/origin/UI&Altered-Skill-Methods
 
 
 def go_to_grindfest():
-    mousePos(Cord.battle_cat_loc)
+    mouse_position(Cord.battle_cat_loc)
 <<<<<<< HEAD
     print Cord.battle_cat_loc
     time.sleep(0.5)
-    mousePos(Cord.Grindfest_cat_loc)
+    mouse_position(Cord.Grindfest_cat_loc)
     print Cord.Grindfest_cat_loc
 =======
     time.sleep(0.5)
-    mousePos(Cord.Grindfest_cat_loc)
+    mouse_position(Cord.Grindfest_cat_loc)
 >>>>>>> refs/remotes/origin/UI&Altered-Skill-Methods
-    leftClick()
+    left_click()
     time.sleep(0.5)
-    mousePos(Cord.grindfest_button)
-    leftClick()
+    mouse_position(Cord.grindfest_button)
+    left_click()
 
 
 def is_channeling_active():
@@ -584,16 +584,16 @@ def press(*args):
 
 def recover():
     if Settings.recover >= 0:
-        mousePos(Cord.restoratives_button)
-        leftClick()
+        mouse_position(Cord.restoratives_button)
+        left_click()
         if Settings.recover == 0:
-            mousePos(Cord.restore_all_button)
+            mouse_position(Cord.restore_all_button)
         elif Settings.recover == 1:
-            mousePos(Cord.restore_health_button)
+            mouse_position(Cord.restore_health_button)
         elif Settings.recover == 2:
-            mousePos(Cord.restore_mana_button)
+            mouse_position(Cord.restore_mana_button)
         elif Settings.recover == 3:
-            mousePos(Cord.restore_spirit_button)
+            mouse_position(Cord.restore_spirit_button)
 =======
 def pony_time(im):
     if im.getpixel(Cord.Pony_check_loc[0]) != Cord.Pony_check_color and len(get_enemies(im)) == 0:
@@ -630,22 +630,22 @@ def pony_time(im):
 
 def recover():
     if Settings.recover:
-        mousePos(Cord.restoratives_button)
-        leftClick()
-        mousePos(Cord.restore_all_button)
+        mouse_position(Cord.restoratives_button)
+        left_click()
+        mouse_position(Cord.restore_all_button)
     #if Settings.recover >= 0:
-    #    mousePos(Cord.restoratives_button)
-    #    leftClick()
+    #    mouse_position(Cord.restoratives_button)
+    #    left_click()
     #    if Settings.recover == 0:
-    #        mousePos(Cord.restore_all_button)
+    #        mouse_position(Cord.restore_all_button)
     #    elif Settings.recover == 1:
-    #        mousePos(Cord.restore_health_button)
+    #        mouse_position(Cord.restore_health_button)
     #    elif Settings.recover == 2:
-    #        mousePos(Cord.restore_mana_button)
+    #        mouse_position(Cord.restore_mana_button)
     #    elif Settings.recover == 3:
-    #        mousePos(Cord.restore_spirit_button)
+    #        mouse_position(Cord.restore_spirit_button)
 >>>>>>> refs/remotes/origin/UI&Altered-Skill-Methods
-        leftClick()
+        left_click()
         sleep()
         return True
     return False
@@ -898,8 +898,8 @@ def start_arena(start=1, end=21):#UNFINISHED
                     logging.debug("Player still recovering")
 >>>>>>> refs/remotes/origin/UI&Altered-Skill-Methods
                     time.sleep(60)
-                    mousePos(Cord.battle_cat_loc)
-                    leftClick()
+                    mouse_position(Cord.battle_cat_loc)
+                    left_click()
                     time.sleep(1)
                     get_boundaries()
                     im = screenGrab()
@@ -1007,8 +1007,8 @@ def start_grindfest():
                 logging.debug( "Player still recovering")
 >>>>>>> refs/remotes/origin/UI&Altered-Skill-Methods
                 time.sleep(60)
-                mousePos(Cord.battle_cat_loc)
-                leftClick()
+                mouse_position(Cord.battle_cat_loc)
+                left_click()
                 time.sleep(1)
                 get_boundaries()
                 im = screenGrab()
@@ -1018,8 +1018,8 @@ def start_grindfest():
         go_to_grindfest()
         startGame()
         sleep()
-        mousePos(Cord.battle_cat_loc)
-        leftClick()
+        mouse_position(Cord.battle_cat_loc)
+        left_click()
         print "Player Dead, waiting until revival."
 
 
@@ -1090,35 +1090,35 @@ def use_spirit_pot(current_spirit):
 
 
 def use_gem():
-    mousePos(Cord.Item_cat_loc)
-    leftClick()
-    mousePos(Cord.gem_loc)
-    leftClick()
+    mouse_position(Cord.Item_cat_loc)
+    left_click()
+    mouse_position(Cord.gem_loc)
+    left_click()
 
 
 def use_item(item_type):
     for i in range(0, len(Cord.Items)):
         if Cord.Items[i] == item_type:
             Cord.Items[i] = 9
-            mousePos(Cord.Item_cat_loc)
-            leftClick()
-            mousePos(Cord.item_locs[i])
-            leftClick()
+            mouse_position(Cord.Item_cat_loc)
+            left_click()
+            mouse_position(Cord.item_locs[i])
+            left_click()
             return
     print "Item Not Found..."
 
 
 def use_skill(skill):
-    #mousePos(Cord.Cure)
+    #mouse_position(Cord.Cure)
     if skill >= 0:
-        mousePos(Cord.skills[skill])
-        leftClick()
+        mouse_position(Cord.skills[skill])
+        left_click()
 
 
 def use_spirit(current_spirit, current_overcharge, im):
     if current_overcharge >= 80 and Cooldown.overcharge <= 0 and current_spirit >= 30 and not is_spirit_active(im):
-        mousePos(Cord.spirit_cat_loc)
-        leftClick()
+        mouse_position(Cord.spirit_cat_loc)
+        left_click()
         Cooldown.overcharge = 10
         return True
     else:
@@ -1279,8 +1279,8 @@ VK_CODE = {'backspace':0x08,
         if not startGame():
             return
         sleep()
-        mousePos(Cord.battle_cat_loc)
-        leftClick()
+        mouse_position(Cord.battle_cat_loc)
+        left_click()
         logging.info("Player Dead, waiting until revival.")
         sleep()
 

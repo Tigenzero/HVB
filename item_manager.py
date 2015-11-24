@@ -1,6 +1,6 @@
 import logging
-import Click_Press
-from Coordinates import ItemCords
+import click_press
+from coordinates import ItemCords
 import Settings
 import time
 
@@ -45,13 +45,12 @@ class ItemManager(object):
     def use_item(self, item):
         if not item.available:
             logging.critical("Item cannot be used if it is unavailable.")
-        Click_Press.mousePos(self.item_cords.item_cat_loc)
-        Click_Press.leftClick()
-        Click_Press.mousePos(item.coordinates)
-        Click_Press.leftClick()
+        click_press.mouse_position(self.item_cords.item_cat_loc)
+        click_press.left_click()
+        click_press.mouse_position(item.coordinates)
+        click_press.left_click()
         item.cool_down = 20  # Fix Later as a cool down dictionary that checks levels
         item.available = False
-        self.check_inventory()
         # BE SURE TO SET ITEM'S SOURCE SELF.NEXT_# TO NONE
 
     def cool_down_items(self):
@@ -59,18 +58,18 @@ class ItemManager(object):
             item.cool_down()
 
     def activate_gem(self):
-        self.open_items()
-        Click_Press.mousePos(self.item_cords.gem_loc)
-        Click_Press.leftClick()
+        self.open_item_tab()
+        click_press.mouse_position(self.item_cords.gem_loc)
+        click_press.left_click()
 
-    def open_items(self):
-        Click_Press.mousePos(self.item_cords.item_cat_loc, True)
-        Click_Press.leftClick()
+    def open_item_tab(self):
+        click_press.mouse_position(self.item_cords.item_cat_loc, True)
+        click_press.left_click()
         time.sleep(1.0)
 
-    def _close_items(self):
-        Click_Press.mousePos(self.item_cords.item_cat_loc, True)
-        Click_Press.leftClick()
+    def _close_item_tab(self):
+        click_press.mouse_position(self.item_cords.item_cat_loc, True)
+        click_press.left_click()
 
     def get_gem(self, gem_color):
         """
@@ -93,8 +92,8 @@ class ItemManager(object):
         elif 722000 <= gem_color <= 722999:
             self.current_gem = 3
             message = "Channeling gem found"
-        Click_Press.mousePos(self.item_cords.item_cat_loc)
-        Click_Press.leftClick()
+        click_press.mouse_position(self.item_cords.item_cat_loc)
+        click_press.left_click()
         return message
 
     def check_inventory(self):

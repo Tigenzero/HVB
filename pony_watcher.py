@@ -2,7 +2,7 @@ from find_window import ScreenGrabber
 import time
 import logging
 import winsound
-from Click_Press import press
+from click_press import press
 import random
 
 

@@ -1,4 +1,4 @@
-from Coordinates import EnemyCords
+from coordinates import EnemyCords
 
 
 class EnemyMonitor(object):
@@ -10,8 +10,11 @@ class EnemyMonitor(object):
     def get_enemies(self, image):
         current_enemies = []
         for enemy in self.coordinates.enemies:
-            if image.getpixel(enemy) == self.coordinates.over_color \
-                    or image.getpixel(enemy) == self.coordinates.under_color:
+            pixel = image.getpixel(enemy)
+            if len(pixel) > 3:
+                pixel = (pixel[0], pixel[1], pixel[2])
+            if pixel == self.coordinates.over_color \
+                    or pixel == self.coordinates.under_color:
                 current_enemies.append(enemy)
         self.current_enemies = current_enemies
         self.enemy_count = len(current_enemies)

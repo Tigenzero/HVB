@@ -1,5 +1,5 @@
-from Click_Press import mousePos, leftClick, press
-from Coordinates import Cord
+from click_press import mouse_position, left_click, press
+from coordinates import Cord
 from Status import is_status_active, get_pixel_sum, get_pixel_sum_color
 import Settings
 import logging
@@ -39,7 +39,7 @@ class Skills:
     Current = ["", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""]
     Exceptions = ["Shadow_Veil", "Corruption", "Shockblast", "Smite"]
 Enemies = {
-    Cord.e1_health: "1",
+    """Cord.e1_health: "1",
     Cord.e2_health: "2",
     Cord.e3_health: "3",
     Cord.e4_health: "4",
@@ -48,13 +48,13 @@ Enemies = {
     Cord.e7_health: "7",
     Cord.e8_health: "8",
     Cord.e9_health: "9",
-    Cord.e10_health: "0",
+    Cord.e10_health: "0","""
 }
 
 def attack(enemy):
     try:
-        #mousePos(enemy)
-        #leftClick()
+        #mouse_position(enemy)
+        #left_click()
         press(Enemies[enemy])
     except ValueError:
         logging.warning("no more enemies")
@@ -66,6 +66,7 @@ def activate_cooldown(special, style):
     else:
         Cooldown.special_attack[special] = 10
 """
+
 
 #Done, base Activate functions on this
 def activate_cure(current_health):
@@ -489,16 +490,16 @@ def special_attack_single_original(current_overcharge):
 
 
 def use_skill(skill):
-    #mousePos(Cord.Cure)
+    #mouse_position(Cord.Cure)
     if skill >= 0:
-        mousePos(Cord.skills[skill])
-        leftClick()
+        mouse_position(Cord.skills[skill])
+        left_click()
 
 
 def use_spirit(current_spirit, current_overcharge, im):
     if current_overcharge >= 80 and Skills.overcharge_cooldown <= 0 and current_spirit >= 40 and not is_spirit_active(im) and Settings.Player.spirit:
-        mousePos(Cord.spirit_cat_loc)
-        leftClick()
+        mouse_position(Cord.spirit_cat_loc)
+        left_click()
         Skills.overcharge_cooldown = 10
         return True
     else:

@@ -1,7 +1,7 @@
 import ImageOps
 import ImageGrab
 from numpy import *
-from Coordinates import Cord
+from coordinates import Cord
 import Settings
 import os
 import logging
@@ -26,10 +26,10 @@ class Status:
     collection = {}
 
 
-def get_status():
+def get_status(image):
     Cord.Current_Status = []
     for status in Cord.Status:
-        pixel_sum = get_pixel_sum(status)
+        pixel_sum = get_pixel_sum(image, status)
         if pixel_sum == Status.nothing:
             return
         lookup = lookup_status(pixel_sum)
@@ -40,17 +40,23 @@ def get_status():
           #  get_pixel_sum_color(status, True)
 
 
-def get_pixel_sum(box, save_box=False):
-    im = ImageOps.grayscale(ImageGrab.grab((Settings.box[0] + box[0], Settings.box[1] + box[1], Settings.box[0] + box[2], Settings.box[1] + box[3])))
-    a = array(im.getcolors())
+def get_pixel_sum(image, box):
+    #im = ImageOps.grayscale(ImageGrab.grab((Settings.box[0] + box[0],
+    #                                        Settings.box[1] + box[1],
+    #                                        Settings.box[0] + box[2],
+    #                                        Settings.box[1] + box[3])))
+    image_crop = ImageOps.grayscale(image.crop(box))
+
+    a = array(image_crop.getcolors())
     a = a.sum()
-    if save_box:
-        im.save(os.getcwd() + '\\images\\' + str(a) + '.png', 'PNG')
     return a
 
 
-def get_pixel_sum_color(box, save=False):
-    im = ImageGrab.grab((Settings.box[0] + box[0], Settings.box[1] + box[1], Settings.box[0] + box[2], Settings.box[1] + box[3]))
+def get_pixel_sum_color(box):
+    im = ImageGrab.grab((Settings.box[0] + box[0],
+                         Settings.box[1] + box[1],
+                         Settings.box[0] + box[2],
+                         Settings.box[1] + box[3]))
     a = array(im)
     a = a.sum()
     if save:
