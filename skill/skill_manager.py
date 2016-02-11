@@ -9,11 +9,12 @@ holding the current active and inactive skill objects
 import image_initialize
 import coordinates
 import logging
-import Settings
+from Settings import Settings
 import etc_manager
 import click_press
 
-# TODO: Add Use Skills, Add Attack Enemies
+# TODO: Add Attack Master
+# TODO: Add Premium Skill Use / Uses
 
 
 class Skill(object):
@@ -33,6 +34,16 @@ class Skill(object):
         self.box_bounds = box_bounds
         self.premium = premium
         self.special = special
+
+    def use_skill(self):
+        click_press.mouse_position(self.click_coordinates)
+        click_press.left_click()
+
+    def print_skill(self):
+        logging.info("Name: {}".format(self.name))
+        logging.info("Active: {}".format(self.active))
+        logging.info("Premium: {}".format(self.premium))
+        logging.info("Special: {}".format(self.special))
 
 
 class SkillGenerator(object):
@@ -61,7 +72,12 @@ class SkillGenerator(object):
         return index in self.special_slots
 
     def _is_invalid_skill_name(self, name):
-        return name != "Empty" and name != "None"
+        return name == "Empty" or name == "None"
+
+    def _get_special_num(self, index):
+        for spec_index, spec_num in enumerate(self.special_slots):
+            if spec_num == index:
+                return spec_index + 1
 
     @classmethod
     def generate_skills(cls, player_skill_names, player_premium_slots, player_special_slots):
@@ -70,17 +86,19 @@ class SkillGenerator(object):
         for index in range(0, len(skill_gen.skill_names) - 1):
             name = player_skill_names[index]
             if skill_gen._is_invalid_skill_name(name):
+                logging.warning("Skill is Invalid, ignoring: {}".format(name))
                 continue
             loc = skill_gen.skill_cords.skill_locs[index]
             box_bounds = skill_gen.skill_cords.skill_box_locs[index]
             is_premium = skill_gen._is_skill_premium(name)
-            special_num = skill_gen._is_skill_special(index)
-            skill = skill_gen._create_skill(name, loc, box_bounds, is_premium, special_num)
+            special = skill_gen._is_skill_special(index)
+            special_num = 0
+            if special:
+                special_num = skill_gen._get_special_num(index)
+            skill = skill_gen._create_skill(name, loc, box_bounds, active=True, premium=is_premium, special=special_num)
             skill_list.append(skill)
+            logging.debug(skill.name)
         return skill_list
-
-
-
 
 
 class SkillMonitor(object):
@@ -89,59 +107,15 @@ class SkillMonitor(object):
     """
     def __init__(self):
         self.active_skill_collection, self.inactive_skill_collection = image_initialize.get_skill_images()
-
-    def get_skills(self, image):
-        skill_count = 0
-        skill_kill = False
-        for skill in self.skill_cords.skill_box_locs:
-            #sum = get_pixel_sum_color(skill)
-            sum = etc_manager.get_pixel_sum_color(image, skill)
-            logging.debug("Skill {}: {}".format(skill_count, sum))
-
-            result = self.active_skill_collection.get(sum)
-            result2 = self.inactive_skill_collection.get(sum)
-            if result is not None:
-                self.current_skills[skill_count] = result
-            elif result2 is not None:
-                self.current_skills[skill_count] = result2
-            else:
-                result = self.skill_sum_buffer(sum, True)
-                if result is not None:
-                    self.current_skills[skill_count] = result
-                    self.active_skill_collection[sum] = result
-                else:
-                    result2 = self.skill_sum_buffer(sum, False)
-                    if result2 is not None:
-                        self.current_skills[skill_count] = result2
-                        self.inactive_skill_collection[sum] = result2
-                    else:
-                        logging.warning("UNKNOWN skill: %d" % sum)
-                        etc_manager.get_pixel_sum_color(image, skill)
-                        skill_kill = True
-            skill_count += 1
-        if skill_kill:
-            logging.critical("Not all skills were identified. Shutting down now.")
-            quit()
+        self.skill_kill = False
 
     def _is_skill_sum_active(self, skill_sum):
-        return self.active_skill_collection.get(skill_sum) is None
+        return self.active_skill_collection.get(skill_sum) is not None
 
     def _is_skill_sum_inactive(self, skill_sum):
-        return self.inactive_skill_collection.get(skill_sum) is None
+        return self.inactive_skill_collection.get(skill_sum) is not None
 
-
-class SkillMaster(object):
-    """
-
-    """
-    def __init__(self):
-
-        self.current_skills = []
-        self.overcharge_cooldown = 0
-
-
-
-    def skill_sum_buffer(self, pixel_sum, active=True):
+    def _skill_sum_buffer(self, pixel_sum, active=True):
         logging.info("Skill Buffer Being Used")
         if active:
             collection = self.active_skill_collection
@@ -157,25 +131,121 @@ class SkillMaster(object):
                 return value
         return None
 
-    def use_skill(self, skill):
-        #mouse_position(Cord.Cure)
-        if skill >= 0:
-            click_press.mouse_position(self.skill_cords.skill_locs[skill])
-            click_press.left_click()
+    def print_active_skill_collection(self):
+        image_initialize.print_collection(self.active_skill_collection)
 
-    def use_spirit(self, image, current_spirit, current_overcharge):
-        if current_overcharge >= 80 and self.overcharge_cooldown <= 0 and current_spirit >= 40 \
-                and not self._is_spirit_active(image) and Settings.Player.spirit:
-            click_press.mouse_position(self.skill_cords.spirit_cat_loc)
-            click_press.left_click()
-            self.overcharge_cooldown = 10
+    def print_inactive_skill_collection(self):
+        image_initialize.print_collection(self.inactive_skill_collection)
+
+    def _get_skill_sum(self, image, box_bounds):
+        return etc_manager.get_pixel_sum_color(image, box_bounds)
+
+    def _is_skill_active_buffer(self, skill, image):
+        skill_sum = self._get_skill_sum(image, skill.box_bounds)
+        result = self._skill_sum_buffer(skill_sum, True)
+        if result is not None:
+            self.active_skill_collection[skill_sum] = result
             return True
+        result2 = self._skill_sum_buffer(skill_sum, False)
+        if result2 is not None:
+            self.inactive_skill_collection[skill_sum] = result2
+            return False
         else:
-            self.overcharge_cooldown -= 1
+            logging.critical("UNKNOWN skill: %d" % skill_sum)
+            etc_manager.get_pixel_sum_color(image, skill.box_bounds)
+            self.skill_kill = True
+            return None
+
+    def _is_skill_active(self, skill, image):
+        skill_sum = self._get_skill_sum(image, skill.box_bounds)
+        logging.debug("{}: {}".format(skill.name, skill_sum))
+        if self._is_skill_sum_active(skill_sum):
+            return True
+        elif self._is_skill_sum_inactive(skill_sum):
+            return False
+        else:
+            return self._is_skill_active_buffer(skill, image)
+
+    @classmethod
+    def update_skills(cls, image, skill_list):
+        monitor = cls()
+        for skill in skill_list:
+            skill.active = monitor._is_skill_active(skill, image)
+        if monitor.skill_kill:
+            logging.critical("Not all skills were identified. Shutting down now.")
+            quit()
+        return skill_list
+
+
+class SpiritMaster(object):
+    """
+    SpiritMaster manages the use and monitoring of Spirit
+    """
+    def __init__(self):
+        self.overcharge_cooldown = 0
+        self.spirit_cords = coordinates.SpiritCords()
+        self.overcharge_max = 80
+
+    def _is_spirit_possible(self, current_overcharge, current_spirit):
+        if current_overcharge >= self.overcharge_max and self.overcharge_cooldown == 0 and current_spirit >= 40 \
+                and Settings.Player.spirit:
+            pass
+        else:
             return False
 
     def _is_spirit_active(self, image):
-        if image.getpixel(self.skill_cords.spirit_cat_loc) == self.skill_cords.spirit_active_color:
+        if image.getpixel(self.spirit_cords.spirit_cat_loc) == self.spirit_cords.spirit_active_color:
             return True
         else:
             return False
+
+    def _spirit_cooldown(self):
+        if self.overcharge_cooldown > 0:
+            self.overcharge_cooldown -= 1
+
+    def is_spirit_available(self, image, current_overcharge, current_spirit):
+        if self._is_spirit_active(image) and self._is_spirit_possible(current_overcharge, current_spirit):
+            pass
+        else:
+            return False
+
+    def use_spirit(self):
+        click_press.mouse_position(self.spirit_cords.spirit_cat_loc)
+        click_press.left_click()
+        self.overcharge_cooldown = 10
+
+
+class SkillMaster(object):
+    """
+    Obtains skills from SkillGenerator
+    Updates skills' active states
+    Updates and uses spirit
+    """
+    def __init__(self, skill_list):
+
+        self.current_skills = skill_list
+        self.skill_monitor = SkillMonitor()
+        self.spirit_master = SpiritMaster()
+
+    def update_skills(self, image):
+        self.spirit_master._spirit_cooldown()
+        self.current_skills = self.skill_monitor.update_skills(image, self.current_skills)
+
+    def is_spirit_available(self, image, current_overcharge, current_spirit):
+        return self.spirit_master.is_spirit_available(image, current_overcharge, current_spirit)
+
+    def is_spirit_active(self, image):
+        return self.spirit_master._is_spirit_active(image)
+
+    def use_spirit(self):
+        self.spirit_master.use_spirit()
+
+    def use_skill(self, skill_name):
+        for skill in self.current_skills:
+            if skill.name == skill_name:
+                skill.use_skill()
+
+    def get_skill(self, skill_name):
+        for skill in self.current_skills:
+            if skill.name == skill_name:
+                return skill

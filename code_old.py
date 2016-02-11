@@ -2,13 +2,8 @@
 For Screen Resolution 1920 X 1080
 """
 import ImageGrab
-import os
-import winsound
-import time
 import ImageOps
-import win32api, win32con
-from numpy import *
-from find_window import find_corner, find_browser
+import win32con
 
 #Styles: Dual-wield:0, 1-handed:1, 2-handed:2, mage:3, niken:4
 class Player_0:
@@ -314,10 +309,11 @@ def attack(enemy):
 =======
 import winsound
 from numpy import *
-from find_window import find_corner
+from window_finder.find_window import find_corner
 import os
 from items import get_gem, use_health_pot, use_mana_pot, use_spirit_pot, get_items, use_gem, leftover_inventory, cool_down
-from Skills import activate_cure, activate_premium, activate_protection, activate_regen, special_attack, get_spirit, activate_absorb, activate_auto_cast, activate_spark_life
+from Skills import activate_cure, activate_premium, activate_protection, activate_regen, special_attack, get_spirit, \
+    activate_auto_cast, activate_spark_life
 from click_press import *
 from coordinates import Cord
 import Settings
@@ -523,7 +519,7 @@ def is_spirit_active(im):
 def lookup_status(pixel_sum):
     for known_status in Status.collection:
         if pixel_sum == known_status:
-            #print "status found: %s" % Status.collection.get(known_status)
+            #print "status found: %s" % status.collection.get(known_status)
             return Status.collection.get(known_status)
     return " "
 

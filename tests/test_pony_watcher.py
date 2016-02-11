@@ -1,8 +1,10 @@
-import pony_watcher
-import find_window
 import os
+
 from PIL import Image
-import find_window
+
+import pony_watcher
+from window_finder import find_window
+
 TEST_WINDOW_IMAGE = os.path.join(os.path.dirname(os.path.abspath(__file__)), "test_full_window.png")
 TEST_PONY_IMAGE = os.path.join(os.path.dirname(os.path.abspath(__file__)), "test_pony_image.png")
 

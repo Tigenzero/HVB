@@ -1,9 +1,10 @@
 import win32api
 from win32con import MOUSEEVENTF_LEFTUP, MOUSEEVENTF_LEFTDOWN, KEYEVENTF_KEYUP
 import time
-from Coordinates import Cord
+from coordinates import Cord
 import Settings
 import logging
+
 
 def cursor_check(init_check):
     x, y = win32api.GetCursorPos()
@@ -14,26 +15,26 @@ def cursor_check(init_check):
         return True
 
 
-def leftClick():
+def left_click():
     win32api.mouse_event(MOUSEEVENTF_LEFTDOWN, 0, 0)
     time.sleep(.1)
     win32api.mouse_event(MOUSEEVENTF_LEFTUP, 0, 0)
     #print "Click."          #completely optional. But nice for debugging purposes.
 
 
-def leftDown():
+def left_down():
     win32api.mouse_event(MOUSEEVENTF_LEFTDOWN, 0, 0)
     time.sleep(.1)
     print 'left Down'
 
 
-def leftUp():
+def left_up():
     win32api.mouse_event(MOUSEEVENTF_LEFTUP, 0, 0)
     time.sleep(.1)
     print 'left release'
 
 
-def mousePos(cord, init=False):
+def mouse_position(cord, init=False):
     if cursor_check(init):
         Settings.pause = True
         return False

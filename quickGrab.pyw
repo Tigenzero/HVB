@@ -1,7 +1,4 @@
-import ImageGrab
-import os
-import time
-from find_window import *
+from window_finder.find_window import *
 def screenGrab():
     corner = find_corner()
     #for 1920 X 1080

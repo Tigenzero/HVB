@@ -1,20 +1,19 @@
 """
 For Screen Resolution 1920 X 1080
 """
-import ImageGrab
 import winsound
+
 from numpy import *
-import find_window
-import os
+
 from items import get_gem, use_health_pot, use_mana_pot, use_spirit_pot, get_items, use_gem, leftover_inventory, cool_down
-from Skills import activate_cure, activate_premium, activate_protection, activate_regen, special_attack, get_spirit, activate_absorb, activate_auto_cast, activate_spark_life
+from Skills import activate_cure, activate_premium, activate_protection, activate_regen, special_attack, get_spirit, \
+    activate_auto_cast, activate_spark_life
 from click_press import *
 from coordinates import Cord
 import Settings
 from Status import get_status
 from image_initialize import get_images
-import random
-import scanner
+from window_finder import find_window, scanner
 
 
 def enemies_exist(im):

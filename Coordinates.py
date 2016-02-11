@@ -77,6 +77,16 @@ class EnemyCords(object):
         e10_health = (e_x,  595) #untested
         self.under_color = (0, 0, 0) #Black
         self.over_color = (0, 166, 23) #Green
+        self.enemy_press = {e1_health: "1",
+                            e2_health: "2",
+                            e3_health: "3",
+                            e4_health: "4",
+                            e5_health: "5",
+                            e6_health: "6",
+                            e7_health: "7",
+                            e8_health: "8",
+                            e9_health: "9",
+                            e10_health: "0"}
 
         self.enemies = (e1_health,
                         e2_health,
@@ -88,6 +98,7 @@ class EnemyCords(object):
                         e8_health,
                         e9_health,
                         e10_health)
+
 
 
 class ItemCords(object):
@@ -134,6 +145,71 @@ class ItemCords(object):
         ibox15 = [itemx_begin, 551, itemx_end, 558]
         self.ibox_list = [ibox1, ibox2, ibox3, ibox4, ibox5, ibox6, ibox7, ibox8, ibox9, ibox10, ibox11, ibox12, ibox13, ibox14, ibox15]
 
+
+class SkillHKCords(object):
+    def __init__(self):
+        sk_x1 = 169
+        sk_x2 = 199
+        sk_y1 = 80
+        sk_y2 = 112
+        sk_0 = (0*37 + sk_x1, sk_y1, 0*37 + sk_x2, sk_y2)
+        sk_1 = (1*37 + sk_x1, sk_y1, 1*37 + sk_x2, sk_y2)
+        sk_2 = (2*37 + sk_x1, sk_y1, 2*37 + sk_x2, sk_y2)
+        sk_3 = (3*37 + sk_x1, sk_y1, 3*37 + sk_x2, sk_y2)
+        sk_4 = (4*37 + sk_x1, sk_y1, 4*37 + sk_x2, sk_y2)
+        sk_5 = (5*37 + sk_x1, sk_y1, 5*37 + sk_x2, sk_y2)
+        sk_6 = (6*37 + sk_x1, sk_y1, 6*37 + sk_x2, sk_y2)
+        sk_7 = (7*37 + sk_x1, sk_y1, 7*37 + sk_x2, sk_y2)
+        sk_8 = (8*37 + sk_x1, sk_y1, 8*37 + sk_x2, sk_y2)
+        sk_9 = (9*37 + sk_x1, sk_y1, 9*37 + sk_x2, sk_y2)
+        sk_10 = (10*37 + sk_x1, sk_y1, 10*37 + sk_x2, sk_y2)
+        sk_11 = (11*37 + sk_x1, sk_y1, 11*37 + sk_x2, sk_y2)
+        sk_12 = (12*37 + sk_x1, sk_y1, 12*37 + sk_x2, sk_y2)
+        sk_13 = (13*37 + sk_x1, sk_y1, 13*37 + sk_x2, sk_y2)
+        sk_14 = (14*37 + sk_x1, sk_y1, 14*37 + sk_x2, sk_y2)
+        sk_15 = (15*37 + sk_x1, sk_y1, 15*37 + sk_x2, sk_y2)
+        self.skill_box_locs = [sk_0, sk_1, sk_2, sk_3, sk_4, sk_5, sk_6, sk_7, sk_8, sk_9, sk_10, sk_11, sk_12, sk_13, sk_14, sk_15]
+        s_y = 96
+        #s_y = 290
+        s1 = (188, s_y)
+        s2 = (225, s_y)
+        s3 = (262, s_y)
+        s4 = (299, s_y)
+        s5 = (338,  s_y)
+        s6 = (375, s_y)
+        s7 = (412, s_y)
+        s8 = (447, s_y)
+        s9 = (485, s_y)
+        s10 = (523, s_y)
+        s11 = (559, s_y)
+        s12 = (598, s_y)
+        s13 = (630, s_y)
+        s14 = (671, s_y)
+        s15 = (707, s_y)
+        s16 = (743, s_y)
+        self.skill_locs = [s1, s2, s3, s4, s5, s6, s7, s8, s9, s10, s11, s12, s13, s14, s15, s16]
+
+
+class SpiritCords(object):
+    def __init__(self):
+        self.spirit_cat_loc = (494,  60) #changed, confirm with Chrome. X used to be 508
+        self.spirit_active_color = (250, 59, 56) #(170, 36, 36)
+
+
+class StatusCords(object):
+    def __init__(self):
+            st_y1 = 13
+            st_y2 = 45
+            st1 = (167, st_y1, 197, st_y2)
+            st2 = (200, st_y1, 230, st_y2)
+            st3 = (233, st_y1, 263, st_y2)
+            st4 = (266, st_y1, 296, st_y2)
+            st5 = (299, st_y1, 329, st_y2)
+            st6 = (332, st_y1, 362, st_y2)
+            st7 = (365, st_y1, 395, st_y2)
+            st8 = (398, st_y1, 428, st_y2)
+            st9 = (431, st_y1, 461, st_y2)
+            self.status_locs = (st1, st2, st3, st4, st5, st6, st7, st8, st9)
 
 
 class Cord:

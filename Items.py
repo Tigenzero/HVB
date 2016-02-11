@@ -1,4 +1,4 @@
-from Click_Press import *
+from click_press import *
 from Status import is_status_active, get_status, get_pixel_sum, get_pixel_sum_color
 import logging
 import Settings
@@ -16,10 +16,10 @@ class Items:
 
 def activate_gem():
     open_items()
-    mousePos(Cord.gem_loc)
-    leftClick()
-    #mousePos(Cord.Item_cat_loc)
-    #leftClick()
+    mouse_position(Cord.gem_loc)
+    left_click()
+    #mouse_position(Cord.Item_cat_loc)
+    #left_click()
 
 
 def cool_down():
@@ -49,19 +49,19 @@ def dynamic_get_gem():
         elif result == "Mystic_Gem" and not is_status_active("Channeling"):
             logging.debug("mystic gem found")
             get_pixel_sum_color(item, True)
-            mousePos(Cord.gem_loc)
-            leftClick()
+            mouse_position(Cord.gem_loc)
+            left_click()
     else:
         logger.warning("UNKNOWN gem: %d" % sum)
         get_pixel_sum_color(item, True)
         #REMOVE ONCE ALL GEMS ARE FOUND
-        mousePos(Cord.gem_loc)
-        leftClick()
+        mouse_position(Cord.gem_loc)
+        left_click()
         if Settings.shutdown:
             logging.critical("unknown gem, shutting down")
             quit()
-    mousePos(Cord.Item_cat_loc)
-    leftClick()
+    mouse_position(Cord.Item_cat_loc)
+    left_click()
 
 
 def get_gem():
@@ -83,16 +83,16 @@ def get_gem():
         Items.s_gem = True
     elif 722000 <= sum <= 722999 and not is_status_active("Channeling"):
         message = "Channeling gem found"
-        mousePos(Cord.gem_loc)
-        leftClick()
-    mousePos(Cord.Item_cat_loc)
-    leftClick()
+        mouse_position(Cord.gem_loc)
+        left_click()
+    mouse_position(Cord.Item_cat_loc)
+    left_click()
     return message
 
 
 def get_gem_original():
-    mousePos(Cord.Item_cat_loc)
-    leftClick()
+    mouse_position(Cord.Item_cat_loc)
+    left_click()
     time.sleep(0.3)
     item = Cord.ibox_gem
     sum = get_pixel_sum(item)
@@ -111,28 +111,28 @@ def get_gem_original():
     elif (sum == 722692 or sum == 722641) and not is_status_active("Channeling"):
         logging.debug("mystic gem found")
         get_pixel_sum_color(item, True)
-        mousePos(Cord.gem_loc)
-        leftClick()
+        mouse_position(Cord.gem_loc)
+        left_click()
     elif sum == 865970 or sum == 1480:  # empty
         ""
         #logging.debug("no gem found")
     else:
         logger.warning("UNKNOWN gem: %d" % sum)
         get_pixel_sum_color(item, True)
-        mousePos(Cord.gem_loc)
-        leftClick()
+        mouse_position(Cord.gem_loc)
+        left_click()
         if Settings.shutdown:
             logging.critical("unknown gem, shutting down")
             quit()
-    mousePos(Cord.Item_cat_loc)
-    leftClick()
+    mouse_position(Cord.Item_cat_loc)
+    left_click()
 
 
 # 0 = Health, 1 = Mana, 2 = Spirit, 9 = used
 def dynamic_get_items():
     Cord.Items = [9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9]
-    mousePos(Cord.Item_cat_loc, True)
-    leftClick()
+    mouse_position(Cord.Item_cat_loc, True)
+    left_click()
     time.sleep(0.7)
     count = 1
     for item in Cord.ibox_list:
@@ -154,8 +154,8 @@ def dynamic_get_items():
             #    logging.critical("unknown element, shutting down")
             #    quit()
         count += 1
-    mousePos(Cord.Item_cat_loc, True)
-    leftClick()
+    mouse_position(Cord.Item_cat_loc, True)
+    left_click()
     #print Cord.Items
 
 
@@ -164,7 +164,7 @@ def get_items():
     Cord.Items = list(Settings.Player.items)
     logging.debug(Cord.Items)
     #Settings Items as static until further notice.
-    """open_items()
+    """open_item_tab()
     count = 1
     for item in Cord.ibox_list:
         if is_slot_empty_or_used(item):
@@ -175,14 +175,14 @@ def get_items():
 
 
 def open_items():
-    mousePos(Cord.Item_cat_loc, True)
-    leftClick()
+    mouse_position(Cord.Item_cat_loc, True)
+    left_click()
     time.sleep(1.0)
 
 
 def close_items():
-    mousePos(Cord.Item_cat_loc, True)
-    leftClick()
+    mouse_position(Cord.Item_cat_loc, True)
+    left_click()
 
 
 def is_slot_empty_or_used(item):
@@ -301,10 +301,10 @@ def use_item(item_type):
     for i in range(0, len(Cord.Items)):
         if Cord.Items[i] == item_type and Items.cool_down[i] == 0:
             #Cord.Items[i] = 9 ##New Rule
-            mousePos(Cord.Item_cat_loc)
-            leftClick()
-            mousePos(Cord.item_locs[i])
-            leftClick()
+            mouse_position(Cord.Item_cat_loc)
+            left_click()
+            mouse_position(Cord.item_locs[i])
+            left_click()
             Items.cool_down[i] = Settings.cool_down
             return True
     logging.warning("No Items Could be Used.")

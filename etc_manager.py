@@ -32,6 +32,7 @@ def get_pixel_sum(image, crop_box):
 
 def get_pixel_sum_color(image, crop_box):
         image_crop = image.crop(crop_box)
-        a = array(image_crop.getcolors())
-        a = a.sum()
-        return a
+        colors = image_crop.getdata()
+        color_array = array(colors)
+        color_sum = color_array.sum()
+        return color_sum

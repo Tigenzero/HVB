@@ -1,0 +1,11 @@
+IMPORTANT: this program takes control of your mouse! In the event that you require your mouse again, move the cursor out of the HV window and grind buster will end. 
+
+Configure: The Configure button allows for characters to be created/edited 
+
+Auto-Recover: Auto-Recover is used to automatically restore the character’s health,magic, and spirit before an arena and grindest.
+
+Quick Start: Starts grind buster on the current round of battle.
+
+Start Grindfest: Starts a new grindfest and will continue to start grindfest once the character dies and has full health.
+
+Start Arena: Starts the arena based on the starting and ending arena selections.

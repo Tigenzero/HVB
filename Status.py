@@ -74,7 +74,7 @@ def is_status_active(status_name):
 def lookup_status(pixel_sum):
     for known_status in Status.collection:
         if pixel_sum == known_status:
-            #print "status found: %s" % Status.collection.get(known_status)
+            #print "status found: %s" % status.collection.get(known_status)
             return Status.collection.get(known_status)
     #logging.debug("status not found: {0}".format(pixel_sum))
     return " "

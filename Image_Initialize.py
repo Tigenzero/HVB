@@ -4,7 +4,6 @@ import os.path
 from ntpath import split, basename
 from Skills import Skills
 from ImageOps import grayscale
-from Status import Status
 import items
 import logging
 
@@ -24,13 +23,13 @@ def get_images():
         a = sum(pix_val_flat)
         filename = return_filename(image).split(".")[0]
         Skills.Inactive_Collection[a] = filename
-    for image in list_files("status"):
+    """for image in list_files("status"):
         im = Image.open(image, 'r')
         im = grayscale(im)
         a = array(im.getcolors())
         a = a.sum()
         filename = return_filename(image).split(".")[0]
-        Status.collection[a] = filename
+        Status.collection[a] = filename"""
     for image in list_files("gem"):
         im = Image.open(image, 'r')
         pix_val = list(im.getdata())
@@ -59,10 +58,10 @@ def get_images():
     #print_collection(Skills.Inactive_Collection)
 
 
-
 def list_files(type):
     r = []
     path = os.getcwd() + "\\images\\initialize\\" + type
+    logging.debug("Pulling Images from: {}".format(path))
     subdirs = [x[0] for x in os.walk(path)]
     for subdir in subdirs:
         files = os.walk(subdir).next()[2]
@@ -78,9 +77,41 @@ def return_filename(path):
 
 
 def print_collection(collection):
-    for key,value in sort(collection.items()):
+    logging.debug("Collection length: {}".format(len(collection)))
+    for key, value in sort(collection.items()):
         logging.debug("{}: {}".format(value, key))
 
+
+def get_status_images():
+    collection = {}
+    for image in list_files("status"):
+        im = Image.open(image, 'r')
+        im = grayscale(im)
+        a = array(im.getcolors())
+        a = a.sum()
+        filename = return_filename(image).split(".")[0]
+        collection[a] = filename
+    return collection
+
+
+def get_skill_images():
+    active_collection = {}
+    for image in list_files("active"):
+        im = Image.open(image, 'r')
+        pix_val = list(im.getdata())
+        pix_val_flat = [x for sets in pix_val for x in sets]
+        a = sum(pix_val_flat)
+        filename = return_filename(image).split(".")[0]
+        active_collection[a] = filename
+    inactive_collection = {}
+    for image in list_files("inactive"):
+        im = Image.open(image, 'r')
+        pix_val = list(im.getdata())
+        pix_val_flat = [x for sets in pix_val for x in sets]
+        a = sum(pix_val_flat)
+        filename = return_filename(image).split(".")[0]
+        inactive_collection[a] = filename
+    return active_collection, inactive_collection
 
 if __name__ == "__main__":
     get_images()

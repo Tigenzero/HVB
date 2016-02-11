@@ -1,7 +1,6 @@
 import logging
 import click_press
 from coordinates import ItemCords
-import Settings
 import time
 
 
@@ -26,7 +25,8 @@ class Item(object):
 
 
 class ItemManager(object):
-    def __init__(self):
+    def __init__(self, player_items):
+        self.player_items = player_items
         self.current_gem = None
         self.item_cords = ItemCords()
         self.items = []
@@ -38,7 +38,7 @@ class ItemManager(object):
         self.next_s = None
 
     def get_items(self):
-        for index, item in enumerate(list(Settings.Player.items)):
+        for index, item in enumerate(list(self.player_items)):
             self.items[index] = Item(item, self.item_cords.item_locs[index])
             self.check_inventory()
 
@@ -67,13 +67,13 @@ class ItemManager(object):
         click_press.left_click()
         time.sleep(1.0)
 
-    def _close_item_tab(self):
+    def close_item_tab(self):
         click_press.mouse_position(self.item_cords.item_cat_loc, True)
         click_press.left_click()
 
     def get_gem(self, gem_color):
         """
-        :param gem_color: result of Status.get_pixel_sum_color(self.item_cords.ibox_gem)
+        :param gem_color: result of status.get_pixel_sum_color(self.item_cords.ibox_gem)
         :return: logging message
         """
         message = "no gem found"
