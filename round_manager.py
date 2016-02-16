@@ -8,6 +8,7 @@ import item_manager
 import click_press
 from skill import skill_manager
 from Settings.player_config import PlayerConfig
+from Settings import Settings
 import etc_manager
 from status import status_monitor
 from window_finder import find_window
@@ -16,11 +17,12 @@ from window_finder import find_window
 class MasterControl(object):
     def __init__(self, mode=0):
         self.window_grabber = find_window.ScreenGrabber.get_window()
+        Settings.box = self.window_grabber.window_dimensions
         self.p_watcher = pony_watcher.PonyWatcher()
         self.player_monitor = player_monitor.PlayerMonitor()
         self.enemy_monitor = enemy_monitor.EnemyMonitor()
-        self.item_master = item_manager.ItemManager()
         self.player = PlayerConfig.get_player_0()
+        self.item_master = item_manager.ItemManager(self.player.items)
         skill_list = skill_manager.SkillGenerator.generate_skills(self.player.skills,
                                                                   self.player.premium,
                                                                   self.player.special_attack)

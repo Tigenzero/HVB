@@ -62,7 +62,8 @@ class SkillGenerator(object):
         if not type(self.special_slots) is list:
             raise ValueError("Player special slots not of type list")
 
-    def _create_skill(self, name, click_coord, box_bounds, active=True, premium=False, special=0):
+    @staticmethod
+    def _create_skill(name, click_coord, box_bounds, active=True, premium=False, special=0):
         return Skill(name, active, click_coord, box_bounds, premium, special)
 
     def _is_skill_premium(self, name):
@@ -71,7 +72,8 @@ class SkillGenerator(object):
     def _is_skill_special(self, index):
         return index in self.special_slots
 
-    def _is_invalid_skill_name(self, name):
+    @staticmethod
+    def _is_invalid_skill_name(name):
         return name == "Empty" or name == "None"
 
     def _get_special_num(self, index):
@@ -137,7 +139,8 @@ class SkillMonitor(object):
     def print_inactive_skill_collection(self):
         image_initialize.print_collection(self.inactive_skill_collection)
 
-    def _get_skill_sum(self, image, box_bounds):
+    @staticmethod
+    def _get_skill_sum(image, box_bounds):
         return etc_manager.get_pixel_sum_color(image, box_bounds)
 
     def _is_skill_active_buffer(self, skill, image):
