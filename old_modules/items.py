@@ -1,7 +1,9 @@
-from click_press import *
-from Status import is_status_active, get_status, get_pixel_sum, get_pixel_sum_color
 import logging
+
+from user_interface.click_press import *
+from Status import is_status_active, get_status, get_pixel_sum, get_pixel_sum_color
 import Settings
+
 logger = logging.getLogger(__name__)
 Gem_Collection = {}
 Item_Collection = {}

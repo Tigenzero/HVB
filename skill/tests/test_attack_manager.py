@@ -1,12 +1,15 @@
 __author__ = 'Matt'
 import os
-from skill.attack_manager import AttackManager, DualMaster
-from Settings.player_config import PlayerConfig
+import logging
+
+import Image
+
+from skill.attack_manager import AttackManager
+from player.player_config import PlayerConfig
 from skill.skill_manager import SkillGenerator
 from window_finder import find_window
 from Settings import Settings
-import Image
-import logging
+
 
 PLAYER = PlayerConfig.get_player_0()
 SKILL_LIST = SkillGenerator.generate_skills(PLAYER.skills,

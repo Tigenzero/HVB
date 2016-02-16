@@ -1,8 +1,11 @@
 import os
-from PIL import Image
-from status.status_monitor import StatusMonitor
-import image_initialize
 import logging
+
+from PIL import Image
+
+from status import image_initialize
+from status.status_monitor import StatusMonitor
+
 
 TEST_IMAGE = Image.open(os.path.join("data", "test_HV_window.png")).convert("RGB")
 SPARK_LIFE = 15707

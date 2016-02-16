@@ -1,4 +1,4 @@
-import player_monitor
+from player import player_monitor
 
 
 def test_player_monitor_init():

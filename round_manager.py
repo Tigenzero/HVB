@@ -1,21 +1,21 @@
 import time
 import logging
 
-import pony_watcher
-import player_monitor
-import enemy_monitor
-import item_manager
-import click_press
+from enemies import enemy_monitor
+
+from items import item_manager
+from player import player_monitor
+from pony_time import pony_watcher
 from skill import skill_manager
-from Settings.player_config import PlayerConfig
+from player.player_config import PlayerConfig
 from Settings import Settings
-import etc_manager
 from status import status_monitor
+from user_interface import click_press, etc_manager
 from window_finder import find_window
 
 
 class MasterControl(object):
-    def __init__(self, mode=0):
+    def __init__(self, mode=0, arena_start=1, arena_end=24):
         self.window_grabber = find_window.ScreenGrabber.get_window()
         Settings.box = self.window_grabber.window_dimensions
         self.p_watcher = pony_watcher.PonyWatcher()
@@ -32,6 +32,8 @@ class MasterControl(object):
         #image_initialize.get_images()
         self.item_master.get_items()
         self.pause = False
+        self.arena_start = arena_start
+        self.arena_end = arena_end
 
     def start(self):
         logging.info("Master Control starting")
@@ -41,6 +43,10 @@ class MasterControl(object):
         self.window_grabber.refresh_image()
         if self.mode == 0:
             self._start_general_game()
+        #Grindfest = 1
+        #Arena = 2
+        else:
+            logging.critical("This Game Mode not implemented yet.")
 
     def _start_general_game(self):
         battle_end = False

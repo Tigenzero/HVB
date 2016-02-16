@@ -1,4 +1,4 @@
-from coordinates import PlayerCords
+from user_interface.coordinates import PlayerCords
 
 
 class PlayerMonitor(object):

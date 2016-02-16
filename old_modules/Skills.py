@@ -1,8 +1,8 @@
-from click_press import mouse_position, left_click, press
-from coordinates import Cord
-from Status import is_status_active, get_pixel_sum, get_pixel_sum_color
-import Settings
 import logging
+
+from user_interface.click_press import mouse_position, left_click, press
+from user_interface.coordinates import Cord
+import Settings
 
 
 class Skills:

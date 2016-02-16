@@ -1,8 +1,11 @@
-import enemy_monitor
 import os
+
 from PIL import Image
 
-TEST_IMAGE = os.path.join(os.path.dirname(os.path.abspath(__file__)), "test_HV_window.png")
+from enemies import enemy_monitor
+
+
+TEST_IMAGE = os.path.join(os.path.dirname(os.path.abspath(__file__)), "../../tests/test_HV_window.png")
 
 
 def test_enemy_monitor_init():

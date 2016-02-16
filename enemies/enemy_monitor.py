@@ -1,4 +1,4 @@
-from coordinates import EnemyCords
+from user_interface.coordinates import EnemyCords
 
 
 class EnemyMonitor(object):

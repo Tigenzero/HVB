@@ -1,9 +1,11 @@
 import win32api
-from win32con import MOUSEEVENTF_LEFTUP, MOUSEEVENTF_LEFTDOWN, KEYEVENTF_KEYUP
 import time
-from coordinates import Cord
-import Settings
 import logging
+
+from win32con import MOUSEEVENTF_LEFTUP, MOUSEEVENTF_LEFTDOWN, KEYEVENTF_KEYUP
+
+from user_interface.coordinates import Cord
+from Settings import Settings
 
 
 def cursor_check(init_check):

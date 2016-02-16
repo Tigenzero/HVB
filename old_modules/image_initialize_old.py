@@ -1,11 +1,13 @@
-from PIL import Image
-from numpy import array, sort
 import os.path
 from ntpath import split, basename
-from Skills import Skills
-from ImageOps import grayscale
-import items
 import logging
+
+from PIL import Image
+from numpy import array, sort
+from ImageOps import grayscale
+
+import items
+#from old_modules import Skills
 
 
 def get_images():

@@ -6,15 +6,15 @@ holding skill button click locations
 holding the current active and inactive skill objects
 """
 
-import image_initialize
-import coordinates
 import logging
+
 from Settings import Settings
-import etc_manager
-import click_press
+
 
 # TODO: Add Attack Master
 # TODO: Add Premium Skill Use / Uses
+from status import image_initialize
+from user_interface import coordinates, click_press, etc_manager
 
 
 class Skill(object):

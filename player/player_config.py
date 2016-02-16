@@ -55,25 +55,31 @@ class PlayerConfig(object):
             self.player_list.append(self.player)
         delattr(self, "player")
 
-    def _get_skills(self, line):
+    @staticmethod
+    def _get_skills(line):
         return line.split(",")
 
-    def _get_premium(self, line):
+    @staticmethod
+    def _get_premium(line):
         return line.split(',')
 
-    def _get_spirit(self, line):
+    @staticmethod
+    def _get_spirit(line):
         if line.lower() == "true":
             return True
         else:
             return False
 
-    def _get_style(self, line):
+    @staticmethod
+    def _get_style(line):
         return int(line)
 
-    def _get_items(self, line):
+    @staticmethod
+    def _get_items(line):
         return tuple(map(int, line.split(",")))
 
-    def _get_special(self, line):
+    @staticmethod
+    def _get_special(line):
         return map(int, line.split(","))
 
     def _add_player(self):
@@ -81,7 +87,8 @@ class PlayerConfig(object):
         self.player_list.append(self.player)
         self.player = Player()
 
-    def _clean(self, line):
+    @staticmethod
+    def _clean(line):
         #line = line.rstrip("\n")
         line = line.strip()
         line = line.replace(" ", "")

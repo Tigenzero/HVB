@@ -1,10 +1,12 @@
+import os
+
 import ImageOps
 import ImageGrab
 from numpy import *
-from coordinates import Cord
+
+from user_interface.coordinates import Cord
 import Settings
-import os
-import logging
+
 
 class Status:
     channeling = 10527

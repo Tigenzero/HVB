@@ -4,7 +4,7 @@ import winsound
 import random
 
 from window_finder.find_window import ScreenGrabber
-from click_press import press
+from user_interface.click_press import press
 
 
 class PonyWatcher(object):

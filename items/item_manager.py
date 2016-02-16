@@ -1,7 +1,8 @@
 import logging
-import click_press
-from coordinates import ItemCords
 import time
+
+from user_interface import click_press
+from user_interface.coordinates import ItemCords
 
 
 class Item(object):

@@ -3,12 +3,11 @@ __author__ = 'Matt'
 EXECUTE FROM PROJECT ROOT
 To Execute:python -m nose -v skill/live_tests/test_skill_manager_live.py
 """
-import logging
 
 from nose.tools import raises
 
 from skill.skill_manager import SkillGenerator, SkillMonitor
-from Settings.player_config import PlayerConfig
+from player.player_config import PlayerConfig
 import window_finder.find_window
 import window_finder.scanner
 

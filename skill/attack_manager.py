@@ -1,8 +1,9 @@
+from user_interface import click_press
+
 __author__ = 'Matt'
 # TODO: Attack Enemy
 # TODO: Use 3 different special attacks
 # TODO:
-import click_press
 import logging
 
 

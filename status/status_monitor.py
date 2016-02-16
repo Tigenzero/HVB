@@ -1,8 +1,11 @@
-from coordinates import StatusCords
-from numpy import *
-import image_initialize
-import ImageOps
 import logging
+
+from numpy import *
+import ImageOps
+
+from status import image_initialize
+
+from user_interface.coordinates import StatusCords
 
 
 class StatusType(object):

@@ -6,13 +6,13 @@ import winsound
 from numpy import *
 
 from items import get_gem, use_health_pot, use_mana_pot, use_spirit_pot, get_items, use_gem, leftover_inventory, cool_down
-from Skills import activate_cure, activate_premium, activate_protection, activate_regen, special_attack, get_spirit, \
+from old_modules.Skills import activate_cure, activate_premium, activate_protection, activate_regen, special_attack, get_spirit, \
     activate_auto_cast, activate_spark_life
-from click_press import *
-from coordinates import Cord
+from user_interface.click_press import *
+from user_interface.coordinates import Cord
 import Settings
 from Status import get_status
-from image_initialize import get_images
+from status.image_initialize import get_images
 from window_finder import find_window, scanner
 
 

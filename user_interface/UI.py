@@ -1,11 +1,13 @@
+#from old_modules import code, Players
+
 __author__ = 'mhull'
 import wx
 import os
 import logging
-import code
-import Settings
-import Players
-import main
+from Settings import Settings
+from round_manager import MasterControl
+from player.player_config import PlayerConfig
+
 
 class UI(wx.Frame):
 
@@ -134,14 +136,17 @@ class UI(wx.Frame):
             display_message("PLAYER NOT VALID")
             return False
 
-    def launch_game(self, event):
+    def launch_game(self):
         if self.player_validate():
-            code.startGame()
+            master = MasterControl()
+            master.start()
             self.end_of_game()
 
     def launch_grindfest(self, event):
         if self.player_validate():
-            code.start_grindfest()
+            master = MasterControl(1)
+            master.start()
+            #code.start_grindfest()
             self.end_of_game()
 
     #UNFINISHED
@@ -159,7 +164,8 @@ class UI(wx.Frame):
                 #display_message("end arena found")
 
         if self.player_validate():
-            code.start_arena(start_num + 1, end_num + 1)
+            master = MasterControl(2, start_num + 1, end_num + 1)
+            master.start()
             self.end_of_game()
 
     def autorecover(self, event):
@@ -191,7 +197,9 @@ class UI(wx.Frame):
         dial = wx.MessageDialog(None, message, "Character Delete", wx.YES_NO)
         if dial.ShowModal() == wx.ID_YES:
             rewrite_player_file(name)
-            main.get_player_config()
+            config = PlayerConfig()
+            config.get_player_config()
+            Settings.Player_List = config.player_list
             UI.cb.Clear()
             if len(Settings.Player_List) > 0:
                 print len(Settings.Player_List)
@@ -284,7 +292,7 @@ class Window2(wx.Frame):
         Window2.config_player = None
         self.current_player = UI.cb.GetValue()
         if self.current_player == "new":
-            Window2.config_player = factory(Players.Player)
+            Window2.config_player = factory(New_Player)
             Window2.config_player.skills = []
             Window2.config_player.premium = []
             Window2.config_player.special_attack = []
@@ -637,7 +645,9 @@ class Window2(wx.Frame):
                 f.write("%s\n" % line)
                 line = "max_sleep:{}".format(self.sleep_max.GetValue())
                 f.write("%s\n" % line)
-        main.get_player_config()
+        config = PlayerConfig()
+        config.get_player_config()
+        Settings.Player_List = config.player_list
         UI.cb.Clear()
         if len(Settings.Player_List) > 0:
             for player in Settings.Player_List:
@@ -940,3 +950,17 @@ class item_window(wx.Frame):
                 self.skill_cb5.GetValue().encode('utf-8'), self.skill_cb6.GetValue().encode('utf-8'), self.skill_cb7.GetValue().encode('utf-8'), self.skill_cb8.GetValue().encode('utf-8'),
                 self.skill_cb9.GetValue().encode('utf-8'), self.skill_cb10.GetValue().encode('utf-8'), self.skill_cb11.GetValue().encode('utf-8'), self.skill_cb12.GetValue().encode('utf-8'),
                 self.skill_cb13.GetValue().encode('utf-8'), self.skill_cb14.GetValue().encode('utf-8'), self.skill_cb15.GetValue().encode('utf-8'), self.skill_cb16.GetValue().encode('utf-8')]
+
+
+class New_Player:
+    name = ""
+    style = 0
+    spirit = False
+    # 0 = Health, 1 = Mana, 2 = Spirit, 9 = used
+    items = () #main character
+    special_attack = []
+    premium = []
+    skills = []
+    auto_cast = ["Spark_Life", "Absorb"]
+    min_sleep = 0.5
+    max_sleep = 2.5
