@@ -42,7 +42,8 @@ def mouse_position(cord, init=False):
         return False
     try:
         #print Cord.window_padding_x + cord[0], ", ", Cord.window_padding_y + cord[1]
-        win32api.SetCursorPos((Cord.window_padding_x + cord[0], Cord.window_padding_y + cord[1]))
+        #win32api.SetCursorPos((Cord.window_padding_x + cord[0], Cord.window_padding_y + cord[1]))
+        win32api.SetCursorPos((Settings.box[0] + cord[0], Settings.box[1] + cord[1]))
         return True
     except ValueError:
         print "Mouse Positioning Failed"

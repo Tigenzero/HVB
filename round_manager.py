@@ -12,6 +12,7 @@ from Settings import Settings
 from status import status_monitor
 from user_interface import click_press, etc_manager
 from window_finder import find_window
+from skill import attack_manager
 
 
 class MasterControl(object):
@@ -25,9 +26,10 @@ class MasterControl(object):
         self.item_master = item_manager.ItemManager(self.player.items)
         skill_list = skill_manager.SkillGenerator.generate_skills(self.player.skills,
                                                                   self.player.premium,
-                                                                  self.player.special_attack)
+                                                                  self.player.special)
         self.skill_master = skill_manager.SkillMaster(skill_list)
         self.status_monitor = status_monitor.StatusMonitor()
+        self.attack_manager = attack_manager.AttackManager(self.player.style)
         self.mode = mode
         #image_initialize.get_images()
         self.item_master.get_items()
@@ -53,12 +55,15 @@ class MasterControl(object):
         while not battle_end:
             self.enemy_monitor.get_enemies(self.window_grabber.image)
             if self.enemy_monitor.enemy_count == 0 or self.p_watcher.is_pony_time(self.window_grabber.image):
+                logging.info("General Game - No Enemeis Found. Pressing Spacebar to start next round")
                 click_press.press('spacebar')
                 time.sleep(1.5)
                 self.window_grabber.refresh_image()
                 if self.enemy_monitor.enemy_count == 0 and not self.p_watcher.is_pony_time(self.window_grabber.image):
+                    logging.info("General Game - No Enemeis Found Again. Ending Round")
                     battle_end = True
                 else:
+                    logging.info("General Game - Starting Pony Time")
                     self.window_grabber.save()
                     self.p_watcher.activate_pony_time(self.window_grabber)
             else:
@@ -94,11 +99,12 @@ class MasterControl(object):
                 gem_message = self.check_gem_color()
                 log_message = log_message + gem_message
             else:
-                message = special_attack(im, current_enemies, self.player.style)
+                spirit_active = self.skill_master.spirit_master.is_spirit_active(self.window_grabber.image)
+                message = self.attack_manager.attack_master.attack_enemies(self.skill_master.current_skills
+                                                                           , spirit_active
+                                                                           , current_enemies
+                                                                           , self.player_monitor.overcharge)
                 log_message = log_message + message
-            #this sleep function triggers the amount of time between clicks, thus the time between server communication
-            #This function is very important, it randomizes the communication times, emulating the behavior of a player
-            #sleep()
             logging.info(log_message)
             prev_enemy_num = len(current_enemies)
         return True
@@ -110,9 +116,12 @@ class MasterControl(object):
     def _round_refresh_and_cooldown(self):
         self.window_grabber.refresh_image()
         self.enemy_monitor.get_enemies(self.window_grabber.image)
+        if self.enemy_monitor.enemy_count == 0:
+            return
         self.player_monitor.refresh_stats(self.window_grabber.image)
         self.item_master.cool_down_items()
         self.status_monitor.refresh_status(self.window_grabber.image)
+        self.skill_master.update_skills(self.window_grabber.image)
 
     def start_health_recovery(self, restore_id):
         """
@@ -180,6 +189,7 @@ class MasterControl(object):
         return restore_message
 
     def check_gem_color(self):
+        logging.debug("Checking Gem Color")
         self.item_master.open_item_tab()
         self.window_grabber.refresh_image()
         gem_color = etc_manager.get_pixel_sum_color(self.window_grabber.image, self.item_master.item_cords.ibox_gem)

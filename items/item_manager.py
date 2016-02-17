@@ -1,6 +1,6 @@
 import logging
 import time
-
+from Settings import Settings
 from user_interface import click_press
 from user_interface.coordinates import ItemCords
 
@@ -17,12 +17,18 @@ class Item(object):
         self.available = True
         self.coordinates = coordinates
 
-    def cool_down(self):
+    def cool_down_item(self):
         if self.available:
             return
         self.cool_down -= 1
         if self.cool_down <= 0:
             self.available = True
+
+    def print_item(self):
+        logging.debug("type: {}".format(self.type))
+        logging.debug("cooldown: {}".format(self.cool_down))
+        logging.debug("available: {}".format(self.available))
+        logging.debug("coordinates: {}".format(self.coordinates))
 
 
 class ItemManager(object):
@@ -39,8 +45,11 @@ class ItemManager(object):
         self.next_s = None
 
     def get_items(self):
+        logging.debug(self.player_items)
+        self.items = []
         for index, item in enumerate(list(self.player_items)):
-            self.items[index] = Item(item, self.item_cords.item_locs[index])
+            item_loc = self.item_cords.item_locs[index]
+            self.items.append(Item(item, item_loc))
             self.check_inventory()
 
     def use_item(self, item):
@@ -50,18 +59,19 @@ class ItemManager(object):
         click_press.left_click()
         click_press.mouse_position(item.coordinates)
         click_press.left_click()
-        item.cool_down = 20  # Fix Later as a cool down dictionary that checks levels
+        item.cool_down = Settings.item_cooldown  # Fix Later as a cool down dictionary that checks levels
         item.available = False
-        # BE SURE TO SET ITEM'S SOURCE SELF.NEXT_# TO NONE
 
     def cool_down_items(self):
         for item in self.items:
-            item.cool_down()
+            logging.debug(item.print_item())
+            item.cool_down_item()
 
     def activate_gem(self):
         self.open_item_tab()
         click_press.mouse_position(self.item_cords.gem_loc)
         click_press.left_click()
+        self.current_gem = None
 
     def open_item_tab(self):
         click_press.mouse_position(self.item_cords.item_cat_loc, True)

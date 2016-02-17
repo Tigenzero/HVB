@@ -23,13 +23,15 @@ class AttackManager(object):
     def get_style(self, special_count):
         if self.style == 0:
             return DualMaster(special_count)
-
-    def parse_special(self, skill_list):
-        self.special_skills = list()
-        for skill in skill_list:
-            if skill.special:
-                self.special_skills.append(skill)
-        self.special_len = len(self.special_skills)
+        elif self.style == 1:
+            logging.critical("The One-Handed attack style has not been implemented yet")
+            return None
+        elif self.style == 2:
+            logging.critical("The Magic attack style has not been implemented yet")
+            return None
+        elif self.style == 3:
+            logging.critical("The Niken attack style has not been implemented yet")
+            return None
 
 
 class _Base(object):
@@ -101,6 +103,8 @@ class DualMaster(_Base):
         param current_enemies: list of living enemies
         param current_overcharge: percentage of overcharge that is filled
         """
+        if len(current_enemies) == 0:
+            return "No enemies in Attack Phase. Returning"
         attack_message = "Attacked Enemy {}".format(current_enemies[0])
         if spirit_active:
             self.attack(current_enemies[0])

@@ -7,6 +7,7 @@ import logging
 from PIL import Image
 
 TEST_IMAGE = Image.open(os.path.join("skill", "tests", "data", "test_full_window.png")).convert("RGB")
+TEST_IMAGE_2 = Image.open(os.path.join("skill", "tests", "data", "HV_player_hp_50.jpg")).convert("RGB")
 PREMIUM = ['Heartseeker', 'Spark_Life', 'Spirit_Shield', 'Haste']
 SKILLS = ['Cure', 'Regen', 'Heartseeker', 'Spirit_Shield', 'Absorb', 'Special', 'Special', 'Special', 'Blind', 'Drain', 'Weaken', 'Sleep', 'Spark_Life', 'Empty', 'Empty', 'Empty']
 SPECIAL = [5, 6, 7]
@@ -60,7 +61,37 @@ def test_skill_skill_manager_skill_monitor_is_skill_sum_inactive_true():
     logging.debug("inactive skill collection result: {}".format(result))
     assert result
 
-#test_skill_skill_manager_skill_monitor_is_skill_active_false
+
+def test_skill_skill_manager_skill_monitor_is_skill_active_false():
+    skill_monitor = SkillMonitor()
+    assert(skill_monitor._is_skill_active(SKILL_LIST[5], WINDOW_GRABBER.image) is False)
+    assert(skill_monitor._is_skill_active(SKILL_LIST[6], WINDOW_GRABBER.image) is False)
+    assert(skill_monitor._is_skill_active(SKILL_LIST[7], WINDOW_GRABBER.image) is False)
+
+
+def test_skill_skill_manager_skill_monitor_is_skill_active_true():
+    skill_monitor = SkillMonitor()
+    assert(skill_monitor._is_skill_active(SKILL_LIST[0], WINDOW_GRABBER.image))
+    assert(skill_monitor._is_skill_active(SKILL_LIST[1], WINDOW_GRABBER.image))
+    assert(skill_monitor._is_skill_active(SKILL_LIST[2], WINDOW_GRABBER.image))
+    assert(skill_monitor._is_skill_active(SKILL_LIST[3], WINDOW_GRABBER.image))
+    assert(skill_monitor._is_skill_active(SKILL_LIST[4], WINDOW_GRABBER.image))
+    assert(skill_monitor._is_skill_active(SKILL_LIST[8], WINDOW_GRABBER.image))
+    assert(skill_monitor._is_skill_active(SKILL_LIST[9], WINDOW_GRABBER.image))
+    assert(skill_monitor._is_skill_active(SKILL_LIST[10], WINDOW_GRABBER.image))
+    assert(skill_monitor._is_skill_active(SKILL_LIST[11], WINDOW_GRABBER.image))
+    assert(skill_monitor._is_skill_active(SKILL_LIST[12], WINDOW_GRABBER.image))
+
+
+def test_skill_skill_manager_skill_monitor_is_special_active_true():
+    skill_monitor = SkillMonitor()
+    #grabber_2 = window_finder.find_window.ScreenGrabber.get_window_test(TEST_IMAGE_2)
+    skill_monitor.print_active_skill_collection()
+    skill_monitor.print_inactive_skill_collection()
+    #for skill in skill_monitor.active_skill_collection:
+    #    logging.debug("{}: {}".format(skill, skill_monitor.active_skill_collection[skill]))
+    assert(skill_monitor._is_skill_active(SKILL_LIST[5], TEST_IMAGE_2))
+
 
 #test_skill_skill_manager_skill_monitor_is_skill_active_true
 

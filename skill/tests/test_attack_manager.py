@@ -19,16 +19,9 @@ TEST_IMAGE = Image.open(os.path.join(os.path.dirname(os.path.abspath(__file__)),
 
 WINDOW = find_window.ScreenGrabber.get_window_test(TEST_IMAGE)
 
+
 def test_skill_attack_manager_init():
     AttackManager(0)
-
-
-def test_skill_attack_manager_parse_special():
-    attack_manager = AttackManager(0)
-    attack_manager.parse_special(SKILL_LIST)
-    assert(attack_manager.special_len == 3)
-    for skill in attack_manager.special_skills:
-        assert(skill.special > 0)
 
 
 def test_skill_attack_manager_get_style():

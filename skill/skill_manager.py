@@ -154,7 +154,7 @@ class SkillMonitor(object):
             self.inactive_skill_collection[skill_sum] = result2
             return False
         else:
-            logging.critical("UNKNOWN skill: %d" % skill_sum)
+            logging.critical("UNKNOWN skill: %d - %s" % skill_sum, skill.name)
             etc_manager.get_pixel_sum_color(image, skill.box_bounds)
             self.skill_kill = True
             return None
@@ -169,8 +169,21 @@ class SkillMonitor(object):
         else:
             return self._is_skill_active_buffer(skill, image)
 
+    def update_skills(self, image, skill_list):
+        for skill in skill_list:
+            skill.active = self._is_skill_active(skill, image)
+        if self.skill_kill:
+            logging.critical("Not all skills were identified. Shutting down now.")
+            quit()
+        return skill_list
+
     @classmethod
-    def update_skills(cls, image, skill_list):
+    def update_skills_test(cls, image, skill_list):
+        """
+        MEANT TO BE USED IN TESTING ONLY
+        REASON: Initializing image files can take a long time and will increase processing time for every round.
+        gets updates a skill_list's active attributes and returns the skill_list
+        """
         monitor = cls()
         for skill in skill_list:
             skill.active = monitor._is_skill_active(skill, image)
@@ -192,11 +205,11 @@ class SpiritMaster(object):
     def _is_spirit_possible(self, current_overcharge, current_spirit):
         if current_overcharge >= self.overcharge_max and self.overcharge_cooldown == 0 and current_spirit >= 40 \
                 and Settings.Player.spirit:
-            pass
+            return True
         else:
             return False
 
-    def _is_spirit_active(self, image):
+    def is_spirit_active(self, image):
         if image.getpixel(self.spirit_cords.spirit_cat_loc) == self.spirit_cords.spirit_active_color:
             return True
         else:
@@ -207,8 +220,8 @@ class SpiritMaster(object):
             self.overcharge_cooldown -= 1
 
     def is_spirit_available(self, image, current_overcharge, current_spirit):
-        if self._is_spirit_active(image) and self._is_spirit_possible(current_overcharge, current_spirit):
-            pass
+        if self.is_spirit_active(image) and self._is_spirit_possible(current_overcharge, current_spirit):
+            return True
         else:
             return False
 
@@ -238,7 +251,7 @@ class SkillMaster(object):
         return self.spirit_master.is_spirit_available(image, current_overcharge, current_spirit)
 
     def is_spirit_active(self, image):
-        return self.spirit_master._is_spirit_active(image)
+        return self.spirit_master.is_spirit_active(image)
 
     def use_spirit(self):
         self.spirit_master.use_spirit()

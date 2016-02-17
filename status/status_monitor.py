@@ -30,7 +30,7 @@ class StatusType(object):
 
 class StatusMonitor(object):
     """
-    Collects status images and monitors current status of player
+    Collects status images and monitors current statuses of player
     NEEDS TO STAY ACTIVE
     """
     def __init__(self):
@@ -45,7 +45,9 @@ class StatusMonitor(object):
     def _lookup_status(self, pixel_sum):
         for known_status in self.status_collection:
             if pixel_sum == known_status:
+                logging.debug("Status known as {}".format(self.status_collection.get(known_status)))
                 return self.status_collection.get(known_status)
+        logging.debug("Status Not Known")
         return None
 
     def is_status_active(self, status_name):
@@ -56,9 +58,13 @@ class StatusMonitor(object):
 
     def refresh_status(self, image):
         self.current_status = []
+        count = 1
         for status in self.status_coordinates.status_locs:
             pixel_sum = self._get_status_sum(image, status)
+            logging.debug("Status {}: {}".format(count, pixel_sum))
+            count += 1
             if self.status_types.nothing - 100 <= pixel_sum <= self.status_types.nothing + 100:
+                logging.debug("pixel sum is too low/high, returning")
                 return
             lookup = self._lookup_status(pixel_sum)
             if lookup is not None:

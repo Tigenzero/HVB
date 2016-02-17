@@ -15,6 +15,6 @@ class EnemyMonitor(object):
                 pixel = (pixel[0], pixel[1], pixel[2])
             if pixel == self.coordinates.over_color \
                     or pixel == self.coordinates.under_color:
-                current_enemies.append(self.coordinates.enemy_press(enemy))
+                current_enemies.append(self.coordinates.enemy_press[enemy])
         self.current_enemies = current_enemies
         self.enemy_count = len(current_enemies)

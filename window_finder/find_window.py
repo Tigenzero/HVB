@@ -4,8 +4,7 @@ import win32api
 import PIL
 from PIL import Image, ImageGrab
 import logging
-from window_finder import scanner
-import window_finder
+import scanner
 """
  The initial test will involve 1920X1080
  The width of the box will be at least 1293px
@@ -82,7 +81,7 @@ class ScreenGrabber(object):
         """
         window_grabber = cls()
         window_grabber.refresh_image()
-        window = window_finder.scanner.Scanner.run(window_grabber.screen_width,
+        window = scanner.Scanner.run(window_grabber.screen_width,
                                                    window_grabber.screen_height,
                                                    window_grabber.scan_size,
                                                    window_grabber.image,
@@ -102,7 +101,7 @@ class ScreenGrabber(object):
         """
         window_grabber = cls()
         window_grabber.image = image
-        window = window_finder.scanner.Scanner.run(window_grabber.screen_width,
+        window = scanner.Scanner.run(window_grabber.screen_width,
                                                    window_grabber.screen_height,
                                                    window_grabber.scan_size,
                                                    window_grabber.image,
@@ -124,3 +123,8 @@ def find_browser():
             return temp_point + 1
     print "no point was found, must have been 0"
     return 0"""
+
+if __name__ == "__main__":
+    window = ScreenGrabber.get_window()
+    window.refresh_image()
+    window.save()

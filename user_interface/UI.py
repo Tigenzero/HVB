@@ -136,7 +136,7 @@ class UI(wx.Frame):
             display_message("PLAYER NOT VALID")
             return False
 
-    def launch_game(self):
+    def launch_game(self, event):
         if self.player_validate():
             master = MasterControl()
             master.start()

@@ -7,13 +7,14 @@ from status import image_initialize
 from status.status_monitor import StatusMonitor
 
 
-TEST_IMAGE = Image.open(os.path.join("data", "test_HV_window.png")).convert("RGB")
+TEST_IMAGE = Image.open(os.path.join("status", "tests", "data", "test_HV_window.png")).convert("RGB")
+TEST_IMAGE_2 = Image.open(os.path.join("status", "tests", "data", "hv_channeling_activated.png")).convert("RGB")
 SPARK_LIFE = 15707
 STATUS_LIST = ["Spark_Life", "Spirit_Shield", "Haste", "Shadow_Veil", "Protection"]
 
+
 def test_status_status_monitor_init():
     StatusMonitor()
-
 
 def test_status_status_monitor_get_status_sum():
     status_monitor = StatusMonitor()
@@ -46,5 +47,11 @@ def test_status_status_monitor_update_status():
 def test_status_status_monitor_is_status_active():
     status_monitor = StatusMonitor()
     status_monitor.refresh_status(TEST_IMAGE)
-    is_active = status_monitor.is_status_active("Haste")
-    assert is_active
+    assert(status_monitor.is_status_active("Haste"))
+
+
+def test_status_status_monitor_is_status_active_channeling():
+    status_monitor = StatusMonitor()
+    status_monitor.refresh_status(TEST_IMAGE_2)
+    logging.debug(status_monitor.current_status)
+    assert(status_monitor.is_status_active("Channeling"))
