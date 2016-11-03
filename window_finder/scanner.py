@@ -55,6 +55,14 @@ class Scanner(object):
 
     @classmethod
     def run(cls, x_scan, y_scan, scan_size, image, scan_targets):
+        """Take an image and scan each pixel for a list of colors
+        :param x_scan:
+        :param y_scan:
+        :param scan_size: int difference between each pixel scan. If 12, every 12th pixel will be scanned.
+        :param image: source Image object to scan
+        :param scan_targets: list of tuple colors (0,0,0) to check against.
+        :return: x,y coordinates
+        """
         scanner = cls(x_scan, y_scan, scan_size, image, scan_targets)
         scanner.logger.info("Starting Scanner")
         scanner.logger.debug('x_scan: {}'.format(x_scan))

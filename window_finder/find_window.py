@@ -96,11 +96,14 @@ class ScreenGrabber(object):
     def get_window_test(cls, image):
         """
         performs the necessary steps to create a full ScreenGrabber object
-        image: unedited screen capture of the window
+        image: unedited screen capture of the window001000
         returns: a ScreenGrabber object
         """
         window_grabber = cls()
         window_grabber.image = image
+        window_grabber.screen_height = image.size[1]
+        window_grabber.screen_width = image.size[0]
+        window_grabber.window_dimensions = [0, 0, window_grabber.screen_width, window_grabber.screen_height]
         window = scanner.Scanner.run(window_grabber.screen_width,
                                                    window_grabber.screen_height,
                                                    window_grabber.scan_size,

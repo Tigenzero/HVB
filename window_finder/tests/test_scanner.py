@@ -22,7 +22,7 @@ IMAGE.convert('RGB')
 
 
 def test_scanner_init():
-    scan_module = scanner.Scanner(SCREEN_WIDTH, SCREEN_HEIGHT, SCAN_SIZE, IMAGE, WINDOW_COLORS)
+    scanner.Scanner(SCREEN_WIDTH, SCREEN_HEIGHT, SCAN_SIZE, IMAGE, WINDOW_COLORS)
 
 
 def test_scanner_scan():
