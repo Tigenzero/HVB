@@ -5,3 +5,7 @@ Numpy
 PIL
 pywin32
 wxPython
+
+
+To install wxPython_Phoenix from pip, add the following: --upgrade  --trusted-host wxpython.org --pre -f http://wxpython.org/Phoenix/snapshot-builds/ wxPython_Phoenix
+The above can be used in PyCharm within the options or using pip.
