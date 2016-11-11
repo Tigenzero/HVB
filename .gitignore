@@ -7,3 +7,4 @@ workspace.xml
 .idea/workspace.xml
 *.pyc
 logs/logging_file.log.2016-11-03_10
+.idea/workspace.xml
